@@ -1,0 +1,66 @@
+{
+    "addons": {
+        "devTools": {
+            "enabled": true
+        },
+        "github": {
+            "enabled": true
+        }
+    },
+    "controller": {
+        "kinds": [
+            "Adb"
+        ]
+    },
+    "features": {
+        "ci": {
+            "enabled": true
+        },
+        "quality": {
+            "enabled": true
+        },
+        "release": {
+            "enabled": true
+        },
+        "vscode": {
+            "enabled": true
+        }
+    },
+    "license": {
+        "spdx": "MIT"
+    },
+    "maafw": {
+        "channel": "stable",
+        "version": ""
+    },
+    "network": {
+        "mode": "auto"
+    },
+    "project": {
+        "displayName": "Maa杖劍傳說助手",
+        "initialTemplate": "pipeline",
+        "slug": "maa-sword-staff",
+        "version": "0.1.0"
+    },
+    "resources": [
+        {
+            "enabled": true,
+            "label": "Base",
+            "path": "resource/base",
+            "slug": "base"
+        }
+    ],
+    "runtime": {
+        "mfa": {
+            "channel": "stable",
+            "enabled": false,
+            "version": ""
+        },
+        "mxu": {
+            "channel": "stable",
+            "enabled": true,
+            "version": ""
+        }
+    },
+    "schemaVersion": 2
+}
