@@ -27,7 +27,6 @@
     "Objectives.GoddessStatue.Prayer.Start": {"recognition": "DirectHit", "action": "DoNothing"},
     "Objectives.GachaMachine.Start": {"recognition": "DirectHit", "action": "DoNothing"},
     "Objectives.SakuraTree.BeastBonding.Start": {"recognition": "DirectHit", "action": "DoNothing"},
-    "Objectives.Guild.IdleReward.Start": {"recognition": "DirectHit", "action": "DoNothing"},
     "Objectives.AlchemyFurnace.Start": {"recognition": "DirectHit", "action": "DoNothing"},
     "Objectives.Bag.UseItems.Start": {"recognition": "DirectHit", "action": "DoNothing"}
 }

@@ -1,15 +1,107 @@
 {
+    "Objectives.Guild.IdleReward.Start": {
+        "recognition": "DirectHit",
+        "action": "StartApp",
+        "package": "com.m88.idleXX",
+        "anchor": "Navigation.Root.RetryTask",
+        "post_delay": 800,
+        "timeout": 5000,
+        "next": [
+            "Guild.IdleReward.Furnace",
+            "Guild.IdleReward.FromLobby",
+            "Guild.IdleReward.FromChannel",
+            "Guild.IdleReward.FromHome",
+            "Guild.IdleReward.FromExploration"
+        ],
+        "on_error": ["Navigation.Root.Recovery.Start"]
+    },
+    "Guild.IdleReward.FromHome": {
+        "recognition": "OCR",
+        "roi": [
+            285,
+            1180,
+            180,
+            100
+        ],
+        "expected": "家園",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            450,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 600,
+        "next": ["Guild.IdleReward.Furnace"]
+    },
+    "Guild.IdleReward.FromLobby": {
+        "recognition": "OCR",
+        "roi": [
+            20,
+            20,
+            180,
+            100
+        ],
+        "expected": "公會",
+        "threshold": 0.2,
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 500,
+        "next": [
+            "Guild.IdleReward.Furnace",
+            "Guild.IdleReward.FromHome"
+        ]
+    },
+    "Guild.IdleReward.FromChannel": {
+        "recognition": "OCR",
+        "roi": [
+            240,
+            0,
+            360,
+            85
+        ],
+        "expected": "公會頻道",
+        "threshold": 0.2,
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 500,
+        "next": [
+            "Guild.IdleReward.Furnace",
+            "Guild.IdleReward.FromHome"
+        ]
+    },
+    "Guild.IdleReward.FromExploration": {
+        "recognition": "OCR",
+        "roi": [
+            470,
+            1120,
+            250,
+            160
+        ],
+        "expected": "探索.*",
+        "threshold": 0.2,
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 500,
+        "next": [
+            "Guild.IdleReward.FromHome"
+        ]
+    },
     "Objectives.Guild.Donation.Start": {
         "recognition": "DirectHit",
         "action": "StartApp",
         "package": "com.m88.idleXX",
+        "anchor": "Navigation.Root.RetryTask",
         "post_delay": 800,
+        "timeout": 5000,
         "next": [
             "Guild.Donation.Screen",
             "Guild.Lobby.Screen",
             "Guild.Screen",
             "Guild.FromHome"
-        ]
+        ],
+        "on_error": ["Navigation.Root.Recovery.Start"]
     },
     "Guild.FromHome": {
         "recognition": "OCR",
@@ -88,6 +180,30 @@
         ],
         "template": "guild/idle-reward-furnace.png",
         "threshold": 0.7,
+        "action": "Click",
+        "post_delay": 600,
+        "next": [
+            "Guild.IdleReward.Overlay",
+            "Guild.IdleReward.Done"
+        ]
+    },
+    "Guild.IdleReward.Overlay": {
+        "recognition": "OCR",
+        "roi": [
+            100,
+            300,
+            520,
+            150
+        ],
+        "expected": "獲得獎勵",
+        "threshold": 0.2,
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 350,
+        "next": ["Guild.IdleReward.Done"]
+    },
+    "Guild.IdleReward.Done": {
+        "recognition": "DirectHit",
         "action": "DoNothing"
     },
     "Guild.Donation.Screen": {

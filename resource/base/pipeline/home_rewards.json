@@ -106,13 +106,15 @@
         "recognition": "DirectHit",
         "action": "StartApp",
         "package": "com.m88.idleXX",
+        "anchor": "Navigation.Root.RetryTask",
         "post_delay": 1000,
-        "timeout": 60000,
+        "timeout": 5000,
         "next": [
             "HomeRewards.HomeReady",
             "HomeRewards.GuildToHome",
             "HomeRewards.ExplorationToHome"
-        ]
+        ],
+        "on_error": ["Navigation.Root.Recovery.Start"]
     },
     "HomeRewards.HomeReady": {
         "recognition": "OCR",

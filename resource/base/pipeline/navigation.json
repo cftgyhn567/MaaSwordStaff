@@ -1,4 +1,61 @@
 {
+    "Navigation.Root.Recovery.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "timeout": 1500,
+        "next": [
+            "Navigation.Root.Recovery.ExitDialog",
+            "Navigation.Root.Recovery.Back"
+        ]
+    },
+    "Navigation.Root.Recovery.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            100,
+            690,
+            260,
+            100
+        ],
+        "post_delay": 800,
+        "next": [
+            "Navigation.Root.SelectHome"
+        ]
+    },
+    "Navigation.Root.SelectHome": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            300,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 1000,
+        "next": [
+            "[Anchor]Navigation.Root.RetryTask"
+        ]
+    },
+    "Navigation.Root.Recovery.Back": {
+        "max_hit": 12,
+        "recognition": "DirectHit",
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 700,
+        "timeout": 1500,
+        "next": [
+            "Navigation.Root.Recovery.ExitDialog",
+            "Navigation.Root.Recovery.Back"
+        ]
+    },
     "Navigation.Bottom.Note": {
         "recognition": "TemplateMatch",
         "roi": [

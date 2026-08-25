@@ -2,6 +2,7 @@ const homeBottomNavigationHits = [
   'Navigation.Bottom.Note',
   'Navigation.Bottom.Home',
   'Navigation.Bottom.Guild',
+  'Guild.IdleReward.FromHome',
 ]
 
 const contextualRewardClaimHits = [
@@ -32,12 +33,17 @@ export default {
             hits: [
               'ExplorationScreen.Ready',
               'HomeRewards.ExplorationToHome',
+              'Guild.IdleReward.FromExploration',
               'Rewards.Featured.List.RedDot',
             ],
           },
           {
             image: 'guild-channel.png',
-            hits: ['GuildChannel.BackToGame', 'HomeRewards.GuildToHome'],
+            hits: [
+              'GuildChannel.BackToGame',
+              'HomeRewards.GuildToHome',
+              'Guild.IdleReward.FromChannel',
+            ],
           },
           {
             image: 'home-screen.png',
@@ -158,7 +164,11 @@ export default {
           },
           {
             image: 'guild-lobby.png',
-            hits: ['Guild.Lobby.Screen', 'Guild.Donation.Enter'],
+            hits: [
+              'Guild.Lobby.Screen',
+              'Guild.Donation.Enter',
+              'Guild.IdleReward.FromLobby',
+            ],
           },
           {
             image: 'guild-donation.png',
@@ -169,6 +179,10 @@ export default {
               'Guild.Donation.Execute',
               'Rewards.Featured.Event.RedDot',
             ],
+          },
+          {
+            image: 'exit-game-dialog.png',
+            hits: ['Navigation.Root.Recovery.ExitDialog'],
           },
           {
             image: 'phantom-realm-entry.png',
@@ -335,7 +349,11 @@ export default {
           },
           {
             image: 'login-after-announcement.png',
-            hits: ['Startup.LoginScreen', 'MaterialRealm.Iron.Quick.On'],
+            hits: [
+              'Startup.LoginScreenByServerMenu',
+              'Startup.LoginScreenByClickText',
+              'MaterialRealm.Iron.Quick.On',
+            ],
           },
         ],
       },
