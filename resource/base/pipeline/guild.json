@@ -1,0 +1,171 @@
+{
+    "Objectives.Guild.Donation.Start": {
+        "recognition": "DirectHit",
+        "action": "StartApp",
+        "package": "com.m88.idleXX",
+        "post_delay": 800,
+        "next": [
+            "Guild.Donation.Screen",
+            "Guild.Lobby.Screen",
+            "Guild.Screen",
+            "Guild.FromHome"
+        ]
+    },
+    "Guild.FromHome": {
+        "recognition": "OCR",
+        "roi": [
+            285,
+            1180,
+            180,
+            100
+        ],
+        "expected": "家園",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            450,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 600,
+        "next": ["Guild.Screen"]
+    },
+    "Guild.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            180,
+            560,
+            220,
+            180
+        ],
+        "expected": "公會大廳",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            160,
+            180,
+            300,
+            520
+        ],
+        "post_delay": 600,
+        "next": ["Guild.Lobby.Screen"]
+    },
+    "Guild.Lobby.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            20,
+            20,
+            180,
+            100
+        ],
+        "expected": "公會",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": ["Guild.Donation.Enter"]
+    },
+    "Guild.Donation.Enter": {
+        "recognition": "OCR",
+        "roi": [
+            110,
+            1000,
+            230,
+            150
+        ],
+        "expected": "公會捐贈",
+        "threshold": 0.2,
+        "action": "Click",
+        "post_delay": 500,
+        "next": ["Guild.Donation.Screen"]
+    },
+    "Guild.IdleReward.Furnace": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            520,
+            870,
+            200,
+            220
+        ],
+        "template": "guild/idle-reward-furnace.png",
+        "threshold": 0.7,
+        "action": "DoNothing"
+    },
+    "Guild.Donation.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            120,
+            160,
+            480,
+            180
+        ],
+        "expected": "公會捐贈",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "Guild.Donation.Execute",
+            "Guild.Donation.Done"
+        ]
+    },
+    "Guild.Donation.Count": {
+        "recognition": "OCR",
+        "roi": [
+            180,
+            780,
+            360,
+            150
+        ],
+        "expected": "每日捐贈次數.*",
+        "threshold": 0.2,
+        "action": "DoNothing"
+    },
+    "Guild.Donation.Button": {
+        "recognition": "OCR",
+        "roi": [
+            190,
+            850,
+            340,
+            150
+        ],
+        "expected": ".*捐贈",
+        "threshold": 0.2,
+        "action": "DoNothing"
+    },
+    "Guild.Donation.Execute": {
+        "max_hit": 0,
+        "recognition": "OCR",
+        "roi": [
+            190,
+            850,
+            340,
+            150
+        ],
+        "expected": "免費捐贈|.*捐贈.*",
+        "threshold": 0.2,
+        "action": "Click",
+        "post_delay": 450,
+        "next": [
+            "Guild.Donation.Overlay",
+            "Guild.Donation.Screen"
+        ]
+    },
+    "Guild.Donation.Overlay": {
+        "recognition": "OCR",
+        "roi": [
+            130,
+            180,
+            460,
+            350
+        ],
+        "expected": "獲得獎勵|獲得.*",
+        "threshold": 0.2,
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 350,
+        "next": ["Guild.Donation.Screen"]
+    },
+    "Guild.Donation.Done": {
+        "recognition": "DirectHit",
+        "action": "ClickKey",
+        "key": 4
+    }
+}

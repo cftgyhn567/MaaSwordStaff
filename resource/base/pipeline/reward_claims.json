@@ -1,0 +1,1694 @@
+{
+    "Rewards.All.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": ["HomeRewards.Start"]
+    },
+    "Rewards.FunctionList.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Rewards.FunctionList.Screen",
+            "Rewards.FunctionList.FromHome"
+        ]
+    },
+    "Rewards.FunctionList.FromHome": {
+        "recognition": "OCR",
+        "roi": [
+            285,
+            1180,
+            180,
+            100
+        ],
+        "expected": "家園",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            645,
+            985,
+            40,
+            40
+        ],
+        "post_delay": 600,
+        "next": ["Rewards.FunctionList.Screen"]
+    },
+    "Rewards.FunctionList.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            365,
+            635,
+            305,
+            125
+        ],
+        "expected": "商城",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": ["Rewards.Friends.Open"]
+    },
+    "Rewards.Friends.Open": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            45,
+            775,
+            115,
+            120
+        ],
+        "post_delay": 600,
+        "next": ["Rewards.Friends.Screen"]
+    },
+    "Rewards.Friends.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            20,
+            20,
+            180,
+            110
+        ],
+        "expected": "好友",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            350,
+            1095,
+            20,
+            20
+        ],
+        "post_delay": 800,
+        "next": [
+            "Rewards.Friends.ClaimSecond",
+            "Rewards.Friends.Back"
+        ]
+    },
+    "Rewards.Friends.ClaimSecond": {
+        "max_hit": 1,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            350,
+            1095,
+            20,
+            20
+        ],
+        "post_delay": 1000,
+        "next": [
+            "Rewards.Friends.Overlay",
+            "Rewards.Friends.Back"
+        ]
+    },
+    "Rewards.Friends.Overlay": {
+        "recognition": "OCR",
+        "roi": [
+            100,
+            150,
+            520,
+            450
+        ],
+        "expected": "獲得獎勵|獲得.*|感謝.*",
+        "threshold": 0.2,
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 600,
+        "next": ["Rewards.Friends.Back"]
+    },
+    "Rewards.Friends.Back": {
+        "max_hit": 15,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            70,
+            1210,
+            10,
+            10
+        ],
+        "post_delay": 1000,
+        "next": [
+            "Rewards.FunctionList.ForGift",
+            "Rewards.FunctionList.HomeForGift",
+            "Rewards.Friends.Back"
+        ]
+    },
+    "Rewards.FunctionList.HomeForGift": {
+        "recognition": "OCR",
+        "roi": [
+            285,
+            1180,
+            180,
+            100
+        ],
+        "expected": "家園",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            645,
+            985,
+            40,
+            40
+        ],
+        "post_delay": 600,
+        "next": ["Rewards.FunctionList.ForGift"]
+    },
+    "Rewards.FunctionList.ForGift": {
+        "recognition": "OCR",
+        "roi": [
+            365,
+            635,
+            305,
+            125
+        ],
+        "expected": "商城",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            430,
+            905,
+            120,
+            120
+        ],
+        "post_delay": 600,
+        "next": ["Rewards.Gifts.Screen"]
+    },
+    "Rewards.Gifts.Screen": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            20,
+            20,
+            240,
+            110
+        ],
+        "template": "rewards/gift-overview-title.png",
+        "threshold": 0.8,
+        "action": "DoNothing",
+        "next": [
+            "Rewards.Gifts.Claim",
+            "Rewards.Gifts.Back"
+        ]
+    },
+    "Rewards.Gifts.Claim": {
+        "recognition": "OCR",
+        "roi": [
+            450,
+            170,
+            250,
+            900
+        ],
+        "expected": "領取",
+        "threshold": 0.2,
+        "action": "Click",
+        "post_delay": 450,
+        "next": [
+            "Rewards.Gifts.Overlay",
+            "Rewards.Gifts.Back"
+        ]
+    },
+    "Rewards.Gifts.Overlay": {
+        "recognition": "OCR",
+        "roi": [
+            130,
+            180,
+            460,
+            350
+        ],
+        "expected": "獲得獎勵|獲得.*",
+        "threshold": 0.2,
+        "action": "ClickKey",
+        "key": 4,
+        "next": ["Rewards.Gifts.Back"]
+    },
+    "Rewards.Gifts.Back": {
+        "max_hit": 15,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            70,
+            1210,
+            10,
+            10
+        ],
+        "post_delay": 1000,
+        "next": [
+            "Rewards.FunctionList.ForTasks",
+            "Rewards.FunctionList.HomeForTasks",
+            "Rewards.Gifts.Back"
+        ]
+    },
+    "Rewards.FunctionList.HomeForTasks": {
+        "recognition": "OCR",
+        "roi": [
+            285,
+            1180,
+            180,
+            100
+        ],
+        "expected": "家園",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            645,
+            985,
+            40,
+            40
+        ],
+        "post_delay": 600,
+        "next": ["Rewards.FunctionList.ForTasks"]
+    },
+    "Rewards.FunctionList.ForTasks": {
+        "recognition": "OCR",
+        "roi": [
+            365,
+            635,
+            305,
+            125
+        ],
+        "expected": "商城",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            45,
+            635,
+            305,
+            125
+        ],
+        "post_delay": 600,
+        "next": ["Rewards.Daily.Screen"]
+    },
+    "Rewards.Daily.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            20,
+            20,
+            240,
+            100
+        ],
+        "expected": "日常任務",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": ["Rewards.Daily.Scan"]
+    },
+    "Rewards.Daily.Scan": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Rewards.Daily.ClaimTop",
+            "Rewards.Daily.Claim",
+            "Rewards.Daily.Scroll",
+            "Rewards.Weekly.Open"
+        ]
+    },
+    "Rewards.Daily.ClaimTop": {
+        "max_hit": 10,
+        "recognition": "OCR",
+        "roi": [
+            450,
+            100,
+            250,
+            600
+        ],
+        "expected": "領取",
+        "threshold": 0.2,
+        "action": "Click",
+        "post_delay": 400,
+        "next": [
+            "Rewards.Daily.Overlay",
+            "Rewards.Daily.Scan"
+        ]
+    },
+    "Rewards.Daily.Claim": {
+        "recognition": "OCR",
+        "roi": [
+            450,
+            100,
+            250,
+            1030
+        ],
+        "expected": "領取",
+        "threshold": 0.2,
+        "action": "Click",
+        "post_delay": 400,
+        "next": [
+            "Rewards.Daily.Overlay",
+            "Rewards.Daily.Scan"
+        ]
+    },
+    "Rewards.Daily.Overlay": {
+        "recognition": "OCR",
+        "roi": [
+            130,
+            180,
+            460,
+            350
+        ],
+        "expected": "獲得獎勵|獲得.*",
+        "threshold": 0.2,
+        "action": "ClickKey",
+        "key": 4,
+        "next": ["Rewards.Daily.Scan"]
+    },
+    "Rewards.Daily.Scroll": {
+        "max_hit": 5,
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            360,
+            1030,
+            1,
+            1
+        ],
+        "end": [
+            360,
+            300,
+            1,
+            1
+        ],
+        "duration": 500,
+        "next": ["Rewards.Daily.Scan"]
+    },
+    "Rewards.Weekly.Open": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            260,
+            1170,
+            130,
+            100
+        ],
+        "post_delay": 450,
+        "next": ["Rewards.Weekly.Screen"]
+    },
+    "Rewards.Weekly.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            20,
+            20,
+            240,
+            100
+        ],
+        "expected": "周常任務|週常任務",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": ["Rewards.Weekly.Scan"]
+    },
+    "Rewards.Weekly.Scan": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Rewards.Weekly.ClaimTop",
+            "Rewards.Weekly.Claim",
+            "Rewards.Weekly.Scroll",
+            "Rewards.Commissions.Open"
+        ]
+    },
+    "Rewards.Weekly.ClaimTop": {
+        "max_hit": 10,
+        "recognition": "OCR",
+        "roi": [
+            450,
+            100,
+            250,
+            600
+        ],
+        "expected": "領取",
+        "threshold": 0.2,
+        "action": "Click",
+        "post_delay": 400,
+        "next": [
+            "Rewards.Weekly.Overlay",
+            "Rewards.Weekly.Scan"
+        ]
+    },
+    "Rewards.Weekly.Claim": {
+        "recognition": "OCR",
+        "roi": [
+            450,
+            100,
+            250,
+            1030
+        ],
+        "expected": "領取",
+        "threshold": 0.2,
+        "action": "Click",
+        "post_delay": 400,
+        "next": [
+            "Rewards.Weekly.Overlay",
+            "Rewards.Weekly.Scan"
+        ]
+    },
+    "Rewards.Weekly.Overlay": {
+        "recognition": "OCR",
+        "roi": [
+            130,
+            180,
+            460,
+            350
+        ],
+        "expected": "獲得獎勵|獲得.*",
+        "threshold": 0.2,
+        "action": "ClickKey",
+        "key": 4,
+        "next": ["Rewards.Weekly.Scan"]
+    },
+    "Rewards.Weekly.Scroll": {
+        "max_hit": 5,
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            360,
+            1030,
+            1,
+            1
+        ],
+        "end": [
+            360,
+            300,
+            1,
+            1
+        ],
+        "duration": 500,
+        "next": ["Rewards.Weekly.Scan"]
+    },
+    "Rewards.Commissions.Open": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            375,
+            1170,
+            120,
+            100
+        ],
+        "post_delay": 450,
+        "next": ["Rewards.Commissions.Screen"]
+    },
+    "Rewards.Commissions.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            20,
+            20,
+            260,
+            100
+        ],
+        "expected": "委託任務",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": ["Rewards.Commissions.Scan"]
+    },
+    "Rewards.Commissions.Scan": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Rewards.Commissions.Submit",
+            "Rewards.Commissions.Scroll",
+            "Rewards.Tasks.Back"
+        ]
+    },
+    "Rewards.Commissions.Submit": {
+        "recognition": "OCR",
+        "roi": [
+            20,
+            150,
+            680,
+            970
+        ],
+        "expected": "提交",
+        "threshold": 0.2,
+        "action": "Click",
+        "post_delay": 450,
+        "next": [
+            "Rewards.Commissions.Overlay",
+            "Rewards.Commissions.Scan"
+        ]
+    },
+    "Rewards.Commissions.Overlay": {
+        "recognition": "OCR",
+        "roi": [
+            130,
+            180,
+            460,
+            350
+        ],
+        "expected": "獲得獎勵|委託完成|獲得.*",
+        "threshold": 0.2,
+        "action": "ClickKey",
+        "key": 4,
+        "next": ["Rewards.Commissions.Scan"]
+    },
+    "Rewards.Commissions.Scroll": {
+        "max_hit": 5,
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            360,
+            1030,
+            1,
+            1
+        ],
+        "end": [
+            360,
+            300,
+            1,
+            1
+        ],
+        "duration": 500,
+        "next": ["Rewards.Commissions.Scan"]
+    },
+    "Rewards.Tasks.Back": {
+        "max_hit": 15,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            70,
+            1210,
+            10,
+            10
+        ],
+        "post_delay": 1000,
+        "next": [
+            "Rewards.FunctionList.ForShop",
+            "Rewards.FunctionList.HomeForShop",
+            "Rewards.Tasks.Back"
+        ]
+    },
+    "Rewards.FunctionList.HomeForShop": {
+        "recognition": "OCR",
+        "roi": [
+            285,
+            1180,
+            180,
+            100
+        ],
+        "expected": "家園",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            645,
+            985,
+            40,
+            40
+        ],
+        "post_delay": 600,
+        "next": ["Rewards.FunctionList.ForShop"]
+    },
+    "Rewards.FunctionList.ForShop": {
+        "recognition": "OCR",
+        "roi": [
+            365,
+            635,
+            305,
+            125
+        ],
+        "expected": "商城",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            365,
+            635,
+            305,
+            125
+        ],
+        "post_delay": 650,
+        "next": ["Rewards.Shop.List"]
+    },
+    "Rewards.Shop.List": {
+        "recognition": "OCR",
+        "roi": [
+            20,
+            20,
+            260,
+            100
+        ],
+        "expected": "超值精選",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": ["Rewards.Shop.ResetTop"]
+    },
+    "Rewards.Shop.ResetTop": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            360,
+            260,
+            1,
+            1
+        ],
+        "end": [
+            360,
+            1040,
+            1,
+            1
+        ],
+        "duration": 500,
+        "repeat": 3,
+        "repeat_delay": 150,
+        "next": ["Rewards.Pilgrimage.Find"]
+    },
+    "Rewards.Pilgrimage.Find": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Rewards.Pilgrimage.Card",
+            "Rewards.Pilgrimage.Scroll"
+        ]
+    },
+    "Rewards.Pilgrimage.Card": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            100,
+            720,
+            1050
+        ],
+        "expected": "巡禮之證",
+        "threshold": 0.2,
+        "action": "Click",
+        "post_delay": 550,
+        "next": ["Rewards.Pilgrimage.Screen"]
+    },
+    "Rewards.Pilgrimage.Scroll": {
+        "max_hit": 3,
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            360,
+            1030,
+            1,
+            1
+        ],
+        "end": [
+            360,
+            280,
+            1,
+            1
+        ],
+        "duration": 500,
+        "next": ["Rewards.Pilgrimage.Find"]
+    },
+    "Rewards.Pilgrimage.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            20,
+            20,
+            330,
+            220
+        ],
+        "expected": "巡禮之證",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            425,
+            1170,
+            280,
+            100
+        ],
+        "post_delay": 450,
+        "next": ["Rewards.Pilgrimage.Daily.Scan"]
+    },
+    "Rewards.Pilgrimage.Daily.Scan": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Rewards.Pilgrimage.Daily.Claim",
+            "Rewards.Pilgrimage.Daily.Scroll",
+            "Rewards.Pilgrimage.Weekly.Open"
+        ]
+    },
+    "Rewards.Pilgrimage.Daily.Claim": {
+        "recognition": "OCR",
+        "roi": [
+            450,
+            90,
+            250,
+            980
+        ],
+        "expected": "領取",
+        "threshold": 0.2,
+        "action": "Click",
+        "next": ["Rewards.Pilgrimage.Daily.Scan"]
+    },
+    "Rewards.Pilgrimage.Daily.Scroll": {
+        "max_hit": 4,
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            360,
+            950,
+            1,
+            1
+        ],
+        "end": [
+            360,
+            280,
+            1,
+            1
+        ],
+        "duration": 500,
+        "next": ["Rewards.Pilgrimage.Daily.Scan"]
+    },
+    "Rewards.Pilgrimage.Weekly.Open": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            255,
+            1070,
+            210,
+            80
+        ],
+        "next": ["Rewards.Pilgrimage.Weekly.Scan"]
+    },
+    "Rewards.Pilgrimage.Weekly.Scan": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Rewards.Pilgrimage.Weekly.Claim",
+            "Rewards.Pilgrimage.Weekly.Scroll",
+            "Rewards.Pilgrimage.Period.Open"
+        ]
+    },
+    "Rewards.Pilgrimage.Weekly.Claim": {
+        "recognition": "OCR",
+        "roi": [
+            450,
+            90,
+            250,
+            980
+        ],
+        "expected": "領取",
+        "threshold": 0.2,
+        "action": "Click",
+        "next": ["Rewards.Pilgrimage.Weekly.Scan"]
+    },
+    "Rewards.Pilgrimage.Weekly.Scroll": {
+        "max_hit": 4,
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            360,
+            950,
+            1,
+            1
+        ],
+        "end": [
+            360,
+            280,
+            1,
+            1
+        ],
+        "duration": 500,
+        "next": ["Rewards.Pilgrimage.Weekly.Scan"]
+    },
+    "Rewards.Pilgrimage.Period.Open": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            465,
+            1070,
+            210,
+            80
+        ],
+        "next": ["Rewards.Pilgrimage.Period.Scan"]
+    },
+    "Rewards.Pilgrimage.Period.Scan": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Rewards.Pilgrimage.Period.Claim",
+            "Rewards.Pilgrimage.Period.Scroll",
+            "Rewards.Pilgrimage.Pass.Open"
+        ]
+    },
+    "Rewards.Pilgrimage.Period.Claim": {
+        "recognition": "OCR",
+        "roi": [
+            450,
+            90,
+            250,
+            980
+        ],
+        "expected": "領取",
+        "threshold": 0.2,
+        "action": "Click",
+        "next": ["Rewards.Pilgrimage.Period.Scan"]
+    },
+    "Rewards.Pilgrimage.Period.Scroll": {
+        "max_hit": 4,
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            360,
+            950,
+            1,
+            1
+        ],
+        "end": [
+            360,
+            280,
+            1,
+            1
+        ],
+        "duration": 500,
+        "next": ["Rewards.Pilgrimage.Period.Scan"]
+    },
+    "Rewards.Pilgrimage.Pass.Open": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            150,
+            1170,
+            280,
+            100
+        ],
+        "post_delay": 450,
+        "next": ["Rewards.Pilgrimage.Pass.Scan"]
+    },
+    "Rewards.Pilgrimage.Pass.Scan": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Rewards.Pilgrimage.Pass.RedDot",
+            "Rewards.Pilgrimage.Back"
+        ]
+    },
+    "Rewards.Pilgrimage.Pass.RedDot": {
+        "max_hit": 30,
+        "recognition": "TemplateMatch",
+        "roi": [
+            0,
+            250,
+            720,
+            850
+        ],
+        "template": "common/red-dot.png",
+        "threshold": 0.78,
+        "action": "Click",
+        "next": ["Rewards.Pilgrimage.Pass.Scan"]
+    },
+    "Rewards.Pilgrimage.Back": {
+        "max_hit": 15,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            70,
+            1210,
+            10,
+            10
+        ],
+        "post_delay": 1000,
+        "next": [
+            "Rewards.Shop.AfterPilgrimage",
+            "Rewards.Pilgrimage.Back"
+        ]
+    },
+    "Rewards.Shop.AfterPilgrimage": {
+        "recognition": "OCR",
+        "roi": [
+            20,
+            20,
+            260,
+            100
+        ],
+        "expected": "超值精選",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": ["Rewards.Funds.Find"]
+    },
+    "Rewards.Funds.Find": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Rewards.Funds.Card",
+            "Rewards.Funds.FindScroll"
+        ]
+    },
+    "Rewards.Funds.Card": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            100,
+            720,
+            1050
+        ],
+        "expected": ".*基金",
+        "threshold": 0.2,
+        "action": "Click",
+        "post_delay": 550,
+        "next": ["Rewards.Funds.Scan"]
+    },
+    "Rewards.Funds.FindScroll": {
+        "max_hit": 4,
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            360,
+            1030,
+            1,
+            1
+        ],
+        "end": [
+            360,
+            280,
+            1,
+            1
+        ],
+        "duration": 500,
+        "next": ["Rewards.Funds.Find"]
+    },
+    "Rewards.Funds.Scan": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Rewards.Funds.RedDot",
+            "Rewards.Funds.Scroll",
+            "Rewards.Funds.Back"
+        ]
+    },
+    "Rewards.Funds.RedDot": {
+        "max_hit": 40,
+        "recognition": "TemplateMatch",
+        "roi": [
+            0,
+            150,
+            350,
+            900
+        ],
+        "template": "common/red-dot.png",
+        "threshold": 0.78,
+        "action": "Click",
+        "next": ["Rewards.Funds.Scan"]
+    },
+    "Rewards.Funds.Scroll": {
+        "max_hit": 8,
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            250,
+            950,
+            1,
+            1
+        ],
+        "end": [
+            250,
+            280,
+            1,
+            1
+        ],
+        "duration": 500,
+        "next": ["Rewards.Funds.Scan"]
+    },
+    "Rewards.Funds.Back": {
+        "max_hit": 15,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            70,
+            1210,
+            10,
+            10
+        ],
+        "post_delay": 1000,
+        "next": [
+            "Rewards.Shop.AfterFunds",
+            "Rewards.Funds.Back"
+        ]
+    },
+    "Rewards.Shop.AfterFunds": {
+        "recognition": "OCR",
+        "roi": [
+            20,
+            20,
+            260,
+            100
+        ],
+        "expected": "超值精選",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": ["Rewards.DailyOffer.Find"]
+    },
+    "Rewards.DailyOffer.Find": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Rewards.DailyOffer.Card",
+            "Rewards.DailyOffer.FindScroll"
+        ]
+    },
+    "Rewards.DailyOffer.Card": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            100,
+            720,
+            1050
+        ],
+        "expected": "每日優惠",
+        "threshold": 0.2,
+        "action": "Click",
+        "post_delay": 550,
+        "next": ["Rewards.DailyOffer.Screen"]
+    },
+    "Rewards.DailyOffer.FindScroll": {
+        "max_hit": 4,
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            360,
+            1030,
+            1,
+            1
+        ],
+        "end": [
+            360,
+            280,
+            1,
+            1
+        ],
+        "duration": 500,
+        "next": ["Rewards.DailyOffer.Find"]
+    },
+    "Rewards.DailyOffer.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            100,
+            250,
+            520,
+            220
+        ],
+        "expected": "每日優惠",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "Rewards.DailyOffer.Gift",
+            "Rewards.DailyOffer.Back"
+        ]
+    },
+    "Rewards.DailyOffer.Gift": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            0,
+            250,
+            180,
+            220
+        ],
+        "template": "common/red-dot-daily-offer.png",
+        "threshold": 0.82,
+        "action": "Click",
+        "next": [
+            "Rewards.DailyOffer.Claim",
+            "Rewards.DailyOffer.Overlay",
+            "Rewards.DailyOffer.Back"
+        ]
+    },
+    "Rewards.DailyOffer.Claim": {
+        "recognition": "OCR",
+        "roi": [
+            100,
+            250,
+            520,
+            700
+        ],
+        "expected": "領取",
+        "threshold": 0.2,
+        "action": "Click",
+        "next": [
+            "Rewards.DailyOffer.Overlay",
+            "Rewards.DailyOffer.Back"
+        ]
+    },
+    "Rewards.DailyOffer.Overlay": {
+        "recognition": "OCR",
+        "roi": [
+            130,
+            180,
+            460,
+            350
+        ],
+        "expected": "獲得獎勵|獲得.*",
+        "threshold": 0.2,
+        "action": "ClickKey",
+        "key": 4,
+        "next": ["Rewards.DailyOffer.Back"]
+    },
+    "Rewards.DailyOffer.Back": {
+        "max_hit": 15,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            70,
+            1210,
+            10,
+            10
+        ],
+        "post_delay": 1000,
+        "next": [
+            "Rewards.Shop.AfterDailyOffer",
+            "Rewards.DailyOffer.Back"
+        ]
+    },
+    "Rewards.Shop.AfterDailyOffer": {
+        "recognition": "OCR",
+        "roi": [
+            20,
+            20,
+            260,
+            100
+        ],
+        "expected": "超值精選",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": ["Rewards.WeeklySelection.Find"]
+    },
+    "Rewards.WeeklySelection.Find": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Rewards.WeeklySelection.Card",
+            "Rewards.WeeklySelection.FindScroll"
+        ]
+    },
+    "Rewards.WeeklySelection.Card": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            100,
+            720,
+            1050
+        ],
+        "expected": "本周精選|本週精選",
+        "threshold": 0.2,
+        "action": "Click",
+        "post_delay": 550,
+        "next": ["Rewards.WeeklySelection.Screen"]
+    },
+    "Rewards.WeeklySelection.FindScroll": {
+        "max_hit": 4,
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            360,
+            1030,
+            1,
+            1
+        ],
+        "end": [
+            360,
+            280,
+            1,
+            1
+        ],
+        "duration": 500,
+        "next": ["Rewards.WeeklySelection.Find"]
+    },
+    "Rewards.WeeklySelection.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            20,
+            20,
+            260,
+            100
+        ],
+        "expected": "本周精選|本週精選",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "Rewards.WeeklySelection.Gift",
+            "Rewards.WeeklySelection.Back"
+        ]
+    },
+    "Rewards.WeeklySelection.Gift": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            0,
+            120,
+            180,
+            230
+        ],
+        "template": "common/red-dot-weekly-offer.png",
+        "threshold": 0.82,
+        "action": "Click",
+        "next": [
+            "Rewards.WeeklySelection.Claim",
+            "Rewards.WeeklySelection.Overlay",
+            "Rewards.WeeklySelection.Back"
+        ]
+    },
+    "Rewards.WeeklySelection.Claim": {
+        "recognition": "OCR",
+        "roi": [
+            100,
+            250,
+            520,
+            700
+        ],
+        "expected": "領取",
+        "threshold": 0.2,
+        "action": "Click",
+        "next": [
+            "Rewards.WeeklySelection.Overlay",
+            "Rewards.WeeklySelection.Back"
+        ]
+    },
+    "Rewards.WeeklySelection.Overlay": {
+        "recognition": "OCR",
+        "roi": [
+            130,
+            180,
+            460,
+            350
+        ],
+        "expected": "獲得獎勵|獲得.*",
+        "threshold": 0.2,
+        "action": "ClickKey",
+        "key": 4,
+        "next": ["Rewards.WeeklySelection.Back"]
+    },
+    "Rewards.WeeklySelection.Back": {
+        "max_hit": 15,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            70,
+            1210,
+            10,
+            10
+        ],
+        "post_delay": 1000,
+        "next": [
+            "Rewards.Shop.AfterWeeklySelection",
+            "Rewards.WeeklySelection.Back"
+        ]
+    },
+    "Rewards.Shop.AfterWeeklySelection": {
+        "recognition": "OCR",
+        "roi": [
+            20,
+            20,
+            260,
+            100
+        ],
+        "expected": "超值精選",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": ["Rewards.Monthly.Open"]
+    },
+    "Rewards.Monthly.Open": {
+        "recognition": "OCR",
+        "roi": [
+            20,
+            20,
+            260,
+            100
+        ],
+        "expected": "超值精選",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            335,
+            1170,
+            200,
+            100
+        ],
+        "post_delay": 450,
+        "next": ["Rewards.Monthly.Screen"]
+    },
+    "Rewards.Monthly.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            20,
+            20,
+            180,
+            100
+        ],
+        "expected": "月卡",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "Rewards.Monthly.Claim",
+            "Rewards.Monthly.Back"
+        ]
+    },
+    "Rewards.Monthly.Claim": {
+        "max_hit": 2,
+        "recognition": "OCR",
+        "roi": [
+            390,
+            180,
+            300,
+            900
+        ],
+        "expected": "領取",
+        "threshold": 0.2,
+        "action": "Click",
+        "next": [
+            "Rewards.Monthly.Overlay",
+            "Rewards.Monthly.Screen"
+        ]
+    },
+    "Rewards.Monthly.Overlay": {
+        "recognition": "OCR",
+        "roi": [
+            130,
+            180,
+            460,
+            350
+        ],
+        "expected": "獲得獎勵|獲得.*",
+        "threshold": 0.2,
+        "action": "ClickKey",
+        "key": 4,
+        "next": ["Rewards.Monthly.Screen"]
+    },
+    "Rewards.Monthly.Back": {
+        "max_hit": 15,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            70,
+            1210,
+            10,
+            10
+        ],
+        "post_delay": 1000,
+        "next": [
+            "Rewards.FunctionList.BackHome",
+            "Rewards.Featured.FromHome",
+            "Rewards.Monthly.Back"
+        ]
+    },
+    "Rewards.FunctionList.BackHome": {
+        "max_hit": 15,
+        "recognition": "OCR",
+        "roi": [
+            365,
+            635,
+            305,
+            125
+        ],
+        "expected": "商城",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            70,
+            1210,
+            10,
+            10
+        ],
+        "post_delay": 1000,
+        "next": [
+            "Rewards.Featured.FromHome",
+            "Rewards.FunctionList.BackHome"
+        ]
+    },
+    "Rewards.Featured.FromHome": {
+        "recognition": "OCR",
+        "roi": [
+            285,
+            1180,
+            180,
+            100
+        ],
+        "expected": "家園",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            620,
+            100,
+            100,
+            160
+        ],
+        "post_delay": 550,
+        "next": ["Rewards.Featured.List"]
+    },
+    "Rewards.Featured.List": {
+        "recognition": "OCR",
+        "roi": [
+            20,
+            20,
+            260,
+            100
+        ],
+        "expected": "活動一覽",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "Rewards.Featured.List.RedDot",
+            "Rewards.Featured.List.Scroll",
+            "Rewards.All.Done"
+        ]
+    },
+    "Rewards.Featured.List.RedDot": {
+        "max_hit": 30,
+        "recognition": "TemplateMatch",
+        "roi": [
+            620,
+            100,
+            100,
+            1060
+        ],
+        "template": "common/red-dot-activity-list.png",
+        "threshold": 0.82,
+        "action": "Click",
+        "post_delay": 550,
+        "next": ["Rewards.Featured.Event.Scan"]
+    },
+    "Rewards.Featured.Event.Scan": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Rewards.Featured.Season.Goals.Open",
+            "Rewards.Featured.Event.AllClaim",
+            "Rewards.Featured.Event.Claim",
+            "Rewards.Featured.Event.RedDot",
+            "Rewards.Featured.Event.Scroll",
+            "Rewards.Featured.Season.Pass.Open",
+            "Rewards.Featured.Event.Back"
+        ]
+    },
+    "Rewards.Featured.Season.Goals.Open": {
+        "max_hit": 1,
+        "recognition": "OCR",
+        "roi": [
+            150,
+            1040,
+            420,
+            140
+        ],
+        "expected": "解鎖賜福",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            500,
+            1190,
+            180,
+            70
+        ],
+        "post_delay": 600,
+        "next": ["Rewards.Featured.Event.Scan"]
+    },
+    "Rewards.Featured.Event.AllClaim": {
+        "max_hit": 10,
+        "recognition": "OCR",
+        "roi": [
+            20,
+            100,
+            680,
+            1080
+        ],
+        "expected": "全部領取",
+        "threshold": 0.2,
+        "action": "Click",
+        "next": [
+            "Rewards.Featured.Event.Overlay",
+            "Rewards.Featured.Event.Scan"
+        ]
+    },
+    "Rewards.Featured.Event.Claim": {
+        "max_hit": 50,
+        "recognition": "OCR",
+        "roi": [
+            350,
+            100,
+            350,
+            1050
+        ],
+        "expected": "領取",
+        "threshold": 0.2,
+        "action": "Click",
+        "next": [
+            "Rewards.Featured.Event.Overlay",
+            "Rewards.Featured.Event.Scan"
+        ]
+    },
+    "Rewards.Featured.Event.RedDot": {
+        "max_hit": 30,
+        "recognition": "TemplateMatch",
+        "roi": [
+            0,
+            100,
+            720,
+            1060
+        ],
+        "template": "common/red-dot-event.png",
+        "threshold": 0.82,
+        "action": "Click",
+        "next": ["Rewards.Featured.Event.Scan"]
+    },
+    "Rewards.Featured.Event.Overlay": {
+        "recognition": "OCR",
+        "roi": [
+            120,
+            180,
+            480,
+            350
+        ],
+        "expected": "獲得獎勵|獲得.*",
+        "threshold": 0.2,
+        "action": "ClickKey",
+        "key": 4,
+        "next": ["Rewards.Featured.Event.Scan"]
+    },
+    "Rewards.Featured.Event.Scroll": {
+        "max_hit": 4,
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            360,
+            1000,
+            1,
+            1
+        ],
+        "end": [
+            360,
+            300,
+            1,
+            1
+        ],
+        "duration": 500,
+        "next": ["Rewards.Featured.Event.Scan"]
+    },
+    "Rewards.Featured.Season.Pass.Open": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            0,
+            720,
+            1180
+        ],
+        "expected": "每日目標|每周目標|每週目標|本期目標",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            160,
+            1190,
+            240,
+            70
+        ],
+        "post_delay": 600,
+        "next": ["Rewards.Featured.Season.Pass.Scan"]
+    },
+    "Rewards.Featured.Season.Pass.Scan": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Rewards.Featured.Season.Pass.Overlay",
+            "Rewards.Featured.Season.Pass.RedDot",
+            "Rewards.Featured.Season.Pass.Back",
+            "Rewards.Featured.Event.Back"
+        ]
+    },
+    "Rewards.Featured.Season.Pass.Overlay": {
+        "recognition": "OCR",
+        "roi": [
+            100,
+            300,
+            520,
+            140
+        ],
+        "expected": "獲得獎勵",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            300,
+            350,
+            120,
+            80
+        ],
+        "post_delay": 500,
+        "next": ["Rewards.Featured.Season.Pass.Scan"]
+    },
+    "Rewards.Featured.Season.Pass.RedDot": {
+        "max_hit": 20,
+        "recognition": "TemplateMatch",
+        "roi": [
+            0,
+            300,
+            360,
+            780
+        ],
+        "template": "common/red-dot.png",
+        "threshold": 0.78,
+        "action": "Click",
+        "post_delay": 400,
+        "next": ["Rewards.Featured.Season.Pass.Scan"]
+    },
+    "Rewards.Featured.Season.Pass.Back": {
+        "recognition": "OCR",
+        "roi": [
+            150,
+            1040,
+            420,
+            140
+        ],
+        "expected": "解鎖賜福",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            70,
+            1210,
+            10,
+            10
+        ],
+        "post_delay": 1000,
+        "next": ["Rewards.Featured.Event.Scan"]
+    },
+    "Rewards.Featured.Event.Back": {
+        "max_hit": 15,
+        "recognition": "OCR",
+        "roi": [
+            0,
+            0,
+            720,
+            180
+        ],
+        "expected": "霜焰之歌|霜焰詩篇|冰原營火|永冬織夢|解鎖賜福|幸運刮刮樂|秘寶大作戰|大話異界奇緣|賽季評價",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            70,
+            1210,
+            10,
+            10
+        ],
+        "post_delay": 1000,
+        "next": [
+            "Rewards.Featured.List",
+            "Rewards.Featured.Event.Back"
+        ]
+    },
+    "Rewards.Featured.List.Scroll": {
+        "max_hit": 6,
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            360,
+            1040,
+            1,
+            1
+        ],
+        "end": [
+            360,
+            280,
+            1,
+            1
+        ],
+        "duration": 500,
+        "next": ["Rewards.Featured.List"]
+    },
+    "Rewards.All.Done": {"recognition": "DirectHit", "action": "DoNothing"}
+}

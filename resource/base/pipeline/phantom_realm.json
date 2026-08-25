@@ -1,0 +1,50 @@
+{
+    "PhantomRealm.EntryScreen": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            0,
+            260,
+            150
+        ],
+        "expected": "雙影幻境",
+        "threshold": 0.2,
+        "action": "DoNothing"
+    },
+    "PhantomRealm.TodayWaveCount": {
+        "recognition": "OCR",
+        "roi": [
+            100,
+            740,
+            520,
+            150
+        ],
+        "expected": "今日最多擊破波次.*",
+        "threshold": 0.2,
+        "action": "DoNothing"
+    },
+    "PhantomRealm.GoToMap": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1000,
+            370,
+            160
+        ],
+        "expected": "前往地圖",
+        "threshold": 0.2,
+        "action": "DoNothing"
+    },
+    "PhantomRealm.Match": {
+        "recognition": "OCR",
+        "roi": [
+            350,
+            1000,
+            370,
+            160
+        ],
+        "expected": "配對",
+        "threshold": 0.2,
+        "action": "DoNothing"
+    }
+}

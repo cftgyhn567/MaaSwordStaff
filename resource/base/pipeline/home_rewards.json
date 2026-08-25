@@ -1,0 +1,197 @@
+{
+    "Home.NavigateBed": {
+        "recognition": "FeatureMatch",
+        "roi": [
+            600,
+            450,
+            120,
+            350
+        ],
+        "template": "home/navigate-bed.png",
+        "detector": "SIFT",
+        "ratio": 0.65,
+        "count": 4,
+        "action": "Click",
+        "post_wait_freezes": 500,
+        "post_delay": 500,
+        "timeout": 15000,
+        "next": [
+            "Home.IdleBedReady"
+        ],
+        "on_error": [
+            "HomeRewards.FindCart"
+        ]
+    },
+    "Home.NavigateCart": {
+        "recognition": "FeatureMatch",
+        "roi": [
+            0,
+            550,
+            120,
+            350
+        ],
+        "template": "home/navigate-cart.png",
+        "detector": "SIFT",
+        "ratio": 0.65,
+        "count": 4,
+        "action": "Click",
+        "post_wait_freezes": 500,
+        "post_delay": 500,
+        "timeout": 15000,
+        "next": [
+            "Home.IdleCartReady"
+        ],
+        "on_error": [
+            "HomeRewards.Done"
+        ]
+    },
+    "Home.IdleBedReady": {
+        "recognition": "FeatureMatch",
+        "roi": [
+            0,
+            400,
+            430,
+            260
+        ],
+        "template": "home/idle-bed-ready.png",
+        "detector": "SIFT",
+        "ratio": 0.65,
+        "count": 4,
+        "action": "Click",
+        "post_delay": 1000,
+        "next": [
+            "HomeRewards.FindCart"
+        ]
+    },
+    "Home.IdleCartReady": {
+        "recognition": "FeatureMatch",
+        "roi": [
+            200,
+            650,
+            260,
+            250
+        ],
+        "template": "home/idle-cart-ready.png",
+        "detector": "SIFT",
+        "ratio": 0.65,
+        "count": 4,
+        "action": "Click",
+        "post_delay": 1000,
+        "timeout": 15000,
+        "next": [
+            "Home.RewardOverlayClose"
+        ],
+        "on_error": [
+            "HomeRewards.Done"
+        ]
+    },
+    "Home.RewardOverlayClose": {
+        "recognition": "OCR",
+        "roi": [
+            180,
+            300,
+            360,
+            110
+        ],
+        "expected": "獲得獎勵",
+        "threshold": 0.2,
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 500,
+        "next": [
+            "HomeRewards.Done"
+        ]
+    },
+    "HomeRewards.Start": {
+        "recognition": "DirectHit",
+        "action": "StartApp",
+        "package": "com.m88.idleXX",
+        "post_delay": 1000,
+        "timeout": 60000,
+        "next": [
+            "HomeRewards.HomeReady",
+            "HomeRewards.GuildToHome",
+            "HomeRewards.ExplorationToHome"
+        ]
+    },
+    "HomeRewards.HomeReady": {
+        "recognition": "OCR",
+        "roi": [
+            285,
+            1180,
+            180,
+            100
+        ],
+        "expected": "家園",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "HomeRewards.FindBed"
+        ]
+    },
+    "HomeRewards.GuildToHome": {
+        "recognition": "OCR",
+        "roi": [
+            240,
+            0,
+            360,
+            85
+        ],
+        "expected": "公會頻道",
+        "threshold": 0.2,
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 1000,
+        "timeout": 15000,
+        "next": [
+            "HomeRewards.HomeReady"
+        ]
+    },
+    "HomeRewards.ExplorationToHome": {
+        "recognition": "OCR",
+        "roi": [
+            470,
+            1120,
+            250,
+            160
+        ],
+        "expected": "探索.*",
+        "threshold": 0.2,
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 1000,
+        "timeout": 15000,
+        "next": [
+            "HomeRewards.HomeReady"
+        ]
+    },
+    "HomeRewards.FindBed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "timeout": 4000,
+        "next": [
+            "Home.IdleBedReady",
+            "Home.NavigateBed"
+        ],
+        "on_error": [
+            "HomeRewards.FindCart"
+        ]
+    },
+    "HomeRewards.FindCart": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "timeout": 4000,
+        "next": [
+            "Home.IdleCartReady",
+            "Home.NavigateCart"
+        ],
+        "on_error": [
+            "HomeRewards.Done"
+        ]
+    },
+    "HomeRewards.Done": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": ["Rewards.FunctionList.Start"]
+    }
+}

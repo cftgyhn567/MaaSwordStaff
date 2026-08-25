@@ -1,0 +1,66 @@
+{
+    "interface_version": 2,
+    "name": "maa-sword-staff",
+    "label": "Maa杖劍傳說助手",
+    "version": "v0.1.0",
+    "description": "透過 Android 模擬器與 ADB 執行《杖劍傳說：坎斯汀之約》日常流程。",
+    "welcome": "目前為開發版本。所有消耗付費貨幣、購買、出售及分解類功能均不會自動執行。",
+    "controller": [
+        {
+            "name": "Android",
+            "label": "Android 模擬器",
+            "type": "Adb",
+            "display_short_side": 720
+        }
+    ],
+    "resource": [
+        {
+            "name": "base",
+            "label": "台灣版",
+            "path": [
+                "./resource/base"
+            ]
+        }
+    ],
+    "group": [
+        {
+            "name": "Home",
+            "label": "家園",
+            "description": "家園地圖設施互動、購物、祈願與煉金。",
+            "default_expand": true
+        },
+        {
+            "name": "Guild",
+            "label": "公會",
+            "description": "公會大廳、捐贈、討伐與放置領獎。",
+            "default_expand": true
+        },
+        {
+            "name": "Note",
+            "label": "筆記",
+            "description": "透過筆記入口執行的副本、競技與委派。",
+            "default_expand": true
+        },
+        {
+            "name": "Map",
+            "label": "地圖",
+            "description": "地圖探索與體力消耗。",
+            "default_expand": true
+        },
+        {
+            "name": "Other",
+            "label": "其他",
+            "description": "進入遊戲、委託與一鍵領取所有獎勵。",
+            "default_expand": true
+        }
+    ],
+    "import": [
+        "./tasks/startup.json",
+        "./tasks/reward_claims.json",
+        "./tasks/home_shop.json",
+        "./tasks/gameplay_objectives.json",
+        "./tasks/preset/QuickDaily.json",
+        "./tasks/preset/DailyFull.json",
+        "./tasks/preset/ClaimOnly.json"
+    ]
+}

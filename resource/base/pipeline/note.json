@@ -1,0 +1,98 @@
+{
+    "Note.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            160,
+            720,
+            180
+        ],
+        "expected": "日常副本|羈絆冒險",
+        "threshold": 0.2,
+        "action": "DoNothing"
+    },
+    "Note.DailyDungeon": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            0,
+            120,
+            410,
+            180
+        ],
+        "template": "note/daily-dungeon-title.png",
+        "threshold": 0.75,
+        "action": "DoNothing"
+    },
+    "Note.BondAdventure": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            400,
+            120,
+            320,
+            190
+        ],
+        "template": "note/bond-adventure-title.png",
+        "threshold": 0.75,
+        "action": "DoNothing"
+    },
+    "Note.MapExplore": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            610,
+            410,
+            150
+        ],
+        "expected": "地圖探索",
+        "threshold": 0.2,
+        "action": "DoNothing"
+    },
+    "Note.Arena": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            720,
+            410,
+            150
+        ],
+        "expected": "競技",
+        "threshold": 0.2,
+        "action": "DoNothing"
+    },
+    "Note.DailyActivities": {
+        "recognition": "OCR",
+        "roi": [
+            400,
+            690,
+            320,
+            180
+        ],
+        "expected": "每日活動",
+        "threshold": 0.2,
+        "action": "DoNothing"
+    },
+    "Note.MaterialRealm": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1030,
+            410,
+            180
+        ],
+        "expected": "素材.*境",
+        "threshold": 0.2,
+        "action": "DoNothing"
+    },
+    "Note.WeeklyActivities": {
+        "recognition": "OCR",
+        "roi": [
+            400,
+            1020,
+            320,
+            190
+        ],
+        "expected": "每週活動",
+        "threshold": 0.2,
+        "action": "DoNothing"
+    }
+}

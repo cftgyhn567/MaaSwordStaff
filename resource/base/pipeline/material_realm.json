@@ -1,0 +1,1077 @@
+{
+    "Objectives.MaterialRealm.Start": {
+        "recognition": "DirectHit",
+        "action": "StartApp",
+        "package": "com.m88.idleXX",
+        "post_delay": 1000,
+        "next": [
+            "MaterialRealm.Home",
+            "MaterialRealm.Note.Screen",
+            "MaterialRealm.Menu.Iron"
+        ]
+    },
+    "MaterialRealm.Home": {
+        "recognition": "OCR",
+        "roi": [
+            285,
+            1180,
+            180,
+            100
+        ],
+        "expected": "家園",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            165,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 800,
+        "next": ["MaterialRealm.Note.Screen"]
+    },
+    "MaterialRealm.Note.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            130,
+            720,
+            1080
+        ],
+        "expected": "日常副本|羈絆冒險|素材.*境",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": ["MaterialRealm.Note.Entry"]
+    },
+    "MaterialRealm.Note.Entry": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            900,
+            430,
+            280
+        ],
+        "expected": "素材.*境",
+        "threshold": 0.2,
+        "action": "Click",
+        "post_delay": 800,
+        "next": ["MaterialRealm.Menu.Iron"]
+    },
+    "MaterialRealm.Menu.Iron": {
+        "recognition": "OCR",
+        "roi": [
+            20,
+            350,
+            330,
+            230
+        ],
+        "expected": "鐵石礦洞",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": ["MaterialRealm.Iron.Enter"]
+    },
+    "MaterialRealm.Iron.Enter": {
+        "recognition": "OCR",
+        "roi": [
+            20,
+            350,
+            330,
+            230
+        ],
+        "expected": "鐵石礦洞",
+        "threshold": 0.2,
+        "action": "Click",
+        "post_delay": 700,
+        "next": ["MaterialRealm.Iron.Detail"]
+    },
+    "MaterialRealm.Iron.Detail": {
+        "recognition": "OCR",
+        "roi": [
+            130,
+            1150,
+            220,
+            120
+        ],
+        "expected": "鐵石礦洞",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "MaterialRealm.Iron.Purchase.Open",
+            "MaterialRealm.Iron.Quick.Route"
+        ]
+    },
+    "MaterialRealm.Iron.Purchase.Open": {
+        "max_hit": 0,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            670,
+            20,
+            50,
+            70
+        ],
+        "post_delay": 500,
+        "next": ["MaterialRealm.Iron.Purchase.Dialog"]
+    },
+    "MaterialRealm.Iron.Purchase.Dialog": {
+        "recognition": "OCR",
+        "roi": [
+            80,
+            300,
+            560,
+            620
+        ],
+        "expected": "購買鐵礦錘|購買.*錘",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": ["MaterialRealm.Iron.Purchase.Confirm"]
+    },
+    "MaterialRealm.Iron.Purchase.Confirm": {
+        "recognition": "OCR",
+        "roi": [
+            360,
+            780,
+            270,
+            110
+        ],
+        "expected": "購買.*",
+        "threshold": 0.2,
+        "action": "Click",
+        "post_delay": 600,
+        "next": [
+            "MaterialRealm.Iron.RewardOverlay",
+            "MaterialRealm.Iron.Purchase.DialogAfter",
+            "MaterialRealm.Iron.DetailAfterPurchase"
+        ]
+    },
+    "MaterialRealm.Iron.RewardOverlay": {
+        "recognition": "OCR",
+        "roi": [
+            150,
+            250,
+            420,
+            180
+        ],
+        "expected": "獲得獎勵|獲得.*",
+        "threshold": 0.2,
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 400,
+        "next": ["MaterialRealm.Iron.DetailAfterPurchase"]
+    },
+    "MaterialRealm.Iron.Purchase.DialogAfter": {
+        "recognition": "OCR",
+        "roi": [
+            80,
+            300,
+            560,
+            620
+        ],
+        "expected": "購買鐵礦錘|購買.*錘",
+        "threshold": 0.2,
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 400,
+        "next": ["MaterialRealm.Iron.DetailAfterPurchase"]
+    },
+    "MaterialRealm.Iron.DetailAfterPurchase": {
+        "recognition": "OCR",
+        "roi": [
+            130,
+            1150,
+            220,
+            120
+        ],
+        "expected": "鐵石礦洞",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "MaterialRealm.Iron.Purchase.Open",
+            "MaterialRealm.Iron.Quick.Route"
+        ]
+    },
+    "MaterialRealm.Iron.Quick.Route": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "MaterialRealm.Iron.Quick.On",
+            "MaterialRealm.Iron.Quick.Enable"
+        ]
+    },
+    "MaterialRealm.Iron.Quick.On": {
+        "recognition": "OCR",
+        "roi": [
+            370,
+            1020,
+            100,
+            75
+        ],
+        "expected": "開",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "MaterialRealm.Iron.Mine",
+            "MaterialRealm.Iron.Exit"
+        ]
+    },
+    "MaterialRealm.Iron.Quick.Enable": {
+        "recognition": "OCR",
+        "roi": [
+            370,
+            1020,
+            100,
+            75
+        ],
+        "expected": "關",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            385,
+            1030,
+            80,
+            55
+        ],
+        "next": [
+            "MaterialRealm.Iron.Mine",
+            "MaterialRealm.Iron.Exit"
+        ]
+    },
+    "MaterialRealm.Iron.Quick.Off": {
+        "recognition": "OCR",
+        "roi": [
+            370,
+            1020,
+            100,
+            75
+        ],
+        "expected": "關",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "MaterialRealm.Iron.Mine",
+            "MaterialRealm.Iron.Exit"
+        ]
+    },
+    "MaterialRealm.Iron.Quick.Disable": {
+        "recognition": "OCR",
+        "roi": [
+            370,
+            1020,
+            100,
+            75
+        ],
+        "expected": "開",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            385,
+            1030,
+            80,
+            55
+        ],
+        "next": [
+            "MaterialRealm.Iron.Mine",
+            "MaterialRealm.Iron.Exit"
+        ]
+    },
+    "MaterialRealm.Iron.Mine": {
+        "max_hit": 0,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            285,
+            835,
+            160,
+            180
+        ],
+        "post_wait_freezes": 500,
+        "post_delay": 300,
+        "next": ["MaterialRealm.Iron.DetailAfterMine"]
+    },
+    "MaterialRealm.Iron.DetailAfterMine": {
+        "recognition": "OCR",
+        "roi": [
+            130,
+            1150,
+            220,
+            120
+        ],
+        "expected": "鐵石礦洞",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "MaterialRealm.Iron.Mine",
+            "MaterialRealm.Iron.Exit"
+        ]
+    },
+    "MaterialRealm.Iron.Exit": {
+        "recognition": "DirectHit",
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 500,
+        "next": ["MaterialRealm.Menu.Gold"]
+    },
+    "MaterialRealm.Menu.Gold": {
+        "recognition": "OCR",
+        "roi": [
+            370,
+            350,
+            330,
+            230
+        ],
+        "expected": "黃金礦洞",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": ["MaterialRealm.Gold.Enter"]
+    },
+    "MaterialRealm.Gold.Enter": {
+        "recognition": "OCR",
+        "roi": [
+            370,
+            350,
+            330,
+            230
+        ],
+        "expected": "黃金礦洞",
+        "threshold": 0.2,
+        "action": "Click",
+        "post_delay": 700,
+        "next": ["MaterialRealm.Gold.Detail"]
+    },
+    "MaterialRealm.Gold.Detail": {
+        "recognition": "OCR",
+        "roi": [
+            130,
+            1150,
+            220,
+            120
+        ],
+        "expected": "黃金礦洞",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "MaterialRealm.Gold.Purchase.Open",
+            "MaterialRealm.Gold.Quick.Route"
+        ]
+    },
+    "MaterialRealm.Gold.Purchase.Open": {
+        "max_hit": 0,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            670,
+            20,
+            50,
+            70
+        ],
+        "post_delay": 500,
+        "next": ["MaterialRealm.Gold.Purchase.Dialog"]
+    },
+    "MaterialRealm.Gold.Purchase.Dialog": {
+        "recognition": "OCR",
+        "roi": [
+            80,
+            300,
+            560,
+            620
+        ],
+        "expected": "購買.*",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": ["MaterialRealm.Gold.Purchase.Confirm"]
+    },
+    "MaterialRealm.Gold.Purchase.Confirm": {
+        "recognition": "OCR",
+        "roi": [
+            360,
+            780,
+            270,
+            110
+        ],
+        "expected": "購買.*",
+        "threshold": 0.2,
+        "action": "Click",
+        "post_delay": 600,
+        "next": [
+            "MaterialRealm.Gold.RewardOverlay",
+            "MaterialRealm.Gold.Purchase.DialogAfter",
+            "MaterialRealm.Gold.DetailAfterPurchase"
+        ]
+    },
+    "MaterialRealm.Gold.RewardOverlay": {
+        "recognition": "OCR",
+        "roi": [
+            150,
+            250,
+            420,
+            180
+        ],
+        "expected": "獲得獎勵|獲得.*",
+        "threshold": 0.2,
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 400,
+        "next": ["MaterialRealm.Gold.DetailAfterPurchase"]
+    },
+    "MaterialRealm.Gold.Purchase.DialogAfter": {
+        "recognition": "OCR",
+        "roi": [
+            80,
+            300,
+            560,
+            620
+        ],
+        "expected": "購買.*",
+        "threshold": 0.2,
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 400,
+        "next": ["MaterialRealm.Gold.DetailAfterPurchase"]
+    },
+    "MaterialRealm.Gold.DetailAfterPurchase": {
+        "recognition": "OCR",
+        "roi": [
+            130,
+            1150,
+            220,
+            120
+        ],
+        "expected": "黃金礦洞",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "MaterialRealm.Gold.Purchase.Open",
+            "MaterialRealm.Gold.Quick.Route"
+        ]
+    },
+    "MaterialRealm.Gold.Quick.Route": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "MaterialRealm.Gold.Quick.On",
+            "MaterialRealm.Gold.Quick.Enable"
+        ]
+    },
+    "MaterialRealm.Gold.Quick.On": {
+        "recognition": "OCR",
+        "roi": [
+            370,
+            1020,
+            100,
+            75
+        ],
+        "expected": "開",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "MaterialRealm.Gold.Mine",
+            "MaterialRealm.Gold.Exit"
+        ]
+    },
+    "MaterialRealm.Gold.Quick.Enable": {
+        "recognition": "OCR",
+        "roi": [
+            370,
+            1020,
+            100,
+            75
+        ],
+        "expected": "關",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            385,
+            1030,
+            80,
+            55
+        ],
+        "next": [
+            "MaterialRealm.Gold.Mine",
+            "MaterialRealm.Gold.Exit"
+        ]
+    },
+    "MaterialRealm.Gold.Quick.Off": {
+        "recognition": "OCR",
+        "roi": [
+            370,
+            1020,
+            100,
+            75
+        ],
+        "expected": "關",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "MaterialRealm.Gold.Mine",
+            "MaterialRealm.Gold.Exit"
+        ]
+    },
+    "MaterialRealm.Gold.Quick.Disable": {
+        "recognition": "OCR",
+        "roi": [
+            370,
+            1020,
+            100,
+            75
+        ],
+        "expected": "開",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            385,
+            1030,
+            80,
+            55
+        ],
+        "next": [
+            "MaterialRealm.Gold.Mine",
+            "MaterialRealm.Gold.Exit"
+        ]
+    },
+    "MaterialRealm.Gold.Mine": {
+        "max_hit": 0,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            285,
+            835,
+            160,
+            180
+        ],
+        "post_wait_freezes": 500,
+        "post_delay": 300,
+        "next": ["MaterialRealm.Gold.DetailAfterMine"]
+    },
+    "MaterialRealm.Gold.DetailAfterMine": {
+        "recognition": "OCR",
+        "roi": [
+            130,
+            1150,
+            220,
+            120
+        ],
+        "expected": "黃金礦洞",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "MaterialRealm.Gold.Mine",
+            "MaterialRealm.Gold.Exit"
+        ]
+    },
+    "MaterialRealm.Gold.Exit": {
+        "recognition": "DirectHit",
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 500,
+        "next": ["MaterialRealm.Menu.Monster"]
+    },
+    "MaterialRealm.Menu.Monster": {
+        "recognition": "OCR",
+        "roi": [
+            20,
+            850,
+            330,
+            250
+        ],
+        "expected": "怪物洞窟",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": ["MaterialRealm.Monster.Enter"]
+    },
+    "MaterialRealm.Monster.Enter": {
+        "recognition": "OCR",
+        "roi": [
+            20,
+            850,
+            330,
+            250
+        ],
+        "expected": "怪物洞窟",
+        "threshold": 0.2,
+        "action": "Click",
+        "post_delay": 700,
+        "next": ["MaterialRealm.Monster.Detail"]
+    },
+    "MaterialRealm.Monster.Detail": {
+        "recognition": "OCR",
+        "roi": [
+            130,
+            1150,
+            220,
+            120
+        ],
+        "expected": "怪物洞窟",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "MaterialRealm.Monster.Purchase.Open",
+            "MaterialRealm.Monster.Quick.Route"
+        ]
+    },
+    "MaterialRealm.Monster.Purchase.Open": {
+        "max_hit": 0,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            670,
+            20,
+            50,
+            70
+        ],
+        "post_delay": 500,
+        "next": ["MaterialRealm.Monster.Purchase.Dialog"]
+    },
+    "MaterialRealm.Monster.Purchase.Dialog": {
+        "recognition": "OCR",
+        "roi": [
+            80,
+            300,
+            560,
+            620
+        ],
+        "expected": "購買.*",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": ["MaterialRealm.Monster.Purchase.Confirm"]
+    },
+    "MaterialRealm.Monster.Purchase.Confirm": {
+        "recognition": "OCR",
+        "roi": [
+            360,
+            780,
+            270,
+            110
+        ],
+        "expected": "購買.*",
+        "threshold": 0.2,
+        "action": "Click",
+        "post_delay": 600,
+        "next": [
+            "MaterialRealm.Monster.RewardOverlay",
+            "MaterialRealm.Monster.Purchase.DialogAfter",
+            "MaterialRealm.Monster.DetailAfterPurchase"
+        ]
+    },
+    "MaterialRealm.Monster.RewardOverlay": {
+        "recognition": "OCR",
+        "roi": [
+            150,
+            250,
+            420,
+            180
+        ],
+        "expected": "獲得獎勵|獲得.*",
+        "threshold": 0.2,
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 400,
+        "next": ["MaterialRealm.Monster.DetailAfterPurchase"]
+    },
+    "MaterialRealm.Monster.Purchase.DialogAfter": {
+        "recognition": "OCR",
+        "roi": [
+            80,
+            300,
+            560,
+            620
+        ],
+        "expected": "購買.*",
+        "threshold": 0.2,
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 400,
+        "next": ["MaterialRealm.Monster.DetailAfterPurchase"]
+    },
+    "MaterialRealm.Monster.DetailAfterPurchase": {
+        "recognition": "OCR",
+        "roi": [
+            130,
+            1150,
+            220,
+            120
+        ],
+        "expected": "怪物洞窟",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "MaterialRealm.Monster.Purchase.Open",
+            "MaterialRealm.Monster.Quick.Route"
+        ]
+    },
+    "MaterialRealm.Monster.Quick.Route": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "MaterialRealm.Monster.Quick.On",
+            "MaterialRealm.Monster.Quick.Enable"
+        ]
+    },
+    "MaterialRealm.Monster.Quick.On": {
+        "recognition": "OCR",
+        "roi": [
+            370,
+            1020,
+            100,
+            75
+        ],
+        "expected": "開",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "MaterialRealm.Monster.Mine",
+            "MaterialRealm.Monster.Exit"
+        ]
+    },
+    "MaterialRealm.Monster.Quick.Enable": {
+        "recognition": "OCR",
+        "roi": [
+            370,
+            1020,
+            100,
+            75
+        ],
+        "expected": "關",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            385,
+            1030,
+            80,
+            55
+        ],
+        "next": [
+            "MaterialRealm.Monster.Mine",
+            "MaterialRealm.Monster.Exit"
+        ]
+    },
+    "MaterialRealm.Monster.Quick.Off": {
+        "recognition": "OCR",
+        "roi": [
+            370,
+            1020,
+            100,
+            75
+        ],
+        "expected": "關",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "MaterialRealm.Monster.Mine",
+            "MaterialRealm.Monster.Exit"
+        ]
+    },
+    "MaterialRealm.Monster.Quick.Disable": {
+        "recognition": "OCR",
+        "roi": [
+            370,
+            1020,
+            100,
+            75
+        ],
+        "expected": "開",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            385,
+            1030,
+            80,
+            55
+        ],
+        "next": [
+            "MaterialRealm.Monster.Mine",
+            "MaterialRealm.Monster.Exit"
+        ]
+    },
+    "MaterialRealm.Monster.Mine": {
+        "max_hit": 0,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            285,
+            835,
+            160,
+            180
+        ],
+        "post_wait_freezes": 500,
+        "post_delay": 300,
+        "next": ["MaterialRealm.Monster.DetailAfterMine"]
+    },
+    "MaterialRealm.Monster.DetailAfterMine": {
+        "recognition": "OCR",
+        "roi": [
+            130,
+            1150,
+            220,
+            120
+        ],
+        "expected": "怪物洞窟",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "MaterialRealm.Monster.Mine",
+            "MaterialRealm.Monster.Exit"
+        ]
+    },
+    "MaterialRealm.Monster.Exit": {
+        "recognition": "DirectHit",
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 500,
+        "next": ["MaterialRealm.Menu.Sand"]
+    },
+    "MaterialRealm.Menu.Sand": {
+        "recognition": "OCR",
+        "roi": [
+            370,
+            850,
+            330,
+            250
+        ],
+        "expected": "砂石礦洞",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": ["MaterialRealm.Sand.Enter"]
+    },
+    "MaterialRealm.Sand.Enter": {
+        "recognition": "OCR",
+        "roi": [
+            370,
+            850,
+            330,
+            250
+        ],
+        "expected": "砂石礦洞",
+        "threshold": 0.2,
+        "action": "Click",
+        "post_delay": 700,
+        "next": ["MaterialRealm.Sand.Detail"]
+    },
+    "MaterialRealm.Sand.Detail": {
+        "recognition": "OCR",
+        "roi": [
+            130,
+            1150,
+            220,
+            120
+        ],
+        "expected": "砂石礦洞",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "MaterialRealm.Sand.Purchase.Open",
+            "MaterialRealm.Sand.Quick.Route"
+        ]
+    },
+    "MaterialRealm.Sand.Purchase.Open": {
+        "max_hit": 0,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            670,
+            20,
+            50,
+            70
+        ],
+        "post_delay": 500,
+        "next": ["MaterialRealm.Sand.Purchase.Dialog"]
+    },
+    "MaterialRealm.Sand.Purchase.Dialog": {
+        "recognition": "OCR",
+        "roi": [
+            80,
+            300,
+            560,
+            620
+        ],
+        "expected": "購買.*",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": ["MaterialRealm.Sand.Purchase.Confirm"]
+    },
+    "MaterialRealm.Sand.Purchase.Confirm": {
+        "recognition": "OCR",
+        "roi": [
+            360,
+            780,
+            270,
+            110
+        ],
+        "expected": "購買.*",
+        "threshold": 0.2,
+        "action": "Click",
+        "post_delay": 600,
+        "next": [
+            "MaterialRealm.Sand.RewardOverlay",
+            "MaterialRealm.Sand.Purchase.DialogAfter",
+            "MaterialRealm.Sand.DetailAfterPurchase"
+        ]
+    },
+    "MaterialRealm.Sand.RewardOverlay": {
+        "recognition": "OCR",
+        "roi": [
+            150,
+            250,
+            420,
+            180
+        ],
+        "expected": "獲得獎勵|獲得.*",
+        "threshold": 0.2,
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 400,
+        "next": ["MaterialRealm.Sand.DetailAfterPurchase"]
+    },
+    "MaterialRealm.Sand.Purchase.DialogAfter": {
+        "recognition": "OCR",
+        "roi": [
+            80,
+            300,
+            560,
+            620
+        ],
+        "expected": "購買.*",
+        "threshold": 0.2,
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 400,
+        "next": ["MaterialRealm.Sand.DetailAfterPurchase"]
+    },
+    "MaterialRealm.Sand.DetailAfterPurchase": {
+        "recognition": "OCR",
+        "roi": [
+            130,
+            1150,
+            220,
+            120
+        ],
+        "expected": "砂石礦洞",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "MaterialRealm.Sand.Purchase.Open",
+            "MaterialRealm.Sand.Quick.Route"
+        ]
+    },
+    "MaterialRealm.Sand.Quick.Route": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "MaterialRealm.Sand.Quick.On",
+            "MaterialRealm.Sand.Quick.Enable"
+        ]
+    },
+    "MaterialRealm.Sand.Quick.On": {
+        "recognition": "OCR",
+        "roi": [
+            370,
+            1020,
+            100,
+            75
+        ],
+        "expected": "開",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "MaterialRealm.Sand.Mine",
+            "MaterialRealm.Sand.Exit"
+        ]
+    },
+    "MaterialRealm.Sand.Quick.Enable": {
+        "recognition": "OCR",
+        "roi": [
+            370,
+            1020,
+            100,
+            75
+        ],
+        "expected": "關",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            385,
+            1030,
+            80,
+            55
+        ],
+        "next": [
+            "MaterialRealm.Sand.Mine",
+            "MaterialRealm.Sand.Exit"
+        ]
+    },
+    "MaterialRealm.Sand.Quick.Off": {
+        "recognition": "OCR",
+        "roi": [
+            370,
+            1020,
+            100,
+            75
+        ],
+        "expected": "關",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "MaterialRealm.Sand.Mine",
+            "MaterialRealm.Sand.Exit"
+        ]
+    },
+    "MaterialRealm.Sand.Quick.Disable": {
+        "recognition": "OCR",
+        "roi": [
+            370,
+            1020,
+            100,
+            75
+        ],
+        "expected": "開",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            385,
+            1030,
+            80,
+            55
+        ],
+        "next": [
+            "MaterialRealm.Sand.Mine",
+            "MaterialRealm.Sand.Exit"
+        ]
+    },
+    "MaterialRealm.Sand.Mine": {
+        "max_hit": 0,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            285,
+            835,
+            160,
+            180
+        ],
+        "post_wait_freezes": 500,
+        "post_delay": 300,
+        "next": ["MaterialRealm.Sand.DetailAfterMine"]
+    },
+    "MaterialRealm.Sand.DetailAfterMine": {
+        "recognition": "OCR",
+        "roi": [
+            130,
+            1150,
+            220,
+            120
+        ],
+        "expected": "砂石礦洞",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "MaterialRealm.Sand.Mine",
+            "MaterialRealm.Sand.Exit"
+        ]
+    },
+    "MaterialRealm.Sand.Exit": {
+        "recognition": "DirectHit",
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 500,
+        "next": ["MaterialRealm.Done"]
+    },
+    "MaterialRealm.Done": {"recognition": "DirectHit", "action": "DoNothing"}
+}

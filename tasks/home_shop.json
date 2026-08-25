@@ -1,0 +1,832 @@
+{
+    "task": [
+        {
+            "name": "HomeShopPurchase",
+            "label": "商店購物",
+            "entry": "HomeShop.Start",
+            "description": "依商品內容與折數設定瀏覽家園商店。購買時只允許點擊商品下方的黃色價格按鈕；目前為安全骨架，不會實際購買或刷新。",
+            "group": [
+                "Home"
+            ],
+            "controller": [
+                "Android"
+            ],
+            "option": [
+                "HomeShopRefreshLimit",
+                "HomeShopGroceryFirstRow",
+                "HomeShopGroceryRoughStone",
+                "HomeShopGroceryRareTimeSand",
+                "HomeShopGroceryBattleEssence",
+                "HomeShopGroceryOrdinaryFreezeDried",
+                "HomeShopVaultSlot1",
+                "HomeShopVaultSlot2",
+                "HomeShopVaultSlot3",
+                "HomeShopVaultSlot4",
+                "HomeShopVaultSlot5",
+                "HomeShopVaultSlot6",
+                "HomeShopVaultSlot7",
+                "HomeShopVaultSlot8",
+                "HomeShopVaultSlot9",
+                "HomeShopSpecialSale"
+            ]
+        }
+    ],
+    "option": {
+        "HomeShopRefreshLimit": {
+            "type": "select",
+            "label": "每日雜貨刷新次數上限",
+            "description": "一天最多主動刷新幾次；0 代表完全不刷新。每日刷新總上限為 10 次。",
+            "cases": [
+                {
+                    "name": "Refresh0",
+                    "label": "0 次（不刷新）"
+                },
+                {
+                    "name": "Refresh1",
+                    "label": "1 次"
+                },
+                {
+                    "name": "Refresh2",
+                    "label": "2 次"
+                },
+                {
+                    "name": "Refresh3",
+                    "label": "3 次"
+                },
+                {
+                    "name": "Refresh4",
+                    "label": "4 次"
+                },
+                {
+                    "name": "Refresh5",
+                    "label": "5 次"
+                },
+                {
+                    "name": "Refresh6",
+                    "label": "6 次"
+                },
+                {
+                    "name": "Refresh7",
+                    "label": "7 次"
+                },
+                {
+                    "name": "Refresh8",
+                    "label": "8 次"
+                },
+                {
+                    "name": "Refresh9",
+                    "label": "9 次"
+                },
+                {
+                    "name": "Refresh10",
+                    "label": "10 次"
+                }
+            ],
+            "default_case": "Refresh3"
+        },
+        "HomeShopGroceryFirstRow": {
+            "type": "select",
+            "label": "雜貨第一排商品",
+            "description": "第一排三個商品的購買策略。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買"
+                },
+                {
+                    "name": "BuyAll",
+                    "label": "全部購買"
+                }
+            ],
+            "default_case": "BuyAll"
+        },
+        "HomeShopGroceryRoughStone": {
+            "type": "select",
+            "label": "雜貨：粗煉石（黑色的鐵）",
+            "description": "第二、三排出現粗煉石時，只有折數不高於設定值才購買。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買"
+                },
+                {
+                    "name": "Discount10",
+                    "label": "1 折以下"
+                },
+                {
+                    "name": "Discount20",
+                    "label": "2 折以下"
+                },
+                {
+                    "name": "Discount30",
+                    "label": "3 折以下"
+                },
+                {
+                    "name": "Discount40",
+                    "label": "4 折以下"
+                },
+                {
+                    "name": "Discount50",
+                    "label": "5 折以下"
+                },
+                {
+                    "name": "Discount60",
+                    "label": "6 折以下"
+                },
+                {
+                    "name": "Discount70",
+                    "label": "7 折以下"
+                },
+                {
+                    "name": "Discount80",
+                    "label": "8 折以下"
+                },
+                {
+                    "name": "Discount90",
+                    "label": "9 折以下"
+                },
+                {
+                    "name": "Unlimited",
+                    "label": "不限折數"
+                }
+            ],
+            "default_case": "Discount70"
+        },
+        "HomeShopGroceryRareTimeSand": {
+            "type": "select",
+            "label": "雜貨：稀有的時之沙（黃色的砂）",
+            "description": "第二、三排出現稀有的時之沙時，只有折數不高於設定值才購買。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買"
+                },
+                {
+                    "name": "Discount10",
+                    "label": "1 折以下"
+                },
+                {
+                    "name": "Discount20",
+                    "label": "2 折以下"
+                },
+                {
+                    "name": "Discount30",
+                    "label": "3 折以下"
+                },
+                {
+                    "name": "Discount40",
+                    "label": "4 折以下"
+                },
+                {
+                    "name": "Discount50",
+                    "label": "5 折以下"
+                },
+                {
+                    "name": "Discount60",
+                    "label": "6 折以下"
+                },
+                {
+                    "name": "Discount70",
+                    "label": "7 折以下"
+                },
+                {
+                    "name": "Discount80",
+                    "label": "8 折以下"
+                },
+                {
+                    "name": "Discount90",
+                    "label": "9 折以下"
+                },
+                {
+                    "name": "Unlimited",
+                    "label": "不限折數"
+                }
+            ],
+            "default_case": "Discount80"
+        },
+        "HomeShopGroceryBattleEssence": {
+            "type": "select",
+            "label": "雜貨：歷戰精華（紫色）",
+            "description": "第二、三排出現歷戰精華時，只有折數不高於設定值才購買。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買"
+                },
+                {
+                    "name": "Discount10",
+                    "label": "1 折以下"
+                },
+                {
+                    "name": "Discount20",
+                    "label": "2 折以下"
+                },
+                {
+                    "name": "Discount30",
+                    "label": "3 折以下"
+                },
+                {
+                    "name": "Discount40",
+                    "label": "4 折以下"
+                },
+                {
+                    "name": "Discount50",
+                    "label": "5 折以下"
+                },
+                {
+                    "name": "Discount60",
+                    "label": "6 折以下"
+                },
+                {
+                    "name": "Discount70",
+                    "label": "7 折以下"
+                },
+                {
+                    "name": "Discount80",
+                    "label": "8 折以下"
+                },
+                {
+                    "name": "Discount90",
+                    "label": "9 折以下"
+                },
+                {
+                    "name": "Unlimited",
+                    "label": "不限折數"
+                }
+            ],
+            "default_case": "Discount90"
+        },
+        "HomeShopGroceryOrdinaryFreezeDried": {
+            "type": "select",
+            "label": "雜貨：普通凍乾（咖啡色）",
+            "description": "第二、三排出現普通凍乾時，只有折數不高於設定值才購買。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買"
+                },
+                {
+                    "name": "Discount10",
+                    "label": "1 折以下"
+                },
+                {
+                    "name": "Discount20",
+                    "label": "2 折以下"
+                },
+                {
+                    "name": "Discount30",
+                    "label": "3 折以下"
+                },
+                {
+                    "name": "Discount40",
+                    "label": "4 折以下"
+                },
+                {
+                    "name": "Discount50",
+                    "label": "5 折以下"
+                },
+                {
+                    "name": "Discount60",
+                    "label": "6 折以下"
+                },
+                {
+                    "name": "Discount70",
+                    "label": "7 折以下"
+                },
+                {
+                    "name": "Discount80",
+                    "label": "8 折以下"
+                },
+                {
+                    "name": "Discount90",
+                    "label": "9 折以下"
+                },
+                {
+                    "name": "Unlimited",
+                    "label": "不限折數"
+                }
+            ],
+            "default_case": "Discount60"
+        },
+        "HomeShopVaultSlot1": {
+            "type": "select",
+            "label": "寶庫第 1 格折數上限",
+            "description": "寶庫前三排第 1 個商品；依由左至右、由上至下編號。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買"
+                },
+                {
+                    "name": "Discount10",
+                    "label": "1 折以下"
+                },
+                {
+                    "name": "Discount20",
+                    "label": "2 折以下"
+                },
+                {
+                    "name": "Discount30",
+                    "label": "3 折以下"
+                },
+                {
+                    "name": "Discount40",
+                    "label": "4 折以下"
+                },
+                {
+                    "name": "Discount50",
+                    "label": "5 折以下"
+                },
+                {
+                    "name": "Discount60",
+                    "label": "6 折以下"
+                },
+                {
+                    "name": "Discount70",
+                    "label": "7 折以下"
+                },
+                {
+                    "name": "Discount80",
+                    "label": "8 折以下"
+                },
+                {
+                    "name": "Discount90",
+                    "label": "9 折以下"
+                },
+                {
+                    "name": "Unlimited",
+                    "label": "不限折數"
+                }
+            ],
+            "default_case": "Never"
+        },
+        "HomeShopVaultSlot2": {
+            "type": "select",
+            "label": "寶庫第 2 格折數上限",
+            "description": "寶庫前三排第 2 個商品；依由左至右、由上至下編號。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買"
+                },
+                {
+                    "name": "Discount10",
+                    "label": "1 折以下"
+                },
+                {
+                    "name": "Discount20",
+                    "label": "2 折以下"
+                },
+                {
+                    "name": "Discount30",
+                    "label": "3 折以下"
+                },
+                {
+                    "name": "Discount40",
+                    "label": "4 折以下"
+                },
+                {
+                    "name": "Discount50",
+                    "label": "5 折以下"
+                },
+                {
+                    "name": "Discount60",
+                    "label": "6 折以下"
+                },
+                {
+                    "name": "Discount70",
+                    "label": "7 折以下"
+                },
+                {
+                    "name": "Discount80",
+                    "label": "8 折以下"
+                },
+                {
+                    "name": "Discount90",
+                    "label": "9 折以下"
+                },
+                {
+                    "name": "Unlimited",
+                    "label": "不限折數"
+                }
+            ],
+            "default_case": "Never"
+        },
+        "HomeShopVaultSlot3": {
+            "type": "select",
+            "label": "寶庫第 3 格折數上限",
+            "description": "寶庫前三排第 3 個商品；依由左至右、由上至下編號。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買"
+                },
+                {
+                    "name": "Discount10",
+                    "label": "1 折以下"
+                },
+                {
+                    "name": "Discount20",
+                    "label": "2 折以下"
+                },
+                {
+                    "name": "Discount30",
+                    "label": "3 折以下"
+                },
+                {
+                    "name": "Discount40",
+                    "label": "4 折以下"
+                },
+                {
+                    "name": "Discount50",
+                    "label": "5 折以下"
+                },
+                {
+                    "name": "Discount60",
+                    "label": "6 折以下"
+                },
+                {
+                    "name": "Discount70",
+                    "label": "7 折以下"
+                },
+                {
+                    "name": "Discount80",
+                    "label": "8 折以下"
+                },
+                {
+                    "name": "Discount90",
+                    "label": "9 折以下"
+                },
+                {
+                    "name": "Unlimited",
+                    "label": "不限折數"
+                }
+            ],
+            "default_case": "Never"
+        },
+        "HomeShopVaultSlot4": {
+            "type": "select",
+            "label": "寶庫第 4 格折數上限",
+            "description": "寶庫前三排第 4 個商品；依由左至右、由上至下編號。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買"
+                },
+                {
+                    "name": "Discount10",
+                    "label": "1 折以下"
+                },
+                {
+                    "name": "Discount20",
+                    "label": "2 折以下"
+                },
+                {
+                    "name": "Discount30",
+                    "label": "3 折以下"
+                },
+                {
+                    "name": "Discount40",
+                    "label": "4 折以下"
+                },
+                {
+                    "name": "Discount50",
+                    "label": "5 折以下"
+                },
+                {
+                    "name": "Discount60",
+                    "label": "6 折以下"
+                },
+                {
+                    "name": "Discount70",
+                    "label": "7 折以下"
+                },
+                {
+                    "name": "Discount80",
+                    "label": "8 折以下"
+                },
+                {
+                    "name": "Discount90",
+                    "label": "9 折以下"
+                },
+                {
+                    "name": "Unlimited",
+                    "label": "不限折數"
+                }
+            ],
+            "default_case": "Never"
+        },
+        "HomeShopVaultSlot5": {
+            "type": "select",
+            "label": "寶庫第 5 格折數上限",
+            "description": "寶庫前三排第 5 個商品；依由左至右、由上至下編號。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買"
+                },
+                {
+                    "name": "Discount10",
+                    "label": "1 折以下"
+                },
+                {
+                    "name": "Discount20",
+                    "label": "2 折以下"
+                },
+                {
+                    "name": "Discount30",
+                    "label": "3 折以下"
+                },
+                {
+                    "name": "Discount40",
+                    "label": "4 折以下"
+                },
+                {
+                    "name": "Discount50",
+                    "label": "5 折以下"
+                },
+                {
+                    "name": "Discount60",
+                    "label": "6 折以下"
+                },
+                {
+                    "name": "Discount70",
+                    "label": "7 折以下"
+                },
+                {
+                    "name": "Discount80",
+                    "label": "8 折以下"
+                },
+                {
+                    "name": "Discount90",
+                    "label": "9 折以下"
+                },
+                {
+                    "name": "Unlimited",
+                    "label": "不限折數"
+                }
+            ],
+            "default_case": "Never"
+        },
+        "HomeShopVaultSlot6": {
+            "type": "select",
+            "label": "寶庫第 6 格折數上限",
+            "description": "寶庫前三排第 6 個商品；依由左至右、由上至下編號。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買"
+                },
+                {
+                    "name": "Discount10",
+                    "label": "1 折以下"
+                },
+                {
+                    "name": "Discount20",
+                    "label": "2 折以下"
+                },
+                {
+                    "name": "Discount30",
+                    "label": "3 折以下"
+                },
+                {
+                    "name": "Discount40",
+                    "label": "4 折以下"
+                },
+                {
+                    "name": "Discount50",
+                    "label": "5 折以下"
+                },
+                {
+                    "name": "Discount60",
+                    "label": "6 折以下"
+                },
+                {
+                    "name": "Discount70",
+                    "label": "7 折以下"
+                },
+                {
+                    "name": "Discount80",
+                    "label": "8 折以下"
+                },
+                {
+                    "name": "Discount90",
+                    "label": "9 折以下"
+                },
+                {
+                    "name": "Unlimited",
+                    "label": "不限折數"
+                }
+            ],
+            "default_case": "Never"
+        },
+        "HomeShopVaultSlot7": {
+            "type": "select",
+            "label": "寶庫第 7 格折數上限",
+            "description": "寶庫前三排第 7 個商品；依由左至右、由上至下編號。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買"
+                },
+                {
+                    "name": "Discount10",
+                    "label": "1 折以下"
+                },
+                {
+                    "name": "Discount20",
+                    "label": "2 折以下"
+                },
+                {
+                    "name": "Discount30",
+                    "label": "3 折以下"
+                },
+                {
+                    "name": "Discount40",
+                    "label": "4 折以下"
+                },
+                {
+                    "name": "Discount50",
+                    "label": "5 折以下"
+                },
+                {
+                    "name": "Discount60",
+                    "label": "6 折以下"
+                },
+                {
+                    "name": "Discount70",
+                    "label": "7 折以下"
+                },
+                {
+                    "name": "Discount80",
+                    "label": "8 折以下"
+                },
+                {
+                    "name": "Discount90",
+                    "label": "9 折以下"
+                },
+                {
+                    "name": "Unlimited",
+                    "label": "不限折數"
+                }
+            ],
+            "default_case": "Never"
+        },
+        "HomeShopVaultSlot8": {
+            "type": "select",
+            "label": "寶庫第 8 格折數上限",
+            "description": "寶庫前三排第 8 個商品；依由左至右、由上至下編號。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買"
+                },
+                {
+                    "name": "Discount10",
+                    "label": "1 折以下"
+                },
+                {
+                    "name": "Discount20",
+                    "label": "2 折以下"
+                },
+                {
+                    "name": "Discount30",
+                    "label": "3 折以下"
+                },
+                {
+                    "name": "Discount40",
+                    "label": "4 折以下"
+                },
+                {
+                    "name": "Discount50",
+                    "label": "5 折以下"
+                },
+                {
+                    "name": "Discount60",
+                    "label": "6 折以下"
+                },
+                {
+                    "name": "Discount70",
+                    "label": "7 折以下"
+                },
+                {
+                    "name": "Discount80",
+                    "label": "8 折以下"
+                },
+                {
+                    "name": "Discount90",
+                    "label": "9 折以下"
+                },
+                {
+                    "name": "Unlimited",
+                    "label": "不限折數"
+                }
+            ],
+            "default_case": "Never"
+        },
+        "HomeShopVaultSlot9": {
+            "type": "select",
+            "label": "寶庫第 9 格折數上限",
+            "description": "寶庫前三排第 9 個商品；依由左至右、由上至下編號。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買"
+                },
+                {
+                    "name": "Discount10",
+                    "label": "1 折以下"
+                },
+                {
+                    "name": "Discount20",
+                    "label": "2 折以下"
+                },
+                {
+                    "name": "Discount30",
+                    "label": "3 折以下"
+                },
+                {
+                    "name": "Discount40",
+                    "label": "4 折以下"
+                },
+                {
+                    "name": "Discount50",
+                    "label": "5 折以下"
+                },
+                {
+                    "name": "Discount60",
+                    "label": "6 折以下"
+                },
+                {
+                    "name": "Discount70",
+                    "label": "7 折以下"
+                },
+                {
+                    "name": "Discount80",
+                    "label": "8 折以下"
+                },
+                {
+                    "name": "Discount90",
+                    "label": "9 折以下"
+                },
+                {
+                    "name": "Unlimited",
+                    "label": "不限折數"
+                }
+            ],
+            "default_case": "Never"
+        },
+        "HomeShopSpecialSale": {
+            "type": "select",
+            "label": "特賣商品折數上限",
+            "description": "特賣出現時，只有折數不高於設定值才購買；沒有特賣時直接略過。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買"
+                },
+                {
+                    "name": "Discount10",
+                    "label": "1 折以下"
+                },
+                {
+                    "name": "Discount20",
+                    "label": "2 折以下"
+                },
+                {
+                    "name": "Discount30",
+                    "label": "3 折以下"
+                },
+                {
+                    "name": "Discount40",
+                    "label": "4 折以下"
+                },
+                {
+                    "name": "Discount50",
+                    "label": "5 折以下"
+                },
+                {
+                    "name": "Discount60",
+                    "label": "6 折以下"
+                },
+                {
+                    "name": "Discount70",
+                    "label": "7 折以下"
+                },
+                {
+                    "name": "Discount80",
+                    "label": "8 折以下"
+                },
+                {
+                    "name": "Discount90",
+                    "label": "9 折以下"
+                },
+                {
+                    "name": "Unlimited",
+                    "label": "不限折數"
+                }
+            ],
+            "default_case": "Never"
+        }
+    }
+}

@@ -1,0 +1,66 @@
+{
+    "HomeShop.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing"
+    },
+    "HomeShop.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            0,
+            220,
+            180
+        ],
+        "expected": "商店",
+        "threshold": 0.2,
+        "action": "DoNothing"
+    },
+    "HomeShop.Grocery.RoughStone": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            0,
+            450,
+            720,
+            650
+        ],
+        "template": "home_shop/grocery_rough_stone.png",
+        "threshold": 0.75,
+        "action": "DoNothing"
+    },
+    "HomeShop.Grocery.RareTimeSand": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            0,
+            450,
+            720,
+            650
+        ],
+        "template": "home_shop/grocery_rare_time_sand.png",
+        "threshold": 0.75,
+        "action": "DoNothing"
+    },
+    "HomeShop.Grocery.BattleEssence": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            0,
+            450,
+            720,
+            650
+        ],
+        "template": "home_shop/grocery_battle_essence.png",
+        "threshold": 0.75,
+        "action": "DoNothing"
+    },
+    "HomeShop.Grocery.OrdinaryFreezeDried": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            0,
+            450,
+            720,
+            650
+        ],
+        "template": "home_shop/grocery_ordinary_freeze_dried.png",
+        "threshold": 0.75,
+        "action": "DoNothing"
+    }
+}

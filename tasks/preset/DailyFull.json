@@ -1,0 +1,87 @@
+{
+    "preset": [
+        {
+            "name": "DailyFull",
+            "label": "完整日常",
+            "description": "包含進入遊戲、家園、公會、筆記、地圖與其他項目。執行順序依序為：進入遊戲 → 家園 → 公會 → 筆記 → 地圖 → 其他，一鍵領取所有獎勵安排在最末項執行。",
+            "task": [
+                {
+                    "name": "StartupProbe"
+                },
+                {
+                    "name": "HomeShopPurchase"
+                },
+                {
+                    "name": "GoddessStatuePrayer"
+                },
+                {
+                    "name": "TimeGachaMachine"
+                },
+                {
+                    "name": "SakuraBeastBonding"
+                },
+                {
+                    "name": "AlchemyFurnace",
+                    "option": {"AlchemyExcludeHighPower": "Enabled"}
+                },
+                {
+                    "name": "BagUseItems"
+                },
+                {
+                    "name": "GuildRaid"
+                },
+                {
+                    "name": "GuildDonation",
+                    "option": {"GuildDonationCount": "Donate0"}
+                },
+                {
+                    "name": "GuildIdleReward"
+                },
+                {
+                    "name": "DailyDungeon"
+                },
+                {
+                    "name": "ArenaChallenge"
+                },
+                {
+                    "name": "BeastTrial"
+                },
+                {
+                    "name": "PhantomRealm"
+                },
+                {
+                    "name": "MaterialRealm",
+                    "option": {
+                        "MaterialIronPurchaseCount": {"Count": "0"},
+                        "MaterialIronQuickMining": "Yes",
+                        "MaterialIronMiningCount": {"Count": "0"},
+                        "MaterialGoldPurchaseCount": {"Count": "0"},
+                        "MaterialGoldQuickMining": "Yes",
+                        "MaterialGoldMiningCount": {"Count": "0"},
+                        "MaterialMonsterPurchaseCount": {"Count": "0"},
+                        "MaterialMonsterQuickMining": "Yes",
+                        "MaterialMonsterMiningCount": {"Count": "0"},
+                        "MaterialSandPurchaseCount": {"Count": "0"},
+                        "MaterialSandQuickMining": "Yes",
+                        "MaterialSandMiningCount": {"Count": "0"}
+                    }
+                },
+                {
+                    "name": "BondAdventureScenicDispatch"
+                },
+                {
+                    "name": "ExploreFate"
+                },
+                {
+                    "name": "ConsumeStamina"
+                },
+                {
+                    "name": "Commissions"
+                },
+                {
+                    "name": "ClaimAllRewards"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,14 @@
+{
+    "preset": [
+        {
+            "name": "ClaimOnly",
+            "label": "只領獎勵",
+            "description": "僅執行家園床與推車等免費掛機收益領取。",
+            "task": [
+                {
+                    "name": "ClaimAllRewards"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,16 @@
+{
+    "task": [
+        {
+            "name": "ClaimAllRewards",
+            "label": "領取所有獎勵",
+            "entry": "Rewards.All.Start",
+            "description": "統一執行家園床與推車、好友、餽贈、日常／周常／委託、巡禮、基金、每日／每周饋禮、月卡及精彩活動紅點領獎。商城只點領取與紅點，禁止點擊價格、延長、續訂、儲值與活動資源兌換。",
+            "group": [
+                "Other"
+            ],
+            "controller": [
+                "Android"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,38 @@
+{
+    "Navigation.Bottom.Note": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            150,
+            1150,
+            150,
+            130
+        ],
+        "template": "navigation/bottom-note.png",
+        "threshold": 0.75,
+        "action": "DoNothing"
+    },
+    "Navigation.Bottom.Home": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            290,
+            1140,
+            170,
+            140
+        ],
+        "template": "navigation/bottom-home.png",
+        "threshold": 0.75,
+        "action": "DoNothing"
+    },
+    "Navigation.Bottom.Guild": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            430,
+            1150,
+            150,
+            130
+        ],
+        "template": "navigation/bottom-guild.png",
+        "threshold": 0.75,
+        "action": "DoNothing"
+    }
+}
