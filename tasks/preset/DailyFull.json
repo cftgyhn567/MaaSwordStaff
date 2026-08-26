@@ -3,11 +3,8 @@
         {
             "name": "DailyFull",
             "label": "完整日常",
-            "description": "包含進入遊戲、家園、公會、筆記、地圖與其他項目。執行順序依序為：進入遊戲 → 家園 → 公會 → 筆記 → 地圖 → 其他，一鍵領取所有獎勵安排在最末項執行。",
+            "description": "包含家園、公會、筆記、地圖與其他項目。執行順序依序為：家園 → 公會 → 筆記 → 地圖 → 其他，一鍵領取所有獎勵安排在最末項執行。",
             "task": [
-                {
-                    "name": "StartupProbe"
-                },
                 {
                     "name": "HomeShopPurchase"
                 },
@@ -22,7 +19,9 @@
                 },
                 {
                     "name": "AlchemyFurnace",
-                    "option": {"AlchemyExcludeHighPower": "Enabled"}
+                    "option": {
+                        "AlchemyExcludeHighPower": "Enabled"
+                    }
                 },
                 {
                     "name": "BagUseItems"
@@ -32,7 +31,9 @@
                 },
                 {
                     "name": "GuildDonation",
-                    "option": {"GuildDonationCount": "Donate0"}
+                    "option": {
+                        "GuildDonationCount": "Donate0"
+                    }
                 },
                 {
                     "name": "GuildIdleReward"
@@ -52,18 +53,26 @@
                 {
                     "name": "MaterialRealm",
                     "option": {
-                        "MaterialIronPurchaseCount": {"Count": "0"},
+                        "MaterialIronPurchaseCount": "Buy0",
                         "MaterialIronQuickMining": "Yes",
-                        "MaterialIronMiningCount": {"Count": "0"},
-                        "MaterialGoldPurchaseCount": {"Count": "0"},
+                        "MaterialIronMiningCount": {
+                            "Count": "0"
+                        },
+                        "MaterialGoldPurchaseCount": "Buy0",
                         "MaterialGoldQuickMining": "Yes",
-                        "MaterialGoldMiningCount": {"Count": "0"},
-                        "MaterialMonsterPurchaseCount": {"Count": "0"},
+                        "MaterialGoldMiningCount": {
+                            "Count": "0"
+                        },
+                        "MaterialMonsterPurchaseCount": "Buy0",
                         "MaterialMonsterQuickMining": "Yes",
-                        "MaterialMonsterMiningCount": {"Count": "0"},
-                        "MaterialSandPurchaseCount": {"Count": "0"},
+                        "MaterialMonsterMiningCount": {
+                            "Count": "0"
+                        },
+                        "MaterialSandPurchaseCount": "Buy0",
                         "MaterialSandQuickMining": "Yes",
-                        "MaterialSandMiningCount": {"Count": "0"}
+                        "MaterialSandMiningCount": {
+                            "Count": "0"
+                        }
                     }
                 },
                 {
@@ -76,10 +85,18 @@
                     "name": "ConsumeStamina"
                 },
                 {
-                    "name": "Commissions"
+                    "name": "Commissions",
+                    "option": {
+                        "CommissionSubmitCount": {"Count": "4"},
+                        "CommissionUseExtraAttempts": "No"
+                    }
                 },
                 {
-                    "name": "ClaimAllRewards"
+                    "name": "ClaimAllRewards",
+                    "option": {
+                        "CommissionSubmitCount": {"Count": "4"},
+                        "CommissionUseExtraAttempts": "No"
+                    }
                 }
             ]
         }

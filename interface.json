@@ -50,12 +50,11 @@
         {
             "name": "Other",
             "label": "其他",
-            "description": "進入遊戲、委託與一鍵領取所有獎勵。",
+            "description": "委託與一鍵領取所有獎勵。",
             "default_expand": true
         }
     ],
     "import": [
-        "./tasks/startup.json",
         "./tasks/reward_claims.json",
         "./tasks/home_shop.json",
         "./tasks/gameplay_objectives.json",

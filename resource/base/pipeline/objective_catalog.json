@@ -22,7 +22,6 @@
     "Objectives.LuckyScratch.DailyDungeon5.Start": {"recognition": "DirectHit", "action": "DoNothing"},
     "Objectives.TreasureBattle.DailyDungeon2.Start": {"recognition": "DirectHit", "action": "DoNothing"},
     "Objectives.TreasureBattle.BeastTrialStage3.Start": {"recognition": "DirectHit", "action": "DoNothing"},
-    "Objectives.Commissions.Start": {"recognition": "DirectHit", "action": "DoNothing"},
     "Objectives.BondAdventureScenicDispatch.Start": {"recognition": "DirectHit", "action": "DoNothing"},
     "Objectives.GoddessStatue.Prayer.Start": {"recognition": "DirectHit", "action": "DoNothing"},
     "Objectives.GachaMachine.Start": {"recognition": "DirectHit", "action": "DoNothing"},

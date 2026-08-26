@@ -11,3 +11,6 @@ maafw.log
 maatoolsErrorDetails.json
 .create-maa-project/
 # END create-maa-project
+
+tests/screenshots/
+

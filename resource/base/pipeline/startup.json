@@ -12,6 +12,7 @@
             "Startup.LoginScreenByClickText",
             "ExplorationScreen.Ready",
             "HomeScreen.Ready",
+            "GuildScreen.Ready",
             "GuildChannel.BackToGame"
         ],
         "on_error": ["Navigation.Root.Recovery.Start"]
@@ -107,6 +108,18 @@
             100
         ],
         "expected": "家園",
+        "threshold": 0.2,
+        "action": "DoNothing"
+    },
+    "GuildScreen.Ready": {
+        "recognition": "OCR",
+        "roi": [
+            180,
+            560,
+            220,
+            180
+        ],
+        "expected": "公會大廳",
         "threshold": 0.2,
         "action": "DoNothing"
     },

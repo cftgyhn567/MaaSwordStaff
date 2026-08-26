@@ -218,46 +218,28 @@
         "threshold": 0.2,
         "action": "DoNothing",
         "next": [
-            "Guild.Donation.Execute",
+            "Guild.Donation.NeedMore",
             "Guild.Donation.Done"
         ]
     },
-    "Guild.Donation.Count": {
+    "Guild.Donation.NeedMore": {
+        "max_hit": 5,
         "recognition": "OCR",
         "roi": [
             180,
-            780,
+            840,
             360,
-            150
+            100
         ],
-        "expected": "每日捐贈次數.*",
-        "threshold": 0.2,
-        "action": "DoNothing"
-    },
-    "Guild.Donation.Button": {
-        "recognition": "OCR",
-        "roi": [
-            190,
-            850,
-            340,
-            150
-        ],
-        "expected": ".*捐贈",
-        "threshold": 0.2,
-        "action": "DoNothing"
-    },
-    "Guild.Donation.Execute": {
-        "max_hit": 0,
-        "recognition": "OCR",
-        "roi": [
-            190,
-            850,
-            340,
-            150
-        ],
-        "expected": "免費捐贈|.*捐贈.*",
+        "expected": "每日捐贈次數.*0/5",
         "threshold": 0.2,
         "action": "Click",
+        "target": [
+            230,
+            915,
+            260,
+            80
+        ],
         "post_delay": 450,
         "next": [
             "Guild.Donation.Overlay",

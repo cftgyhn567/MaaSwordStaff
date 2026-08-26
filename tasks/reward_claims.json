@@ -10,6 +10,10 @@
             ],
             "controller": [
                 "Android"
+            ],
+            "option": [
+                "CommissionSubmitCount",
+                "CommissionUseExtraAttempts"
             ]
         }
     ]

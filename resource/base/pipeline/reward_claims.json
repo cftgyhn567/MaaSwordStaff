@@ -291,7 +291,6 @@
         "next": [
             "Rewards.Daily.ClaimTop",
             "Rewards.Daily.Claim",
-            "Rewards.Daily.Scroll",
             "Rewards.Weekly.Open"
         ]
     },
@@ -394,7 +393,6 @@
         "next": [
             "Rewards.Weekly.ClaimTop",
             "Rewards.Weekly.Claim",
-            "Rewards.Weekly.Scroll",
             "Rewards.Commissions.Open"
         ]
     },
@@ -489,7 +487,133 @@
         "expected": "委託任務",
         "threshold": 0.2,
         "action": "DoNothing",
-        "next": ["Rewards.Commissions.Scan"]
+        "next": ["Rewards.Commissions.Count.Route"]
+    },
+    "Rewards.Commissions.Count.Route": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Rewards.Commissions.Count.0",
+            "Rewards.Commissions.Count.1",
+            "Rewards.Commissions.Count.2",
+            "Rewards.Commissions.Count.3",
+            "Rewards.Commissions.Count.4",
+            "Rewards.Commissions.Scan"
+        ]
+    },
+    "Rewards.Commissions.Count.0": {
+        "recognition": "OCR",
+        "roi": [
+            180,
+            95,
+            380,
+            70
+        ],
+        "expected": "今日可提交次數.*0/4",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": ["Rewards.Commissions.Extra.Route"],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "委託次數辨識：今日可提交 0/4，免費剩餘 0 次。",
+                "display": "log"
+            }
+        }
+    },
+    "Rewards.Commissions.Count.1": {
+        "recognition": "OCR",
+        "roi": [
+            180,
+            95,
+            380,
+            70
+        ],
+        "expected": "今日可提交次數.*1/4",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": ["Rewards.Commissions.Scan"],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "委託次數辨識：今日可提交 1/4，免費剩餘 1 次。",
+                "display": "log"
+            }
+        }
+    },
+    "Rewards.Commissions.Count.2": {
+        "recognition": "OCR",
+        "roi": [
+            180,
+            95,
+            380,
+            70
+        ],
+        "expected": "今日可提交次數.*2/4",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": ["Rewards.Commissions.Scan"],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "委託次數辨識：今日可提交 2/4，免費剩餘 2 次。",
+                "display": "log"
+            }
+        }
+    },
+    "Rewards.Commissions.Count.3": {
+        "recognition": "OCR",
+        "roi": [
+            180,
+            95,
+            380,
+            70
+        ],
+        "expected": "今日可提交次數.*3/4",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": ["Rewards.Commissions.Scan"],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "委託次數辨識：今日可提交 3/4，免費剩餘 3 次。",
+                "display": "log"
+            }
+        }
+    },
+    "Rewards.Commissions.Count.4": {
+        "recognition": "OCR",
+        "roi": [
+            180,
+            95,
+            380,
+            70
+        ],
+        "expected": "今日可提交次數.*4/4",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": ["Rewards.Commissions.Scan"],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "委託次數辨識：今日可提交 4/4，免費剩餘 4 次。",
+                "display": "log"
+            }
+        }
+    },
+    "Rewards.Commissions.Extra.Route": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": ["Rewards.Tasks.Back"]
+    },
+    "Rewards.Commissions.Extra.NeedsSample": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": ["Rewards.Tasks.Back"],
+        "focus": {
+            "Node.Action.Starting": {
+                "content": "已允許使用委託額外次數，但尚缺 0/4 後的額外次數確認畫面；為避免誤扣資源，本次先停在免費上限。",
+                "display": [
+                    "log",
+                    "toast"
+                ]
+            }
+        }
     },
     "Rewards.Commissions.Scan": {
         "recognition": "DirectHit",
@@ -501,6 +625,7 @@
         ]
     },
     "Rewards.Commissions.Submit": {
+        "max_hit": 4,
         "recognition": "OCR",
         "roi": [
             20,
@@ -514,7 +639,7 @@
         "post_delay": 450,
         "next": [
             "Rewards.Commissions.Overlay",
-            "Rewards.Commissions.Scan"
+            "Rewards.Commissions.Count.Route"
         ]
     },
     "Rewards.Commissions.Overlay": {
@@ -529,7 +654,7 @@
         "threshold": 0.2,
         "action": "ClickKey",
         "key": 4,
-        "next": ["Rewards.Commissions.Scan"]
+        "next": ["Rewards.Commissions.Count.Route"]
     },
     "Rewards.Commissions.Scroll": {
         "max_hit": 5,
@@ -706,7 +831,6 @@
         "action": "DoNothing",
         "next": [
             "Rewards.Pilgrimage.Daily.Claim",
-            "Rewards.Pilgrimage.Daily.Scroll",
             "Rewards.Pilgrimage.Weekly.Open"
         ]
     },
@@ -758,7 +882,6 @@
         "action": "DoNothing",
         "next": [
             "Rewards.Pilgrimage.Weekly.Claim",
-            "Rewards.Pilgrimage.Weekly.Scroll",
             "Rewards.Pilgrimage.Period.Open"
         ]
     },
@@ -810,7 +933,6 @@
         "action": "DoNothing",
         "next": [
             "Rewards.Pilgrimage.Period.Claim",
-            "Rewards.Pilgrimage.Period.Scroll",
             "Rewards.Pilgrimage.Pass.Open"
         ]
     },

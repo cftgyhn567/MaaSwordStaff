@@ -3,11 +3,8 @@
         {
             "name": "QuickDaily",
             "label": "快速日常",
-            "description": "自動啟動遊戲並領取所有免費掛機與收益獎勵。",
+            "description": "領取所有免費掛機與收益獎勵。",
             "task": [
-                {
-                    "name": "StartupProbe"
-                },
                 {
                     "name": "ClaimAllRewards"
                 }

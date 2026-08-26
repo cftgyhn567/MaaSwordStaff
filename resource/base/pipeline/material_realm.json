@@ -7,11 +7,17 @@
         "post_delay": 1000,
         "timeout": 5000,
         "next": [
+            "MaterialRealm.Iron.Detail",
+            "MaterialRealm.Gold.Detail",
+            "MaterialRealm.Monster.Detail",
+            "MaterialRealm.Sand.Detail",
             "MaterialRealm.Home",
             "MaterialRealm.Note.Screen",
             "MaterialRealm.Menu.Iron"
         ],
-        "on_error": ["Navigation.Root.Recovery.Start"]
+        "on_error": [
+            "Navigation.Root.Recovery.Start"
+        ]
     },
     "MaterialRealm.Home": {
         "recognition": "OCR",
@@ -31,7 +37,9 @@
             120
         ],
         "post_delay": 800,
-        "next": ["MaterialRealm.Note.Screen"]
+        "next": [
+            "MaterialRealm.Note.Screen"
+        ]
     },
     "MaterialRealm.Note.Screen": {
         "recognition": "OCR",
@@ -44,7 +52,9 @@
         "expected": "日常副本|羈絆冒險|素材.*境",
         "threshold": 0.2,
         "action": "DoNothing",
-        "next": ["MaterialRealm.Note.Entry"]
+        "next": [
+            "MaterialRealm.Note.Entry"
+        ]
     },
     "MaterialRealm.Note.Entry": {
         "recognition": "OCR",
@@ -58,7 +68,9 @@
         "threshold": 0.2,
         "action": "Click",
         "post_delay": 800,
-        "next": ["MaterialRealm.Menu.Iron"]
+        "next": [
+            "MaterialRealm.Menu.Iron"
+        ]
     },
     "MaterialRealm.Menu.Iron": {
         "recognition": "OCR",
@@ -71,7 +83,9 @@
         "expected": "鐵石礦洞",
         "threshold": 0.2,
         "action": "DoNothing",
-        "next": ["MaterialRealm.Iron.Enter"]
+        "next": [
+            "MaterialRealm.Iron.Enter"
+        ]
     },
     "MaterialRealm.Iron.Enter": {
         "recognition": "OCR",
@@ -85,7 +99,9 @@
         "threshold": 0.2,
         "action": "Click",
         "post_delay": 700,
-        "next": ["MaterialRealm.Iron.Detail"]
+        "next": [
+            "MaterialRealm.Iron.Detail"
+        ]
     },
     "MaterialRealm.Iron.Detail": {
         "recognition": "OCR",
@@ -104,7 +120,7 @@
         ]
     },
     "MaterialRealm.Iron.Purchase.Open": {
-        "max_hit": 0,
+        "max_hit": 1,
         "recognition": "DirectHit",
         "action": "Click",
         "target": [
@@ -114,7 +130,9 @@
             70
         ],
         "post_delay": 500,
-        "next": ["MaterialRealm.Iron.Purchase.Dialog"]
+        "next": [
+            "MaterialRealm.Iron.Purchase.Dialog"
+        ]
     },
     "MaterialRealm.Iron.Purchase.Dialog": {
         "recognition": "OCR",
@@ -127,7 +145,10 @@
         "expected": "購買鐵礦錘|購買.*錘",
         "threshold": 0.2,
         "action": "DoNothing",
-        "next": ["MaterialRealm.Iron.Purchase.Confirm"]
+        "next": [
+            "MaterialRealm.Iron.Purchase.CapReached",
+            "MaterialRealm.Iron.Purchase.Available"
+        ]
     },
     "MaterialRealm.Iron.Purchase.Confirm": {
         "recognition": "OCR",
@@ -160,7 +181,9 @@
         "action": "ClickKey",
         "key": 4,
         "post_delay": 400,
-        "next": ["MaterialRealm.Iron.DetailAfterPurchase"]
+        "next": [
+            "MaterialRealm.Iron.DetailAfterPurchase"
+        ]
     },
     "MaterialRealm.Iron.Purchase.DialogAfter": {
         "recognition": "OCR",
@@ -175,7 +198,9 @@
         "action": "ClickKey",
         "key": 4,
         "post_delay": 400,
-        "next": ["MaterialRealm.Iron.DetailAfterPurchase"]
+        "next": [
+            "MaterialRealm.Iron.DetailAfterPurchase"
+        ]
     },
     "MaterialRealm.Iron.DetailAfterPurchase": {
         "recognition": "OCR",
@@ -189,7 +214,6 @@
         "threshold": 0.2,
         "action": "DoNothing",
         "next": [
-            "MaterialRealm.Iron.Purchase.Open",
             "MaterialRealm.Iron.Quick.Route"
         ]
     },
@@ -282,14 +306,13 @@
         "recognition": "DirectHit",
         "action": "Click",
         "target": [
-            285,
-            835,
-            160,
-            180
+            360,
+            920
         ],
-        "post_wait_freezes": 500,
-        "post_delay": 300,
-        "next": ["MaterialRealm.Iron.DetailAfterMine"]
+        "post_delay": 800,
+        "next": [
+            "MaterialRealm.Iron.DetailAfterMine"
+        ]
     },
     "MaterialRealm.Iron.DetailAfterMine": {
         "recognition": "OCR",
@@ -312,7 +335,9 @@
         "action": "ClickKey",
         "key": 4,
         "post_delay": 500,
-        "next": ["MaterialRealm.Menu.Gold"]
+        "next": [
+            "MaterialRealm.Menu.Gold"
+        ]
     },
     "MaterialRealm.Menu.Gold": {
         "recognition": "OCR",
@@ -325,7 +350,9 @@
         "expected": "黃金礦洞",
         "threshold": 0.2,
         "action": "DoNothing",
-        "next": ["MaterialRealm.Gold.Enter"]
+        "next": [
+            "MaterialRealm.Gold.Enter"
+        ]
     },
     "MaterialRealm.Gold.Enter": {
         "recognition": "OCR",
@@ -339,7 +366,9 @@
         "threshold": 0.2,
         "action": "Click",
         "post_delay": 700,
-        "next": ["MaterialRealm.Gold.Detail"]
+        "next": [
+            "MaterialRealm.Gold.Detail"
+        ]
     },
     "MaterialRealm.Gold.Detail": {
         "recognition": "OCR",
@@ -358,7 +387,7 @@
         ]
     },
     "MaterialRealm.Gold.Purchase.Open": {
-        "max_hit": 0,
+        "max_hit": 1,
         "recognition": "DirectHit",
         "action": "Click",
         "target": [
@@ -368,7 +397,9 @@
             70
         ],
         "post_delay": 500,
-        "next": ["MaterialRealm.Gold.Purchase.Dialog"]
+        "next": [
+            "MaterialRealm.Gold.Purchase.Dialog"
+        ]
     },
     "MaterialRealm.Gold.Purchase.Dialog": {
         "recognition": "OCR",
@@ -381,7 +412,10 @@
         "expected": "購買.*",
         "threshold": 0.2,
         "action": "DoNothing",
-        "next": ["MaterialRealm.Gold.Purchase.Confirm"]
+        "next": [
+            "MaterialRealm.Gold.Purchase.CapReached",
+            "MaterialRealm.Gold.Purchase.Available"
+        ]
     },
     "MaterialRealm.Gold.Purchase.Confirm": {
         "recognition": "OCR",
@@ -414,7 +448,9 @@
         "action": "ClickKey",
         "key": 4,
         "post_delay": 400,
-        "next": ["MaterialRealm.Gold.DetailAfterPurchase"]
+        "next": [
+            "MaterialRealm.Gold.DetailAfterPurchase"
+        ]
     },
     "MaterialRealm.Gold.Purchase.DialogAfter": {
         "recognition": "OCR",
@@ -429,7 +465,9 @@
         "action": "ClickKey",
         "key": 4,
         "post_delay": 400,
-        "next": ["MaterialRealm.Gold.DetailAfterPurchase"]
+        "next": [
+            "MaterialRealm.Gold.DetailAfterPurchase"
+        ]
     },
     "MaterialRealm.Gold.DetailAfterPurchase": {
         "recognition": "OCR",
@@ -443,7 +481,6 @@
         "threshold": 0.2,
         "action": "DoNothing",
         "next": [
-            "MaterialRealm.Gold.Purchase.Open",
             "MaterialRealm.Gold.Quick.Route"
         ]
     },
@@ -536,14 +573,13 @@
         "recognition": "DirectHit",
         "action": "Click",
         "target": [
-            285,
-            835,
-            160,
-            180
+            360,
+            920
         ],
-        "post_wait_freezes": 500,
-        "post_delay": 300,
-        "next": ["MaterialRealm.Gold.DetailAfterMine"]
+        "post_delay": 800,
+        "next": [
+            "MaterialRealm.Gold.DetailAfterMine"
+        ]
     },
     "MaterialRealm.Gold.DetailAfterMine": {
         "recognition": "OCR",
@@ -566,7 +602,9 @@
         "action": "ClickKey",
         "key": 4,
         "post_delay": 500,
-        "next": ["MaterialRealm.Menu.Monster"]
+        "next": [
+            "MaterialRealm.Menu.Monster"
+        ]
     },
     "MaterialRealm.Menu.Monster": {
         "recognition": "OCR",
@@ -579,7 +617,9 @@
         "expected": "怪物洞窟",
         "threshold": 0.2,
         "action": "DoNothing",
-        "next": ["MaterialRealm.Monster.Enter"]
+        "next": [
+            "MaterialRealm.Monster.Enter"
+        ]
     },
     "MaterialRealm.Monster.Enter": {
         "recognition": "OCR",
@@ -593,7 +633,9 @@
         "threshold": 0.2,
         "action": "Click",
         "post_delay": 700,
-        "next": ["MaterialRealm.Monster.Detail"]
+        "next": [
+            "MaterialRealm.Monster.Detail"
+        ]
     },
     "MaterialRealm.Monster.Detail": {
         "recognition": "OCR",
@@ -612,7 +654,7 @@
         ]
     },
     "MaterialRealm.Monster.Purchase.Open": {
-        "max_hit": 0,
+        "max_hit": 1,
         "recognition": "DirectHit",
         "action": "Click",
         "target": [
@@ -622,7 +664,9 @@
             70
         ],
         "post_delay": 500,
-        "next": ["MaterialRealm.Monster.Purchase.Dialog"]
+        "next": [
+            "MaterialRealm.Monster.Purchase.Dialog"
+        ]
     },
     "MaterialRealm.Monster.Purchase.Dialog": {
         "recognition": "OCR",
@@ -635,7 +679,10 @@
         "expected": "購買.*",
         "threshold": 0.2,
         "action": "DoNothing",
-        "next": ["MaterialRealm.Monster.Purchase.Confirm"]
+        "next": [
+            "MaterialRealm.Monster.Purchase.CapReached",
+            "MaterialRealm.Monster.Purchase.Available"
+        ]
     },
     "MaterialRealm.Monster.Purchase.Confirm": {
         "recognition": "OCR",
@@ -668,7 +715,9 @@
         "action": "ClickKey",
         "key": 4,
         "post_delay": 400,
-        "next": ["MaterialRealm.Monster.DetailAfterPurchase"]
+        "next": [
+            "MaterialRealm.Monster.DetailAfterPurchase"
+        ]
     },
     "MaterialRealm.Monster.Purchase.DialogAfter": {
         "recognition": "OCR",
@@ -683,7 +732,9 @@
         "action": "ClickKey",
         "key": 4,
         "post_delay": 400,
-        "next": ["MaterialRealm.Monster.DetailAfterPurchase"]
+        "next": [
+            "MaterialRealm.Monster.DetailAfterPurchase"
+        ]
     },
     "MaterialRealm.Monster.DetailAfterPurchase": {
         "recognition": "OCR",
@@ -697,7 +748,6 @@
         "threshold": 0.2,
         "action": "DoNothing",
         "next": [
-            "MaterialRealm.Monster.Purchase.Open",
             "MaterialRealm.Monster.Quick.Route"
         ]
     },
@@ -790,14 +840,13 @@
         "recognition": "DirectHit",
         "action": "Click",
         "target": [
-            285,
-            835,
-            160,
-            180
+            360,
+            920
         ],
-        "post_wait_freezes": 500,
-        "post_delay": 300,
-        "next": ["MaterialRealm.Monster.DetailAfterMine"]
+        "post_delay": 800,
+        "next": [
+            "MaterialRealm.Monster.DetailAfterMine"
+        ]
     },
     "MaterialRealm.Monster.DetailAfterMine": {
         "recognition": "OCR",
@@ -820,7 +869,9 @@
         "action": "ClickKey",
         "key": 4,
         "post_delay": 500,
-        "next": ["MaterialRealm.Menu.Sand"]
+        "next": [
+            "MaterialRealm.Menu.Sand"
+        ]
     },
     "MaterialRealm.Menu.Sand": {
         "recognition": "OCR",
@@ -833,7 +884,9 @@
         "expected": "砂石礦洞",
         "threshold": 0.2,
         "action": "DoNothing",
-        "next": ["MaterialRealm.Sand.Enter"]
+        "next": [
+            "MaterialRealm.Sand.Enter"
+        ]
     },
     "MaterialRealm.Sand.Enter": {
         "recognition": "OCR",
@@ -847,7 +900,9 @@
         "threshold": 0.2,
         "action": "Click",
         "post_delay": 700,
-        "next": ["MaterialRealm.Sand.Detail"]
+        "next": [
+            "MaterialRealm.Sand.Detail"
+        ]
     },
     "MaterialRealm.Sand.Detail": {
         "recognition": "OCR",
@@ -866,7 +921,7 @@
         ]
     },
     "MaterialRealm.Sand.Purchase.Open": {
-        "max_hit": 0,
+        "max_hit": 1,
         "recognition": "DirectHit",
         "action": "Click",
         "target": [
@@ -876,7 +931,9 @@
             70
         ],
         "post_delay": 500,
-        "next": ["MaterialRealm.Sand.Purchase.Dialog"]
+        "next": [
+            "MaterialRealm.Sand.Purchase.Dialog"
+        ]
     },
     "MaterialRealm.Sand.Purchase.Dialog": {
         "recognition": "OCR",
@@ -889,7 +946,10 @@
         "expected": "購買.*",
         "threshold": 0.2,
         "action": "DoNothing",
-        "next": ["MaterialRealm.Sand.Purchase.Confirm"]
+        "next": [
+            "MaterialRealm.Sand.Purchase.CapReached",
+            "MaterialRealm.Sand.Purchase.Available"
+        ]
     },
     "MaterialRealm.Sand.Purchase.Confirm": {
         "recognition": "OCR",
@@ -922,7 +982,9 @@
         "action": "ClickKey",
         "key": 4,
         "post_delay": 400,
-        "next": ["MaterialRealm.Sand.DetailAfterPurchase"]
+        "next": [
+            "MaterialRealm.Sand.DetailAfterPurchase"
+        ]
     },
     "MaterialRealm.Sand.Purchase.DialogAfter": {
         "recognition": "OCR",
@@ -937,7 +999,9 @@
         "action": "ClickKey",
         "key": 4,
         "post_delay": 400,
-        "next": ["MaterialRealm.Sand.DetailAfterPurchase"]
+        "next": [
+            "MaterialRealm.Sand.DetailAfterPurchase"
+        ]
     },
     "MaterialRealm.Sand.DetailAfterPurchase": {
         "recognition": "OCR",
@@ -951,7 +1015,6 @@
         "threshold": 0.2,
         "action": "DoNothing",
         "next": [
-            "MaterialRealm.Sand.Purchase.Open",
             "MaterialRealm.Sand.Quick.Route"
         ]
     },
@@ -1044,14 +1107,13 @@
         "recognition": "DirectHit",
         "action": "Click",
         "target": [
-            285,
-            835,
-            160,
-            180
+            360,
+            920
         ],
-        "post_wait_freezes": 500,
-        "post_delay": 300,
-        "next": ["MaterialRealm.Sand.DetailAfterMine"]
+        "post_delay": 800,
+        "next": [
+            "MaterialRealm.Sand.DetailAfterMine"
+        ]
     },
     "MaterialRealm.Sand.DetailAfterMine": {
         "recognition": "OCR",
@@ -1074,7 +1136,264 @@
         "action": "ClickKey",
         "key": 4,
         "post_delay": 500,
-        "next": ["MaterialRealm.Done"]
+        "next": [
+            "MaterialRealm.Done"
+        ]
     },
-    "MaterialRealm.Done": {"recognition": "DirectHit", "action": "DoNothing"}
+    "MaterialRealm.Done": {
+        "recognition": "DirectHit",
+        "action": "DoNothing"
+    },
+    "MaterialRealm.Iron.Purchase.CapReached": {
+        "recognition": "OCR",
+        "roi": [
+            360,
+            720,
+            260,
+            100
+        ],
+        "expected": "今日限購.*20/20",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            230,
+            835
+        ],
+        "post_delay": 400,
+        "next": [
+            "MaterialRealm.Iron.DetailAfterPurchase"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "鐵石礦洞今日已購買 20/20 次，略過購買。",
+                "display": "log"
+            }
+        }
+    },
+    "MaterialRealm.Iron.Purchase.Available": {
+        "recognition": "OCR",
+        "roi": [
+            360,
+            720,
+            260,
+            100
+        ],
+        "expected": "今日限購.*(?:[0-9]|1[0-9])/20",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "MaterialRealm.Iron.Purchase.Adjust"
+        ]
+    },
+    "MaterialRealm.Iron.Purchase.Adjust": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "MaterialRealm.Iron.Purchase.Plus",
+            "MaterialRealm.Iron.Purchase.Confirm"
+        ]
+    },
+    "MaterialRealm.Iron.Purchase.Plus": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            535,
+            700
+        ],
+        "repeat": 1,
+        "repeat_delay": 100,
+        "post_delay": 200,
+        "next": [
+            "MaterialRealm.Iron.Purchase.Confirm"
+        ]
+    },
+    "MaterialRealm.Gold.Purchase.CapReached": {
+        "recognition": "OCR",
+        "roi": [
+            360,
+            720,
+            260,
+            100
+        ],
+        "expected": "今日限購.*20/20",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            230,
+            835
+        ],
+        "post_delay": 400,
+        "next": [
+            "MaterialRealm.Gold.DetailAfterPurchase"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "黃金礦洞今日已購買 20/20 次，略過購買。",
+                "display": "log"
+            }
+        }
+    },
+    "MaterialRealm.Gold.Purchase.Available": {
+        "recognition": "OCR",
+        "roi": [
+            360,
+            720,
+            260,
+            100
+        ],
+        "expected": "今日限購.*(?:[0-9]|1[0-9])/20",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "MaterialRealm.Gold.Purchase.Adjust"
+        ]
+    },
+    "MaterialRealm.Gold.Purchase.Adjust": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "MaterialRealm.Gold.Purchase.Plus",
+            "MaterialRealm.Gold.Purchase.Confirm"
+        ]
+    },
+    "MaterialRealm.Gold.Purchase.Plus": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            535,
+            700
+        ],
+        "repeat": 1,
+        "repeat_delay": 100,
+        "post_delay": 200,
+        "next": [
+            "MaterialRealm.Gold.Purchase.Confirm"
+        ]
+    },
+    "MaterialRealm.Monster.Purchase.CapReached": {
+        "recognition": "OCR",
+        "roi": [
+            360,
+            720,
+            260,
+            100
+        ],
+        "expected": "今日限購.*20/20",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            230,
+            835
+        ],
+        "post_delay": 400,
+        "next": [
+            "MaterialRealm.Monster.DetailAfterPurchase"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "怪物洞窟今日已購買 20/20 次，略過購買。",
+                "display": "log"
+            }
+        }
+    },
+    "MaterialRealm.Monster.Purchase.Available": {
+        "recognition": "OCR",
+        "roi": [
+            360,
+            720,
+            260,
+            100
+        ],
+        "expected": "今日限購.*(?:[0-9]|1[0-9])/20",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "MaterialRealm.Monster.Purchase.Adjust"
+        ]
+    },
+    "MaterialRealm.Monster.Purchase.Adjust": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "MaterialRealm.Monster.Purchase.Plus",
+            "MaterialRealm.Monster.Purchase.Confirm"
+        ]
+    },
+    "MaterialRealm.Monster.Purchase.Plus": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            535,
+            700
+        ],
+        "repeat": 1,
+        "repeat_delay": 100,
+        "post_delay": 200,
+        "next": [
+            "MaterialRealm.Monster.Purchase.Confirm"
+        ]
+    },
+    "MaterialRealm.Sand.Purchase.CapReached": {
+        "recognition": "OCR",
+        "roi": [
+            360,
+            720,
+            260,
+            100
+        ],
+        "expected": "今日限購.*20/20",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            230,
+            835
+        ],
+        "post_delay": 400,
+        "next": [
+            "MaterialRealm.Sand.DetailAfterPurchase"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "砂石礦洞今日已購買 20/20 次，略過購買。",
+                "display": "log"
+            }
+        }
+    },
+    "MaterialRealm.Sand.Purchase.Available": {
+        "recognition": "OCR",
+        "roi": [
+            360,
+            720,
+            260,
+            100
+        ],
+        "expected": "今日限購.*(?:[0-9]|1[0-9])/20",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "MaterialRealm.Sand.Purchase.Adjust"
+        ]
+    },
+    "MaterialRealm.Sand.Purchase.Adjust": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "MaterialRealm.Sand.Purchase.Plus",
+            "MaterialRealm.Sand.Purchase.Confirm"
+        ]
+    },
+    "MaterialRealm.Sand.Purchase.Plus": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            535,
+            700
+        ],
+        "repeat": 1,
+        "repeat_delay": 100,
+        "post_delay": 200,
+        "next": [
+            "MaterialRealm.Sand.Purchase.Confirm"
+        ]
+    }
 }

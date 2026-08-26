@@ -5,40 +5,60 @@
             "label": "日常副本",
             "entry": "Objectives.Daily.Dungeon1.Start",
             "description": "透過「筆記」進入日常副本進行挑戰。",
-            "group": ["Note"],
-            "controller": ["Android"]
+            "group": [
+                "Note"
+            ],
+            "controller": [
+                "Android"
+            ]
         },
         {
             "name": "ArenaChallenge",
             "label": "競技場挑戰",
             "entry": "Objectives.Daily.Arena1.Start",
             "description": "筆記 → 競技；只處理第一個競技模式，在四個項目中選擇最右側的一個，戰鬥 3 次。",
-            "group": ["Note"],
-            "controller": ["Android"]
+            "group": [
+                "Note"
+            ],
+            "controller": [
+                "Android"
+            ]
         },
         {
             "name": "BeastTrial",
             "label": "聖獸試煉",
             "entry": "Objectives.Daily.BeastTrialReward1.Start",
             "description": "筆記 → 每日活動 → 聖獸試煉 → 前往地圖 → 點人物上方入口 → 組隊 → 夥伴任選一人 → 進入副本。",
-            "group": ["Note"],
-            "controller": ["Android"]
+            "group": [
+                "Note"
+            ],
+            "controller": [
+                "Android"
+            ]
         },
         {
             "name": "PhantomRealm",
             "label": "雙影幻境",
             "entry": "Objectives.Daily.PhantomRealmWave3.Start",
             "description": "筆記 → 每日活動 → 雙影幻境 → 前往地圖 → 點人物上方入口 → 組隊 → 夥伴任選一人 → 進入副本。",
-            "group": ["Note"],
-            "controller": ["Android"]
+            "group": [
+                "Note"
+            ],
+            "controller": [
+                "Android"
+            ]
         },
         {
             "name": "MaterialRealm",
             "label": "素材秘境",
             "entry": "Objectives.MaterialRealm.Start",
-            "description": "筆記 → 素材秘境；分別處理鐵石礦洞、黃金礦洞、怪物洞窟與砂石礦洞。四類均可獨立設定購買次數、快速開採及採集次數。購買預設為 0，避免意外消耗星形貨幣。",
-            "group": ["Note"],
-            "controller": ["Android"],
+            "description": "筆記 → 素材秘境；分別處理鐵石礦洞、黃金礦洞、怪物洞窟與砂石礦洞。四類均可獨立設定本次購買數量、快速開採及採集次數；購買會先辨識今日已購買次數，預設為 0。",
+            "group": [
+                "Note"
+            ],
+            "controller": [
+                "Android"
+            ],
             "option": [
                 "MaterialIronPurchaseCount",
                 "MaterialIronQuickMining",
@@ -59,116 +79,432 @@
             "label": "探尋/探索命運",
             "entry": "Objectives.Pilgrimage.Daily.ExploreFate3.Start",
             "description": "「探尋命運」與「探索命運」是同一個遊戲功能，共用一個 Maa 任務。",
-            "group": ["Map"],
-            "controller": ["Android"]
+            "group": [
+                "Map"
+            ],
+            "controller": [
+                "Android"
+            ]
         },
         {
             "name": "ConsumeStamina",
             "label": "消耗體力",
             "entry": "Objectives.ConsumeStamina.Start",
             "description": "由日常副本、素材秘境等已啟用流程自然消耗體力，不為湊進度使用付費道具。",
-            "group": ["Map"],
-            "controller": ["Android"]
+            "group": [
+                "Map"
+            ],
+            "controller": [
+                "Android"
+            ]
         },
         {
             "name": "GuildRaid",
             "label": "公會討伐",
             "entry": "Objectives.Pilgrimage.Weekly.GuildRaid7.Start",
             "description": "進行公會討伐挑戰。",
-            "group": ["Guild"],
-            "controller": ["Android"]
+            "group": [
+                "Guild"
+            ],
+            "controller": [
+                "Android"
+            ]
         },
         {
             "name": "Commissions",
             "label": "委託任務",
             "entry": "Objectives.Commissions.Start",
-            "description": "進行遊戲任務頁中的委託任務。",
-            "group": ["Other"],
-            "controller": ["Android"]
+            "description": "進入任務 → 委託，辨識今日剩餘次數（4/4 逐次降至 0/4）並寫入執行日誌；只提交已完成的委託，且依設定限制本次最多提交次數。",
+            "group": [
+                "Other"
+            ],
+            "controller": [
+                "Android"
+            ],
+            "option": [
+                "CommissionSubmitCount",
+                "CommissionUseExtraAttempts"
+            ]
         },
         {
             "name": "BondAdventureScenicDispatch",
             "label": "羈絆冒險／奇景委派",
             "entry": "Objectives.BondAdventureScenicDispatch.Start",
             "description": "「羈絆冒險」與「奇景委派」是同一個遊戲功能，從筆記的羈絆冒險入口進入。",
-            "group": ["Note"],
-            "controller": ["Android"]
+            "group": [
+                "Note"
+            ],
+            "controller": [
+                "Android"
+            ]
         },
         {
             "name": "GoddessStatuePrayer",
             "label": "女神像祈願",
             "entry": "Objectives.GoddessStatue.Prayer.Start",
             "description": "至家園女神像選擇「祈願」->「友情祈願」，點擊祈願 1 次（執行 2 次）。",
-            "group": ["Home"],
-            "controller": ["Android"]
+            "group": [
+                "Home"
+            ],
+            "controller": [
+                "Android"
+            ]
         },
         {
             "name": "TimeGachaMachine",
             "label": "時光扭蛋機",
             "entry": "Objectives.GachaMachine.Start",
             "description": "至家園扭蛋台選擇「國度」，點擊扭蛋 1 次（執行 2 次）。",
-            "group": ["Home"],
-            "controller": ["Android"]
+            "group": [
+                "Home"
+            ],
+            "controller": [
+                "Android"
+            ]
         },
         {
             "name": "SakuraBeastBonding",
             "label": "幻獸結緣",
             "entry": "Objectives.SakuraTree.BeastBonding.Start",
             "description": "點擊家園大櫻花樹（嘗試多次進入），選擇「結緣十次」。",
-            "group": ["Home"],
-            "controller": ["Android"]
+            "group": [
+                "Home"
+            ],
+            "controller": [
+                "Android"
+            ]
         },
         {
             "name": "GuildDonation",
             "label": "公會捐贈",
             "entry": "Objectives.Guild.Donation.Start",
             "description": "至公會大廳執行捐贈；每日最多 5 次，第 1 次免費，後續允許消耗遊戲資源，依設定次數停止。",
-            "group": ["Guild"],
-            "controller": ["Android"],
-            "option": ["GuildDonationCount"]
+            "group": [
+                "Guild"
+            ],
+            "controller": [
+                "Android"
+            ],
+            "option": [
+                "GuildDonationCount"
+            ]
         },
         {
             "name": "GuildIdleReward",
             "label": "公會放置獎勵",
             "entry": "Objectives.Guild.IdleReward.Start",
             "description": "點擊公會右下角的放置獎勵爐子領取收益。",
-            "group": ["Guild"],
-            "controller": ["Android"]
+            "group": [
+                "Guild"
+            ],
+            "controller": [
+                "Android"
+            ]
         },
         {
             "name": "AlchemyFurnace",
             "label": "煉金爐分解裝備與寶石合成",
             "entry": "Objectives.AlchemyFurnace.Start",
             "description": "至家園右側煉金鍋爐：依設定決定是否勾選排除高戰力，再分解所選裝備；寶石頁執行一鍵合成。",
-            "group": ["Home"],
-            "controller": ["Android"],
-            "option": ["AlchemyExcludeHighPower"]
+            "group": [
+                "Home"
+            ],
+            "controller": [
+                "Android"
+            ],
+            "option": [
+                "AlchemyExcludeHighPower"
+            ]
         },
         {
             "name": "BagUseItems",
             "label": "背包道具一鍵使用",
             "entry": "Objectives.Bag.UseItems.Start",
             "description": "點擊家園寶箱，選擇右下角一鍵使用道具。",
-            "group": ["Home"],
-            "controller": ["Android"]
+            "group": [
+                "Home"
+            ],
+            "controller": [
+                "Android"
+            ]
         }
     ],
     "option": {
         "MaterialIronPurchaseCount": {
-            "type": "input",
-            "label": "鐵石礦洞：購買次數",
-            "description": "每日購買鐵礦錘的次數，範圍 0～20；會消耗畫面顯示的星形貨幣，預設 0。",
-            "inputs": [
+            "type": "select",
+            "label": "鐵石礦洞：本次購買數量",
+            "description": "開啟購買視窗後先辨識「今日限購 x/20」，再於同一次購買中設定數量。0 不購買；若設定量超過今日剩餘上限，遊戲會停在可購買上限。",
+            "cases": [
                 {
-                    "name": "Count",
-                    "label": "次數",
-                    "default": "0",
-                    "pipeline_type": "int",
-                    "verify": "^(?:[0-9]|1[0-9]|20)$",
-                    "pattern_msg": "請輸入 0～20。"
+                    "name": "Buy0",
+                    "label": "0（不購買）",
+                    "pipeline_override": {
+                        "MaterialRealm.Iron.Purchase.Open": {
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "name": "Buy1",
+                    "label": "1 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Iron.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Iron.Purchase.Plus": {
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "name": "Buy2",
+                    "label": "2 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Iron.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Iron.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 1
+                        }
+                    }
+                },
+                {
+                    "name": "Buy3",
+                    "label": "3 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Iron.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Iron.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 2
+                        }
+                    }
+                },
+                {
+                    "name": "Buy4",
+                    "label": "4 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Iron.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Iron.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 3
+                        }
+                    }
+                },
+                {
+                    "name": "Buy5",
+                    "label": "5 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Iron.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Iron.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 4
+                        }
+                    }
+                },
+                {
+                    "name": "Buy6",
+                    "label": "6 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Iron.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Iron.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 5
+                        }
+                    }
+                },
+                {
+                    "name": "Buy7",
+                    "label": "7 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Iron.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Iron.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 6
+                        }
+                    }
+                },
+                {
+                    "name": "Buy8",
+                    "label": "8 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Iron.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Iron.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 7
+                        }
+                    }
+                },
+                {
+                    "name": "Buy9",
+                    "label": "9 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Iron.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Iron.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 8
+                        }
+                    }
+                },
+                {
+                    "name": "Buy10",
+                    "label": "10 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Iron.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Iron.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 9
+                        }
+                    }
+                },
+                {
+                    "name": "Buy11",
+                    "label": "11 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Iron.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Iron.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 10
+                        }
+                    }
+                },
+                {
+                    "name": "Buy12",
+                    "label": "12 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Iron.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Iron.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 11
+                        }
+                    }
+                },
+                {
+                    "name": "Buy13",
+                    "label": "13 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Iron.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Iron.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 12
+                        }
+                    }
+                },
+                {
+                    "name": "Buy14",
+                    "label": "14 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Iron.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Iron.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 13
+                        }
+                    }
+                },
+                {
+                    "name": "Buy15",
+                    "label": "15 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Iron.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Iron.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 14
+                        }
+                    }
+                },
+                {
+                    "name": "Buy16",
+                    "label": "16 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Iron.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Iron.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 15
+                        }
+                    }
+                },
+                {
+                    "name": "Buy17",
+                    "label": "17 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Iron.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Iron.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 16
+                        }
+                    }
+                },
+                {
+                    "name": "Buy18",
+                    "label": "18 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Iron.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Iron.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 17
+                        }
+                    }
+                },
+                {
+                    "name": "Buy19",
+                    "label": "19 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Iron.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Iron.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 18
+                        }
+                    }
+                },
+                {
+                    "name": "Buy20",
+                    "label": "20 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Iron.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Iron.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 19
+                        }
+                    }
                 }
             ],
-            "pipeline_override": {"MaterialRealm.Iron.Purchase.Open": {"max_hit": "{Count}"}}
+            "default_case": "Buy0"
         },
         "MaterialIronQuickMining": {
             "type": "switch",
@@ -216,23 +552,287 @@
                     "pattern_msg": "請輸入 0～999。"
                 }
             ],
-            "pipeline_override": {"MaterialRealm.Iron.Mine": {"max_hit": "{Count}"}}
+            "pipeline_override": {
+                "MaterialRealm.Iron.Mine": {
+                    "max_hit": "{Count}"
+                }
+            }
         },
         "MaterialGoldPurchaseCount": {
-            "type": "input",
-            "label": "黃金礦洞：購買次數",
-            "description": "每日購買黃金礦洞採集道具的次數，範圍 0～20；預設 0。",
-            "inputs": [
+            "type": "select",
+            "label": "黃金礦洞：本次購買數量",
+            "description": "開啟購買視窗後先辨識「今日限購 x/20」，再於同一次購買中設定數量。0 不購買；若設定量超過今日剩餘上限，遊戲會停在可購買上限。",
+            "cases": [
                 {
-                    "name": "Count",
-                    "label": "次數",
-                    "default": "0",
-                    "pipeline_type": "int",
-                    "verify": "^(?:[0-9]|1[0-9]|20)$",
-                    "pattern_msg": "請輸入 0～20。"
+                    "name": "Buy0",
+                    "label": "0（不購買）",
+                    "pipeline_override": {
+                        "MaterialRealm.Gold.Purchase.Open": {
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "name": "Buy1",
+                    "label": "1 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Gold.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Gold.Purchase.Plus": {
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "name": "Buy2",
+                    "label": "2 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Gold.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Gold.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 1
+                        }
+                    }
+                },
+                {
+                    "name": "Buy3",
+                    "label": "3 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Gold.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Gold.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 2
+                        }
+                    }
+                },
+                {
+                    "name": "Buy4",
+                    "label": "4 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Gold.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Gold.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 3
+                        }
+                    }
+                },
+                {
+                    "name": "Buy5",
+                    "label": "5 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Gold.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Gold.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 4
+                        }
+                    }
+                },
+                {
+                    "name": "Buy6",
+                    "label": "6 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Gold.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Gold.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 5
+                        }
+                    }
+                },
+                {
+                    "name": "Buy7",
+                    "label": "7 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Gold.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Gold.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 6
+                        }
+                    }
+                },
+                {
+                    "name": "Buy8",
+                    "label": "8 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Gold.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Gold.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 7
+                        }
+                    }
+                },
+                {
+                    "name": "Buy9",
+                    "label": "9 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Gold.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Gold.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 8
+                        }
+                    }
+                },
+                {
+                    "name": "Buy10",
+                    "label": "10 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Gold.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Gold.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 9
+                        }
+                    }
+                },
+                {
+                    "name": "Buy11",
+                    "label": "11 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Gold.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Gold.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 10
+                        }
+                    }
+                },
+                {
+                    "name": "Buy12",
+                    "label": "12 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Gold.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Gold.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 11
+                        }
+                    }
+                },
+                {
+                    "name": "Buy13",
+                    "label": "13 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Gold.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Gold.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 12
+                        }
+                    }
+                },
+                {
+                    "name": "Buy14",
+                    "label": "14 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Gold.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Gold.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 13
+                        }
+                    }
+                },
+                {
+                    "name": "Buy15",
+                    "label": "15 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Gold.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Gold.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 14
+                        }
+                    }
+                },
+                {
+                    "name": "Buy16",
+                    "label": "16 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Gold.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Gold.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 15
+                        }
+                    }
+                },
+                {
+                    "name": "Buy17",
+                    "label": "17 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Gold.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Gold.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 16
+                        }
+                    }
+                },
+                {
+                    "name": "Buy18",
+                    "label": "18 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Gold.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Gold.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 17
+                        }
+                    }
+                },
+                {
+                    "name": "Buy19",
+                    "label": "19 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Gold.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Gold.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 18
+                        }
+                    }
+                },
+                {
+                    "name": "Buy20",
+                    "label": "20 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Gold.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Gold.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 19
+                        }
+                    }
                 }
             ],
-            "pipeline_override": {"MaterialRealm.Gold.Purchase.Open": {"max_hit": "{Count}"}}
+            "default_case": "Buy0"
         },
         "MaterialGoldQuickMining": {
             "type": "switch",
@@ -280,23 +880,287 @@
                     "pattern_msg": "請輸入 0～999。"
                 }
             ],
-            "pipeline_override": {"MaterialRealm.Gold.Mine": {"max_hit": "{Count}"}}
+            "pipeline_override": {
+                "MaterialRealm.Gold.Mine": {
+                    "max_hit": "{Count}"
+                }
+            }
         },
         "MaterialMonsterPurchaseCount": {
-            "type": "input",
-            "label": "怪物洞窟：購買次數",
-            "description": "每日購買怪物洞窟採集道具的次數，範圍 0～20；預設 0。",
-            "inputs": [
+            "type": "select",
+            "label": "怪物洞窟：本次購買數量",
+            "description": "開啟購買視窗後先辨識「今日限購 x/20」，再於同一次購買中設定數量。0 不購買；若設定量超過今日剩餘上限，遊戲會停在可購買上限。",
+            "cases": [
                 {
-                    "name": "Count",
-                    "label": "次數",
-                    "default": "0",
-                    "pipeline_type": "int",
-                    "verify": "^(?:[0-9]|1[0-9]|20)$",
-                    "pattern_msg": "請輸入 0～20。"
+                    "name": "Buy0",
+                    "label": "0（不購買）",
+                    "pipeline_override": {
+                        "MaterialRealm.Monster.Purchase.Open": {
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "name": "Buy1",
+                    "label": "1 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Monster.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Monster.Purchase.Plus": {
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "name": "Buy2",
+                    "label": "2 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Monster.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Monster.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 1
+                        }
+                    }
+                },
+                {
+                    "name": "Buy3",
+                    "label": "3 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Monster.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Monster.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 2
+                        }
+                    }
+                },
+                {
+                    "name": "Buy4",
+                    "label": "4 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Monster.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Monster.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 3
+                        }
+                    }
+                },
+                {
+                    "name": "Buy5",
+                    "label": "5 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Monster.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Monster.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 4
+                        }
+                    }
+                },
+                {
+                    "name": "Buy6",
+                    "label": "6 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Monster.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Monster.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 5
+                        }
+                    }
+                },
+                {
+                    "name": "Buy7",
+                    "label": "7 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Monster.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Monster.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 6
+                        }
+                    }
+                },
+                {
+                    "name": "Buy8",
+                    "label": "8 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Monster.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Monster.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 7
+                        }
+                    }
+                },
+                {
+                    "name": "Buy9",
+                    "label": "9 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Monster.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Monster.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 8
+                        }
+                    }
+                },
+                {
+                    "name": "Buy10",
+                    "label": "10 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Monster.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Monster.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 9
+                        }
+                    }
+                },
+                {
+                    "name": "Buy11",
+                    "label": "11 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Monster.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Monster.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 10
+                        }
+                    }
+                },
+                {
+                    "name": "Buy12",
+                    "label": "12 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Monster.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Monster.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 11
+                        }
+                    }
+                },
+                {
+                    "name": "Buy13",
+                    "label": "13 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Monster.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Monster.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 12
+                        }
+                    }
+                },
+                {
+                    "name": "Buy14",
+                    "label": "14 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Monster.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Monster.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 13
+                        }
+                    }
+                },
+                {
+                    "name": "Buy15",
+                    "label": "15 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Monster.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Monster.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 14
+                        }
+                    }
+                },
+                {
+                    "name": "Buy16",
+                    "label": "16 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Monster.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Monster.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 15
+                        }
+                    }
+                },
+                {
+                    "name": "Buy17",
+                    "label": "17 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Monster.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Monster.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 16
+                        }
+                    }
+                },
+                {
+                    "name": "Buy18",
+                    "label": "18 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Monster.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Monster.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 17
+                        }
+                    }
+                },
+                {
+                    "name": "Buy19",
+                    "label": "19 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Monster.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Monster.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 18
+                        }
+                    }
+                },
+                {
+                    "name": "Buy20",
+                    "label": "20 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Monster.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Monster.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 19
+                        }
+                    }
                 }
             ],
-            "pipeline_override": {"MaterialRealm.Monster.Purchase.Open": {"max_hit": "{Count}"}}
+            "default_case": "Buy0"
         },
         "MaterialMonsterQuickMining": {
             "type": "switch",
@@ -344,23 +1208,287 @@
                     "pattern_msg": "請輸入 0～999。"
                 }
             ],
-            "pipeline_override": {"MaterialRealm.Monster.Mine": {"max_hit": "{Count}"}}
+            "pipeline_override": {
+                "MaterialRealm.Monster.Mine": {
+                    "max_hit": "{Count}"
+                }
+            }
         },
         "MaterialSandPurchaseCount": {
-            "type": "input",
-            "label": "砂石礦洞：購買次數",
-            "description": "每日購買砂石礦洞採集道具的次數，範圍 0～20；預設 0。",
-            "inputs": [
+            "type": "select",
+            "label": "砂石礦洞：本次購買數量",
+            "description": "開啟購買視窗後先辨識「今日限購 x/20」，再於同一次購買中設定數量。0 不購買；若設定量超過今日剩餘上限，遊戲會停在可購買上限。",
+            "cases": [
                 {
-                    "name": "Count",
-                    "label": "次數",
-                    "default": "0",
-                    "pipeline_type": "int",
-                    "verify": "^(?:[0-9]|1[0-9]|20)$",
-                    "pattern_msg": "請輸入 0～20。"
+                    "name": "Buy0",
+                    "label": "0（不購買）",
+                    "pipeline_override": {
+                        "MaterialRealm.Sand.Purchase.Open": {
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "name": "Buy1",
+                    "label": "1 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Sand.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Sand.Purchase.Plus": {
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "name": "Buy2",
+                    "label": "2 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Sand.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Sand.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 1
+                        }
+                    }
+                },
+                {
+                    "name": "Buy3",
+                    "label": "3 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Sand.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Sand.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 2
+                        }
+                    }
+                },
+                {
+                    "name": "Buy4",
+                    "label": "4 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Sand.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Sand.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 3
+                        }
+                    }
+                },
+                {
+                    "name": "Buy5",
+                    "label": "5 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Sand.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Sand.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 4
+                        }
+                    }
+                },
+                {
+                    "name": "Buy6",
+                    "label": "6 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Sand.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Sand.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 5
+                        }
+                    }
+                },
+                {
+                    "name": "Buy7",
+                    "label": "7 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Sand.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Sand.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 6
+                        }
+                    }
+                },
+                {
+                    "name": "Buy8",
+                    "label": "8 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Sand.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Sand.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 7
+                        }
+                    }
+                },
+                {
+                    "name": "Buy9",
+                    "label": "9 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Sand.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Sand.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 8
+                        }
+                    }
+                },
+                {
+                    "name": "Buy10",
+                    "label": "10 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Sand.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Sand.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 9
+                        }
+                    }
+                },
+                {
+                    "name": "Buy11",
+                    "label": "11 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Sand.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Sand.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 10
+                        }
+                    }
+                },
+                {
+                    "name": "Buy12",
+                    "label": "12 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Sand.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Sand.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 11
+                        }
+                    }
+                },
+                {
+                    "name": "Buy13",
+                    "label": "13 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Sand.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Sand.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 12
+                        }
+                    }
+                },
+                {
+                    "name": "Buy14",
+                    "label": "14 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Sand.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Sand.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 13
+                        }
+                    }
+                },
+                {
+                    "name": "Buy15",
+                    "label": "15 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Sand.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Sand.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 14
+                        }
+                    }
+                },
+                {
+                    "name": "Buy16",
+                    "label": "16 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Sand.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Sand.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 15
+                        }
+                    }
+                },
+                {
+                    "name": "Buy17",
+                    "label": "17 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Sand.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Sand.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 16
+                        }
+                    }
+                },
+                {
+                    "name": "Buy18",
+                    "label": "18 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Sand.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Sand.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 17
+                        }
+                    }
+                },
+                {
+                    "name": "Buy19",
+                    "label": "19 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Sand.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Sand.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 18
+                        }
+                    }
+                },
+                {
+                    "name": "Buy20",
+                    "label": "20 個",
+                    "pipeline_override": {
+                        "MaterialRealm.Sand.Purchase.Open": {
+                            "enabled": true
+                        },
+                        "MaterialRealm.Sand.Purchase.Plus": {
+                            "enabled": true,
+                            "repeat": 19
+                        }
+                    }
                 }
             ],
-            "pipeline_override": {"MaterialRealm.Sand.Purchase.Open": {"max_hit": "{Count}"}}
+            "default_case": "Buy0"
         },
         "MaterialSandQuickMining": {
             "type": "switch",
@@ -408,42 +1536,126 @@
                     "pattern_msg": "請輸入 0～999。"
                 }
             ],
-            "pipeline_override": {"MaterialRealm.Sand.Mine": {"max_hit": "{Count}"}}
+            "pipeline_override": {
+                "MaterialRealm.Sand.Mine": {
+                    "max_hit": "{Count}"
+                }
+            }
+        },
+        "CommissionSubmitCount": {
+            "type": "input",
+            "label": "委託：本次最多提交次數",
+            "description": "本次執行最多點擊幾次「提交」，範圍 0～99；未勾選額外次數時，辨識到今日剩餘 0/4 就停止。",
+            "inputs": [
+                {
+                    "name": "Count",
+                    "label": "次數",
+                    "default": "4",
+                    "pipeline_type": "int",
+                    "verify": "^(?:0|[1-9][0-9]?)$",
+                    "pattern_msg": "請輸入 0～99。"
+                }
+            ],
+            "pipeline_override": {
+                "Rewards.Commissions.Submit": {"max_hit": "{Count}"},
+                "Commissions.Submit": {"max_hit": "{Count}"}
+            }
+        },
+        "CommissionUseExtraAttempts": {
+            "type": "switch",
+            "label": "委託：使用額外次數",
+            "description": "關閉時只使用每日 4 次免費額度；開啟後才允許處理剩餘 0/4 之後的額外次數。額外次數確認畫面尚待建立辨識樣本。",
+            "cases": [
+                {
+                    "name": "No",
+                    "label": "不使用",
+                    "pipeline_override": {
+                        "Rewards.Commissions.Extra.Route": {
+                            "next": ["Rewards.Tasks.Back"]
+                        },
+                        "Commissions.Extra.Route": {
+                            "next": ["Commissions.Done"]
+                        }
+                    }
+                },
+                {
+                    "name": "Yes",
+                    "label": "允許使用",
+                    "pipeline_override": {
+                        "Rewards.Commissions.Extra.Route": {
+                            "next": ["Rewards.Commissions.Extra.NeedsSample"]
+                        },
+                        "Commissions.Extra.Route": {
+                            "next": ["Commissions.Extra.NeedsSample"]
+                        }
+                    }
+                }
+            ],
+            "default_case": "No"
         },
         "GuildDonationCount": {
             "type": "select",
             "label": "每日公會捐贈次數",
-            "description": "每天最多執行幾次公會捐贈；第 1 次免費，後續允許消耗遊戲資源。畫面上限為 5 次，0 代表不執行。",
+            "description": "設定今日捐贈的目標總次數。會先判斷畫面上的現有次數，只補到設定值；已達設定值就不執行。第 1 次免費，後續允許消耗遊戲資源。",
             "cases": [
                 {
                     "name": "Donate0",
                     "label": "0 次（不捐贈）",
-                    "pipeline_override": {"Guild.Donation.Execute": {"max_hit": 0}}
+                    "pipeline_override": {
+                        "Guild.Donation.NeedMore": {
+                            "enabled": false
+                        }
+                    }
                 },
                 {
                     "name": "Donate1",
                     "label": "1 次",
-                    "pipeline_override": {"Guild.Donation.Execute": {"max_hit": 1}}
+                    "pipeline_override": {
+                        "Guild.Donation.NeedMore": {
+                            "enabled": true,
+                            "expected": "每日捐贈次數.*0/5"
+                        }
+                    }
                 },
                 {
                     "name": "Donate2",
                     "label": "2 次",
-                    "pipeline_override": {"Guild.Donation.Execute": {"max_hit": 2}}
+                    "pipeline_override": {
+                        "Guild.Donation.NeedMore": {
+                            "enabled": true,
+                            "expected": "每日捐贈次數.*[01]/5"
+                        }
+                    }
                 },
                 {
                     "name": "Donate3",
                     "label": "3 次",
-                    "pipeline_override": {"Guild.Donation.Execute": {"max_hit": 3}}
+                    "pipeline_override": {
+                        "Guild.Donation.NeedMore": {
+                            "enabled": true,
+                            "expected": "每日捐贈次數.*[0-2]/5"
+                        }
+                    }
                 },
                 {
                     "name": "Donate4",
                     "label": "4 次",
-                    "pipeline_override": {"Guild.Donation.Execute": {"max_hit": 4}}
+                    "pipeline_override": {
+                        "Guild.Donation.NeedMore": {
+                            "enabled": true,
+                            "expected": "每日捐贈次數.*[0-3]/5"
+                        }
+                    }
                 },
                 {
                     "name": "Donate5",
                     "label": "5 次",
-                    "pipeline_override": {"Guild.Donation.Execute": {"max_hit": 5}}
+                    "pipeline_override": {
+                        "Guild.Donation.NeedMore": {
+                            "enabled": true,
+                            "expected": "每日捐贈次數.*[0-4]/5"
+                        }
+                    }
                 }
             ],
             "default_case": "Donate0"
@@ -453,8 +1665,14 @@
             "label": "分解時排除高戰力裝備",
             "description": "控制進入分解頁後是否勾選「排除高戰力」。預設勾選以降低誤分解風險。",
             "cases": [
-                {"name": "Enabled", "label": "勾選"},
-                {"name": "Disabled", "label": "不勾選"}
+                {
+                    "name": "Enabled",
+                    "label": "勾選"
+                },
+                {
+                    "name": "Disabled",
+                    "label": "不勾選"
+                }
             ],
             "default_case": "Enabled"
         }
