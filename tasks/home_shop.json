@@ -87,28 +87,60 @@
         "HomeShopGroceryFirstRow": {
             "type": "select",
             "label": "雜貨第一排商品",
-            "description": "第一排三個商品的購買策略。",
+            "description": "第一排三個商品的折數購買策略。",
             "cases": [
+                {
+                    "name": "Discount10",
+                    "label": "1 折以下"
+                },
+                {
+                    "name": "Discount20",
+                    "label": "2 折以下"
+                },
+                {
+                    "name": "Discount30",
+                    "label": "3 折以下"
+                },
+                {
+                    "name": "Discount40",
+                    "label": "4 折以下"
+                },
+                {
+                    "name": "Discount50",
+                    "label": "5 折以下"
+                },
+                {
+                    "name": "Discount60",
+                    "label": "6 折以下"
+                },
+                {
+                    "name": "Discount70",
+                    "label": "7 折以下"
+                },
+                {
+                    "name": "Discount80",
+                    "label": "8 折以下"
+                },
+                {
+                    "name": "Discount90",
+                    "label": "9 折以下"
+                },
+                {
+                    "name": "Unlimited",
+                    "label": "不限折數（全部購買）"
+                },
                 {
                     "name": "Never",
                     "label": "不購買"
-                },
-                {
-                    "name": "BuyAll",
-                    "label": "全部購買"
                 }
             ],
-            "default_case": "BuyAll"
+            "default_case": "Unlimited"
         },
         "HomeShopGroceryRoughStone": {
             "type": "select",
             "label": "雜貨：粗煉石（黑色的鐵）",
             "description": "第二、三排出現粗煉石時，只有折數不高於設定值才購買。",
             "cases": [
-                {
-                    "name": "Never",
-                    "label": "不購買"
-                },
                 {
                     "name": "Discount10",
                     "label": "1 折以下"
@@ -148,6 +180,10 @@
                 {
                     "name": "Unlimited",
                     "label": "不限折數"
+                },
+                {
+                    "name": "Never",
+                    "label": "不購買"
                 }
             ],
             "default_case": "Discount70"
@@ -158,10 +194,6 @@
             "description": "第二、三排出現稀有的時之沙時，只有折數不高於設定值才購買。",
             "cases": [
                 {
-                    "name": "Never",
-                    "label": "不購買"
-                },
-                {
                     "name": "Discount10",
                     "label": "1 折以下"
                 },
@@ -200,6 +232,10 @@
                 {
                     "name": "Unlimited",
                     "label": "不限折數"
+                },
+                {
+                    "name": "Never",
+                    "label": "不購買"
                 }
             ],
             "default_case": "Discount80"
@@ -210,10 +246,6 @@
             "description": "第二、三排出現歷戰精華時，只有折數不高於設定值才購買。",
             "cases": [
                 {
-                    "name": "Never",
-                    "label": "不購買"
-                },
-                {
                     "name": "Discount10",
                     "label": "1 折以下"
                 },
@@ -252,6 +284,10 @@
                 {
                     "name": "Unlimited",
                     "label": "不限折數"
+                },
+                {
+                    "name": "Never",
+                    "label": "不購買"
                 }
             ],
             "default_case": "Discount90"
@@ -262,10 +298,6 @@
             "description": "第二、三排出現普通凍乾時，只有折數不高於設定值才購買。",
             "cases": [
                 {
-                    "name": "Never",
-                    "label": "不購買"
-                },
-                {
                     "name": "Discount10",
                     "label": "1 折以下"
                 },
@@ -304,6 +336,10 @@
                 {
                     "name": "Unlimited",
                     "label": "不限折數"
+                },
+                {
+                    "name": "Never",
+                    "label": "不購買"
                 }
             ],
             "default_case": "Discount60"
@@ -314,10 +350,6 @@
             "description": "寶庫前三排第 1 個商品；依由左至右、由上至下編號。",
             "cases": [
                 {
-                    "name": "Never",
-                    "label": "不購買"
-                },
-                {
                     "name": "Discount10",
                     "label": "1 折以下"
                 },
@@ -356,6 +388,10 @@
                 {
                     "name": "Unlimited",
                     "label": "不限折數"
+                },
+                {
+                    "name": "Never",
+                    "label": "不購買"
                 }
             ],
             "default_case": "Never"
@@ -366,10 +402,6 @@
             "description": "寶庫前三排第 2 個商品；依由左至右、由上至下編號。",
             "cases": [
                 {
-                    "name": "Never",
-                    "label": "不購買"
-                },
-                {
                     "name": "Discount10",
                     "label": "1 折以下"
                 },
@@ -408,6 +440,10 @@
                 {
                     "name": "Unlimited",
                     "label": "不限折數"
+                },
+                {
+                    "name": "Never",
+                    "label": "不購買"
                 }
             ],
             "default_case": "Never"
@@ -418,10 +454,6 @@
             "description": "寶庫前三排第 3 個商品；依由左至右、由上至下編號。",
             "cases": [
                 {
-                    "name": "Never",
-                    "label": "不購買"
-                },
-                {
                     "name": "Discount10",
                     "label": "1 折以下"
                 },
@@ -460,6 +492,10 @@
                 {
                     "name": "Unlimited",
                     "label": "不限折數"
+                },
+                {
+                    "name": "Never",
+                    "label": "不購買"
                 }
             ],
             "default_case": "Never"
@@ -470,10 +506,6 @@
             "description": "寶庫前三排第 4 個商品；依由左至右、由上至下編號。",
             "cases": [
                 {
-                    "name": "Never",
-                    "label": "不購買"
-                },
-                {
                     "name": "Discount10",
                     "label": "1 折以下"
                 },
@@ -512,6 +544,10 @@
                 {
                     "name": "Unlimited",
                     "label": "不限折數"
+                },
+                {
+                    "name": "Never",
+                    "label": "不購買"
                 }
             ],
             "default_case": "Never"
@@ -522,10 +558,6 @@
             "description": "寶庫前三排第 5 個商品；依由左至右、由上至下編號。",
             "cases": [
                 {
-                    "name": "Never",
-                    "label": "不購買"
-                },
-                {
                     "name": "Discount10",
                     "label": "1 折以下"
                 },
@@ -564,6 +596,10 @@
                 {
                     "name": "Unlimited",
                     "label": "不限折數"
+                },
+                {
+                    "name": "Never",
+                    "label": "不購買"
                 }
             ],
             "default_case": "Never"
@@ -574,10 +610,6 @@
             "description": "寶庫前三排第 6 個商品；依由左至右、由上至下編號。",
             "cases": [
                 {
-                    "name": "Never",
-                    "label": "不購買"
-                },
-                {
                     "name": "Discount10",
                     "label": "1 折以下"
                 },
@@ -616,6 +648,10 @@
                 {
                     "name": "Unlimited",
                     "label": "不限折數"
+                },
+                {
+                    "name": "Never",
+                    "label": "不購買"
                 }
             ],
             "default_case": "Never"
@@ -626,10 +662,6 @@
             "description": "寶庫前三排第 7 個商品；依由左至右、由上至下編號。",
             "cases": [
                 {
-                    "name": "Never",
-                    "label": "不購買"
-                },
-                {
                     "name": "Discount10",
                     "label": "1 折以下"
                 },
@@ -668,6 +700,10 @@
                 {
                     "name": "Unlimited",
                     "label": "不限折數"
+                },
+                {
+                    "name": "Never",
+                    "label": "不購買"
                 }
             ],
             "default_case": "Never"
@@ -678,10 +714,6 @@
             "description": "寶庫前三排第 8 個商品；依由左至右、由上至下編號。",
             "cases": [
                 {
-                    "name": "Never",
-                    "label": "不購買"
-                },
-                {
                     "name": "Discount10",
                     "label": "1 折以下"
                 },
@@ -720,6 +752,10 @@
                 {
                     "name": "Unlimited",
                     "label": "不限折數"
+                },
+                {
+                    "name": "Never",
+                    "label": "不購買"
                 }
             ],
             "default_case": "Never"
@@ -730,10 +766,6 @@
             "description": "寶庫前三排第 9 個商品；依由左至右、由上至下編號。",
             "cases": [
                 {
-                    "name": "Never",
-                    "label": "不購買"
-                },
-                {
                     "name": "Discount10",
                     "label": "1 折以下"
                 },
@@ -772,6 +804,10 @@
                 {
                     "name": "Unlimited",
                     "label": "不限折數"
+                },
+                {
+                    "name": "Never",
+                    "label": "不購買"
                 }
             ],
             "default_case": "Never"
@@ -782,10 +818,6 @@
             "description": "特賣出現時，只有折數不高於設定值才購買；沒有特賣時直接略過。",
             "cases": [
                 {
-                    "name": "Never",
-                    "label": "不購買"
-                },
-                {
                     "name": "Discount10",
                     "label": "1 折以下"
                 },
@@ -824,6 +856,10 @@
                 {
                     "name": "Unlimited",
                     "label": "不限折數"
+                },
+                {
+                    "name": "Never",
+                    "label": "不購買"
                 }
             ],
             "default_case": "Never"

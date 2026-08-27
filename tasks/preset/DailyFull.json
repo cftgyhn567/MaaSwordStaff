@@ -6,7 +6,7 @@
             "description": "包含家園、公會、筆記、地圖與其他項目。執行順序依序為：家園 → 公會 → 筆記 → 地圖 → 其他，一鍵領取所有獎勵安排在最末項執行。",
             "task": [
                 {
-                    "name": "HomeShopPurchase"
+                    "name": "SakuraBeastBonding"
                 },
                 {
                     "name": "GoddessStatuePrayer"
@@ -15,16 +15,16 @@
                     "name": "TimeGachaMachine"
                 },
                 {
-                    "name": "SakuraBeastBonding"
+                    "name": "HomeShopPurchase"
+                },
+                {
+                    "name": "BagUseItems"
                 },
                 {
                     "name": "AlchemyFurnace",
                     "option": {
                         "AlchemyExcludeHighPower": "Enabled"
                     }
-                },
-                {
-                    "name": "BagUseItems"
                 },
                 {
                     "name": "GuildRaid"

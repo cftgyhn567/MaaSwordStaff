@@ -1,66 +1,361 @@
 {
     "HomeShop.Start": {
         "recognition": "DirectHit",
-        "action": "DoNothing"
+        "action": "DoNothing",
+        "next": [
+            "HomeShop.EnsureHome",
+            "HomeShop.Nav.FromOtherTab",
+            "HomeShop.Nav.Back"
+        ]
+    },
+    "HomeShop.EnsureHome": {
+        "recognition": "OCR",
+        "roi": [
+            290,
+            1200,
+            140,
+            70
+        ],
+        "expected": "家園",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "HomeShop.ResetToFarRight.Swipe1"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【導航】已確認在家園首頁，開始執行商店購物任務。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Nav.FromOtherTab": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1200,
+            720,
+            70
+        ],
+        "expected": "角色",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            360,
+            1200,
+            40,
+            40
+        ],
+        "post_delay": 800,
+        "next": [
+            "HomeShop.EnsureHome"
+        ]
+    },
+    "HomeShop.Nav.Back": {
+        "max_hit": 12,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            50,
+            1150,
+            100,
+            100
+        ],
+        "post_delay": 700,
+        "next": [
+            "HomeShop.Nav.ExitDialog",
+            "HomeShop.EnsureHome",
+            "HomeShop.Nav.FromOtherTab",
+            "HomeShop.Nav.Back"
+        ]
+    },
+    "HomeShop.Nav.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            100,
+            690,
+            260,
+            100
+        ],
+        "post_delay": 800,
+        "next": [
+            "HomeShop.Nav.SelectHome"
+        ]
+    },
+    "HomeShop.Nav.SelectHome": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            360,
+            1200,
+            40,
+            40
+        ],
+        "post_delay": 1000,
+        "next": [
+            "HomeShop.EnsureHome"
+        ]
+    },
+    "HomeShop.ResetToFarRight.Swipe1": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 150,
+        "next": [
+            "HomeShop.ResetToFarRight.Swipe2"
+        ]
+    },
+    "HomeShop.ResetToFarRight.Swipe2": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 150,
+        "next": [
+            "HomeShop.ResetToFarRight.Swipe3"
+        ]
+    },
+    "HomeShop.ResetToFarRight.Swipe3": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 150,
+        "next": [
+            "HomeShop.ResetToFarRight.Swipe4"
+        ]
+    },
+    "HomeShop.ResetToFarRight.Swipe4": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 300,
+        "next": [
+            "HomeShop.MoveToShop.Swipe1"
+        ]
+    },
+    "HomeShop.MoveToShop.Swipe1": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 400,
+        "next": [
+            "HomeShop.VerifyLog"
+        ]
+    },
+    "HomeShop.VerifyLog": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "HomeShop.FindRedDot",
+            "HomeShop.DirectClick"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園歸零】已連續向右滑動歸位，並向左滑動至家園商店位置！",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.FindRedDot": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            350,
+            500,
+            200,
+            150
+        ],
+        "template": "common/red-dot.png",
+        "threshold": 0.7,
+        "action": "Click",
+        "target_offset": [
+            -50,
+            50,
+            0,
+            0
+        ],
+        "post_delay": 1200,
+        "next": [
+            "HomeShop.Screen",
+            "HomeShop.Back"
+        ]
+    },
+    "HomeShop.DirectClick": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            380,
+            580,
+            80,
+            80
+        ],
+        "post_delay": 1200,
+        "next": [
+            "HomeShop.Screen",
+            "HomeShop.Back"
+        ]
     },
     "HomeShop.Screen": {
         "recognition": "OCR",
         "roi": [
             0,
             0,
-            220,
-            180
+            720,
+            350
         ],
-        "expected": "商店",
-        "threshold": 0.2,
-        "action": "DoNothing"
+        "expected": "雜貨|商會|商店",
+        "action": "DoNothing",
+        "next": [
+            "HomeShop.Grocery.RoughStone",
+            "HomeShop.Grocery.OrdinaryFreezeDried",
+            "HomeShop.Grocery.RareTimeSand",
+            "HomeShop.Grocery.BattleEssence",
+            "HomeShop.Back"
+        ]
     },
     "HomeShop.Grocery.RoughStone": {
-        "recognition": "TemplateMatch",
+        "recognition": "OCR",
         "roi": [
             0,
-            450,
+            200,
             720,
-            650
+            800
         ],
-        "template": "home_shop/grocery_rough_stone.png",
-        "threshold": 0.75,
-        "action": "DoNothing"
-    },
-    "HomeShop.Grocery.RareTimeSand": {
-        "recognition": "TemplateMatch",
-        "roi": [
-            0,
-            450,
-            720,
-            650
-        ],
-        "template": "home_shop/grocery_rare_time_sand.png",
-        "threshold": 0.75,
-        "action": "DoNothing"
-    },
-    "HomeShop.Grocery.BattleEssence": {
-        "recognition": "TemplateMatch",
-        "roi": [
-            0,
-            450,
-            720,
-            650
-        ],
-        "template": "home_shop/grocery_battle_essence.png",
-        "threshold": 0.75,
-        "action": "DoNothing"
+        "expected": "粗糙原石",
+        "action": "Click",
+        "post_delay": 600,
+        "next": [
+            "HomeShop.Grocery.OrdinaryFreezeDried",
+            "HomeShop.Grocery.RareTimeSand",
+            "HomeShop.Grocery.BattleEssence",
+            "HomeShop.Back"
+        ]
     },
     "HomeShop.Grocery.OrdinaryFreezeDried": {
-        "recognition": "TemplateMatch",
+        "recognition": "OCR",
         "roi": [
             0,
-            450,
+            200,
             720,
-            650
+            800
         ],
-        "template": "home_shop/grocery_ordinary_freeze_dried.png",
-        "threshold": 0.75,
-        "action": "DoNothing"
+        "expected": "普通凍乾",
+        "action": "Click",
+        "post_delay": 600,
+        "next": [
+            "HomeShop.Grocery.RareTimeSand",
+            "HomeShop.Grocery.BattleEssence",
+            "HomeShop.Back"
+        ]
+    },
+    "HomeShop.Grocery.RareTimeSand": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            200,
+            720,
+            800
+        ],
+        "expected": "稀有時光沙",
+        "action": "Click",
+        "post_delay": 600,
+        "next": [
+            "HomeShop.Grocery.BattleEssence",
+            "HomeShop.Back"
+        ]
+    },
+    "HomeShop.Grocery.BattleEssence": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            200,
+            720,
+            800
+        ],
+        "expected": "對決精華",
+        "action": "Click",
+        "post_delay": 600,
+        "next": [
+            "HomeShop.Back"
+        ]
+    },
+    "HomeShop.Back": {
+        "recognition": "DirectHit",
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 800,
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】完成商店商品購買並返回家園首頁。",
+                "display": "log"
+            }
+        }
     }
 }

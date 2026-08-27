@@ -142,36 +142,45 @@
             "name": "GoddessStatuePrayer",
             "label": "女神像祈願",
             "entry": "Objectives.GoddessStatue.Prayer.Start",
-            "description": "至家園女神像選擇「祈願」->「友情祈願」，點擊祈願 1 次（執行 2 次）。",
+            "description": "至家園女神像選擇「祈願」->「友情祈願」，執行設定之祈願次數。",
             "group": [
                 "Home"
             ],
             "controller": [
                 "Android"
+            ],
+            "option": [
+                "GoddessStatuePrayerCount"
             ]
         },
         {
             "name": "TimeGachaMachine",
             "label": "時光扭蛋機",
             "entry": "Objectives.GachaMachine.Start",
-            "description": "至家園扭蛋台選擇「國度」，點擊扭蛋 1 次（執行 2 次）。",
+            "description": "至家園扭蛋台選擇「國度」，執行設定之扭蛋次數。",
             "group": [
                 "Home"
             ],
             "controller": [
                 "Android"
+            ],
+            "option": [
+                "TimeGachaCount"
             ]
         },
         {
             "name": "SakuraBeastBonding",
             "label": "幻獸結緣",
             "entry": "Objectives.SakuraTree.BeastBonding.Start",
-            "description": "點擊家園大櫻花樹（嘗試多次進入），選擇「結緣十次」。",
+            "description": "至家園大櫻花樹執行結緣抽取，可獨立設定結緣總次數。",
             "group": [
                 "Home"
             ],
             "controller": [
                 "Android"
+            ],
+            "option": [
+                "SakuraBeastBondCount"
             ]
         },
         {
@@ -1675,6 +1684,271 @@
                 }
             ],
             "default_case": "Enabled"
+        },
+        "GoddessStatuePrayerCount": {
+            "type": "select",
+            "label": "女神像：祈願次數",
+            "description": "至女神像執行的祈願次數。",
+            "cases": [
+                {
+                    "name": "Count1",
+                    "label": "1 次",
+                    "pipeline_override": {
+                        "GoddessStatue.LogCount": {
+                            "focus": {
+                                "Node.Recognition.Succeeded": {
+                                    "content": "【女神像祈願】本次設定祈願次數：1 次，開始執行。",
+                                    "display": "log"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "Count2",
+                    "label": "2 次",
+                    "pipeline_override": {
+                        "GoddessStatue.LogCount": {
+                            "focus": {
+                                "Node.Recognition.Succeeded": {
+                                    "content": "【女神像祈願】本次設定祈願次數：2 次，開始執行。",
+                                    "display": "log"
+                                }
+                            }
+                        },
+                        "GoddessStatue.ExecutePrayer": {
+                            "repeat": 2
+                        }
+                    }
+                },
+                {
+                    "name": "Count3",
+                    "label": "3 次",
+                    "pipeline_override": {
+                        "GoddessStatue.LogCount": {
+                            "focus": {
+                                "Node.Recognition.Succeeded": {
+                                    "content": "【女神像祈願】本次設定祈願次數：3 次，開始執行。",
+                                    "display": "log"
+                                }
+                            }
+                        },
+                        "GoddessStatue.ExecutePrayer": {
+                            "repeat": 3
+                        }
+                    }
+                },
+                {
+                    "name": "Count5",
+                    "label": "5 次",
+                    "pipeline_override": {
+                        "GoddessStatue.LogCount": {
+                            "focus": {
+                                "Node.Recognition.Succeeded": {
+                                    "content": "【女神像祈願】本次設定祈願次數：5 次，開始執行。",
+                                    "display": "log"
+                                }
+                            }
+                        },
+                        "GoddessStatue.ExecutePrayer": {
+                            "repeat": 5
+                        }
+                    }
+                },
+                {
+                    "name": "Count0",
+                    "label": "0 次（不執行）",
+                    "pipeline_override": {
+                        "Objectives.GoddessStatue.Prayer.Start": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ],
+            "default_case": "Count1"
+        },
+        "TimeGachaCount": {
+            "type": "select",
+            "label": "時光扭蛋機：扭蛋次數",
+            "description": "至扭蛋台執行的扭蛋次數。",
+            "cases": [
+                {
+                    "name": "Count1",
+                    "label": "1 次",
+                    "pipeline_override": {
+                        "GachaMachine.LogCount": {
+                            "focus": {
+                                "Node.Recognition.Succeeded": {
+                                    "content": "【時光扭蛋機】本次設定扭蛋次數：1 次，開始執行。",
+                                    "display": "log"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "Count2",
+                    "label": "2 次",
+                    "pipeline_override": {
+                        "GachaMachine.LogCount": {
+                            "focus": {
+                                "Node.Recognition.Succeeded": {
+                                    "content": "【時光扭蛋機】本次設定扭蛋次數：2 次，開始執行。",
+                                    "display": "log"
+                                }
+                            }
+                        },
+                        "GachaMachine.Execute": {
+                            "repeat": 2
+                        }
+                    }
+                },
+                {
+                    "name": "Count3",
+                    "label": "3 次",
+                    "pipeline_override": {
+                        "GachaMachine.LogCount": {
+                            "focus": {
+                                "Node.Recognition.Succeeded": {
+                                    "content": "【時光扭蛋機】本次設定扭蛋次數：3 次，開始執行。",
+                                    "display": "log"
+                                }
+                            }
+                        },
+                        "GachaMachine.Execute": {
+                            "repeat": 3
+                        }
+                    }
+                },
+                {
+                    "name": "Count5",
+                    "label": "5 次",
+                    "pipeline_override": {
+                        "GachaMachine.LogCount": {
+                            "focus": {
+                                "Node.Recognition.Succeeded": {
+                                    "content": "【時光扭蛋機】本次設定扭蛋次數：5 次，開始執行。",
+                                    "display": "log"
+                                }
+                            }
+                        },
+                        "GachaMachine.Execute": {
+                            "repeat": 5
+                        }
+                    }
+                },
+                {
+                    "name": "Count0",
+                    "label": "0 次（不執行）",
+                    "pipeline_override": {
+                        "Objectives.GachaMachine.Start": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ],
+            "default_case": "Count1"
+        },
+        "SakuraBeastBondCount": {
+            "type": "select",
+            "label": "幻獸結緣：結緣抽取總次數",
+            "description": "至大櫻花樹執行的結緣總次數。系統將自動依 100 抽、10 抽、1 抽組合解算執行。",
+            "cases": [
+                {
+                    "name": "Count100",
+                    "label": "100 次",
+                    "pipeline_override": {
+                        "SakuraTree.BeastBonding.LogCount": {
+                            "focus": {
+                                "Node.Recognition.Succeeded": {
+                                    "content": "【幻獸結緣】本次設定結緣抽取總次數：100 次，開始執行。",
+                                    "display": "log"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "Count50",
+                    "label": "50 次",
+                    "pipeline_override": {
+                        "SakuraTree.BeastBonding.LogCount": {
+                            "focus": {
+                                "Node.Recognition.Succeeded": {
+                                    "content": "【幻獸結緣】本次設定結緣抽取總次數：50 次，開始執行。",
+                                    "display": "log"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "Count20",
+                    "label": "20 次",
+                    "pipeline_override": {
+                        "SakuraTree.BeastBonding.LogCount": {
+                            "focus": {
+                                "Node.Recognition.Succeeded": {
+                                    "content": "【幻獸結緣】本次設定結緣抽取總次數：20 次，開始執行。",
+                                    "display": "log"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "Count10",
+                    "label": "10 次",
+                    "pipeline_override": {
+                        "SakuraTree.BeastBonding.LogCount": {
+                            "focus": {
+                                "Node.Recognition.Succeeded": {
+                                    "content": "【幻獸結緣】本次設定結緣抽取總次數：10 次，開始執行。",
+                                    "display": "log"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "Count5",
+                    "label": "5 次",
+                    "pipeline_override": {
+                        "SakuraTree.BeastBonding.LogCount": {
+                            "focus": {
+                                "Node.Recognition.Succeeded": {
+                                    "content": "【幻獸結緣】本次設定結緣抽取總次數：5 次，開始執行。",
+                                    "display": "log"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "Count1",
+                    "label": "1 次",
+                    "pipeline_override": {
+                        "SakuraTree.BeastBonding.LogCount": {
+                            "focus": {
+                                "Node.Recognition.Succeeded": {
+                                    "content": "【幻獸結緣】本次設定結緣抽取總次數：1 次，開始執行。",
+                                    "display": "log"
+                                }
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "Count0",
+                    "label": "0 次（不執行）",
+                    "pipeline_override": {
+                        "Objectives.SakuraTree.BeastBonding.Start": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ],
+            "default_case": "Count10"
         }
     }
 }

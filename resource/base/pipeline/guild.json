@@ -1,19 +1,39 @@
 {
     "Objectives.Guild.IdleReward.Start": {
         "recognition": "DirectHit",
-        "action": "StartApp",
-        "package": "com.m88.idleXX",
+        "action": "DoNothing",
         "anchor": "Navigation.Root.RetryTask",
         "post_delay": 800,
         "timeout": 5000,
         "next": [
-            "Guild.IdleReward.Furnace",
-            "Guild.IdleReward.FromLobby",
-            "Guild.IdleReward.FromChannel",
-            "Guild.IdleReward.FromHome",
-            "Guild.IdleReward.FromExploration"
+            "Guild.IdleReward.EnsureGuild",
+            "Guild.IdleReward.Nav.FromOtherTab",
+            "Guild.IdleReward.Nav.Back"
         ],
-        "on_error": ["Navigation.Root.Recovery.Start"]
+        "on_error": [
+            "Navigation.Root.Recovery.Start"
+        ]
+    },
+    "Guild.IdleReward.EnsureGuild": {
+        "recognition": "OCR",
+        "roi": [
+            430,
+            1200,
+            140,
+            70
+        ],
+        "expected": "公會",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "Guild.IdleReward.Furnace"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【導航】已確認在公會首頁，開始領取放置熔爐收益。",
+                "display": "log"
+            }
+        }
     },
     "Guild.IdleReward.FromHome": {
         "recognition": "OCR",
@@ -33,7 +53,9 @@
             120
         ],
         "post_delay": 600,
-        "next": ["Guild.IdleReward.Furnace"]
+        "next": [
+            "Guild.IdleReward.Furnace"
+        ]
     },
     "Guild.IdleReward.FromLobby": {
         "recognition": "OCR",
@@ -49,8 +71,7 @@
         "key": 4,
         "post_delay": 500,
         "next": [
-            "Guild.IdleReward.Furnace",
-            "Guild.IdleReward.FromHome"
+            "Guild.IdleReward.Furnace"
         ]
     },
     "Guild.IdleReward.FromChannel": {
@@ -65,10 +86,9 @@
         "threshold": 0.2,
         "action": "ClickKey",
         "key": 4,
-        "post_delay": 500,
+        "post_delay": 1000,
         "next": [
-            "Guild.IdleReward.Furnace",
-            "Guild.IdleReward.FromHome"
+            "Guild.IdleReward.Furnace"
         ]
     },
     "Guild.IdleReward.FromExploration": {
@@ -90,18 +110,39 @@
     },
     "Objectives.Guild.Donation.Start": {
         "recognition": "DirectHit",
-        "action": "StartApp",
-        "package": "com.m88.idleXX",
+        "action": "DoNothing",
         "anchor": "Navigation.Root.RetryTask",
         "post_delay": 800,
         "timeout": 5000,
         "next": [
-            "Guild.Donation.Screen",
-            "Guild.Lobby.Screen",
-            "Guild.Screen",
-            "Guild.FromHome"
+            "Guild.Donation.EnsureGuild",
+            "Guild.Donation.Nav.FromOtherTab",
+            "Guild.Donation.Nav.Back"
         ],
-        "on_error": ["Navigation.Root.Recovery.Start"]
+        "on_error": [
+            "Navigation.Root.Recovery.Start"
+        ]
+    },
+    "Guild.Donation.EnsureGuild": {
+        "recognition": "OCR",
+        "roi": [
+            430,
+            1200,
+            140,
+            70
+        ],
+        "expected": "公會",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "Guild.Screen"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【導航】已確認在公會首頁，開始執行公會捐獻任務。",
+                "display": "log"
+            }
+        }
     },
     "Guild.FromHome": {
         "recognition": "OCR",
@@ -121,7 +162,9 @@
             120
         ],
         "post_delay": 600,
-        "next": ["Guild.Screen"]
+        "next": [
+            "Guild.Screen"
+        ]
     },
     "Guild.Screen": {
         "recognition": "OCR",
@@ -141,7 +184,9 @@
             520
         ],
         "post_delay": 600,
-        "next": ["Guild.Lobby.Screen"]
+        "next": [
+            "Guild.Lobby.Screen"
+        ]
     },
     "Guild.Lobby.Screen": {
         "recognition": "OCR",
@@ -154,7 +199,9 @@
         "expected": "公會",
         "threshold": 0.2,
         "action": "DoNothing",
-        "next": ["Guild.Donation.Enter"]
+        "next": [
+            "Guild.Donation.Enter"
+        ]
     },
     "Guild.Donation.Enter": {
         "recognition": "OCR",
@@ -168,7 +215,9 @@
         "threshold": 0.2,
         "action": "Click",
         "post_delay": 500,
-        "next": ["Guild.Donation.Screen"]
+        "next": [
+            "Guild.Donation.Screen"
+        ]
     },
     "Guild.IdleReward.Furnace": {
         "recognition": "TemplateMatch",
@@ -200,7 +249,9 @@
         "action": "ClickKey",
         "key": 4,
         "post_delay": 350,
-        "next": ["Guild.IdleReward.Done"]
+        "next": [
+            "Guild.IdleReward.Done"
+        ]
     },
     "Guild.IdleReward.Done": {
         "recognition": "DirectHit",
@@ -259,11 +310,165 @@
         "action": "ClickKey",
         "key": 4,
         "post_delay": 350,
-        "next": ["Guild.Donation.Screen"]
+        "next": [
+            "Guild.Donation.Screen"
+        ]
     },
     "Guild.Donation.Done": {
         "recognition": "DirectHit",
         "action": "ClickKey",
         "key": 4
+    },
+    "Guild.IdleReward.Nav.FromOtherTab": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1200,
+            720,
+            70
+        ],
+        "expected": "角色",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            500,
+            1220,
+            40,
+            40
+        ],
+        "post_delay": 800,
+        "next": [
+            "Guild.IdleReward.EnsureGuild"
+        ]
+    },
+    "Guild.IdleReward.Nav.Back": {
+        "max_hit": 12,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            50,
+            1150,
+            100,
+            100
+        ],
+        "post_delay": 700,
+        "next": [
+            "Guild.IdleReward.Nav.ExitDialog",
+            "Guild.IdleReward.EnsureGuild",
+            "Guild.IdleReward.Nav.FromOtherTab",
+            "Guild.IdleReward.Nav.Back"
+        ]
+    },
+    "Guild.IdleReward.Nav.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            100,
+            690,
+            260,
+            100
+        ],
+        "post_delay": 800,
+        "next": [
+            "Guild.IdleReward.Nav.SelectGuild"
+        ]
+    },
+    "Guild.IdleReward.Nav.SelectGuild": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            500,
+            1220,
+            40,
+            40
+        ],
+        "post_delay": 1000,
+        "next": [
+            "Guild.IdleReward.EnsureGuild"
+        ]
+    },
+    "Guild.Donation.Nav.FromOtherTab": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1200,
+            720,
+            70
+        ],
+        "expected": "角色",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            500,
+            1220,
+            40,
+            40
+        ],
+        "post_delay": 800,
+        "next": [
+            "Guild.Donation.EnsureGuild"
+        ]
+    },
+    "Guild.Donation.Nav.Back": {
+        "max_hit": 12,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            50,
+            1150,
+            100,
+            100
+        ],
+        "post_delay": 700,
+        "next": [
+            "Guild.Donation.Nav.ExitDialog",
+            "Guild.Donation.EnsureGuild",
+            "Guild.Donation.Nav.FromOtherTab",
+            "Guild.Donation.Nav.Back"
+        ]
+    },
+    "Guild.Donation.Nav.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            100,
+            690,
+            260,
+            100
+        ],
+        "post_delay": 800,
+        "next": [
+            "Guild.Donation.Nav.SelectGuild"
+        ]
+    },
+    "Guild.Donation.Nav.SelectGuild": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            500,
+            1220,
+            40,
+            40
+        ],
+        "post_delay": 1000,
+        "next": [
+            "Guild.Donation.EnsureGuild"
+        ]
     }
 }

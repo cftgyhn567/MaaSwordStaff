@@ -1,199 +1,1906 @@
 {
-    "Home.NavigateBed": {
-        "recognition": "FeatureMatch",
-        "roi": [
-            600,
-            450,
-            120,
-            350
-        ],
-        "template": "home/navigate-bed.png",
-        "detector": "SIFT",
-        "ratio": 0.65,
-        "count": 4,
-        "action": "Click",
-        "post_wait_freezes": 500,
-        "post_delay": 500,
-        "timeout": 15000,
-        "next": [
-            "Home.IdleBedReady"
-        ],
-        "on_error": [
-            "HomeRewards.FindCart"
-        ]
-    },
-    "Home.NavigateCart": {
-        "recognition": "FeatureMatch",
-        "roi": [
-            0,
-            550,
-            120,
-            350
-        ],
-        "template": "home/navigate-cart.png",
-        "detector": "SIFT",
-        "ratio": 0.65,
-        "count": 4,
-        "action": "Click",
-        "post_wait_freezes": 500,
-        "post_delay": 500,
-        "timeout": 15000,
-        "next": [
-            "Home.IdleCartReady"
-        ],
-        "on_error": [
-            "HomeRewards.Done"
-        ]
-    },
-    "Home.IdleBedReady": {
-        "recognition": "FeatureMatch",
-        "roi": [
-            0,
-            400,
-            430,
-            260
-        ],
-        "template": "home/idle-bed-ready.png",
-        "detector": "SIFT",
-        "ratio": 0.65,
-        "count": 4,
-        "action": "Click",
-        "post_delay": 1000,
-        "next": [
-            "HomeRewards.FindCart"
-        ]
-    },
-    "Home.IdleCartReady": {
-        "recognition": "FeatureMatch",
-        "roi": [
-            200,
-            650,
-            260,
-            250
-        ],
-        "template": "home/idle-cart-ready.png",
-        "detector": "SIFT",
-        "ratio": 0.65,
-        "count": 4,
-        "action": "Click",
-        "post_delay": 1000,
-        "timeout": 15000,
-        "next": [
-            "Home.RewardOverlayClose"
-        ],
-        "on_error": [
-            "HomeRewards.Done"
-        ]
-    },
-    "Home.RewardOverlayClose": {
-        "recognition": "OCR",
-        "roi": [
-            180,
-            300,
-            360,
-            110
-        ],
-        "expected": "獲得獎勵",
-        "threshold": 0.2,
-        "action": "ClickKey",
-        "key": 4,
-        "post_delay": 500,
-        "next": [
-            "HomeRewards.Done"
-        ]
-    },
     "HomeRewards.Start": {
         "recognition": "DirectHit",
-        "action": "StartApp",
-        "package": "com.m88.idleXX",
-        "anchor": "Navigation.Root.RetryTask",
-        "post_delay": 1000,
-        "timeout": 5000,
+        "action": "DoNothing",
         "next": [
             "HomeRewards.HomeReady",
-            "HomeRewards.GuildToHome",
-            "HomeRewards.ExplorationToHome"
-        ],
-        "on_error": ["Navigation.Root.Recovery.Start"]
+            "HomeRewards.Nav.FromOtherTab",
+            "HomeRewards.Nav.Back"
+        ]
     },
     "HomeRewards.HomeReady": {
         "recognition": "OCR",
         "roi": [
-            285,
-            1180,
-            180,
-            100
+            290,
+            1200,
+            140,
+            70
         ],
         "expected": "家園",
         "threshold": 0.2,
         "action": "DoNothing",
         "next": [
-            "HomeRewards.FindBed"
-        ]
+            "HomeRewards.ResetToFarRight.Swipe1"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【導航】已確認在家園首頁，開始執行家園掛機收益領取。",
+                "display": "log"
+            }
+        }
     },
-    "HomeRewards.GuildToHome": {
+    "HomeRewards.Nav.FromOtherTab": {
         "recognition": "OCR",
         "roi": [
-            240,
             0,
-            360,
-            85
+            1200,
+            720,
+            70
         ],
-        "expected": "公會頻道",
+        "expected": "角色",
         "threshold": 0.2,
-        "action": "ClickKey",
-        "key": 4,
-        "post_delay": 1000,
-        "timeout": 15000,
+        "action": "Click",
+        "target": [
+            360,
+            1200,
+            40,
+            40
+        ],
+        "post_delay": 800,
         "next": [
             "HomeRewards.HomeReady"
         ]
     },
-    "HomeRewards.ExplorationToHome": {
+    "HomeRewards.Nav.Back": {
+        "max_hit": 12,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            50,
+            1150,
+            100,
+            100
+        ],
+        "post_delay": 700,
+        "next": [
+            "HomeRewards.Nav.ExitDialog",
+            "HomeRewards.HomeReady",
+            "HomeRewards.Nav.FromOtherTab",
+            "HomeRewards.Nav.Back"
+        ]
+    },
+    "HomeRewards.Nav.ExitDialog": {
         "recognition": "OCR",
         "roi": [
-            470,
-            1120,
-            250,
-            160
+            160,
+            500,
+            400,
+            210
         ],
-        "expected": "探索.*",
+        "expected": "要離開遊戲嗎",
         "threshold": 0.2,
-        "action": "ClickKey",
-        "key": 4,
+        "action": "Click",
+        "target": [
+            100,
+            690,
+            260,
+            100
+        ],
+        "post_delay": 800,
+        "next": [
+            "HomeRewards.Nav.SelectHome"
+        ]
+    },
+    "HomeRewards.Nav.SelectHome": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            360,
+            1200,
+            40,
+            40
+        ],
         "post_delay": 1000,
-        "timeout": 15000,
         "next": [
             "HomeRewards.HomeReady"
         ]
     },
-    "HomeRewards.FindBed": {
+    "HomeRewards.ResetToFarRight.Swipe1": {
         "recognition": "DirectHit",
-        "action": "DoNothing",
-        "timeout": 4000,
-        "next": [
-            "Home.IdleBedReady",
-            "Home.NavigateBed"
+        "action": "Swipe",
+        "begin": [
+            600,
+            300,
+            10,
+            10
         ],
-        "on_error": [
-            "HomeRewards.FindCart"
+        "end": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 150,
+        "next": [
+            "HomeRewards.ResetToFarRight.Swipe2"
         ]
     },
-    "HomeRewards.FindCart": {
+    "HomeRewards.ResetToFarRight.Swipe2": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 150,
+        "next": [
+            "HomeRewards.ResetToFarRight.Swipe3"
+        ]
+    },
+    "HomeRewards.ResetToFarRight.Swipe3": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 150,
+        "next": [
+            "HomeRewards.ResetToFarRight.Swipe4"
+        ]
+    },
+    "HomeRewards.ResetToFarRight.Swipe4": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 300,
+        "next": [
+            "HomeRewards.ResetToFarRight.VerifyLog"
+        ]
+    },
+    "HomeRewards.ResetToFarRight.VerifyLog": {
         "recognition": "DirectHit",
         "action": "DoNothing",
-        "timeout": 4000,
         "next": [
-            "Home.IdleCartReady",
-            "Home.NavigateCart"
+            "HomeRewards.ClickBed"
         ],
-        "on_error": [
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園歸零】已連續向右滑動歸位至最右側小屋主畫面！準備領取二樓床鋪收益。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeRewards.ClickBed": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            500,
+            400,
+            100,
+            100
+        ],
+        "post_delay": 1000,
+        "next": [
+            "HomeRewards.BedOverlay",
+            "HomeRewards.MoveToCart.Swipe1"
+        ]
+    },
+    "HomeRewards.BedOverlay": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            0,
+            720,
+            1280
+        ],
+        "expected": "獲得獎勵|領取|點擊任意",
+        "action": "Click",
+        "target": [
+            360,
+            200,
+            10,
+            10
+        ],
+        "post_delay": 800,
+        "next": [
+            "HomeRewards.MoveToCart.Swipe1"
+        ]
+    },
+    "HomeRewards.MoveToCart.Swipe1": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 150,
+        "next": [
+            "HomeRewards.MoveToCart.Swipe2"
+        ]
+    },
+    "HomeRewards.MoveToCart.Swipe2": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 150,
+        "next": [
+            "HomeRewards.MoveToCart.Swipe3"
+        ]
+    },
+    "HomeRewards.MoveToCart.Swipe3": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 400,
+        "next": [
+            "HomeRewards.Cart.VerifyLog"
+        ]
+    },
+    "HomeRewards.Cart.VerifyLog": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "HomeRewards.ClickCart"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園收益】已移動至推車位置，準備領取推車放置收益。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeRewards.ClickCart": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            350,
+            650,
+            150,
+            100
+        ],
+        "post_delay": 1000,
+        "next": [
+            "HomeRewards.CartOverlay",
+            "HomeRewards.Done"
+        ]
+    },
+    "HomeRewards.CartOverlay": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            0,
+            720,
+            1280
+        ],
+        "expected": "獲得獎勵|領取|點擊任意",
+        "action": "Click",
+        "target": [
+            360,
+            200,
+            10,
+            10
+        ],
+        "post_delay": 800,
+        "next": [
             "HomeRewards.Done"
         ]
     },
     "HomeRewards.Done": {
         "recognition": "DirectHit",
         "action": "DoNothing",
-        "next": ["Rewards.FunctionList.Start"]
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園收益】床鋪與推車放置收益領取完成！",
+                "display": "log"
+            }
+        }
+    },
+    "Objectives.SakuraTree.BeastBonding.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "SakuraTree.BeastBonding.EnsureHome",
+            "SakuraTree.BeastBonding.Nav.FromOtherTab",
+            "SakuraTree.BeastBonding.Nav.Back"
+        ]
+    },
+    "SakuraTree.BeastBonding.EnsureHome": {
+        "recognition": "OCR",
+        "roi": [
+            290,
+            1200,
+            140,
+            70
+        ],
+        "expected": "家園",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "SakuraTree.BeastBonding.ResetToFarRight.Swipe1"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【導航】已確認在家園首頁，開始執行幻獸結緣任務。",
+                "display": "log"
+            }
+        }
+    },
+    "SakuraTree.BeastBonding.Nav.FromOtherTab": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1200,
+            720,
+            70
+        ],
+        "expected": "角色",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            360,
+            1200,
+            40,
+            40
+        ],
+        "post_delay": 800,
+        "next": [
+            "SakuraTree.BeastBonding.EnsureHome"
+        ]
+    },
+    "SakuraTree.BeastBonding.Nav.Back": {
+        "max_hit": 12,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            50,
+            1150,
+            100,
+            100
+        ],
+        "post_delay": 700,
+        "next": [
+            "SakuraTree.BeastBonding.Nav.ExitDialog",
+            "SakuraTree.BeastBonding.EnsureHome",
+            "SakuraTree.BeastBonding.Nav.FromOtherTab",
+            "SakuraTree.BeastBonding.Nav.Back"
+        ]
+    },
+    "SakuraTree.BeastBonding.Nav.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            100,
+            690,
+            260,
+            100
+        ],
+        "post_delay": 800,
+        "next": [
+            "SakuraTree.BeastBonding.Nav.SelectHome"
+        ]
+    },
+    "SakuraTree.BeastBonding.Nav.SelectHome": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            360,
+            1200,
+            40,
+            40
+        ],
+        "post_delay": 1000,
+        "next": [
+            "SakuraTree.BeastBonding.EnsureHome"
+        ]
+    },
+    "SakuraTree.BeastBonding.ResetToFarRight.Swipe1": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 150,
+        "next": [
+            "SakuraTree.BeastBonding.ResetToFarRight.Swipe2"
+        ]
+    },
+    "SakuraTree.BeastBonding.ResetToFarRight.Swipe2": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 150,
+        "next": [
+            "SakuraTree.BeastBonding.ResetToFarRight.Swipe3"
+        ]
+    },
+    "SakuraTree.BeastBonding.ResetToFarRight.Swipe3": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 150,
+        "next": [
+            "SakuraTree.BeastBonding.ResetToFarRight.Swipe4"
+        ]
+    },
+    "SakuraTree.BeastBonding.ResetToFarRight.Swipe4": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 300,
+        "next": [
+            "SakuraTree.BeastBonding.MoveToSakura.Swipe1"
+        ]
+    },
+    "SakuraTree.BeastBonding.MoveToSakura.Swipe1": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 150,
+        "next": [
+            "SakuraTree.BeastBonding.MoveToSakura.Swipe2"
+        ]
+    },
+    "SakuraTree.BeastBonding.MoveToSakura.Swipe2": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 150,
+        "next": [
+            "SakuraTree.BeastBonding.MoveToSakura.Swipe3"
+        ]
+    },
+    "SakuraTree.BeastBonding.MoveToSakura.Swipe3": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 400,
+        "next": [
+            "SakuraTree.BeastBonding.VerifyLog"
+        ]
+    },
+    "SakuraTree.BeastBonding.VerifyLog": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "SakuraTree.BeastBonding.ClickTree"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園歸零】已連續向右滑動歸位，並向左滑動至大櫻花樹位置！",
+                "display": "log"
+            }
+        }
+    },
+    "SakuraTree.BeastBonding.ClickTree": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            300,
+            400,
+            200,
+            200
+        ],
+        "post_delay": 1200,
+        "next": [
+            "SakuraTree.BeastBonding.Screen",
+            "SakuraTree.BeastBonding.Back"
+        ]
+    },
+    "SakuraTree.BeastBonding.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            0,
+            720,
+            350
+        ],
+        "expected": "結緣|幻獸結緣|今日已結緣",
+        "action": "DoNothing",
+        "next": [
+            "SakuraTree.BeastBonding.LogCount"
+        ]
+    },
+    "SakuraTree.BeastBonding.LogCount": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "SakuraTree.BeastBonding.LogInitialCount"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【幻獸結緣】本次設定結緣抽取總次數：10 次，開始執行。",
+                "display": "log"
+            }
+        }
+    },
+    "SakuraTree.BeastBonding.LogInitialCount": {
+        "recognition": "OCR",
+        "roi": [
+            200,
+            700,
+            320,
+            100
+        ],
+        "expected": "今日已結緣.*",
+        "action": "DoNothing",
+        "next": [
+            "SakuraTree.BeastBonding.Execute100",
+            "SakuraTree.BeastBonding.Execute10",
+            "SakuraTree.BeastBonding.Execute1"
+        ]
+    },
+    "SakuraTree.BeastBonding.Execute10": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            800,
+            720,
+            200
+        ],
+        "expected": "結緣10次|結緣 10 次|10次",
+        "action": "Click",
+        "post_delay": 4500,
+        "next": [
+            "SakuraTree.BeastBonding.LogFinalCount"
+        ]
+    },
+    "SakuraTree.BeastBonding.Execute100": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            800,
+            720,
+            200
+        ],
+        "expected": "結緣100次|結緣 100 次|100次",
+        "action": "Click",
+        "post_delay": 4500,
+        "next": [
+            "SakuraTree.BeastBonding.LogFinalCount"
+        ]
+    },
+    "SakuraTree.BeastBonding.Execute1": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            800,
+            720,
+            200
+        ],
+        "expected": "結緣1次|結緣 1 次|1次",
+        "action": "Click",
+        "post_delay": 4500,
+        "next": [
+            "SakuraTree.BeastBonding.LogFinalCount"
+        ]
+    },
+    "SakuraTree.BeastBonding.LogFinalCount": {
+        "recognition": "OCR",
+        "roi": [
+            200,
+            700,
+            320,
+            100
+        ],
+        "expected": "今日已結緣.*",
+        "action": "DoNothing",
+        "next": [
+            "SakuraTree.BeastBonding.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【幻獸結緣】完成！最終確認今日已結緣次數辨識完成。",
+                "display": "log"
+            }
+        }
+    },
+    "SakuraTree.BeastBonding.Back": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            50,
+            1150,
+            100,
+            100
+        ],
+        "post_delay": 1500,
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【幻獸結緣】完成結緣操作並返回家園首頁。",
+                "display": "log"
+            }
+        }
+    },
+    "Objectives.GoddessStatue.Prayer.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GoddessStatue.EnsureHome",
+            "GoddessStatue.Nav.FromOtherTab",
+            "GoddessStatue.Nav.Back"
+        ]
+    },
+    "GoddessStatue.EnsureHome": {
+        "recognition": "OCR",
+        "roi": [
+            290,
+            1200,
+            140,
+            70
+        ],
+        "expected": "家園",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "GoddessStatue.ResetToFarRight.Swipe1"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【導航】已確認在家園首頁，開始執行女神像祈願任務。",
+                "display": "log"
+            }
+        }
+    },
+    "GoddessStatue.Nav.FromOtherTab": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1200,
+            720,
+            70
+        ],
+        "expected": "角色",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            360,
+            1200,
+            40,
+            40
+        ],
+        "post_delay": 800,
+        "next": [
+            "GoddessStatue.EnsureHome"
+        ]
+    },
+    "GoddessStatue.Nav.Back": {
+        "max_hit": 12,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            50,
+            1150,
+            100,
+            100
+        ],
+        "post_delay": 700,
+        "next": [
+            "GoddessStatue.Nav.ExitDialog",
+            "GoddessStatue.EnsureHome",
+            "GoddessStatue.Nav.FromOtherTab",
+            "GoddessStatue.Nav.Back"
+        ]
+    },
+    "GoddessStatue.Nav.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            100,
+            690,
+            260,
+            100
+        ],
+        "post_delay": 800,
+        "next": [
+            "GoddessStatue.Nav.SelectHome"
+        ]
+    },
+    "GoddessStatue.Nav.SelectHome": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            360,
+            1200,
+            40,
+            40
+        ],
+        "post_delay": 1000,
+        "next": [
+            "GoddessStatue.EnsureHome"
+        ]
+    },
+    "GoddessStatue.ResetToFarRight.Swipe1": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 150,
+        "next": [
+            "GoddessStatue.ResetToFarRight.Swipe2"
+        ]
+    },
+    "GoddessStatue.ResetToFarRight.Swipe2": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 150,
+        "next": [
+            "GoddessStatue.ResetToFarRight.Swipe3"
+        ]
+    },
+    "GoddessStatue.ResetToFarRight.Swipe3": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 150,
+        "next": [
+            "GoddessStatue.ResetToFarRight.Swipe4"
+        ]
+    },
+    "GoddessStatue.ResetToFarRight.Swipe4": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 300,
+        "next": [
+            "GoddessStatue.MoveToStatue.Swipe1"
+        ]
+    },
+    "GoddessStatue.MoveToStatue.Swipe1": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 150,
+        "next": [
+            "GoddessStatue.MoveToStatue.Swipe2"
+        ]
+    },
+    "GoddessStatue.MoveToStatue.Swipe2": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 400,
+        "next": [
+            "GoddessStatue.VerifyLog"
+        ]
+    },
+    "GoddessStatue.VerifyLog": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GoddessStatue.ClickStatue"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園歸零】已連續向右滑動歸位，並向左滑動至女神像位置！",
+                "display": "log"
+            }
+        }
+    },
+    "GoddessStatue.ClickStatue": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            550,
+            550,
+            150,
+            150
+        ],
+        "post_delay": 1200,
+        "next": [
+            "GoddessStatue.Screen",
+            "GoddessStatue.Back"
+        ]
+    },
+    "GoddessStatue.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            0,
+            720,
+            350
+        ],
+        "expected": "祈願|女神像|友情祈願",
+        "action": "DoNothing",
+        "next": [
+            "GoddessStatue.LogCount"
+        ]
+    },
+    "GoddessStatue.LogCount": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GoddessStatue.ExecutePrayer"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【女神像祈願】本次設定祈願次數：1 次，開始執行。",
+                "display": "log"
+            }
+        }
+    },
+    "GoddessStatue.ExecutePrayer": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            700,
+            720,
+            450
+        ],
+        "expected": "友情祈願|祈願1次|祈願10次|祈願.*",
+        "action": "Click",
+        "post_delay": 4500,
+        "next": [
+            "GoddessStatue.Back"
+        ]
+    },
+    "GoddessStatue.Back": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            50,
+            1150,
+            100,
+            100
+        ],
+        "post_delay": 1500,
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【女神像祈願】完成祈願操作並返回家園首頁。",
+                "display": "log"
+            }
+        }
+    },
+    "Objectives.GachaMachine.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GachaMachine.EnsureHome",
+            "GachaMachine.Nav.FromOtherTab",
+            "GachaMachine.Nav.Back"
+        ]
+    },
+    "GachaMachine.EnsureHome": {
+        "recognition": "OCR",
+        "roi": [
+            290,
+            1200,
+            140,
+            70
+        ],
+        "expected": "家園",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "GachaMachine.ResetToFarRight.Swipe1"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【導航】已確認在家園首頁，開始執行時光扭蛋機任務。",
+                "display": "log"
+            }
+        }
+    },
+    "GachaMachine.Nav.FromOtherTab": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1200,
+            720,
+            70
+        ],
+        "expected": "角色",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            360,
+            1200,
+            40,
+            40
+        ],
+        "post_delay": 800,
+        "next": [
+            "GachaMachine.EnsureHome"
+        ]
+    },
+    "GachaMachine.Nav.Back": {
+        "max_hit": 12,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            50,
+            1150,
+            100,
+            100
+        ],
+        "post_delay": 700,
+        "next": [
+            "GachaMachine.Nav.ExitDialog",
+            "GachaMachine.EnsureHome",
+            "GachaMachine.Nav.FromOtherTab",
+            "GachaMachine.Nav.Back"
+        ]
+    },
+    "GachaMachine.Nav.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            100,
+            690,
+            260,
+            100
+        ],
+        "post_delay": 800,
+        "next": [
+            "GachaMachine.Nav.SelectHome"
+        ]
+    },
+    "GachaMachine.Nav.SelectHome": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            360,
+            1200,
+            40,
+            40
+        ],
+        "post_delay": 1000,
+        "next": [
+            "GachaMachine.EnsureHome"
+        ]
+    },
+    "GachaMachine.ResetToFarRight.Swipe1": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 150,
+        "next": [
+            "GachaMachine.ResetToFarRight.Swipe2"
+        ]
+    },
+    "GachaMachine.ResetToFarRight.Swipe2": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 150,
+        "next": [
+            "GachaMachine.ResetToFarRight.Swipe3"
+        ]
+    },
+    "GachaMachine.ResetToFarRight.Swipe3": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 150,
+        "next": [
+            "GachaMachine.ResetToFarRight.Swipe4"
+        ]
+    },
+    "GachaMachine.ResetToFarRight.Swipe4": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 300,
+        "next": [
+            "GachaMachine.MoveToGacha.Swipe1"
+        ]
+    },
+    "GachaMachine.MoveToGacha.Swipe1": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 400,
+        "next": [
+            "GachaMachine.VerifyLog"
+        ]
+    },
+    "GachaMachine.VerifyLog": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GachaMachine.ClickGacha"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園歸零】已連續向右滑動歸位，並向左滑動至時光扭蛋機位置！",
+                "display": "log"
+            }
+        }
+    },
+    "GachaMachine.ClickGacha": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            150,
+            600,
+            150,
+            150
+        ],
+        "post_delay": 1200,
+        "next": [
+            "GachaMachine.Screen",
+            "GachaMachine.Back"
+        ]
+    },
+    "GachaMachine.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            0,
+            720,
+            350
+        ],
+        "expected": "扭蛋|國度|時光扭蛋",
+        "action": "DoNothing",
+        "next": [
+            "GachaMachine.LogCount"
+        ]
+    },
+    "GachaMachine.LogCount": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GachaMachine.Execute"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【時光扭蛋機】本次設定扭蛋次數：1 次，開始執行。",
+                "display": "log"
+            }
+        }
+    },
+    "GachaMachine.Execute": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            800,
+            720,
+            400
+        ],
+        "expected": "扭蛋1次|扭蛋 1 次|扭蛋10次|扭蛋",
+        "action": "Click",
+        "post_delay": 4500,
+        "next": [
+            "GachaMachine.Back"
+        ]
+    },
+    "GachaMachine.Back": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            50,
+            1150,
+            100,
+            100
+        ],
+        "post_delay": 1500,
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【時光扭蛋機】完成扭蛋操作並返回家園首頁。",
+                "display": "log"
+            }
+        }
+    },
+    "Objectives.Bag.UseItems.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Bag.EnsureHome",
+            "Bag.Nav.FromOtherTab",
+            "Bag.Nav.Back"
+        ]
+    },
+    "Bag.EnsureHome": {
+        "recognition": "OCR",
+        "roi": [
+            290,
+            1200,
+            140,
+            70
+        ],
+        "expected": "家園",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "Bag.ResetToFarRight.Swipe1"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【導航】已確認在家園首頁，開始執行背包道具使用任務。",
+                "display": "log"
+            }
+        }
+    },
+    "Bag.Nav.FromOtherTab": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1200,
+            720,
+            70
+        ],
+        "expected": "角色",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            360,
+            1200,
+            40,
+            40
+        ],
+        "post_delay": 800,
+        "next": [
+            "Bag.EnsureHome"
+        ]
+    },
+    "Bag.Nav.Back": {
+        "max_hit": 12,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            50,
+            1150,
+            100,
+            100
+        ],
+        "post_delay": 700,
+        "next": [
+            "Bag.Nav.ExitDialog",
+            "Bag.EnsureHome",
+            "Bag.Nav.FromOtherTab",
+            "Bag.Nav.Back"
+        ]
+    },
+    "Bag.Nav.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            100,
+            690,
+            260,
+            100
+        ],
+        "post_delay": 800,
+        "next": [
+            "Bag.Nav.SelectHome"
+        ]
+    },
+    "Bag.Nav.SelectHome": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            360,
+            1200,
+            40,
+            40
+        ],
+        "post_delay": 1000,
+        "next": [
+            "Bag.EnsureHome"
+        ]
+    },
+    "Bag.ResetToFarRight.Swipe1": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 150,
+        "next": [
+            "Bag.ResetToFarRight.Swipe2"
+        ]
+    },
+    "Bag.ResetToFarRight.Swipe2": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 150,
+        "next": [
+            "Bag.ResetToFarRight.Swipe3"
+        ]
+    },
+    "Bag.ResetToFarRight.Swipe3": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 150,
+        "next": [
+            "Bag.ResetToFarRight.Swipe4"
+        ]
+    },
+    "Bag.ResetToFarRight.Swipe4": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 300,
+        "next": [
+            "Bag.VerifyLog"
+        ]
+    },
+    "Bag.VerifyLog": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Bag.ClickChest"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園歸零】已完成連滑歸位至最右側小屋畫面！目前定位在古遺物寶箱前。",
+                "display": "log"
+            }
+        }
+    },
+    "Bag.ClickChest": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            100,
+            700,
+            60,
+            60
+        ],
+        "post_delay": 1200,
+        "next": [
+            "Bag.Screen",
+            "Bag.Back"
+        ]
+    },
+    "Bag.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            0,
+            720,
+            350
+        ],
+        "expected": "古遺物|背包|道具|全部",
+        "action": "DoNothing",
+        "next": [
+            "Bag.ExecuteUse",
+            "Bag.Back"
+        ]
+    },
+    "Bag.ExecuteUse": {
+        "recognition": "OCR",
+        "roi": [
+            200,
+            900,
+            500,
+            300
+        ],
+        "expected": "一鍵使用|批量使用|使用|全部使用|培養",
+        "action": "Click",
+        "post_delay": 1000,
+        "next": [
+            "Bag.Back"
+        ]
+    },
+    "Bag.Back": {
+        "recognition": "DirectHit",
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 800,
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【背包道具】完成道具/古遺物操作並返回家園首頁。",
+                "display": "log"
+            }
+        }
+    },
+    "Objectives.AlchemyFurnace.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "AlchemyFurnace.EnsureHome",
+            "AlchemyFurnace.Nav.FromOtherTab",
+            "AlchemyFurnace.Nav.Back"
+        ]
+    },
+    "AlchemyFurnace.EnsureHome": {
+        "recognition": "OCR",
+        "roi": [
+            290,
+            1200,
+            140,
+            70
+        ],
+        "expected": "家園",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "AlchemyFurnace.ResetToFarRight.Swipe1"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【導航】已確認在家園首頁，開始執行煉金爐任務。",
+                "display": "log"
+            }
+        }
+    },
+    "AlchemyFurnace.Nav.FromOtherTab": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1200,
+            720,
+            70
+        ],
+        "expected": "角色",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            360,
+            1200,
+            40,
+            40
+        ],
+        "post_delay": 800,
+        "next": [
+            "AlchemyFurnace.EnsureHome"
+        ]
+    },
+    "AlchemyFurnace.Nav.Back": {
+        "max_hit": 12,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            50,
+            1150,
+            100,
+            100
+        ],
+        "post_delay": 700,
+        "next": [
+            "AlchemyFurnace.Nav.ExitDialog",
+            "AlchemyFurnace.EnsureHome",
+            "AlchemyFurnace.Nav.FromOtherTab",
+            "AlchemyFurnace.Nav.Back"
+        ]
+    },
+    "AlchemyFurnace.Nav.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            100,
+            690,
+            260,
+            100
+        ],
+        "post_delay": 800,
+        "next": [
+            "AlchemyFurnace.SelectHome"
+        ]
+    },
+    "AlchemyFurnace.SelectHome": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            360,
+            1200,
+            40,
+            40
+        ],
+        "post_delay": 1000,
+        "next": [
+            "AlchemyFurnace.EnsureHome"
+        ]
+    },
+    "AlchemyFurnace.ResetToFarRight.Swipe1": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 150,
+        "next": [
+            "AlchemyFurnace.ResetToFarRight.Swipe2"
+        ]
+    },
+    "AlchemyFurnace.ResetToFarRight.Swipe2": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 150,
+        "next": [
+            "AlchemyFurnace.ResetToFarRight.Swipe3"
+        ]
+    },
+    "AlchemyFurnace.ResetToFarRight.Swipe3": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 150,
+        "next": [
+            "AlchemyFurnace.ResetToFarRight.Swipe4"
+        ]
+    },
+    "AlchemyFurnace.ResetToFarRight.Swipe4": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            300,
+            10,
+            10
+        ],
+        "end": [
+            100,
+            300,
+            10,
+            10
+        ],
+        "duration": 200,
+        "post_delay": 300,
+        "next": [
+            "AlchemyFurnace.VerifyLog"
+        ]
+    },
+    "AlchemyFurnace.VerifyLog": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "AlchemyFurnace.ClickFurnace"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園歸零】已完成連滑歸位至最右側小屋畫面！目前定位在煉金爐前。",
+                "display": "log"
+            }
+        }
+    },
+    "AlchemyFurnace.ClickFurnace": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            580,
+            680,
+            60,
+            60
+        ],
+        "post_delay": 1200,
+        "next": [
+            "AlchemyFurnace.Screen",
+            "AlchemyFurnace.Back"
+        ]
+    },
+    "AlchemyFurnace.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            0,
+            720,
+            350
+        ],
+        "expected": "煉金|分解|合成|熔煉",
+        "action": "DoNothing",
+        "next": [
+            "AlchemyFurnace.Execute",
+            "AlchemyFurnace.Back"
+        ]
+    },
+    "AlchemyFurnace.Execute": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            800,
+            720,
+            400
+        ],
+        "expected": "一鍵分解|分解|一鍵合成|合成|確定",
+        "action": "Click",
+        "post_delay": 1000,
+        "next": [
+            "AlchemyFurnace.Back"
+        ]
+    },
+    "AlchemyFurnace.Back": {
+        "recognition": "DirectHit",
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 800,
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【煉金爐】完成裝備分解與合成操作並返回家園首頁。",
+                "display": "log"
+            }
+        }
     }
 }

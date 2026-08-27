@@ -91,5 +91,433 @@
         "template": "navigation/bottom-guild.png",
         "threshold": 0.75,
         "action": "DoNothing"
+    },
+    "Home.EnsureHomeScreen.CheckActive": {
+        "recognition": "OCR",
+        "roi": [
+            285,
+            1180,
+            180,
+            100
+        ],
+        "expected": "家園",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【導航】偵測到底部導航列「家園」文字，確認目前在家園首頁。",
+                "display": "log"
+            }
+        }
+    },
+    "Home.EnsureHomeScreen.AtRootClickHome": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1180,
+            720,
+            100
+        ],
+        "expected": "角色|筆記|公會|世界|探索",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            300,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 800,
+        "next": [
+            "Home.EnsureHomeScreen.CheckActive"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【導航】目前在主導航列其他分頁，點擊「家園」按鈕切換至家園…",
+                "display": "log"
+            }
+        }
+    },
+    "Home.EnsureHomeScreen.BackToHome": {
+        "max_hit": 12,
+        "recognition": "DirectHit",
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 700,
+        "next": [
+            "Home.EnsureHomeScreen.ExitDialog",
+            "Home.EnsureHomeScreen.CheckActive",
+            "Home.EnsureHomeScreen.AtRootClickHome",
+            "Home.EnsureHomeScreen.BackToHome"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【導航】目前不在家園首頁，執行返回鍵嘗試回到首頁…",
+                "display": "log"
+            }
+        }
+    },
+    "Home.EnsureHomeScreen.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            100,
+            690,
+            260,
+            100
+        ],
+        "post_delay": 800,
+        "next": [
+            "Home.EnsureHomeScreen.SelectHome"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【導航】偵測到「要離開遊戲嗎」彈窗，點擊取消並返回家園。",
+                "display": "log"
+            }
+        }
+    },
+    "Home.EnsureHomeScreen.SelectHome": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            300,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 1000,
+        "next": [
+            "Home.EnsureHomeScreen.CheckActive"
+        ]
+    },
+    "Note.EnsureNoteScreen.CheckActive": {
+        "recognition": "OCR",
+        "roi": [
+            140,
+            1180,
+            150,
+            100
+        ],
+        "expected": "筆記",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【導航】偵測到底部導航列「筆記」文字，確認目前在筆記主頁。",
+                "display": "log"
+            }
+        }
+    },
+    "Note.EnsureNoteScreen.AtRootClickNote": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1180,
+            720,
+            100
+        ],
+        "expected": "角色|家園|公會|世界|探索",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            165,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 800,
+        "next": [
+            "Note.EnsureNoteScreen.CheckActive"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【導航】目前在主導航列其他分頁，點擊「筆記」按鈕切換至筆記…",
+                "display": "log"
+            }
+        }
+    },
+    "Note.EnsureNoteScreen.BackToNote": {
+        "max_hit": 12,
+        "recognition": "DirectHit",
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 700,
+        "next": [
+            "Note.EnsureNoteScreen.ExitDialog",
+            "Note.EnsureNoteScreen.CheckActive",
+            "Note.EnsureNoteScreen.AtRootClickNote",
+            "Note.EnsureNoteScreen.BackToNote"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【導航】目前不在筆記主頁，執行返回鍵嘗試回到筆記…",
+                "display": "log"
+            }
+        }
+    },
+    "Note.EnsureNoteScreen.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            100,
+            690,
+            260,
+            100
+        ],
+        "post_delay": 800,
+        "next": [
+            "Note.EnsureNoteScreen.SelectNote"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【導航】偵測到「要離開遊戲嗎」彈窗，點擊取消並切換至筆記。",
+                "display": "log"
+            }
+        }
+    },
+    "Note.EnsureNoteScreen.SelectNote": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            165,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 1000,
+        "next": [
+            "Note.EnsureNoteScreen.CheckActive"
+        ]
+    },
+    "Guild.EnsureGuildScreen.CheckActive": {
+        "recognition": "OCR",
+        "roi": [
+            430,
+            1180,
+            150,
+            100
+        ],
+        "expected": "公會",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【導航】偵測到底部導航列「公會」文字，確認目前在公會主頁。",
+                "display": "log"
+            }
+        }
+    },
+    "Guild.EnsureGuildScreen.AtRootClickGuild": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1180,
+            720,
+            100
+        ],
+        "expected": "角色|筆記|家園|世界|探索",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            450,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 800,
+        "next": [
+            "Guild.EnsureGuildScreen.CheckActive"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【導航】目前在主導航列其他分頁，點擊「公會」按鈕切換至公會…",
+                "display": "log"
+            }
+        }
+    },
+    "Guild.EnsureGuildScreen.BackToGuild": {
+        "max_hit": 12,
+        "recognition": "DirectHit",
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 700,
+        "next": [
+            "Guild.EnsureGuildScreen.ExitDialog",
+            "Guild.EnsureGuildScreen.CheckActive",
+            "Guild.EnsureGuildScreen.AtRootClickGuild",
+            "Guild.EnsureGuildScreen.BackToGuild"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【導航】目前不在公會主頁，執行返回鍵嘗試回到公會…",
+                "display": "log"
+            }
+        }
+    },
+    "Guild.EnsureGuildScreen.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            100,
+            690,
+            260,
+            100
+        ],
+        "post_delay": 800,
+        "next": [
+            "Guild.EnsureGuildScreen.SelectGuild"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【導航】偵測到「要離開遊戲嗎」彈窗，點擊取消並切換至公會。",
+                "display": "log"
+            }
+        }
+    },
+    "Guild.EnsureGuildScreen.SelectGuild": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            450,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 1000,
+        "next": [
+            "Guild.EnsureGuildScreen.CheckActive"
+        ]
+    },
+    "World.EnsureWorldScreen.CheckActive": {
+        "recognition": "OCR",
+        "roi": [
+            570,
+            1180,
+            150,
+            100
+        ],
+        "expected": "世界|探索",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【導航】偵測到底部導航列「世界/探索」文字，確認目前在世界/探索主頁。",
+                "display": "log"
+            }
+        }
+    },
+    "World.EnsureWorldScreen.AtRootClickWorld": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1180,
+            720,
+            100
+        ],
+        "expected": "角色|筆記|家園|公會",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            640,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 800,
+        "next": [
+            "World.EnsureWorldScreen.CheckActive"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【導航】目前在主導航列其他分頁，點擊「世界/探索」按鈕切換至世界/探索…",
+                "display": "log"
+            }
+        }
+    },
+    "World.EnsureWorldScreen.BackToWorld": {
+        "max_hit": 12,
+        "recognition": "DirectHit",
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 700,
+        "next": [
+            "World.EnsureWorldScreen.ExitDialog",
+            "World.EnsureWorldScreen.CheckActive",
+            "World.EnsureWorldScreen.AtRootClickWorld",
+            "World.EnsureWorldScreen.BackToWorld"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【導航】目前不在世界/探索主頁，執行返回鍵嘗試回到世界/探索…",
+                "display": "log"
+            }
+        }
+    },
+    "World.EnsureWorldScreen.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            100,
+            690,
+            260,
+            100
+        ],
+        "post_delay": 800,
+        "next": [
+            "World.EnsureWorldScreen.SelectWorld"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【導航】偵測到「要離開遊戲嗎」彈窗，點擊取消並切換至世界/探索。",
+                "display": "log"
+            }
+        }
+    },
+    "World.EnsureWorldScreen.SelectWorld": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            640,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 1000,
+        "next": [
+            "World.EnsureWorldScreen.CheckActive"
+        ]
     }
 }

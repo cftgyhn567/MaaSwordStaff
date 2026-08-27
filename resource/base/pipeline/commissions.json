@@ -1,26 +1,26 @@
 {
     "Objectives.Commissions.Start": {
         "recognition": "DirectHit",
-        "action": "StartApp",
-        "package": "com.m88.idleXX",
+        "action": "DoNothing",
         "anchor": "Navigation.Root.RetryTask",
         "post_delay": 1000,
         "timeout": 5000,
         "next": [
-            "Commissions.Screen",
-            "Commissions.DailyTasks.Screen",
-            "Commissions.FunctionList.Screen",
-            "Commissions.Home"
+            "Commissions.EnsureHome",
+            "Commissions.Nav.FromOtherTab",
+            "Commissions.Nav.Back"
         ],
-        "on_error": ["Navigation.Root.Recovery.Start"]
+        "on_error": [
+            "Navigation.Root.Recovery.Start"
+        ]
     },
-    "Commissions.Home": {
+    "Commissions.EnsureHome": {
         "recognition": "OCR",
         "roi": [
-            285,
-            1180,
-            180,
-            100
+            290,
+            1200,
+            140,
+            70
         ],
         "expected": "家園",
         "threshold": 0.2,
@@ -30,7 +30,15 @@
             1005
         ],
         "post_delay": 600,
-        "next": ["Commissions.FunctionList.Screen"]
+        "next": [
+            "Commissions.FunctionList.Screen"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【導航】已確認在家園首頁，點擊右下角功能列表展開選單…",
+                "display": "log"
+            }
+        }
     },
     "Commissions.FunctionList.Screen": {
         "recognition": "OCR",
@@ -48,7 +56,9 @@
             700
         ],
         "post_delay": 600,
-        "next": ["Commissions.DailyTasks.Screen"]
+        "next": [
+            "Commissions.DailyTasks.Screen"
+        ]
     },
     "Commissions.DailyTasks.Screen": {
         "recognition": "OCR",
@@ -66,7 +76,9 @@
             1215
         ],
         "post_delay": 500,
-        "next": ["Commissions.Screen"]
+        "next": [
+            "Commissions.Screen"
+        ]
     },
     "Commissions.Screen": {
         "recognition": "OCR",
@@ -79,7 +91,9 @@
         "expected": "委託任務",
         "threshold": 0.2,
         "action": "DoNothing",
-        "next": ["Commissions.Count.Route"]
+        "next": [
+            "Commissions.Count.Route"
+        ]
     },
     "Commissions.Count.Route": {
         "recognition": "DirectHit",
@@ -104,7 +118,9 @@
         "expected": "今日可提交次數.*0/4",
         "threshold": 0.2,
         "action": "DoNothing",
-        "next": ["Commissions.Extra.Route"],
+        "next": [
+            "Commissions.Extra.Route"
+        ],
         "focus": {
             "Node.Recognition.Succeeded": {
                 "content": "委託次數辨識：今日可提交 0/4，免費剩餘 0 次。",
@@ -123,7 +139,9 @@
         "expected": "今日可提交次數.*1/4",
         "threshold": 0.2,
         "action": "DoNothing",
-        "next": ["Commissions.Scan"],
+        "next": [
+            "Commissions.Scan"
+        ],
         "focus": {
             "Node.Recognition.Succeeded": {
                 "content": "委託次數辨識：今日可提交 1/4，免費剩餘 1 次。",
@@ -142,7 +160,9 @@
         "expected": "今日可提交次數.*2/4",
         "threshold": 0.2,
         "action": "DoNothing",
-        "next": ["Commissions.Scan"],
+        "next": [
+            "Commissions.Scan"
+        ],
         "focus": {
             "Node.Recognition.Succeeded": {
                 "content": "委託次數辨識：今日可提交 2/4，免費剩餘 2 次。",
@@ -161,7 +181,9 @@
         "expected": "今日可提交次數.*3/4",
         "threshold": 0.2,
         "action": "DoNothing",
-        "next": ["Commissions.Scan"],
+        "next": [
+            "Commissions.Scan"
+        ],
         "focus": {
             "Node.Recognition.Succeeded": {
                 "content": "委託次數辨識：今日可提交 3/4，免費剩餘 3 次。",
@@ -180,7 +202,9 @@
         "expected": "今日可提交次數.*4/4",
         "threshold": 0.2,
         "action": "DoNothing",
-        "next": ["Commissions.Scan"],
+        "next": [
+            "Commissions.Scan"
+        ],
         "focus": {
             "Node.Recognition.Succeeded": {
                 "content": "委託次數辨識：今日可提交 4/4，免費剩餘 4 次。",
@@ -191,12 +215,16 @@
     "Commissions.Extra.Route": {
         "recognition": "DirectHit",
         "action": "DoNothing",
-        "next": ["Commissions.Done"]
+        "next": [
+            "Commissions.Done"
+        ]
     },
     "Commissions.Extra.NeedsSample": {
         "recognition": "DirectHit",
         "action": "DoNothing",
-        "next": ["Commissions.Done"],
+        "next": [
+            "Commissions.Done"
+        ],
         "focus": {
             "Node.Action.Starting": {
                 "content": "已允許使用委託額外次數，但尚缺 0/4 後的額外次數確認畫面；為避免誤扣資源，本次先停在免費上限。",
@@ -246,7 +274,9 @@
         "threshold": 0.2,
         "action": "ClickKey",
         "key": 4,
-        "next": ["Commissions.Count.Route"]
+        "next": [
+            "Commissions.Count.Route"
+        ]
     },
     "Commissions.Scroll": {
         "max_hit": 5,
@@ -265,10 +295,88 @@
             1
         ],
         "duration": 500,
-        "next": ["Commissions.Scan"]
+        "next": [
+            "Commissions.Scan"
+        ]
     },
     "Commissions.Done": {
         "recognition": "DirectHit",
         "action": "DoNothing"
+    },
+    "Commissions.Nav.FromOtherTab": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1200,
+            720,
+            70
+        ],
+        "expected": "角色",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            360,
+            1200,
+            40,
+            40
+        ],
+        "post_delay": 800,
+        "next": [
+            "Commissions.EnsureHome"
+        ]
+    },
+    "Commissions.Nav.Back": {
+        "max_hit": 12,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            50,
+            1150,
+            100,
+            100
+        ],
+        "post_delay": 700,
+        "next": [
+            "Commissions.Nav.ExitDialog",
+            "Commissions.EnsureHome",
+            "Commissions.Nav.FromOtherTab",
+            "Commissions.Nav.Back"
+        ]
+    },
+    "Commissions.Nav.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            100,
+            690,
+            260,
+            100
+        ],
+        "post_delay": 800,
+        "next": [
+            "Commissions.Nav.SelectHome"
+        ]
+    },
+    "Commissions.Nav.SelectHome": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            360,
+            1200,
+            40,
+            40
+        ],
+        "post_delay": 1000,
+        "next": [
+            "Commissions.EnsureHome"
+        ]
     }
 }

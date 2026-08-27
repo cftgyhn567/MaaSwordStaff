@@ -1,31 +1,817 @@
 {
-    "Objectives.Daily.Dungeon1.Start": {"recognition": "DirectHit", "action": "DoNothing"},
-    "Objectives.Daily.Arena1.Start": {"recognition": "DirectHit", "action": "DoNothing"},
-    "Objectives.Daily.BeastTrialReward1.Start": {"recognition": "DirectHit", "action": "DoNothing"},
-    "Objectives.Daily.PhantomRealmWave3.Start": {"recognition": "DirectHit", "action": "DoNothing"},
-    "Objectives.Pilgrimage.Daily.GoddessPrayer2.Start": {"recognition": "DirectHit", "action": "DoNothing"},
-    "Objectives.Pilgrimage.Daily.CompleteFourDailyTasks.Start": {"recognition": "DirectHit", "action": "DoNothing"},
-    "Objectives.Pilgrimage.Daily.CompleteTwoCommissions.Start": {"recognition": "DirectHit", "action": "DoNothing"},
-    "Objectives.Pilgrimage.Daily.ExploreFate3.Start": {"recognition": "DirectHit", "action": "DoNothing"},
-    "Objectives.ConsumeStamina.Start": {"recognition": "DirectHit", "action": "DoNothing"},
-    "Objectives.Pilgrimage.Weekly.GuildRaid7.Start": {"recognition": "DirectHit", "action": "DoNothing"},
-    "Objectives.Pilgrimage.Weekly.ExploreFate30.Start": {"recognition": "DirectHit", "action": "DoNothing"},
-    "Objectives.Pilgrimage.Weekly.MaterialRealm50.Start": {"recognition": "DirectHit", "action": "DoNothing"},
-    "Objectives.Pilgrimage.Weekly.DailyDungeonReward8.Start": {"recognition": "DirectHit", "action": "DoNothing"},
-    "Objectives.Pilgrimage.Period.DailyDungeonReward30.Start": {"recognition": "DirectHit", "action": "DoNothing"},
-    "Objectives.Pilgrimage.Period.GoddessPrayer40.Start": {"recognition": "DirectHit", "action": "DoNothing"},
-    "Objectives.Pilgrimage.Period.GoddessPrayer240.Start": {"recognition": "DirectHit", "action": "DoNothing"},
-    "Objectives.Pilgrimage.Period.Gacha50.Start": {"recognition": "DirectHit", "action": "DoNothing"},
-    "Objectives.LuckyScratch.Arena3.Start": {"recognition": "DirectHit", "action": "DoNothing"},
-    "Objectives.LuckyScratch.Gacha2.Start": {"recognition": "DirectHit", "action": "DoNothing"},
-    "Objectives.LuckyScratch.SpendStamina60.Start": {"recognition": "DirectHit", "action": "DoNothing"},
-    "Objectives.LuckyScratch.DailyDungeon5.Start": {"recognition": "DirectHit", "action": "DoNothing"},
-    "Objectives.TreasureBattle.DailyDungeon2.Start": {"recognition": "DirectHit", "action": "DoNothing"},
-    "Objectives.TreasureBattle.BeastTrialStage3.Start": {"recognition": "DirectHit", "action": "DoNothing"},
-    "Objectives.BondAdventureScenicDispatch.Start": {"recognition": "DirectHit", "action": "DoNothing"},
-    "Objectives.GoddessStatue.Prayer.Start": {"recognition": "DirectHit", "action": "DoNothing"},
-    "Objectives.GachaMachine.Start": {"recognition": "DirectHit", "action": "DoNothing"},
-    "Objectives.SakuraTree.BeastBonding.Start": {"recognition": "DirectHit", "action": "DoNothing"},
-    "Objectives.AlchemyFurnace.Start": {"recognition": "DirectHit", "action": "DoNothing"},
-    "Objectives.Bag.UseItems.Start": {"recognition": "DirectHit", "action": "DoNothing"}
+    "Objectives.Daily.Dungeon1.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Objectives.Daily.Dungeon1.EnsureNote",
+            "Objectives.Daily.Dungeon1.Nav.FromOtherTab",
+            "Objectives.Daily.Dungeon1.Nav.Back"
+        ]
+    },
+    "Objectives.Daily.Dungeon1.EnsureNote": {
+        "recognition": "OCR",
+        "roi": [
+            180,
+            1200,
+            140,
+            70
+        ],
+        "expected": "筆記",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "Note.DailyDungeon",
+            "Note.Screen"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【導航】已確認在筆記主頁，開始執行日常副本任務。",
+                "display": "log"
+            }
+        }
+    },
+    "Objectives.Daily.Arena1.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Objectives.Daily.Arena1.EnsureNote",
+            "Objectives.Daily.Arena1.Nav.FromOtherTab",
+            "Objectives.Daily.Arena1.Nav.Back"
+        ]
+    },
+    "Objectives.Daily.Arena1.EnsureNote": {
+        "recognition": "OCR",
+        "roi": [
+            180,
+            1200,
+            140,
+            70
+        ],
+        "expected": "筆記",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "Note.Arena",
+            "Note.Screen"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【導航】已確認在筆記主頁，開始執行競技場挑戰任務。",
+                "display": "log"
+            }
+        }
+    },
+    "Objectives.Daily.BeastTrialReward1.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Objectives.Daily.BeastTrialReward1.EnsureNote",
+            "Objectives.Daily.BeastTrialReward1.Nav.FromOtherTab",
+            "Objectives.Daily.BeastTrialReward1.Nav.Back"
+        ]
+    },
+    "Objectives.Daily.BeastTrialReward1.EnsureNote": {
+        "recognition": "OCR",
+        "roi": [
+            180,
+            1200,
+            140,
+            70
+        ],
+        "expected": "筆記",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "Note.DailyActivities",
+            "Note.Screen"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【導航】已確認在筆記主頁，開始執行聖獸試煉任務。",
+                "display": "log"
+            }
+        }
+    },
+    "Objectives.Daily.PhantomRealmWave3.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Objectives.Daily.PhantomRealmWave3.EnsureNote",
+            "Objectives.Daily.PhantomRealmWave3.Nav.FromOtherTab",
+            "Objectives.Daily.PhantomRealmWave3.Nav.Back"
+        ]
+    },
+    "Objectives.Daily.PhantomRealmWave3.EnsureNote": {
+        "recognition": "OCR",
+        "roi": [
+            180,
+            1200,
+            140,
+            70
+        ],
+        "expected": "筆記",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "Note.DailyActivities",
+            "Note.Screen"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【導航】已確認在筆記主頁，開始執行雙影幻境任務。",
+                "display": "log"
+            }
+        }
+    },
+    "Objectives.BondAdventureScenicDispatch.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Objectives.BondAdventureScenicDispatch.EnsureNote",
+            "Objectives.BondAdventureScenicDispatch.Nav.FromOtherTab",
+            "Objectives.BondAdventureScenicDispatch.Nav.Back"
+        ]
+    },
+    "Objectives.BondAdventureScenicDispatch.EnsureNote": {
+        "recognition": "OCR",
+        "roi": [
+            180,
+            1200,
+            140,
+            70
+        ],
+        "expected": "筆記",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "next": [
+            "Note.BondAdventure",
+            "Note.Screen"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【導航】已確認在筆記主頁，開始執行羈絆冒險/奇景委派任務。",
+                "display": "log"
+            }
+        }
+    },
+    "Objectives.Pilgrimage.Daily.ExploreFate3.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Objectives.Pilgrimage.Daily.ExploreFate3.EnsureWorld",
+            "Objectives.Pilgrimage.Daily.ExploreFate3.Nav.FromOtherTab",
+            "Objectives.Pilgrimage.Daily.ExploreFate3.Nav.Back"
+        ]
+    },
+    "Objectives.Pilgrimage.Daily.ExploreFate3.EnsureWorld": {
+        "recognition": "OCR",
+        "roi": [
+            570,
+            1200,
+            140,
+            70
+        ],
+        "expected": "世界",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【導航】已確認在世界主頁，開始執行探尋/探索命運任務。",
+                "display": "log"
+            }
+        }
+    },
+    "Objectives.Pilgrimage.Weekly.GuildRaid7.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Objectives.Pilgrimage.Weekly.GuildRaid7.EnsureGuild",
+            "Objectives.Pilgrimage.Weekly.GuildRaid7.Nav.FromOtherTab",
+            "Objectives.Pilgrimage.Weekly.GuildRaid7.Nav.Back"
+        ]
+    },
+    "Objectives.Pilgrimage.Weekly.GuildRaid7.EnsureGuild": {
+        "recognition": "OCR",
+        "roi": [
+            430,
+            1200,
+            140,
+            70
+        ],
+        "expected": "公會",
+        "threshold": 0.2,
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【導航】已確認在公會主頁，開始執行公會討伐任務。",
+                "display": "log"
+            }
+        }
+    },
+    "Objectives.ConsumeStamina.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【導航】消耗體力任務已啟動，由其他流程自然消耗。",
+                "display": "log"
+            }
+        }
+    },
+    "Objectives.Pilgrimage.Daily.GoddessPrayer2.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing"
+    },
+    "Objectives.Pilgrimage.Daily.CompleteFourDailyTasks.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing"
+    },
+    "Objectives.Pilgrimage.Daily.CompleteTwoCommissions.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing"
+    },
+    "Objectives.Pilgrimage.Weekly.ExploreFate30.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing"
+    },
+    "Objectives.Pilgrimage.Weekly.MaterialRealm50.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing"
+    },
+    "Objectives.Pilgrimage.Weekly.DailyDungeonReward8.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing"
+    },
+    "Objectives.Pilgrimage.Period.DailyDungeonReward30.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing"
+    },
+    "Objectives.Pilgrimage.Period.GoddessPrayer40.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing"
+    },
+    "Objectives.Pilgrimage.Period.GoddessPrayer240.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing"
+    },
+    "Objectives.Pilgrimage.Period.Gacha50.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing"
+    },
+    "Objectives.LuckyScratch.Arena3.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing"
+    },
+    "Objectives.LuckyScratch.Gacha2.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing"
+    },
+    "Objectives.LuckyScratch.SpendStamina60.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing"
+    },
+    "Objectives.LuckyScratch.DailyDungeon5.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing"
+    },
+    "Objectives.TreasureBattle.DailyDungeon2.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing"
+    },
+    "Objectives.TreasureBattle.BeastTrialStage3.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing"
+    },
+    "Objectives.Daily.Dungeon1.Nav.FromOtherTab": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1200,
+            720,
+            70
+        ],
+        "expected": "角色",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            250,
+            1220,
+            40,
+            40
+        ],
+        "post_delay": 800,
+        "next": [
+            "Objectives.Daily.Dungeon1.EnsureNote"
+        ]
+    },
+    "Objectives.Daily.Dungeon1.Nav.Back": {
+        "max_hit": 12,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            50,
+            1150,
+            100,
+            100
+        ],
+        "post_delay": 700,
+        "next": [
+            "Objectives.Daily.Dungeon1.Nav.ExitDialog",
+            "Objectives.Daily.Dungeon1.EnsureNote",
+            "Objectives.Daily.Dungeon1.Nav.FromOtherTab",
+            "Objectives.Daily.Dungeon1.Nav.Back"
+        ]
+    },
+    "Objectives.Daily.Dungeon1.Nav.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            100,
+            690,
+            260,
+            100
+        ],
+        "post_delay": 800,
+        "next": [
+            "Objectives.Daily.Dungeon1.Nav.SelectNote"
+        ]
+    },
+    "Objectives.Daily.Dungeon1.Nav.SelectNote": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            250,
+            1220,
+            40,
+            40
+        ],
+        "post_delay": 1000,
+        "next": [
+            "Objectives.Daily.Dungeon1.EnsureNote"
+        ]
+    },
+    "Objectives.Daily.Arena1.Nav.FromOtherTab": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1200,
+            720,
+            70
+        ],
+        "expected": "角色",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            250,
+            1220,
+            40,
+            40
+        ],
+        "post_delay": 800,
+        "next": [
+            "Objectives.Daily.Arena1.EnsureNote"
+        ]
+    },
+    "Objectives.Daily.Arena1.Nav.Back": {
+        "max_hit": 12,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            50,
+            1150,
+            100,
+            100
+        ],
+        "post_delay": 700,
+        "next": [
+            "Objectives.Daily.Arena1.Nav.ExitDialog",
+            "Objectives.Daily.Arena1.EnsureNote",
+            "Objectives.Daily.Arena1.Nav.FromOtherTab",
+            "Objectives.Daily.Arena1.Nav.Back"
+        ]
+    },
+    "Objectives.Daily.Arena1.Nav.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            100,
+            690,
+            260,
+            100
+        ],
+        "post_delay": 800,
+        "next": [
+            "Objectives.Daily.Arena1.Nav.SelectNote"
+        ]
+    },
+    "Objectives.Daily.Arena1.Nav.SelectNote": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            250,
+            1220,
+            40,
+            40
+        ],
+        "post_delay": 1000,
+        "next": [
+            "Objectives.Daily.Arena1.EnsureNote"
+        ]
+    },
+    "Objectives.Daily.BeastTrialReward1.Nav.FromOtherTab": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1200,
+            720,
+            70
+        ],
+        "expected": "角色",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            250,
+            1220,
+            40,
+            40
+        ],
+        "post_delay": 800,
+        "next": [
+            "Objectives.Daily.BeastTrialReward1.EnsureNote"
+        ]
+    },
+    "Objectives.Daily.BeastTrialReward1.Nav.Back": {
+        "max_hit": 12,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            50,
+            1150,
+            100,
+            100
+        ],
+        "post_delay": 700,
+        "next": [
+            "Objectives.Daily.BeastTrialReward1.Nav.ExitDialog",
+            "Objectives.Daily.BeastTrialReward1.EnsureNote",
+            "Objectives.Daily.BeastTrialReward1.Nav.FromOtherTab",
+            "Objectives.Daily.BeastTrialReward1.Nav.Back"
+        ]
+    },
+    "Objectives.Daily.BeastTrialReward1.Nav.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            100,
+            690,
+            260,
+            100
+        ],
+        "post_delay": 800,
+        "next": [
+            "Objectives.Daily.BeastTrialReward1.Nav.SelectNote"
+        ]
+    },
+    "Objectives.Daily.BeastTrialReward1.Nav.SelectNote": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            250,
+            1220,
+            40,
+            40
+        ],
+        "post_delay": 1000,
+        "next": [
+            "Objectives.Daily.BeastTrialReward1.EnsureNote"
+        ]
+    },
+    "Objectives.Daily.PhantomRealmWave3.Nav.FromOtherTab": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1200,
+            720,
+            70
+        ],
+        "expected": "角色",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            250,
+            1220,
+            40,
+            40
+        ],
+        "post_delay": 800,
+        "next": [
+            "Objectives.Daily.PhantomRealmWave3.EnsureNote"
+        ]
+    },
+    "Objectives.Daily.PhantomRealmWave3.Nav.Back": {
+        "max_hit": 12,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            50,
+            1150,
+            100,
+            100
+        ],
+        "post_delay": 700,
+        "next": [
+            "Objectives.Daily.PhantomRealmWave3.Nav.ExitDialog",
+            "Objectives.Daily.PhantomRealmWave3.EnsureNote",
+            "Objectives.Daily.PhantomRealmWave3.Nav.FromOtherTab",
+            "Objectives.Daily.PhantomRealmWave3.Nav.Back"
+        ]
+    },
+    "Objectives.Daily.PhantomRealmWave3.Nav.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            100,
+            690,
+            260,
+            100
+        ],
+        "post_delay": 800,
+        "next": [
+            "Objectives.Daily.PhantomRealmWave3.Nav.SelectNote"
+        ]
+    },
+    "Objectives.Daily.PhantomRealmWave3.Nav.SelectNote": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            250,
+            1220,
+            40,
+            40
+        ],
+        "post_delay": 1000,
+        "next": [
+            "Objectives.Daily.PhantomRealmWave3.EnsureNote"
+        ]
+    },
+    "Objectives.BondAdventureScenicDispatch.Nav.FromOtherTab": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1200,
+            720,
+            70
+        ],
+        "expected": "角色",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            250,
+            1220,
+            40,
+            40
+        ],
+        "post_delay": 800,
+        "next": [
+            "Objectives.BondAdventureScenicDispatch.EnsureNote"
+        ]
+    },
+    "Objectives.BondAdventureScenicDispatch.Nav.Back": {
+        "max_hit": 12,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            50,
+            1150,
+            100,
+            100
+        ],
+        "post_delay": 700,
+        "next": [
+            "Objectives.BondAdventureScenicDispatch.Nav.ExitDialog",
+            "Objectives.BondAdventureScenicDispatch.EnsureNote",
+            "Objectives.BondAdventureScenicDispatch.Nav.FromOtherTab",
+            "Objectives.BondAdventureScenicDispatch.Nav.Back"
+        ]
+    },
+    "Objectives.BondAdventureScenicDispatch.Nav.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            100,
+            690,
+            260,
+            100
+        ],
+        "post_delay": 800,
+        "next": [
+            "Objectives.BondAdventureScenicDispatch.Nav.SelectNote"
+        ]
+    },
+    "Objectives.BondAdventureScenicDispatch.Nav.SelectNote": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            250,
+            1220,
+            40,
+            40
+        ],
+        "post_delay": 1000,
+        "next": [
+            "Objectives.BondAdventureScenicDispatch.EnsureNote"
+        ]
+    },
+    "Objectives.Pilgrimage.Daily.ExploreFate3.Nav.FromOtherTab": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1200,
+            720,
+            70
+        ],
+        "expected": "角色",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            640,
+            1220,
+            40,
+            40
+        ],
+        "post_delay": 800,
+        "next": [
+            "Objectives.Pilgrimage.Daily.ExploreFate3.EnsureWorld"
+        ]
+    },
+    "Objectives.Pilgrimage.Daily.ExploreFate3.Nav.Back": {
+        "max_hit": 12,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            50,
+            1150,
+            100,
+            100
+        ],
+        "post_delay": 700,
+        "next": [
+            "Objectives.Pilgrimage.Daily.ExploreFate3.Nav.ExitDialog",
+            "Objectives.Pilgrimage.Daily.ExploreFate3.EnsureWorld",
+            "Objectives.Pilgrimage.Daily.ExploreFate3.Nav.FromOtherTab",
+            "Objectives.Pilgrimage.Daily.ExploreFate3.Nav.Back"
+        ]
+    },
+    "Objectives.Pilgrimage.Daily.ExploreFate3.Nav.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            100,
+            690,
+            260,
+            100
+        ],
+        "post_delay": 800,
+        "next": [
+            "Objectives.Pilgrimage.Daily.ExploreFate3.Nav.SelectWorld"
+        ]
+    },
+    "Objectives.Pilgrimage.Daily.ExploreFate3.Nav.SelectWorld": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            640,
+            1220,
+            40,
+            40
+        ],
+        "post_delay": 1000,
+        "next": [
+            "Objectives.Pilgrimage.Daily.ExploreFate3.EnsureWorld"
+        ]
+    },
+    "Objectives.Pilgrimage.Weekly.GuildRaid7.Nav.FromOtherTab": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1200,
+            720,
+            70
+        ],
+        "expected": "角色",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            500,
+            1220,
+            40,
+            40
+        ],
+        "post_delay": 800,
+        "next": [
+            "Objectives.Pilgrimage.Weekly.GuildRaid7.EnsureGuild"
+        ]
+    },
+    "Objectives.Pilgrimage.Weekly.GuildRaid7.Nav.Back": {
+        "max_hit": 12,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            50,
+            1150,
+            100,
+            100
+        ],
+        "post_delay": 700,
+        "next": [
+            "Objectives.Pilgrimage.Weekly.GuildRaid7.Nav.ExitDialog",
+            "Objectives.Pilgrimage.Weekly.GuildRaid7.EnsureGuild",
+            "Objectives.Pilgrimage.Weekly.GuildRaid7.Nav.FromOtherTab",
+            "Objectives.Pilgrimage.Weekly.GuildRaid7.Nav.Back"
+        ]
+    },
+    "Objectives.Pilgrimage.Weekly.GuildRaid7.Nav.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            100,
+            690,
+            260,
+            100
+        ],
+        "post_delay": 800,
+        "next": [
+            "Objectives.Pilgrimage.Weekly.GuildRaid7.Nav.SelectGuild"
+        ]
+    },
+    "Objectives.Pilgrimage.Weekly.GuildRaid7.Nav.SelectGuild": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            500,
+            1220,
+            40,
+            40
+        ],
+        "post_delay": 1000,
+        "next": [
+            "Objectives.Pilgrimage.Weekly.GuildRaid7.EnsureGuild"
+        ]
+    }
 }
