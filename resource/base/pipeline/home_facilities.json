@@ -1,0 +1,3713 @@
+{
+    "Objectives.AlchemyFurnace.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Alchemy.EnsureHome",
+            "Alchemy.Nav.FromOtherTab",
+            "Alchemy.Nav.Recover"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【煉金爐】開始執行：分解裝備並一鍵合成寶石。",
+                "display": "log"
+            }
+        }
+    },
+    "Alchemy.EnsureHome": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            280,
+            1160,
+            180,
+            120
+        ],
+        "template": "navigation/bottom-home.png",
+        "threshold": 0.75,
+        "action": "DoNothing",
+        "next": [
+            "Alchemy.ResetRight.Swipe1"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【煉金爐】已辨識到家園頁籤圖示，確認目前在家園首頁。",
+                "display": "log"
+            }
+        }
+    },
+    "Alchemy.Nav.FromOtherTab": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1180,
+            720,
+            100
+        ],
+        "expected": "角色|筆記|公會|世界|探索",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            300,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 1200,
+        "next": [
+            "Alchemy.EnsureHome"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【煉金爐】目前在其他主頁籤，點擊「家園」切換。",
+                "display": "log"
+            }
+        }
+    },
+    "Alchemy.Nav.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            100,
+            690,
+            260,
+            100
+        ],
+        "post_delay": 1000,
+        "next": [
+            "Alchemy.Nav.SelectHome"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【煉金爐】偵測到離開遊戲彈窗，點擊取消。",
+                "display": "log"
+            }
+        }
+    },
+    "Alchemy.Nav.SelectHome": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            300,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 1200,
+        "next": [
+            "Alchemy.EnsureHome"
+        ]
+    },
+    "Alchemy.Nav.Recover": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Alchemy.Nav.ExitDialog",
+            "Alchemy.EnsureHome",
+            "Alchemy.Nav.FromOtherTab",
+            "Alchemy.Nav.Back",
+            "Alchemy.Nav.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【煉金爐】目前在子畫面，改點左下角返回按鈕回到家園首頁…",
+                "display": "log"
+            }
+        }
+    },
+    "Alchemy.Nav.Back": {
+        "max_hit": 12,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            45,
+            1195,
+            60,
+            45
+        ],
+        "post_delay": 1400,
+        "next": [
+            "Alchemy.Nav.ExitDialog",
+            "Alchemy.EnsureHome",
+            "Alchemy.Nav.FromOtherTab",
+            "Alchemy.Nav.Back",
+            "Alchemy.Nav.Failed"
+        ]
+    },
+    "Alchemy.Nav.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【煉金爐】連續點擊返回按鈕仍無法回到家園首頁，已安全停止，未執行任何操作。",
+                "display": "log"
+            }
+        }
+    },
+    "Alchemy.ResetRight.Swipe1": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "Alchemy.ResetRight.Swipe2"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【煉金爐】將家園畫面拉到最右側小屋…",
+                "display": "log"
+            }
+        }
+    },
+    "Alchemy.ResetRight.Swipe2": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "Alchemy.ResetRight.Swipe3"
+        ]
+    },
+    "Alchemy.ResetRight.Swipe3": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "Alchemy.ResetRight.Swipe4"
+        ]
+    },
+    "Alchemy.ResetRight.Swipe4": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "Alchemy.ResetRight.Swipe5"
+        ]
+    },
+    "Alchemy.ResetRight.Swipe5": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "Alchemy.ResetRight.Swipe6"
+        ]
+    },
+    "Alchemy.ResetRight.Swipe6": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "Alchemy.Enter"
+        ]
+    },
+    "Alchemy.Enter": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            540,
+            830,
+            55,
+            50
+        ],
+        "post_delay": 2600,
+        "next": [
+            "Alchemy.Screen",
+            "Alchemy.Enter.Retry"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【煉金爐】點擊設施入口，等待「煉金爐」畫面…",
+                "display": "log"
+            }
+        }
+    },
+    "Alchemy.Enter.Retry": {
+        "max_hit": 3,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            540,
+            830,
+            55,
+            50
+        ],
+        "post_delay": 2600,
+        "next": [
+            "Alchemy.Screen",
+            "Alchemy.Enter.Retry",
+            "Alchemy.Enter.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【煉金爐】尚未進入「煉金爐」，重試點擊入口…",
+                "display": "log"
+            }
+        }
+    },
+    "Alchemy.Enter.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【煉金爐】無法進入「煉金爐」畫面，已安全停止，未執行任何操作。",
+                "display": "log"
+            }
+        }
+    },
+    "Alchemy.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            10,
+            20,
+            250,
+            70
+        ],
+        "expected": "煉金爐",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "Alchemy.OpenDecompose"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【煉金爐】已確認進入「煉金爐」畫面。",
+                "display": "log"
+            }
+        }
+    },
+    "Alchemy.OpenDecompose": {
+        "recognition": "OCR",
+        "roi": [
+            150,
+            1185,
+            540,
+            70
+        ],
+        "expected": "分解",
+        "threshold": 0.3,
+        "action": "Click",
+        "post_delay": 2200,
+        "next": [
+            "Alchemy.Decompose.Screen",
+            "Alchemy.OpenDecompose.Retry"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【煉金爐】切換到分解分頁…",
+                "display": "log"
+            }
+        }
+    },
+    "Alchemy.OpenDecompose.Retry": {
+        "max_hit": 3,
+        "recognition": "OCR",
+        "roi": [
+            150,
+            1185,
+            540,
+            70
+        ],
+        "expected": "分解",
+        "threshold": 0.3,
+        "action": "Click",
+        "post_delay": 2200,
+        "next": [
+            "Alchemy.Decompose.Screen",
+            "Alchemy.OpenDecompose.Retry",
+            "Alchemy.Gem.Open"
+        ]
+    },
+    "Alchemy.Decompose.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            25,
+            878,
+            125,
+            40
+        ],
+        "expected": "已選物品",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "Alchemy.Exclude.Route"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【煉金爐】已進入分解頁。",
+                "display": "log"
+            }
+        }
+    },
+    "Alchemy.Exclude.Route": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Alchemy.Exclude.AlreadyChecked",
+            "Alchemy.Exclude.Enable"
+        ]
+    },
+    "Alchemy.Exclude.AlreadyChecked": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            528,
+            873,
+            54,
+            50
+        ],
+        "template": "home/alchemy-exclude-checked.png",
+        "threshold": 0.95,
+        "action": "DoNothing",
+        "next": [
+            "Alchemy.Loop.SelectNormal"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【煉金爐】「排除高戰力」已為勾選狀態，維持不變。",
+                "display": "log"
+            }
+        }
+    },
+    "Alchemy.Exclude.Enable": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            528,
+            873,
+            54,
+            50
+        ],
+        "template": "home/alchemy-exclude-unchecked.png",
+        "threshold": 0.95,
+        "action": "Click",
+        "target": true,
+        "post_delay": 1000,
+        "next": [
+            "Alchemy.Loop.SelectNormal"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【煉金爐】依設定勾選「排除高戰力」。",
+                "display": "log"
+            }
+        }
+    },
+    "Alchemy.Exclude.AlreadyUnchecked": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            528,
+            873,
+            54,
+            50
+        ],
+        "template": "home/alchemy-exclude-unchecked.png",
+        "threshold": 0.95,
+        "action": "DoNothing",
+        "next": [
+            "Alchemy.Loop.SelectNormal"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【煉金爐】「排除高戰力」已為未勾選狀態，維持不變。",
+                "display": "log"
+            }
+        }
+    },
+    "Alchemy.Exclude.Disable": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            528,
+            873,
+            54,
+            50
+        ],
+        "template": "home/alchemy-exclude-checked.png",
+        "threshold": 0.95,
+        "action": "Click",
+        "target": true,
+        "post_delay": 1000,
+        "next": [
+            "Alchemy.Loop.SelectNormal"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【煉金爐】依設定取消勾選「排除高戰力」。",
+                "display": "log"
+            }
+        }
+    },
+    "Alchemy.Loop.SelectNormal": {
+        "max_hit": 8,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            100,
+            948,
+            28,
+            26
+        ],
+        "post_delay": 1000,
+        "next": [
+            "Alchemy.Loop.SelectRare"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【煉金爐】勾選可分解的裝備品級（普通／稀有／史詩／傳說）…",
+                "display": "log"
+            }
+        }
+    },
+    "Alchemy.Loop.SelectRare": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            232,
+            948,
+            28,
+            26
+        ],
+        "post_delay": 1000,
+        "next": [
+            "Alchemy.Loop.SelectEpic"
+        ]
+    },
+    "Alchemy.Loop.SelectEpic": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            363,
+            948,
+            28,
+            26
+        ],
+        "post_delay": 1000,
+        "next": [
+            "Alchemy.Loop.SelectLegend"
+        ]
+    },
+    "Alchemy.Loop.SelectLegend": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            495,
+            948,
+            28,
+            26
+        ],
+        "post_delay": 1200,
+        "next": [
+            "Alchemy.Loop.NothingLeft",
+            "Alchemy.Loop.Decompose"
+        ]
+    },
+    "Alchemy.Loop.NothingLeft": {
+        "recognition": "OCR",
+        "roi": [
+            138,
+            878,
+            115,
+            38
+        ],
+        "expected": "^0/",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "Alchemy.Gem.Open"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【煉金爐】「已選物品」為 0，沒有可分解的裝備，分解流程結束。",
+                "display": "log"
+            }
+        }
+    },
+    "Alchemy.Loop.Decompose": {
+        "recognition": "OCR",
+        "roi": [
+            180,
+            1072,
+            360,
+            58
+        ],
+        "expected": "分解",
+        "threshold": 0.3,
+        "action": "Click",
+        "post_delay": 3200,
+        "next": [
+            "Alchemy.Loop.Success",
+            "Alchemy.Loop.Unverified"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【煉金爐】點擊「分解」…",
+                "display": "log"
+            }
+        }
+    },
+    "Alchemy.Loop.Success": {
+        "recognition": "OCR",
+        "roi": [
+            140,
+            330,
+            440,
+            90
+        ],
+        "expected": "分解成功",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "post_delay": 1800,
+        "next": [
+            "Alchemy.Loop.SelectNormal",
+            "Alchemy.Gem.Open"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【煉金爐】已看到「分解成功」，檢查是否還有可分解裝備…",
+                "display": "log"
+            }
+        }
+    },
+    "Alchemy.Loop.Unverified": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "post_delay": 1200,
+        "next": [
+            "Alchemy.Gem.Open"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【煉金爐】未看到「分解成功」提示，停止分解迴圈，改為處理寶石。",
+                "display": "log"
+            }
+        }
+    },
+    "Alchemy.Gem.Open": {
+        "recognition": "OCR",
+        "roi": [
+            150,
+            1185,
+            540,
+            70
+        ],
+        "expected": "寶石",
+        "threshold": 0.3,
+        "action": "Click",
+        "post_delay": 2200,
+        "next": [
+            "Alchemy.Gem.Merge",
+            "Alchemy.Gem.Open.Retry"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【煉金爐】切換到寶石分頁…",
+                "display": "log"
+            }
+        }
+    },
+    "Alchemy.Gem.Open.Retry": {
+        "max_hit": 3,
+        "recognition": "OCR",
+        "roi": [
+            150,
+            1185,
+            540,
+            70
+        ],
+        "expected": "寶石",
+        "threshold": 0.3,
+        "action": "Click",
+        "post_delay": 2200,
+        "next": [
+            "Alchemy.Gem.Merge",
+            "Alchemy.Gem.Open.Retry",
+            "Alchemy.Back"
+        ]
+    },
+    "Alchemy.Gem.Merge": {
+        "recognition": "OCR",
+        "roi": [
+            370,
+            1072,
+            310,
+            62
+        ],
+        "expected": "一鍵合成",
+        "threshold": 0.3,
+        "action": "Click",
+        "post_delay": 3200,
+        "next": [
+            "Alchemy.Gem.Rewarded",
+            "Alchemy.Gem.Nothing"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【煉金爐】點擊「一鍵合成」…",
+                "display": "log"
+            }
+        }
+    },
+    "Alchemy.Gem.Rewarded": {
+        "recognition": "OCR",
+        "roi": [
+            140,
+            330,
+            440,
+            90
+        ],
+        "expected": "獲得獎勵",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "post_delay": 1800,
+        "next": [
+            "Alchemy.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【煉金爐】寶石一鍵合成完成，已取得合成獎勵。",
+                "display": "log"
+            }
+        }
+    },
+    "Alchemy.Gem.Nothing": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "post_delay": 800,
+        "next": [
+            "Alchemy.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【煉金爐】沒有出現合成獎勵提示，判定目前沒有可合成的寶石。",
+                "display": "log"
+            }
+        }
+    },
+    "Alchemy.Back": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Alchemy.Back.AtHome",
+            "Alchemy.Back.Press"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【煉金爐】流程結束，準備返回家園首頁…",
+                "display": "log"
+            }
+        }
+    },
+    "Alchemy.Back.Press": {
+        "max_hit": 6,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            45,
+            1195,
+            60,
+            45
+        ],
+        "post_delay": 1600,
+        "next": [
+            "Alchemy.Back.AtHome",
+            "Alchemy.Back.Press"
+        ]
+    },
+    "Alchemy.Back.AtHome": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            280,
+            1160,
+            180,
+            120
+        ],
+        "template": "navigation/bottom-home.png",
+        "threshold": 0.75,
+        "action": "DoNothing",
+        "next": [
+            "Alchemy.Done"
+        ]
+    },
+    "Alchemy.Done": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【煉金爐】已回到家園首頁，本任務結束。",
+                "display": "log"
+            }
+        }
+    },
+    "Objectives.Bag.UseItems.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Bag.EnsureHome",
+            "Bag.Nav.FromOtherTab",
+            "Bag.Nav.Recover"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【背包道具】開始執行：道具一鍵使用。",
+                "display": "log"
+            }
+        }
+    },
+    "Bag.EnsureHome": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            280,
+            1160,
+            180,
+            120
+        ],
+        "template": "navigation/bottom-home.png",
+        "threshold": 0.75,
+        "action": "DoNothing",
+        "next": [
+            "Bag.ResetRight.Swipe1"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【背包道具】已辨識到家園頁籤圖示，確認目前在家園首頁。",
+                "display": "log"
+            }
+        }
+    },
+    "Bag.Nav.FromOtherTab": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1180,
+            720,
+            100
+        ],
+        "expected": "角色|筆記|公會|世界|探索",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            300,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 1200,
+        "next": [
+            "Bag.EnsureHome"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【背包道具】目前在其他主頁籤，點擊「家園」切換。",
+                "display": "log"
+            }
+        }
+    },
+    "Bag.Nav.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            100,
+            690,
+            260,
+            100
+        ],
+        "post_delay": 1000,
+        "next": [
+            "Bag.Nav.SelectHome"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【背包道具】偵測到離開遊戲彈窗，點擊取消。",
+                "display": "log"
+            }
+        }
+    },
+    "Bag.Nav.SelectHome": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            300,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 1200,
+        "next": [
+            "Bag.EnsureHome"
+        ]
+    },
+    "Bag.Nav.Recover": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Bag.Nav.ExitDialog",
+            "Bag.EnsureHome",
+            "Bag.Nav.FromOtherTab",
+            "Bag.Nav.Back",
+            "Bag.Nav.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【背包道具】目前在子畫面，改點左下角返回按鈕回到家園首頁…",
+                "display": "log"
+            }
+        }
+    },
+    "Bag.Nav.Back": {
+        "max_hit": 12,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            45,
+            1195,
+            60,
+            45
+        ],
+        "post_delay": 1400,
+        "next": [
+            "Bag.Nav.ExitDialog",
+            "Bag.EnsureHome",
+            "Bag.Nav.FromOtherTab",
+            "Bag.Nav.Back",
+            "Bag.Nav.Failed"
+        ]
+    },
+    "Bag.Nav.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【背包道具】連續點擊返回按鈕仍無法回到家園首頁，已安全停止，未執行任何操作。",
+                "display": "log"
+            }
+        }
+    },
+    "Bag.ResetRight.Swipe1": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "Bag.ResetRight.Swipe2"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【背包道具】將家園畫面拉到最右側小屋…",
+                "display": "log"
+            }
+        }
+    },
+    "Bag.ResetRight.Swipe2": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "Bag.ResetRight.Swipe3"
+        ]
+    },
+    "Bag.ResetRight.Swipe3": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "Bag.ResetRight.Swipe4"
+        ]
+    },
+    "Bag.ResetRight.Swipe4": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "Bag.ResetRight.Swipe5"
+        ]
+    },
+    "Bag.ResetRight.Swipe5": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "Bag.ResetRight.Swipe6"
+        ]
+    },
+    "Bag.ResetRight.Swipe6": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "Bag.Enter"
+        ]
+    },
+    "Bag.Enter": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            68,
+            865,
+            55,
+            50
+        ],
+        "post_delay": 2600,
+        "next": [
+            "Bag.Screen",
+            "Bag.Enter.Retry"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【背包道具】點擊設施入口，等待「道具」畫面…",
+                "display": "log"
+            }
+        }
+    },
+    "Bag.Enter.Retry": {
+        "max_hit": 3,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            68,
+            865,
+            55,
+            50
+        ],
+        "post_delay": 2600,
+        "next": [
+            "Bag.Screen",
+            "Bag.Enter.Retry",
+            "Bag.Enter.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【背包道具】尚未進入「道具」，重試點擊入口…",
+                "display": "log"
+            }
+        }
+    },
+    "Bag.Enter.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【背包道具】無法進入「道具」畫面，已安全停止，未執行任何操作。",
+                "display": "log"
+            }
+        }
+    },
+    "Bag.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            10,
+            25,
+            150,
+            65
+        ],
+        "expected": "道具",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "Bag.Loop.UseAll"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【背包道具】已確認進入「道具」畫面。",
+                "display": "log"
+            }
+        }
+    },
+    "Bag.Loop.UseAll": {
+        "max_hit": 6,
+        "recognition": "OCR",
+        "roi": [
+            470,
+            1035,
+            250,
+            85
+        ],
+        "expected": "一鍵使用",
+        "threshold": 0.3,
+        "action": "Click",
+        "post_delay": 2000,
+        "next": [
+            "Bag.Confirm",
+            "Bag.NoMore"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【背包道具】找到「一鍵使用」按鈕，點擊開啟確認視窗…",
+                "display": "log"
+            }
+        }
+    },
+    "Bag.Confirm": {
+        "recognition": "OCR",
+        "roi": [
+            370,
+            720,
+            255,
+            90
+        ],
+        "expected": "確認",
+        "threshold": 0.3,
+        "action": "Click",
+        "post_delay": 3200,
+        "next": [
+            "Bag.Dismiss"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【背包道具】確認一鍵使用（單次使用上限 100 個）。",
+                "display": "log"
+            }
+        }
+    },
+    "Bag.Dismiss": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            340,
+            150,
+            40,
+            40
+        ],
+        "post_delay": 2000,
+        "next": [
+            "Bag.Loop.UseAll",
+            "Bag.NoMore"
+        ]
+    },
+    "Bag.NoMore": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Bag.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【背包道具】畫面上已沒有「一鍵使用」按鈕，代表沒有可一鍵使用的道具。",
+                "display": "log"
+            }
+        }
+    },
+    "Bag.Back": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Bag.Back.AtHome",
+            "Bag.Back.Press"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【背包道具】流程結束，準備返回家園首頁…",
+                "display": "log"
+            }
+        }
+    },
+    "Bag.Back.Press": {
+        "max_hit": 6,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            45,
+            1195,
+            60,
+            45
+        ],
+        "post_delay": 1600,
+        "next": [
+            "Bag.Back.AtHome",
+            "Bag.Back.Press"
+        ]
+    },
+    "Bag.Back.AtHome": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            280,
+            1160,
+            180,
+            120
+        ],
+        "template": "navigation/bottom-home.png",
+        "threshold": 0.75,
+        "action": "DoNothing",
+        "next": [
+            "Bag.Done"
+        ]
+    },
+    "Bag.Done": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【背包道具】已回到家園首頁，本任務結束。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "HomeShop.EnsureHome",
+            "HomeShop.Nav.FromOtherTab",
+            "HomeShop.Nav.Recover"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】開始執行：家園商店購物（不刷新）。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.EnsureHome": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            280,
+            1160,
+            180,
+            120
+        ],
+        "template": "navigation/bottom-home.png",
+        "threshold": 0.75,
+        "action": "DoNothing",
+        "next": [
+            "HomeShop.ResetRight.Swipe1"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】已辨識到家園頁籤圖示，確認目前在家園首頁。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Nav.FromOtherTab": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1180,
+            720,
+            100
+        ],
+        "expected": "角色|筆記|公會|世界|探索",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            300,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 1200,
+        "next": [
+            "HomeShop.EnsureHome"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】目前在其他主頁籤，點擊「家園」切換。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Nav.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            100,
+            690,
+            260,
+            100
+        ],
+        "post_delay": 1000,
+        "next": [
+            "HomeShop.Nav.SelectHome"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】偵測到離開遊戲彈窗，點擊取消。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Nav.SelectHome": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            300,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 1200,
+        "next": [
+            "HomeShop.EnsureHome"
+        ]
+    },
+    "HomeShop.Nav.Recover": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "HomeShop.Nav.ExitDialog",
+            "HomeShop.EnsureHome",
+            "HomeShop.Nav.FromOtherTab",
+            "HomeShop.Nav.Back",
+            "HomeShop.Nav.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】目前在子畫面，改點左下角返回按鈕回到家園首頁…",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Nav.Back": {
+        "max_hit": 12,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            45,
+            1195,
+            60,
+            45
+        ],
+        "post_delay": 1400,
+        "next": [
+            "HomeShop.Nav.ExitDialog",
+            "HomeShop.EnsureHome",
+            "HomeShop.Nav.FromOtherTab",
+            "HomeShop.Nav.Back",
+            "HomeShop.Nav.Failed"
+        ]
+    },
+    "HomeShop.Nav.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】連續點擊返回按鈕仍無法回到家園首頁，已安全停止，未執行任何操作。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.ResetRight.Swipe1": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "HomeShop.ResetRight.Swipe2"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】將家園畫面拉到最右側小屋…",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.ResetRight.Swipe2": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "HomeShop.ResetRight.Swipe3"
+        ]
+    },
+    "HomeShop.ResetRight.Swipe3": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "HomeShop.ResetRight.Swipe4"
+        ]
+    },
+    "HomeShop.ResetRight.Swipe4": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "HomeShop.ResetRight.Swipe5"
+        ]
+    },
+    "HomeShop.ResetRight.Swipe5": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "HomeShop.ResetRight.Swipe6"
+        ]
+    },
+    "HomeShop.ResetRight.Swipe6": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "HomeShop.MoveLeft.Swipe1"
+        ]
+    },
+    "HomeShop.MoveLeft.Swipe1": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "HomeShop.Enter"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】往左移動 1 格到商店推車…",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Enter": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            215,
+            815,
+            60,
+            50
+        ],
+        "post_delay": 2800,
+        "next": [
+            "HomeShop.Screen",
+            "HomeShop.Enter.Retry"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】點擊設施入口，等待「商店」畫面…",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Enter.Retry": {
+        "max_hit": 3,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            215,
+            815,
+            60,
+            50
+        ],
+        "post_delay": 2800,
+        "next": [
+            "HomeShop.Screen",
+            "HomeShop.Enter.Retry",
+            "HomeShop.Enter.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】尚未進入「商店」，重試點擊入口…",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Enter.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】無法進入「商店」畫面，已安全停止，未執行任何操作。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            10,
+            25,
+            150,
+            65
+        ],
+        "expected": "商店",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "HomeShop.Grocery.Tab"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】已確認進入「商店」畫面。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Grocery.Tab": {
+        "recognition": "OCR",
+        "roi": [
+            150,
+            1185,
+            540,
+            70
+        ],
+        "expected": "雜貨",
+        "threshold": 0.3,
+        "action": "Click",
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot1"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】切換到雜貨分頁…",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Grocery.Slot1": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "HomeShop.Grocery.Slot1.SoldOut",
+            "HomeShop.Grocery.Slot1.Buy",
+            "HomeShop.Grocery.Slot1.Skip"
+        ]
+    },
+    "HomeShop.Grocery.Slot1.SoldOut": {
+        "recognition": "OCR",
+        "roi": [
+            32,
+            268,
+            200,
+            58
+        ],
+        "expected": "售完",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "HomeShop.Grocery.Slot2"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第一排第 1 格已售完，略過。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Grocery.Slot1.Buy": {
+        "recognition": "OCR",
+        "roi": [
+            6,
+            176,
+            64,
+            48
+        ],
+        "expected": "^[1-9]折",
+        "threshold": 0.3,
+        "action": "Click",
+        "target": [
+            52,
+            388,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot2"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第一排第 1 格折數符合設定，點擊價格按鈕購買。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Grocery.Slot1.Skip": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "HomeShop.Grocery.Slot2"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第一排第 1 格折數不符合設定或無商品，未購買。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Grocery.Slot2": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "HomeShop.Grocery.Slot2.SoldOut",
+            "HomeShop.Grocery.Slot2.Buy",
+            "HomeShop.Grocery.Slot2.Skip"
+        ]
+    },
+    "HomeShop.Grocery.Slot2.SoldOut": {
+        "recognition": "OCR",
+        "roi": [
+            260,
+            268,
+            200,
+            58
+        ],
+        "expected": "售完",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "HomeShop.Grocery.Slot3"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第一排第 2 格已售完，略過。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Grocery.Slot2.Buy": {
+        "recognition": "OCR",
+        "roi": [
+            235,
+            176,
+            64,
+            48
+        ],
+        "expected": "^[1-9]折",
+        "threshold": 0.3,
+        "action": "Click",
+        "target": [
+            280,
+            388,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot3"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第一排第 2 格折數符合設定，點擊價格按鈕購買。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Grocery.Slot2.Skip": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "HomeShop.Grocery.Slot3"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第一排第 2 格折數不符合設定或無商品，未購買。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Grocery.Slot3": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "HomeShop.Grocery.Slot3.SoldOut",
+            "HomeShop.Grocery.Slot3.Buy",
+            "HomeShop.Grocery.Slot3.Skip"
+        ]
+    },
+    "HomeShop.Grocery.Slot3.SoldOut": {
+        "recognition": "OCR",
+        "roi": [
+            489,
+            268,
+            200,
+            58
+        ],
+        "expected": "售完",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "HomeShop.Treasury.Tab"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第一排第 3 格已售完，略過。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Grocery.Slot3.Buy": {
+        "recognition": "OCR",
+        "roi": [
+            464,
+            176,
+            64,
+            48
+        ],
+        "expected": "^[1-9]折",
+        "threshold": 0.3,
+        "action": "Click",
+        "target": [
+            509,
+            388,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Treasury.Tab"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第一排第 3 格折數符合設定，點擊價格按鈕購買。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Grocery.Slot3.Skip": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "HomeShop.Treasury.Tab"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第一排第 3 格折數不符合設定或無商品，未購買。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Treasury.Tab": {
+        "recognition": "OCR",
+        "roi": [
+            150,
+            1185,
+            540,
+            70
+        ],
+        "expected": "寶庫",
+        "threshold": 0.3,
+        "action": "Click",
+        "post_delay": 2200,
+        "next": [
+            "HomeShop.Treasury.Free",
+            "HomeShop.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】切換到寶庫分頁，準備領取免費商品…",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Treasury.Free": {
+        "max_hit": 3,
+        "recognition": "OCR",
+        "roi": [
+            10,
+            375,
+            700,
+            630
+        ],
+        "expected": "免費",
+        "threshold": 0.3,
+        "action": "Click",
+        "post_delay": 2500,
+        "next": [
+            "HomeShop.Treasury.Free",
+            "HomeShop.Treasury.Done"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】寶庫出現「免費」商品，點擊領取。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Treasury.Done": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "HomeShop.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】寶庫已無可領取的免費商品；本流程不會刷新商店，也不購買付費商品。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Back": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "HomeShop.Back.AtHome",
+            "HomeShop.Back.Press"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】流程結束，準備返回家園首頁…",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Back.Press": {
+        "max_hit": 6,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            45,
+            1195,
+            60,
+            45
+        ],
+        "post_delay": 1600,
+        "next": [
+            "HomeShop.Back.AtHome",
+            "HomeShop.Back.Press"
+        ]
+    },
+    "HomeShop.Back.AtHome": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            280,
+            1160,
+            180,
+            120
+        ],
+        "template": "navigation/bottom-home.png",
+        "threshold": 0.75,
+        "action": "DoNothing",
+        "next": [
+            "HomeShop.Done"
+        ]
+    },
+    "HomeShop.Done": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】已回到家園首頁，本任務結束。",
+                "display": "log"
+            }
+        }
+    },
+    "Objectives.GachaMachine.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GachaMachine.EnsureHome",
+            "GachaMachine.Nav.FromOtherTab",
+            "GachaMachine.Nav.Recover"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【時光扭蛋機】開始執行：國度扭蛋。",
+                "display": "log"
+            }
+        }
+    },
+    "GachaMachine.EnsureHome": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            280,
+            1160,
+            180,
+            120
+        ],
+        "template": "navigation/bottom-home.png",
+        "threshold": 0.75,
+        "action": "DoNothing",
+        "next": [
+            "GachaMachine.ResetRight.Swipe1"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【時光扭蛋機】已辨識到家園頁籤圖示，確認目前在家園首頁。",
+                "display": "log"
+            }
+        }
+    },
+    "GachaMachine.Nav.FromOtherTab": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1180,
+            720,
+            100
+        ],
+        "expected": "角色|筆記|公會|世界|探索",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            300,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 1200,
+        "next": [
+            "GachaMachine.EnsureHome"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【時光扭蛋機】目前在其他主頁籤，點擊「家園」切換。",
+                "display": "log"
+            }
+        }
+    },
+    "GachaMachine.Nav.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            100,
+            690,
+            260,
+            100
+        ],
+        "post_delay": 1000,
+        "next": [
+            "GachaMachine.Nav.SelectHome"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【時光扭蛋機】偵測到離開遊戲彈窗，點擊取消。",
+                "display": "log"
+            }
+        }
+    },
+    "GachaMachine.Nav.SelectHome": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            300,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 1200,
+        "next": [
+            "GachaMachine.EnsureHome"
+        ]
+    },
+    "GachaMachine.Nav.Recover": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GachaMachine.Nav.ExitDialog",
+            "GachaMachine.EnsureHome",
+            "GachaMachine.Nav.FromOtherTab",
+            "GachaMachine.Nav.Back",
+            "GachaMachine.Nav.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【時光扭蛋機】目前在子畫面，改點左下角返回按鈕回到家園首頁…",
+                "display": "log"
+            }
+        }
+    },
+    "GachaMachine.Nav.Back": {
+        "max_hit": 12,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            45,
+            1195,
+            60,
+            45
+        ],
+        "post_delay": 1400,
+        "next": [
+            "GachaMachine.Nav.ExitDialog",
+            "GachaMachine.EnsureHome",
+            "GachaMachine.Nav.FromOtherTab",
+            "GachaMachine.Nav.Back",
+            "GachaMachine.Nav.Failed"
+        ]
+    },
+    "GachaMachine.Nav.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【時光扭蛋機】連續點擊返回按鈕仍無法回到家園首頁，已安全停止，未執行任何操作。",
+                "display": "log"
+            }
+        }
+    },
+    "GachaMachine.ResetRight.Swipe1": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GachaMachine.ResetRight.Swipe2"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【時光扭蛋機】將家園畫面拉到最右側小屋…",
+                "display": "log"
+            }
+        }
+    },
+    "GachaMachine.ResetRight.Swipe2": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GachaMachine.ResetRight.Swipe3"
+        ]
+    },
+    "GachaMachine.ResetRight.Swipe3": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GachaMachine.ResetRight.Swipe4"
+        ]
+    },
+    "GachaMachine.ResetRight.Swipe4": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GachaMachine.ResetRight.Swipe5"
+        ]
+    },
+    "GachaMachine.ResetRight.Swipe5": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GachaMachine.ResetRight.Swipe6"
+        ]
+    },
+    "GachaMachine.ResetRight.Swipe6": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GachaMachine.MoveLeft.Swipe1"
+        ]
+    },
+    "GachaMachine.MoveLeft.Swipe1": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GachaMachine.Enter"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【時光扭蛋機】往左移動 1 格到扭蛋台…",
+                "display": "log"
+            }
+        }
+    },
+    "GachaMachine.Enter": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            20,
+            808,
+            58,
+            52
+        ],
+        "post_delay": 2800,
+        "next": [
+            "GachaMachine.Screen",
+            "GachaMachine.Enter.Retry"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【時光扭蛋機】點擊設施入口，等待「時光扭蛋機」畫面…",
+                "display": "log"
+            }
+        }
+    },
+    "GachaMachine.Enter.Retry": {
+        "max_hit": 3,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            20,
+            808,
+            58,
+            52
+        ],
+        "post_delay": 2800,
+        "next": [
+            "GachaMachine.Screen",
+            "GachaMachine.Enter.Retry",
+            "GachaMachine.Enter.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【時光扭蛋機】尚未進入「時光扭蛋機」，重試點擊入口…",
+                "display": "log"
+            }
+        }
+    },
+    "GachaMachine.Enter.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【時光扭蛋機】無法進入「時光扭蛋機」畫面，已安全停止，未執行任何操作。",
+                "display": "log"
+            }
+        }
+    },
+    "GachaMachine.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            10,
+            25,
+            270,
+            65
+        ],
+        "expected": "時光扭蛋機",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "GachaMachine.SelectNation"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【時光扭蛋機】已確認進入「時光扭蛋機」畫面。",
+                "display": "log"
+            }
+        }
+    },
+    "GachaMachine.SelectNation": {
+        "recognition": "OCR",
+        "roi": [
+            150,
+            1185,
+            300,
+            70
+        ],
+        "expected": "國度",
+        "threshold": 0.3,
+        "action": "Click",
+        "post_delay": 2000,
+        "next": [
+            "GachaMachine.LogCount"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【時光扭蛋機】切換到「國度」扭蛋池。",
+                "display": "log"
+            }
+        }
+    },
+    "GachaMachine.LogCount": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GachaMachine.Execute"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【時光扭蛋機】本次設定扭蛋次數：1 次，開始執行。",
+                "display": "log"
+            }
+        }
+    },
+    "GachaMachine.Execute": {
+        "max_hit": 1,
+        "recognition": "OCR",
+        "roi": [
+            5,
+            1055,
+            355,
+            95
+        ],
+        "expected": "扭蛋1次",
+        "threshold": 0.3,
+        "action": "Click",
+        "post_delay": 4800,
+        "next": [
+            "GachaMachine.Execute",
+            "GachaMachine.Verify"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【時光扭蛋機】點擊「扭蛋 1 次」。",
+                "display": "log"
+            }
+        }
+    },
+    "GachaMachine.Verify": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            25,
+            420,
+            62
+        ],
+        "expected": "今日已開啟",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "GachaMachine.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【時光扭蛋機】已在結果畫面看到「今日已開啟」計數，確認扭蛋實際執行。",
+                "display": "log"
+            }
+        }
+    },
+    "GachaMachine.Back": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GachaMachine.Back.AtHome",
+            "GachaMachine.Back.Press"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【時光扭蛋機】流程結束，準備返回家園首頁…",
+                "display": "log"
+            }
+        }
+    },
+    "GachaMachine.Back.Press": {
+        "max_hit": 6,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            45,
+            1195,
+            60,
+            45
+        ],
+        "post_delay": 1600,
+        "next": [
+            "GachaMachine.Back.AtHome",
+            "GachaMachine.Back.Press"
+        ]
+    },
+    "GachaMachine.Back.AtHome": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            280,
+            1160,
+            180,
+            120
+        ],
+        "template": "navigation/bottom-home.png",
+        "threshold": 0.75,
+        "action": "DoNothing",
+        "next": [
+            "GachaMachine.Done"
+        ]
+    },
+    "GachaMachine.Done": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【時光扭蛋機】已回到家園首頁，本任務結束。",
+                "display": "log"
+            }
+        }
+    },
+    "Objectives.GoddessStatue.Prayer.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GoddessStatue.EnsureHome",
+            "GoddessStatue.Nav.FromOtherTab",
+            "GoddessStatue.Nav.Recover"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【女神像祈願】開始執行：友情祈願。",
+                "display": "log"
+            }
+        }
+    },
+    "GoddessStatue.EnsureHome": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            280,
+            1160,
+            180,
+            120
+        ],
+        "template": "navigation/bottom-home.png",
+        "threshold": 0.75,
+        "action": "DoNothing",
+        "next": [
+            "GoddessStatue.ResetRight.Swipe1"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【女神像祈願】已辨識到家園頁籤圖示，確認目前在家園首頁。",
+                "display": "log"
+            }
+        }
+    },
+    "GoddessStatue.Nav.FromOtherTab": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1180,
+            720,
+            100
+        ],
+        "expected": "角色|筆記|公會|世界|探索",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            300,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 1200,
+        "next": [
+            "GoddessStatue.EnsureHome"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【女神像祈願】目前在其他主頁籤，點擊「家園」切換。",
+                "display": "log"
+            }
+        }
+    },
+    "GoddessStatue.Nav.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            100,
+            690,
+            260,
+            100
+        ],
+        "post_delay": 1000,
+        "next": [
+            "GoddessStatue.Nav.SelectHome"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【女神像祈願】偵測到離開遊戲彈窗，點擊取消。",
+                "display": "log"
+            }
+        }
+    },
+    "GoddessStatue.Nav.SelectHome": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            300,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 1200,
+        "next": [
+            "GoddessStatue.EnsureHome"
+        ]
+    },
+    "GoddessStatue.Nav.Recover": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GoddessStatue.Nav.ExitDialog",
+            "GoddessStatue.EnsureHome",
+            "GoddessStatue.Nav.FromOtherTab",
+            "GoddessStatue.Nav.Back",
+            "GoddessStatue.Nav.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【女神像祈願】目前在子畫面，改點左下角返回按鈕回到家園首頁…",
+                "display": "log"
+            }
+        }
+    },
+    "GoddessStatue.Nav.Back": {
+        "max_hit": 12,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            45,
+            1195,
+            60,
+            45
+        ],
+        "post_delay": 1400,
+        "next": [
+            "GoddessStatue.Nav.ExitDialog",
+            "GoddessStatue.EnsureHome",
+            "GoddessStatue.Nav.FromOtherTab",
+            "GoddessStatue.Nav.Back",
+            "GoddessStatue.Nav.Failed"
+        ]
+    },
+    "GoddessStatue.Nav.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【女神像祈願】連續點擊返回按鈕仍無法回到家園首頁，已安全停止，未執行任何操作。",
+                "display": "log"
+            }
+        }
+    },
+    "GoddessStatue.ResetRight.Swipe1": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GoddessStatue.ResetRight.Swipe2"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【女神像祈願】將家園畫面拉到最右側小屋…",
+                "display": "log"
+            }
+        }
+    },
+    "GoddessStatue.ResetRight.Swipe2": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GoddessStatue.ResetRight.Swipe3"
+        ]
+    },
+    "GoddessStatue.ResetRight.Swipe3": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GoddessStatue.ResetRight.Swipe4"
+        ]
+    },
+    "GoddessStatue.ResetRight.Swipe4": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GoddessStatue.ResetRight.Swipe5"
+        ]
+    },
+    "GoddessStatue.ResetRight.Swipe5": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GoddessStatue.ResetRight.Swipe6"
+        ]
+    },
+    "GoddessStatue.ResetRight.Swipe6": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GoddessStatue.MoveLeft.Swipe1"
+        ]
+    },
+    "GoddessStatue.MoveLeft.Swipe1": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GoddessStatue.MoveLeft.Swipe2"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【女神像祈願】往左移動 2 格到女神像…",
+                "display": "log"
+            }
+        }
+    },
+    "GoddessStatue.MoveLeft.Swipe2": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GoddessStatue.Enter"
+        ]
+    },
+    "GoddessStatue.Enter": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            615,
+            782,
+            62,
+            58
+        ],
+        "post_delay": 2800,
+        "next": [
+            "GoddessStatue.Screen",
+            "GoddessStatue.Enter.Retry"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【女神像祈願】點擊設施入口，等待「祈願」畫面…",
+                "display": "log"
+            }
+        }
+    },
+    "GoddessStatue.Enter.Retry": {
+        "max_hit": 3,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            615,
+            782,
+            62,
+            58
+        ],
+        "post_delay": 2800,
+        "next": [
+            "GoddessStatue.Screen",
+            "GoddessStatue.Enter.Retry",
+            "GoddessStatue.Enter.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【女神像祈願】尚未進入「祈願」，重試點擊入口…",
+                "display": "log"
+            }
+        }
+    },
+    "GoddessStatue.Enter.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【女神像祈願】無法進入「祈願」畫面，已安全停止，未執行任何操作。",
+                "display": "log"
+            }
+        }
+    },
+    "GoddessStatue.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            10,
+            25,
+            160,
+            65
+        ],
+        "expected": "祈願",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "GoddessStatue.SelectFriendship"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【女神像祈願】已確認進入「祈願」畫面。",
+                "display": "log"
+            }
+        }
+    },
+    "GoddessStatue.SelectFriendship": {
+        "recognition": "OCR",
+        "roi": [
+            395,
+            1072,
+            325,
+            66
+        ],
+        "expected": "友情祈願",
+        "threshold": 0.3,
+        "action": "Click",
+        "post_delay": 2400,
+        "next": [
+            "GoddessStatue.FriendshipReady",
+            "GoddessStatue.SelectFriendship.Retry"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【女神像祈願】切換到「友情祈願」。",
+                "display": "log"
+            }
+        }
+    },
+    "GoddessStatue.SelectFriendship.Retry": {
+        "max_hit": 3,
+        "recognition": "OCR",
+        "roi": [
+            395,
+            1072,
+            325,
+            66
+        ],
+        "expected": "友情祈願",
+        "threshold": 0.3,
+        "action": "Click",
+        "post_delay": 2400,
+        "next": [
+            "GoddessStatue.FriendshipReady",
+            "GoddessStatue.SelectFriendship.Retry",
+            "GoddessStatue.Failed"
+        ]
+    },
+    "GoddessStatue.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GoddessStatue.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【女神像祈願】無法切換到「友情祈願」，安全結束，未執行祈願。",
+                "display": "log"
+            }
+        }
+    },
+    "GoddessStatue.FriendshipReady": {
+        "recognition": "OCR",
+        "roi": [
+            55,
+            940,
+            310,
+            200
+        ],
+        "expected": "祈願1次",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "GoddessStatue.LogCount"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【女神像祈願】已在友情祈願頁看到「祈願 1 次」按鈕。",
+                "display": "log"
+            }
+        }
+    },
+    "GoddessStatue.LogCount": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GoddessStatue.Execute"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【女神像祈願】本次設定祈願次數：1 次，開始執行。",
+                "display": "log"
+            }
+        }
+    },
+    "GoddessStatue.Execute": {
+        "max_hit": 1,
+        "recognition": "OCR",
+        "roi": [
+            55,
+            940,
+            310,
+            200
+        ],
+        "expected": "祈願1次",
+        "threshold": 0.3,
+        "action": "Click",
+        "post_delay": 4800,
+        "next": [
+            "GoddessStatue.Execute",
+            "GoddessStatue.Verify"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【女神像祈願】點擊「祈願 1 次」。",
+                "display": "log"
+            }
+        }
+    },
+    "GoddessStatue.Verify": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            25,
+            420,
+            62
+        ],
+        "expected": "今日已祈願",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "GoddessStatue.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【女神像祈願】已在結果畫面看到「今日已祈願」計數，確認祈願實際執行。",
+                "display": "log"
+            }
+        }
+    },
+    "GoddessStatue.Back": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GoddessStatue.Back.AtHome",
+            "GoddessStatue.Back.Press"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【女神像祈願】流程結束，準備返回家園首頁…",
+                "display": "log"
+            }
+        }
+    },
+    "GoddessStatue.Back.Press": {
+        "max_hit": 6,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            45,
+            1195,
+            60,
+            45
+        ],
+        "post_delay": 1600,
+        "next": [
+            "GoddessStatue.Back.AtHome",
+            "GoddessStatue.Back.Press"
+        ]
+    },
+    "GoddessStatue.Back.AtHome": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            280,
+            1160,
+            180,
+            120
+        ],
+        "template": "navigation/bottom-home.png",
+        "threshold": 0.75,
+        "action": "DoNothing",
+        "next": [
+            "GoddessStatue.Done"
+        ]
+    },
+    "GoddessStatue.Done": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【女神像祈願】已回到家園首頁，本任務結束。",
+                "display": "log"
+            }
+        }
+    },
+    "Objectives.SakuraTree.BeastBonding.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "SakuraTree.EnsureHome",
+            "SakuraTree.Nav.FromOtherTab",
+            "SakuraTree.Nav.Recover"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【幻獸結緣】開始執行：大櫻花樹幻獸結緣。",
+                "display": "log"
+            }
+        }
+    },
+    "SakuraTree.EnsureHome": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            280,
+            1160,
+            180,
+            120
+        ],
+        "template": "navigation/bottom-home.png",
+        "threshold": 0.75,
+        "action": "DoNothing",
+        "next": [
+            "SakuraTree.ResetRight.Swipe1"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【幻獸結緣】已辨識到家園頁籤圖示，確認目前在家園首頁。",
+                "display": "log"
+            }
+        }
+    },
+    "SakuraTree.Nav.FromOtherTab": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1180,
+            720,
+            100
+        ],
+        "expected": "角色|筆記|公會|世界|探索",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            300,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 1200,
+        "next": [
+            "SakuraTree.EnsureHome"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【幻獸結緣】目前在其他主頁籤，點擊「家園」切換。",
+                "display": "log"
+            }
+        }
+    },
+    "SakuraTree.Nav.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            100,
+            690,
+            260,
+            100
+        ],
+        "post_delay": 1000,
+        "next": [
+            "SakuraTree.Nav.SelectHome"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【幻獸結緣】偵測到離開遊戲彈窗，點擊取消。",
+                "display": "log"
+            }
+        }
+    },
+    "SakuraTree.Nav.SelectHome": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            300,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 1200,
+        "next": [
+            "SakuraTree.EnsureHome"
+        ]
+    },
+    "SakuraTree.Nav.Recover": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "SakuraTree.Nav.ExitDialog",
+            "SakuraTree.EnsureHome",
+            "SakuraTree.Nav.FromOtherTab",
+            "SakuraTree.Nav.Back",
+            "SakuraTree.Nav.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【幻獸結緣】目前在子畫面，改點左下角返回按鈕回到家園首頁…",
+                "display": "log"
+            }
+        }
+    },
+    "SakuraTree.Nav.Back": {
+        "max_hit": 12,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            45,
+            1195,
+            60,
+            45
+        ],
+        "post_delay": 1400,
+        "next": [
+            "SakuraTree.Nav.ExitDialog",
+            "SakuraTree.EnsureHome",
+            "SakuraTree.Nav.FromOtherTab",
+            "SakuraTree.Nav.Back",
+            "SakuraTree.Nav.Failed"
+        ]
+    },
+    "SakuraTree.Nav.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【幻獸結緣】連續點擊返回按鈕仍無法回到家園首頁，已安全停止，未執行任何操作。",
+                "display": "log"
+            }
+        }
+    },
+    "SakuraTree.ResetRight.Swipe1": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "SakuraTree.ResetRight.Swipe2"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【幻獸結緣】將家園畫面拉到最右側小屋…",
+                "display": "log"
+            }
+        }
+    },
+    "SakuraTree.ResetRight.Swipe2": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "SakuraTree.ResetRight.Swipe3"
+        ]
+    },
+    "SakuraTree.ResetRight.Swipe3": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "SakuraTree.ResetRight.Swipe4"
+        ]
+    },
+    "SakuraTree.ResetRight.Swipe4": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "SakuraTree.ResetRight.Swipe5"
+        ]
+    },
+    "SakuraTree.ResetRight.Swipe5": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "SakuraTree.ResetRight.Swipe6"
+        ]
+    },
+    "SakuraTree.ResetRight.Swipe6": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "SakuraTree.MoveLeft.Swipe1"
+        ]
+    },
+    "SakuraTree.MoveLeft.Swipe1": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "SakuraTree.MoveLeft.Swipe2"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【幻獸結緣】往左移動 2 格到大櫻花樹…",
+                "display": "log"
+            }
+        }
+    },
+    "SakuraTree.MoveLeft.Swipe2": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "SakuraTree.Enter"
+        ]
+    },
+    "SakuraTree.Enter": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            335,
+            588,
+            90,
+            64
+        ],
+        "post_delay": 2800,
+        "next": [
+            "SakuraTree.Screen",
+            "SakuraTree.Enter.Retry"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【幻獸結緣】點擊設施入口，等待「幻獸結緣」畫面…",
+                "display": "log"
+            }
+        }
+    },
+    "SakuraTree.Enter.Retry": {
+        "max_hit": 3,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            335,
+            588,
+            90,
+            64
+        ],
+        "post_delay": 2800,
+        "next": [
+            "SakuraTree.Screen",
+            "SakuraTree.Enter.Retry",
+            "SakuraTree.Enter.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【幻獸結緣】尚未進入「幻獸結緣」，重試點擊入口…",
+                "display": "log"
+            }
+        }
+    },
+    "SakuraTree.Enter.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【幻獸結緣】無法進入「幻獸結緣」畫面，已安全停止，未執行任何操作。",
+                "display": "log"
+            }
+        }
+    },
+    "SakuraTree.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            10,
+            25,
+            230,
+            65
+        ],
+        "expected": "幻獸結緣",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "SakuraTree.LogCount"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【幻獸結緣】已確認進入「幻獸結緣」畫面。",
+                "display": "log"
+            }
+        }
+    },
+    "SakuraTree.LogCount": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "SakuraTree.Route"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【幻獸結緣】本次設定結緣總次數：10 次，開始執行。",
+                "display": "log"
+            }
+        }
+    },
+    "SakuraTree.Route": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "SakuraTree.Execute10"
+        ]
+    },
+    "SakuraTree.Execute10": {
+        "max_hit": 1,
+        "recognition": "OCR",
+        "roi": [
+            365,
+            1055,
+            350,
+            95
+        ],
+        "expected": "結緣10次",
+        "threshold": 0.3,
+        "action": "Click",
+        "post_delay": 5200,
+        "next": [
+            "SakuraTree.Execute10",
+            "SakuraTree.Verify"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【幻獸結緣】點擊「結緣 10 次」。",
+                "display": "log"
+            }
+        }
+    },
+    "SakuraTree.Execute1": {
+        "max_hit": 1,
+        "recognition": "OCR",
+        "roi": [
+            5,
+            1055,
+            355,
+            95
+        ],
+        "expected": "結緣1次",
+        "threshold": 0.3,
+        "action": "Click",
+        "post_delay": 5200,
+        "next": [
+            "SakuraTree.Execute1",
+            "SakuraTree.Verify"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【幻獸結緣】點擊「結緣 1 次」。",
+                "display": "log"
+            }
+        }
+    },
+    "SakuraTree.Verify": {
+        "recognition": "OCR",
+        "roi": [
+            130,
+            955,
+            460,
+            55
+        ],
+        "expected": "今日已結緣",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "SakuraTree.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【幻獸結緣】已看到「今日已結緣」計數，確認結緣實際執行。",
+                "display": "log"
+            }
+        }
+    },
+    "SakuraTree.Back": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "SakuraTree.Back.AtHome",
+            "SakuraTree.Back.Press"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【幻獸結緣】流程結束，準備返回家園首頁…",
+                "display": "log"
+            }
+        }
+    },
+    "SakuraTree.Back.Press": {
+        "max_hit": 6,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            45,
+            1195,
+            60,
+            45
+        ],
+        "post_delay": 1600,
+        "next": [
+            "SakuraTree.Back.AtHome",
+            "SakuraTree.Back.Press"
+        ]
+    },
+    "SakuraTree.Back.AtHome": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            280,
+            1160,
+            180,
+            120
+        ],
+        "template": "navigation/bottom-home.png",
+        "threshold": 0.75,
+        "action": "DoNothing",
+        "next": [
+            "SakuraTree.Done"
+        ]
+    },
+    "SakuraTree.Done": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【幻獸結緣】已回到家園首頁，本任務結束。",
+                "display": "log"
+            }
+        }
+    }
+}

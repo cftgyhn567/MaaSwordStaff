@@ -142,7 +142,7 @@
             "name": "GoddessStatuePrayer",
             "label": "女神像祈願",
             "entry": "Objectives.GoddessStatue.Prayer.Start",
-            "description": "至家園女神像選擇「祈願」->「友情祈願」，執行設定之祈願次數。",
+            "description": "至家園女神像切換到「祈願」→「友情祈願」，執行設定次數的「祈願 1 次」，並以畫面上的「今日已祈願」計數驗證。",
             "group": [
                 "Home"
             ],
@@ -157,7 +157,7 @@
             "name": "TimeGachaMachine",
             "label": "時光扭蛋機",
             "entry": "Objectives.GachaMachine.Start",
-            "description": "至家園扭蛋台選擇「國度」，執行設定之扭蛋次數。",
+            "description": "至家園時光扭蛋機切換到「國度」，執行設定次數的「扭蛋 1 次」，並以畫面上的「今日已開啟」計數驗證。",
             "group": [
                 "Home"
             ],
@@ -172,7 +172,7 @@
             "name": "SakuraBeastBonding",
             "label": "幻獸結緣",
             "entry": "Objectives.SakuraTree.BeastBonding.Start",
-            "description": "至家園大櫻花樹執行結緣抽取，可獨立設定結緣總次數。",
+            "description": "至家園大櫻花樹執行幻獸結緣，可設定總次數；10 的倍數使用「結緣 10 次」按鈕，其餘使用「結緣 1 次」，並以「今日已結緣」計數驗證。",
             "group": [
                 "Home"
             ],
@@ -212,9 +212,9 @@
         },
         {
             "name": "AlchemyFurnace",
-            "label": "煉金爐安全檢查",
+            "label": "煉金爐",
             "entry": "Objectives.AlchemyFurnace.Start",
-            "description": "進入煉金爐分解頁並套用「排除高戰力」設定；未指定分解品級前，不選取、不分解也不合成物品。",
+            "description": "進入煉金爐：先在「分解」分頁依設定處理「排除高戰力」，勾選四個裝備品級並重複分解，直到「已選物品」為 0；接著在「寶石」分頁執行「一鍵合成」。",
             "group": [
                 "Home"
             ],
@@ -222,19 +222,23 @@
                 "Android"
             ],
             "option": [
-                "AlchemyExcludeHighPower"
+                "AlchemyExcludeHighPower",
+                "AlchemyDecomposeRounds"
             ]
         },
         {
             "name": "BagUseItems",
-            "label": "背包道具安全檢查",
+            "label": "背包道具一鍵使用",
             "entry": "Objectives.Bag.UseItems.Start",
-            "description": "進入家園道具頁確認可操作；未指定可消耗品種類前，不使用任何道具。",
+            "description": "進入家園寶箱（道具）頁，重複執行「一鍵使用」並確認，直到畫面上不再出現「一鍵使用」按鈕為止。需自行選擇的寶箱不會被使用。",
             "group": [
                 "Home"
             ],
             "controller": [
                 "Android"
+            ],
+            "option": [
+                "BagUseAllRounds"
             ]
         }
     ],
@@ -1566,8 +1570,12 @@
                 }
             ],
             "pipeline_override": {
-                "Rewards.Commissions.Submit": {"max_hit": "{Count}"},
-                "Commissions.Submit": {"max_hit": "{Count}"}
+                "Rewards.Commissions.Submit": {
+                    "max_hit": "{Count}"
+                },
+                "Commissions.Submit": {
+                    "max_hit": "{Count}"
+                }
             }
         },
         "CommissionUseExtraAttempts": {
@@ -1580,10 +1588,14 @@
                     "label": "不使用",
                     "pipeline_override": {
                         "Rewards.Commissions.Extra.Route": {
-                            "next": ["Rewards.Tasks.Back"]
+                            "next": [
+                                "Rewards.Tasks.Back"
+                            ]
                         },
                         "Commissions.Extra.Route": {
-                            "next": ["Commissions.Done"]
+                            "next": [
+                                "Commissions.Done"
+                            ]
                         }
                     }
                 },
@@ -1592,10 +1604,14 @@
                     "label": "允許使用",
                     "pipeline_override": {
                         "Rewards.Commissions.Extra.Route": {
-                            "next": ["Rewards.Commissions.Extra.NeedsSample"]
+                            "next": [
+                                "Rewards.Commissions.Extra.NeedsSample"
+                            ]
                         },
                         "Commissions.Extra.Route": {
-                            "next": ["Commissions.Extra.NeedsSample"]
+                            "next": [
+                                "Commissions.Extra.NeedsSample"
+                            ]
                         }
                     }
                 }
@@ -1671,29 +1687,29 @@
         },
         "AlchemyExcludeHighPower": {
             "type": "select",
-            "label": "分解時排除高戰力裝備",
-            "description": "控制進入分解頁後是否勾選「排除高戰力」。預設勾選以降低誤分解風險。",
+            "label": "煉金爐：分解時排除高戰力裝備",
+            "description": "進入分解頁後，會先辨識「排除高戰力」目前的勾選狀態，再依此設定調整。勾選可避免分解掉戰力較高的裝備。",
             "cases": [
                 {
                     "name": "Enabled",
-                    "label": "勾選",
+                    "label": "勾選（建議）",
                     "pipeline_override": {
-                        "AlchemyFurnace.ExcludeHighPower.Route": {
+                        "Alchemy.Exclude.Route": {
                             "next": [
-                                "AlchemyFurnace.ExcludeHighPower.Checked",
-                                "AlchemyFurnace.ExcludeHighPower.Enable"
+                                "Alchemy.Exclude.AlreadyChecked",
+                                "Alchemy.Exclude.Enable"
                             ]
                         }
                     }
                 },
                 {
                     "name": "Disabled",
-                    "label": "不勾選",
+                    "label": "不勾選（連高戰力裝備一起分解）",
                     "pipeline_override": {
-                        "AlchemyFurnace.ExcludeHighPower.Route": {
+                        "Alchemy.Exclude.Route": {
                             "next": [
-                                "AlchemyFurnace.ExcludeHighPower.Unchecked",
-                                "AlchemyFurnace.ExcludeHighPower.Disable"
+                                "Alchemy.Exclude.AlreadyUnchecked",
+                                "Alchemy.Exclude.Disable"
                             ]
                         }
                     }
@@ -1703,8 +1719,8 @@
         },
         "GoddessStatuePrayerCount": {
             "type": "select",
-            "label": "女神像：祈願次數",
-            "description": "切換至友情祈願後，執行指定次數的「祈願 1 次」。",
+            "label": "女神像：友情祈願次數",
+            "description": "切換至友情祈願後，執行指定次數的「祈願 1 次」；每次都會重新辨識按鈕位置，不會誤按 10 次。",
             "cases": [
                 {
                     "name": "Count1",
@@ -1717,6 +1733,9 @@
                                     "display": "log"
                                 }
                             }
+                        },
+                        "GoddessStatue.Execute": {
+                            "max_hit": 1
                         }
                     }
                 },
@@ -1732,9 +1751,8 @@
                                 }
                             }
                         },
-                        "GoddessStatue.ExecutePrayer": {
-                            "repeat": 2,
-                            "repeat_delay": 4500
+                        "GoddessStatue.Execute": {
+                            "max_hit": 2
                         }
                     }
                 },
@@ -1750,9 +1768,8 @@
                                 }
                             }
                         },
-                        "GoddessStatue.ExecutePrayer": {
-                            "repeat": 3,
-                            "repeat_delay": 4500
+                        "GoddessStatue.Execute": {
+                            "max_hit": 3
                         }
                     }
                 },
@@ -1768,9 +1785,25 @@
                                 }
                             }
                         },
-                        "GoddessStatue.ExecutePrayer": {
-                            "repeat": 5,
-                            "repeat_delay": 4500
+                        "GoddessStatue.Execute": {
+                            "max_hit": 5
+                        }
+                    }
+                },
+                {
+                    "name": "Count10",
+                    "label": "10 次",
+                    "pipeline_override": {
+                        "GoddessStatue.LogCount": {
+                            "focus": {
+                                "Node.Recognition.Succeeded": {
+                                    "content": "【女神像祈願】本次設定祈願次數：10 次，開始執行。",
+                                    "display": "log"
+                                }
+                            }
+                        },
+                        "GoddessStatue.Execute": {
+                            "max_hit": 10
                         }
                     }
                 },
@@ -1784,12 +1817,12 @@
                     }
                 }
             ],
-            "default_case": "Count1"
+            "default_case": "Count2"
         },
         "TimeGachaCount": {
             "type": "select",
-            "label": "時光扭蛋機：扭蛋次數",
-            "description": "切換至國度扭蛋後，執行指定次數的「扭蛋 1 次」，不會誤按 10 次。",
+            "label": "時光扭蛋機：國度扭蛋次數",
+            "description": "切換至「國度」扭蛋池後，執行指定次數的「扭蛋 1 次」；每次都會重新辨識按鈕位置，不會誤按 10 次或 100 次。",
             "cases": [
                 {
                     "name": "Count1",
@@ -1802,6 +1835,9 @@
                                     "display": "log"
                                 }
                             }
+                        },
+                        "GachaMachine.Execute": {
+                            "max_hit": 1
                         }
                     }
                 },
@@ -1818,8 +1854,7 @@
                             }
                         },
                         "GachaMachine.Execute": {
-                            "repeat": 2,
-                            "repeat_delay": 4500
+                            "max_hit": 2
                         }
                     }
                 },
@@ -1836,8 +1871,7 @@
                             }
                         },
                         "GachaMachine.Execute": {
-                            "repeat": 3,
-                            "repeat_delay": 4500
+                            "max_hit": 3
                         }
                     }
                 },
@@ -1854,8 +1888,24 @@
                             }
                         },
                         "GachaMachine.Execute": {
-                            "repeat": 5,
-                            "repeat_delay": 4500
+                            "max_hit": 5
+                        }
+                    }
+                },
+                {
+                    "name": "Count10",
+                    "label": "10 次",
+                    "pipeline_override": {
+                        "GachaMachine.LogCount": {
+                            "focus": {
+                                "Node.Recognition.Succeeded": {
+                                    "content": "【時光扭蛋機】本次設定扭蛋次數：10 次，開始執行。",
+                                    "display": "log"
+                                }
+                            }
+                        },
+                        "GachaMachine.Execute": {
+                            "max_hit": 10
                         }
                     }
                 },
@@ -1869,33 +1919,32 @@
                     }
                 }
             ],
-            "default_case": "Count1"
+            "default_case": "Count2"
         },
         "SakuraBeastBondCount": {
             "type": "select",
-            "label": "幻獸結緣：結緣抽取總次數",
-            "description": "至大櫻花樹執行指定總次數；100、50、20、10 次使用 10 次按鈕，5、1 次使用 1 次按鈕。",
+            "label": "幻獸結緣：結緣總次數",
+            "description": "100／50／20／10 次使用「結緣 10 次」按鈕重複點擊；5／1 次使用「結緣 1 次」按鈕。",
             "cases": [
                 {
                     "name": "Count100",
                     "label": "100 次",
                     "pipeline_override": {
-                        "SakuraTree.BeastBonding.LogCount": {
+                        "SakuraTree.LogCount": {
                             "focus": {
                                 "Node.Recognition.Succeeded": {
-                                    "content": "【幻獸結緣】本次設定結緣抽取總次數：100 次，開始執行。",
+                                    "content": "【幻獸結緣】本次設定結緣總次數：100 次（使用「結緣 10 次」按鈕 10 回），開始執行。",
                                     "display": "log"
                                 }
                             }
                         },
-                        "SakuraTree.BeastBonding.LogInitialCount": {
+                        "SakuraTree.Route": {
                             "next": [
-                                "SakuraTree.BeastBonding.Execute10"
+                                "SakuraTree.Execute10"
                             ]
                         },
-                        "SakuraTree.BeastBonding.Execute10": {
-                            "repeat": 10,
-                            "repeat_delay": 4500
+                        "SakuraTree.Execute10": {
+                            "max_hit": 10
                         }
                     }
                 },
@@ -1903,22 +1952,21 @@
                     "name": "Count50",
                     "label": "50 次",
                     "pipeline_override": {
-                        "SakuraTree.BeastBonding.LogCount": {
+                        "SakuraTree.LogCount": {
                             "focus": {
                                 "Node.Recognition.Succeeded": {
-                                    "content": "【幻獸結緣】本次設定結緣抽取總次數：50 次，開始執行。",
+                                    "content": "【幻獸結緣】本次設定結緣總次數：50 次（使用「結緣 10 次」按鈕 5 回），開始執行。",
                                     "display": "log"
                                 }
                             }
                         },
-                        "SakuraTree.BeastBonding.LogInitialCount": {
+                        "SakuraTree.Route": {
                             "next": [
-                                "SakuraTree.BeastBonding.Execute10"
+                                "SakuraTree.Execute10"
                             ]
                         },
-                        "SakuraTree.BeastBonding.Execute10": {
-                            "repeat": 5,
-                            "repeat_delay": 4500
+                        "SakuraTree.Execute10": {
+                            "max_hit": 5
                         }
                     }
                 },
@@ -1926,22 +1974,21 @@
                     "name": "Count20",
                     "label": "20 次",
                     "pipeline_override": {
-                        "SakuraTree.BeastBonding.LogCount": {
+                        "SakuraTree.LogCount": {
                             "focus": {
                                 "Node.Recognition.Succeeded": {
-                                    "content": "【幻獸結緣】本次設定結緣抽取總次數：20 次，開始執行。",
+                                    "content": "【幻獸結緣】本次設定結緣總次數：20 次（使用「結緣 10 次」按鈕 2 回），開始執行。",
                                     "display": "log"
                                 }
                             }
                         },
-                        "SakuraTree.BeastBonding.LogInitialCount": {
+                        "SakuraTree.Route": {
                             "next": [
-                                "SakuraTree.BeastBonding.Execute10"
+                                "SakuraTree.Execute10"
                             ]
                         },
-                        "SakuraTree.BeastBonding.Execute10": {
-                            "repeat": 2,
-                            "repeat_delay": 4500
+                        "SakuraTree.Execute10": {
+                            "max_hit": 2
                         }
                     }
                 },
@@ -1949,21 +1996,21 @@
                     "name": "Count10",
                     "label": "10 次",
                     "pipeline_override": {
-                        "SakuraTree.BeastBonding.LogCount": {
+                        "SakuraTree.LogCount": {
                             "focus": {
                                 "Node.Recognition.Succeeded": {
-                                    "content": "【幻獸結緣】本次設定結緣抽取總次數：10 次，開始執行。",
+                                    "content": "【幻獸結緣】本次設定結緣總次數：10 次（使用「結緣 10 次」按鈕 1 回），開始執行。",
                                     "display": "log"
                                 }
                             }
                         },
-                        "SakuraTree.BeastBonding.LogInitialCount": {
+                        "SakuraTree.Route": {
                             "next": [
-                                "SakuraTree.BeastBonding.Execute10"
+                                "SakuraTree.Execute10"
                             ]
                         },
-                        "SakuraTree.BeastBonding.Execute10": {
-                            "repeat": 1
+                        "SakuraTree.Execute10": {
+                            "max_hit": 1
                         }
                     }
                 },
@@ -1971,22 +2018,21 @@
                     "name": "Count5",
                     "label": "5 次",
                     "pipeline_override": {
-                        "SakuraTree.BeastBonding.LogCount": {
+                        "SakuraTree.LogCount": {
                             "focus": {
                                 "Node.Recognition.Succeeded": {
-                                    "content": "【幻獸結緣】本次設定結緣抽取總次數：5 次，開始執行。",
+                                    "content": "【幻獸結緣】本次設定結緣總次數：5 次（使用「結緣 1 次」按鈕 5 回），開始執行。",
                                     "display": "log"
                                 }
                             }
                         },
-                        "SakuraTree.BeastBonding.LogInitialCount": {
+                        "SakuraTree.Route": {
                             "next": [
-                                "SakuraTree.BeastBonding.Execute1"
+                                "SakuraTree.Execute1"
                             ]
                         },
-                        "SakuraTree.BeastBonding.Execute1": {
-                            "repeat": 5,
-                            "repeat_delay": 4500
+                        "SakuraTree.Execute1": {
+                            "max_hit": 5
                         }
                     }
                 },
@@ -1994,21 +2040,21 @@
                     "name": "Count1",
                     "label": "1 次",
                     "pipeline_override": {
-                        "SakuraTree.BeastBonding.LogCount": {
+                        "SakuraTree.LogCount": {
                             "focus": {
                                 "Node.Recognition.Succeeded": {
-                                    "content": "【幻獸結緣】本次設定結緣抽取總次數：1 次，開始執行。",
+                                    "content": "【幻獸結緣】本次設定結緣總次數：1 次（使用「結緣 1 次」按鈕 1 回），開始執行。",
                                     "display": "log"
                                 }
                             }
                         },
-                        "SakuraTree.BeastBonding.LogInitialCount": {
+                        "SakuraTree.Route": {
                             "next": [
-                                "SakuraTree.BeastBonding.Execute1"
+                                "SakuraTree.Execute1"
                             ]
                         },
-                        "SakuraTree.BeastBonding.Execute1": {
-                            "repeat": 1
+                        "SakuraTree.Execute1": {
+                            "max_hit": 1
                         }
                     }
                 },
@@ -2023,6 +2069,121 @@
                 }
             ],
             "default_case": "Count10"
+        },
+        "AlchemyDecomposeRounds": {
+            "type": "select",
+            "label": "煉金爐：分解重複輪數上限",
+            "description": "裝備有單次分解數量上限，需要重複「勾選品級 → 分解」。此設定為安全上限，流程仍會在「已選物品」為 0 時提前結束。",
+            "cases": [
+                {
+                    "name": "Rounds1",
+                    "label": "1 輪",
+                    "pipeline_override": {
+                        "Alchemy.Loop.SelectNormal": {
+                            "max_hit": 1
+                        }
+                    }
+                },
+                {
+                    "name": "Rounds2",
+                    "label": "2 輪",
+                    "pipeline_override": {
+                        "Alchemy.Loop.SelectNormal": {
+                            "max_hit": 2
+                        }
+                    }
+                },
+                {
+                    "name": "Rounds4",
+                    "label": "4 輪",
+                    "pipeline_override": {
+                        "Alchemy.Loop.SelectNormal": {
+                            "max_hit": 4
+                        }
+                    }
+                },
+                {
+                    "name": "Rounds6",
+                    "label": "6 輪",
+                    "pipeline_override": {
+                        "Alchemy.Loop.SelectNormal": {
+                            "max_hit": 6
+                        }
+                    }
+                },
+                {
+                    "name": "Rounds8",
+                    "label": "8 輪",
+                    "pipeline_override": {
+                        "Alchemy.Loop.SelectNormal": {
+                            "max_hit": 8
+                        }
+                    }
+                },
+                {
+                    "name": "Rounds12",
+                    "label": "12 輪",
+                    "pipeline_override": {
+                        "Alchemy.Loop.SelectNormal": {
+                            "max_hit": 12
+                        }
+                    }
+                }
+            ],
+            "default_case": "Rounds8"
+        },
+        "BagUseAllRounds": {
+            "type": "select",
+            "label": "背包：一鍵使用重複輪數上限",
+            "description": "「一鍵使用」單次上限 100 個，需要時會重複執行。流程會在按鈕消失時提前結束。",
+            "cases": [
+                {
+                    "name": "Rounds1",
+                    "label": "1 輪",
+                    "pipeline_override": {
+                        "Bag.Loop.UseAll": {
+                            "max_hit": 1
+                        }
+                    }
+                },
+                {
+                    "name": "Rounds2",
+                    "label": "2 輪",
+                    "pipeline_override": {
+                        "Bag.Loop.UseAll": {
+                            "max_hit": 2
+                        }
+                    }
+                },
+                {
+                    "name": "Rounds4",
+                    "label": "4 輪",
+                    "pipeline_override": {
+                        "Bag.Loop.UseAll": {
+                            "max_hit": 4
+                        }
+                    }
+                },
+                {
+                    "name": "Rounds6",
+                    "label": "6 輪",
+                    "pipeline_override": {
+                        "Bag.Loop.UseAll": {
+                            "max_hit": 6
+                        }
+                    }
+                },
+                {
+                    "name": "Rounds10",
+                    "label": "10 輪",
+                    "pipeline_override": {
+                        "Bag.Loop.UseAll": {
+                            "max_hit": 10
+                        }
+                    }
+                }
+            ],
+            "default_case": "Rounds6"
         }
     }
 }
