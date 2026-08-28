@@ -2,7 +2,10 @@
 
 An Android ADB automation project for the Taiwan release of _杖劍傳說：坎斯汀之約_, powered by [MaaFramework](https://github.com/MaaXYZ/MaaFramework).
 
-The project is in early development and currently targets BlueStacks 5 at a portrait resolution of 720 × 1280. Paid-currency spending, purchases, selling, and dismantling are intentionally unsupported.
+> [!WARNING]
+> Connectivity has only been tested with the developer's local BlueStacks 5 instance. Support for other emulators has not been verified, and ADB must be enabled in the emulator before use.
+>
+> Tasks currently exist only as UI entries and definitions. Their execution flows and recognition conditions are all non-functional and must not be considered usable automation.
 
 ## Development
 

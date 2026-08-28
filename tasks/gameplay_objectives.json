@@ -212,9 +212,9 @@
         },
         {
             "name": "AlchemyFurnace",
-            "label": "煉金爐分解裝備與寶石合成",
+            "label": "煉金爐安全檢查",
             "entry": "Objectives.AlchemyFurnace.Start",
-            "description": "至家園右側煉金鍋爐：依設定決定是否勾選排除高戰力，再分解所選裝備；寶石頁執行一鍵合成。",
+            "description": "進入煉金爐分解頁並套用「排除高戰力」設定；未指定分解品級前，不選取、不分解也不合成物品。",
             "group": [
                 "Home"
             ],
@@ -227,9 +227,9 @@
         },
         {
             "name": "BagUseItems",
-            "label": "背包道具一鍵使用",
+            "label": "背包道具安全檢查",
             "entry": "Objectives.Bag.UseItems.Start",
-            "description": "點擊家園寶箱，選擇右下角一鍵使用道具。",
+            "description": "進入家園道具頁確認可操作；未指定可消耗品種類前，不使用任何道具。",
             "group": [
                 "Home"
             ],
@@ -1676,11 +1676,27 @@
             "cases": [
                 {
                     "name": "Enabled",
-                    "label": "勾選"
+                    "label": "勾選",
+                    "pipeline_override": {
+                        "AlchemyFurnace.ExcludeHighPower.Route": {
+                            "next": [
+                                "AlchemyFurnace.ExcludeHighPower.Checked",
+                                "AlchemyFurnace.ExcludeHighPower.Enable"
+                            ]
+                        }
+                    }
                 },
                 {
                     "name": "Disabled",
-                    "label": "不勾選"
+                    "label": "不勾選",
+                    "pipeline_override": {
+                        "AlchemyFurnace.ExcludeHighPower.Route": {
+                            "next": [
+                                "AlchemyFurnace.ExcludeHighPower.Unchecked",
+                                "AlchemyFurnace.ExcludeHighPower.Disable"
+                            ]
+                        }
+                    }
                 }
             ],
             "default_case": "Enabled"
@@ -1688,7 +1704,7 @@
         "GoddessStatuePrayerCount": {
             "type": "select",
             "label": "女神像：祈願次數",
-            "description": "至女神像執行的祈願次數。",
+            "description": "切換至友情祈願後，執行指定次數的「祈願 1 次」。",
             "cases": [
                 {
                     "name": "Count1",
@@ -1717,7 +1733,8 @@
                             }
                         },
                         "GoddessStatue.ExecutePrayer": {
-                            "repeat": 2
+                            "repeat": 2,
+                            "repeat_delay": 4500
                         }
                     }
                 },
@@ -1734,7 +1751,8 @@
                             }
                         },
                         "GoddessStatue.ExecutePrayer": {
-                            "repeat": 3
+                            "repeat": 3,
+                            "repeat_delay": 4500
                         }
                     }
                 },
@@ -1751,7 +1769,8 @@
                             }
                         },
                         "GoddessStatue.ExecutePrayer": {
-                            "repeat": 5
+                            "repeat": 5,
+                            "repeat_delay": 4500
                         }
                     }
                 },
@@ -1770,7 +1789,7 @@
         "TimeGachaCount": {
             "type": "select",
             "label": "時光扭蛋機：扭蛋次數",
-            "description": "至扭蛋台執行的扭蛋次數。",
+            "description": "切換至國度扭蛋後，執行指定次數的「扭蛋 1 次」，不會誤按 10 次。",
             "cases": [
                 {
                     "name": "Count1",
@@ -1799,7 +1818,8 @@
                             }
                         },
                         "GachaMachine.Execute": {
-                            "repeat": 2
+                            "repeat": 2,
+                            "repeat_delay": 4500
                         }
                     }
                 },
@@ -1816,7 +1836,8 @@
                             }
                         },
                         "GachaMachine.Execute": {
-                            "repeat": 3
+                            "repeat": 3,
+                            "repeat_delay": 4500
                         }
                     }
                 },
@@ -1833,7 +1854,8 @@
                             }
                         },
                         "GachaMachine.Execute": {
-                            "repeat": 5
+                            "repeat": 5,
+                            "repeat_delay": 4500
                         }
                     }
                 },
@@ -1852,7 +1874,7 @@
         "SakuraBeastBondCount": {
             "type": "select",
             "label": "幻獸結緣：結緣抽取總次數",
-            "description": "至大櫻花樹執行的結緣總次數。系統將自動依 100 抽、10 抽、1 抽組合解算執行。",
+            "description": "至大櫻花樹執行指定總次數；100、50、20、10 次使用 10 次按鈕，5、1 次使用 1 次按鈕。",
             "cases": [
                 {
                     "name": "Count100",
@@ -1865,6 +1887,15 @@
                                     "display": "log"
                                 }
                             }
+                        },
+                        "SakuraTree.BeastBonding.LogInitialCount": {
+                            "next": [
+                                "SakuraTree.BeastBonding.Execute10"
+                            ]
+                        },
+                        "SakuraTree.BeastBonding.Execute10": {
+                            "repeat": 10,
+                            "repeat_delay": 4500
                         }
                     }
                 },
@@ -1879,6 +1910,15 @@
                                     "display": "log"
                                 }
                             }
+                        },
+                        "SakuraTree.BeastBonding.LogInitialCount": {
+                            "next": [
+                                "SakuraTree.BeastBonding.Execute10"
+                            ]
+                        },
+                        "SakuraTree.BeastBonding.Execute10": {
+                            "repeat": 5,
+                            "repeat_delay": 4500
                         }
                     }
                 },
@@ -1893,6 +1933,15 @@
                                     "display": "log"
                                 }
                             }
+                        },
+                        "SakuraTree.BeastBonding.LogInitialCount": {
+                            "next": [
+                                "SakuraTree.BeastBonding.Execute10"
+                            ]
+                        },
+                        "SakuraTree.BeastBonding.Execute10": {
+                            "repeat": 2,
+                            "repeat_delay": 4500
                         }
                     }
                 },
@@ -1907,6 +1956,14 @@
                                     "display": "log"
                                 }
                             }
+                        },
+                        "SakuraTree.BeastBonding.LogInitialCount": {
+                            "next": [
+                                "SakuraTree.BeastBonding.Execute10"
+                            ]
+                        },
+                        "SakuraTree.BeastBonding.Execute10": {
+                            "repeat": 1
                         }
                     }
                 },
@@ -1921,6 +1978,15 @@
                                     "display": "log"
                                 }
                             }
+                        },
+                        "SakuraTree.BeastBonding.LogInitialCount": {
+                            "next": [
+                                "SakuraTree.BeastBonding.Execute1"
+                            ]
+                        },
+                        "SakuraTree.BeastBonding.Execute1": {
+                            "repeat": 5,
+                            "repeat_delay": 4500
                         }
                     }
                 },
@@ -1935,6 +2001,14 @@
                                     "display": "log"
                                 }
                             }
+                        },
+                        "SakuraTree.BeastBonding.LogInitialCount": {
+                            "next": [
+                                "SakuraTree.BeastBonding.Execute1"
+                            ]
+                        },
+                        "SakuraTree.BeastBonding.Execute1": {
+                            "repeat": 1
                         }
                     }
                 },

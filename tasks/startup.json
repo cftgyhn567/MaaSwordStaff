@@ -4,13 +4,9 @@
             "name": "StartupProbe",
             "label": "進入遊戲",
             "entry": "Startup.Start",
-            "description": "啟動台灣版《杖劍傳說》，自動處理登入頁公告彈窗與點擊進入遊戲，並確認探索或家園主畫面；若目前位於公會頻道，送出返回鍵。",
-            "group": [
-                "Other"
-            ],
-            "controller": [
-                "Android"
-            ]
+            "description": "啟動台服《杖劍傳說》，自動處理登入頁公告彈窗與點擊進入遊戲，並確認探索或家園主畫面；若目前位於公會頻道，送出返回鍵。",
+            "group": ["Other"],
+            "controller": ["Android"]
         }
     ]
 }

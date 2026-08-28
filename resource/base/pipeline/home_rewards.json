@@ -370,15 +370,15 @@
         ]
     },
     "SakuraTree.BeastBonding.EnsureHome": {
-        "recognition": "OCR",
+        "recognition": "TemplateMatch",
         "roi": [
-            290,
-            1200,
-            140,
-            70
+            280,
+            1160,
+            180,
+            120
         ],
-        "expected": "家園",
-        "threshold": 0.2,
+        "template": "navigation/bottom-home.png",
+        "threshold": 0.75,
         "action": "DoNothing",
         "next": [
             "SakuraTree.BeastBonding.ResetToFarRight.Swipe1"
@@ -396,16 +396,16 @@
             0,
             1200,
             720,
-            70
+            80
         ],
-        "expected": "角色",
+        "expected": "角色|筆記|公會|世界|探索",
         "threshold": 0.2,
         "action": "Click",
         "target": [
-            360,
-            1200,
-            40,
-            40
+            300,
+            1160,
+            130,
+            120
         ],
         "post_delay": 800,
         "next": [
@@ -415,13 +415,8 @@
     "SakuraTree.BeastBonding.Nav.Back": {
         "max_hit": 12,
         "recognition": "DirectHit",
-        "action": "Click",
-        "target": [
-            50,
-            1150,
-            100,
-            100
-        ],
+        "action": "ClickKey",
+        "key": 4,
         "post_delay": 700,
         "next": [
             "SakuraTree.BeastBonding.Nav.ExitDialog",
@@ -456,10 +451,10 @@
         "recognition": "DirectHit",
         "action": "Click",
         "target": [
-            360,
-            1200,
-            40,
-            40
+            300,
+            1160,
+            130,
+            120
         ],
         "post_delay": 1000,
         "next": [
@@ -589,7 +584,7 @@
         "duration": 200,
         "post_delay": 150,
         "next": [
-            "SakuraTree.BeastBonding.MoveToSakura.Swipe3"
+            "SakuraTree.BeastBonding.VerifyLog"
         ]
     },
     "SakuraTree.BeastBonding.MoveToSakura.Swipe3": {
@@ -630,15 +625,14 @@
         "recognition": "DirectHit",
         "action": "Click",
         "target": [
-            300,
-            400,
-            200,
-            200
+            330,
+            550,
+            100,
+            100
         ],
-        "post_delay": 1200,
+        "post_delay": 2500,
         "next": [
-            "SakuraTree.BeastBonding.Screen",
-            "SakuraTree.BeastBonding.Back"
+            "SakuraTree.BeastBonding.Screen"
         ]
     },
     "SakuraTree.BeastBonding.Screen": {
@@ -679,20 +673,18 @@
         "expected": "今日已結緣.*",
         "action": "DoNothing",
         "next": [
-            "SakuraTree.BeastBonding.Execute100",
-            "SakuraTree.BeastBonding.Execute10",
-            "SakuraTree.BeastBonding.Execute1"
+            "SakuraTree.BeastBonding.Execute10"
         ]
     },
     "SakuraTree.BeastBonding.Execute10": {
         "recognition": "OCR",
         "roi": [
-            0,
-            800,
-            720,
-            200
+            350,
+            950,
+            370,
+            220
         ],
-        "expected": "結緣10次|結緣 10 次|10次",
+        "expected": "結緣10次",
         "action": "Click",
         "post_delay": 4500,
         "next": [
@@ -718,11 +710,11 @@
         "recognition": "OCR",
         "roi": [
             0,
-            800,
-            720,
-            200
+            950,
+            350,
+            220
         ],
-        "expected": "結緣1次|結緣 1 次|1次",
+        "expected": "結緣1次",
         "action": "Click",
         "post_delay": 4500,
         "next": [
@@ -776,15 +768,15 @@
         ]
     },
     "GoddessStatue.EnsureHome": {
-        "recognition": "OCR",
+        "recognition": "TemplateMatch",
         "roi": [
-            290,
-            1200,
-            140,
-            70
+            280,
+            1160,
+            180,
+            120
         ],
-        "expected": "家園",
-        "threshold": 0.2,
+        "template": "navigation/bottom-home.png",
+        "threshold": 0.75,
         "action": "DoNothing",
         "next": [
             "GoddessStatue.ResetToFarRight.Swipe1"
@@ -802,16 +794,16 @@
             0,
             1200,
             720,
-            70
+            80
         ],
-        "expected": "角色",
+        "expected": "角色|筆記|公會|世界|探索",
         "threshold": 0.2,
         "action": "Click",
         "target": [
-            360,
-            1200,
-            40,
-            40
+            300,
+            1160,
+            130,
+            120
         ],
         "post_delay": 800,
         "next": [
@@ -821,13 +813,8 @@
     "GoddessStatue.Nav.Back": {
         "max_hit": 12,
         "recognition": "DirectHit",
-        "action": "Click",
-        "target": [
-            50,
-            1150,
-            100,
-            100
-        ],
+        "action": "ClickKey",
+        "key": 4,
         "post_delay": 700,
         "next": [
             "GoddessStatue.Nav.ExitDialog",
@@ -862,10 +849,10 @@
         "recognition": "DirectHit",
         "action": "Click",
         "target": [
-            360,
-            1200,
-            40,
-            40
+            300,
+            1160,
+            130,
+            120
         ],
         "post_delay": 1000,
         "next": [
@@ -1015,15 +1002,14 @@
         "recognition": "DirectHit",
         "action": "Click",
         "target": [
-            550,
-            550,
-            150,
-            150
+            640,
+            700,
+            80,
+            110
         ],
-        "post_delay": 1200,
+        "post_delay": 2500,
         "next": [
-            "GoddessStatue.Screen",
-            "GoddessStatue.Back"
+            "GoddessStatue.Screen"
         ]
     },
     "GoddessStatue.Screen": {
@@ -1035,6 +1021,34 @@
             350
         ],
         "expected": "祈願|女神像|友情祈願",
+        "action": "DoNothing",
+        "next": [
+            "GoddessStatue.SelectFriendship"
+        ]
+    },
+    "GoddessStatue.SelectFriendship": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            480,
+            1030,
+            200,
+            150
+        ],
+        "post_delay": 1200,
+        "next": [
+            "GoddessStatue.FriendshipScreen"
+        ]
+    },
+    "GoddessStatue.FriendshipScreen": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            0,
+            720,
+            1150
+        ],
+        "expected": "友情祈願",
         "action": "DoNothing",
         "next": [
             "GoddessStatue.LogCount"
@@ -1056,12 +1070,12 @@
     "GoddessStatue.ExecutePrayer": {
         "recognition": "OCR",
         "roi": [
-            0,
-            700,
-            720,
-            450
+            40,
+            900,
+            310,
+            180
         ],
-        "expected": "友情祈願|祈願1次|祈願10次|祈願.*",
+        "expected": "祈願1次",
         "action": "Click",
         "post_delay": 4500,
         "next": [
@@ -1070,13 +1084,8 @@
     },
     "GoddessStatue.Back": {
         "recognition": "DirectHit",
-        "action": "Click",
-        "target": [
-            50,
-            1150,
-            100,
-            100
-        ],
+        "action": "ClickKey",
+        "key": 4,
         "post_delay": 1500,
         "focus": {
             "Node.Recognition.Succeeded": {
@@ -1095,15 +1104,15 @@
         ]
     },
     "GachaMachine.EnsureHome": {
-        "recognition": "OCR",
+        "recognition": "TemplateMatch",
         "roi": [
-            290,
-            1200,
-            140,
-            70
+            280,
+            1160,
+            180,
+            120
         ],
-        "expected": "家園",
-        "threshold": 0.2,
+        "template": "navigation/bottom-home.png",
+        "threshold": 0.75,
         "action": "DoNothing",
         "next": [
             "GachaMachine.ResetToFarRight.Swipe1"
@@ -1121,16 +1130,16 @@
             0,
             1200,
             720,
-            70
+            80
         ],
-        "expected": "角色",
+        "expected": "角色|筆記|公會|世界|探索",
         "threshold": 0.2,
         "action": "Click",
         "target": [
-            360,
-            1200,
-            40,
-            40
+            300,
+            1160,
+            130,
+            120
         ],
         "post_delay": 800,
         "next": [
@@ -1140,13 +1149,8 @@
     "GachaMachine.Nav.Back": {
         "max_hit": 12,
         "recognition": "DirectHit",
-        "action": "Click",
-        "target": [
-            50,
-            1150,
-            100,
-            100
-        ],
+        "action": "ClickKey",
+        "key": 4,
         "post_delay": 700,
         "next": [
             "GachaMachine.Nav.ExitDialog",
@@ -1181,10 +1185,10 @@
         "recognition": "DirectHit",
         "action": "Click",
         "target": [
-            360,
-            1200,
-            40,
-            40
+            300,
+            1160,
+            130,
+            120
         ],
         "post_delay": 1000,
         "next": [
@@ -1313,15 +1317,14 @@
         "recognition": "DirectHit",
         "action": "Click",
         "target": [
-            150,
-            600,
-            150,
-            150
+            50,
+            730,
+            100,
+            130
         ],
-        "post_delay": 1200,
+        "post_delay": 2500,
         "next": [
-            "GachaMachine.Screen",
-            "GachaMachine.Back"
+            "GachaMachine.Screen"
         ]
     },
     "GachaMachine.Screen": {
@@ -1334,6 +1337,21 @@
         ],
         "expected": "扭蛋|國度|時光扭蛋",
         "action": "DoNothing",
+        "next": [
+            "GachaMachine.SelectNation"
+        ]
+    },
+    "GachaMachine.SelectNation": {
+        "recognition": "OCR",
+        "roi": [
+            120,
+            1140,
+            230,
+            140
+        ],
+        "expected": "國度",
+        "action": "Click",
+        "post_delay": 1000,
         "next": [
             "GachaMachine.LogCount"
         ]
@@ -1354,12 +1372,12 @@
     "GachaMachine.Execute": {
         "recognition": "OCR",
         "roi": [
-            0,
-            800,
-            720,
-            400
+            40,
+            980,
+            310,
+            190
         ],
-        "expected": "扭蛋1次|扭蛋 1 次|扭蛋10次|扭蛋",
+        "expected": "扭蛋1次",
         "action": "Click",
         "post_delay": 4500,
         "next": [
@@ -1368,13 +1386,8 @@
     },
     "GachaMachine.Back": {
         "recognition": "DirectHit",
-        "action": "Click",
-        "target": [
-            50,
-            1150,
-            100,
-            100
-        ],
+        "action": "ClickKey",
+        "key": 4,
         "post_delay": 1500,
         "focus": {
             "Node.Recognition.Succeeded": {
@@ -1393,15 +1406,15 @@
         ]
     },
     "Bag.EnsureHome": {
-        "recognition": "OCR",
+        "recognition": "TemplateMatch",
         "roi": [
-            290,
-            1200,
-            140,
-            70
+            280,
+            1160,
+            180,
+            120
         ],
-        "expected": "家園",
-        "threshold": 0.2,
+        "template": "navigation/bottom-home.png",
+        "threshold": 0.75,
         "action": "DoNothing",
         "next": [
             "Bag.ResetToFarRight.Swipe1"
@@ -1419,16 +1432,16 @@
             0,
             1200,
             720,
-            70
+            80
         ],
-        "expected": "角色",
+        "expected": "角色|筆記|公會|世界|探索",
         "threshold": 0.2,
         "action": "Click",
         "target": [
-            360,
-            1200,
-            40,
-            40
+            300,
+            1160,
+            130,
+            120
         ],
         "post_delay": 800,
         "next": [
@@ -1438,13 +1451,8 @@
     "Bag.Nav.Back": {
         "max_hit": 12,
         "recognition": "DirectHit",
-        "action": "Click",
-        "target": [
-            50,
-            1150,
-            100,
-            100
-        ],
+        "action": "ClickKey",
+        "key": 4,
         "post_delay": 700,
         "next": [
             "Bag.Nav.ExitDialog",
@@ -1479,10 +1487,10 @@
         "recognition": "DirectHit",
         "action": "Click",
         "target": [
-            360,
-            1200,
-            40,
-            40
+            300,
+            1160,
+            130,
+            120
         ],
         "post_delay": 1000,
         "next": [
@@ -1590,15 +1598,14 @@
         "recognition": "DirectHit",
         "action": "Click",
         "target": [
-            100,
-            700,
-            60,
-            60
+            40,
+            800,
+            130,
+            140
         ],
-        "post_delay": 1200,
+        "post_delay": 2000,
         "next": [
-            "Bag.Screen",
-            "Bag.Back"
+            "Bag.Screen"
         ]
     },
     "Bag.Screen": {
@@ -1612,9 +1619,21 @@
         "expected": "古遺物|背包|道具|全部",
         "action": "DoNothing",
         "next": [
-            "Bag.ExecuteUse",
-            "Bag.Back"
+            "Bag.SafeSkip"
         ]
+    },
+    "Bag.SafeSkip": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Bag.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【背包道具】已確認進入道具頁；未指定可消耗品種類，本次不使用任何道具。",
+                "display": "log"
+            }
+        }
     },
     "Bag.ExecuteUse": {
         "recognition": "OCR",
@@ -1638,7 +1657,7 @@
         "post_delay": 800,
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【背包道具】完成道具/古遺物操作並返回家園首頁。",
+                "content": "【背包道具】安全檢查完成，未消耗道具，已返回家園首頁。",
                 "display": "log"
             }
         }
@@ -1653,15 +1672,15 @@
         ]
     },
     "AlchemyFurnace.EnsureHome": {
-        "recognition": "OCR",
+        "recognition": "TemplateMatch",
         "roi": [
-            290,
-            1200,
-            140,
-            70
+            280,
+            1160,
+            180,
+            120
         ],
-        "expected": "家園",
-        "threshold": 0.2,
+        "template": "navigation/bottom-home.png",
+        "threshold": 0.75,
         "action": "DoNothing",
         "next": [
             "AlchemyFurnace.ResetToFarRight.Swipe1"
@@ -1679,16 +1698,16 @@
             0,
             1200,
             720,
-            70
+            80
         ],
-        "expected": "角色",
+        "expected": "角色|筆記|公會|世界|探索",
         "threshold": 0.2,
         "action": "Click",
         "target": [
-            360,
-            1200,
-            40,
-            40
+            300,
+            1160,
+            130,
+            120
         ],
         "post_delay": 800,
         "next": [
@@ -1698,13 +1717,8 @@
     "AlchemyFurnace.Nav.Back": {
         "max_hit": 12,
         "recognition": "DirectHit",
-        "action": "Click",
-        "target": [
-            50,
-            1150,
-            100,
-            100
-        ],
+        "action": "ClickKey",
+        "key": 4,
         "post_delay": 700,
         "next": [
             "AlchemyFurnace.Nav.ExitDialog",
@@ -1739,10 +1753,10 @@
         "recognition": "DirectHit",
         "action": "Click",
         "target": [
-            360,
-            1200,
-            40,
-            40
+            300,
+            1160,
+            130,
+            120
         ],
         "post_delay": 1000,
         "next": [
@@ -1850,15 +1864,14 @@
         "recognition": "DirectHit",
         "action": "Click",
         "target": [
-            580,
-            680,
-            60,
-            60
+            560,
+            770,
+            100,
+            110
         ],
-        "post_delay": 1200,
+        "post_delay": 2000,
         "next": [
-            "AlchemyFurnace.Screen",
-            "AlchemyFurnace.Back"
+            "AlchemyFurnace.Screen"
         ]
     },
     "AlchemyFurnace.Screen": {
@@ -1872,9 +1885,128 @@
         "expected": "煉金|分解|合成|熔煉",
         "action": "DoNothing",
         "next": [
-            "AlchemyFurnace.Execute",
-            "AlchemyFurnace.Back"
+            "AlchemyFurnace.OpenDecompose"
         ]
+    },
+    "AlchemyFurnace.OpenDecompose": {
+        "recognition": "OCR",
+        "roi": [
+            350,
+            1160,
+            170,
+            120
+        ],
+        "expected": "分解",
+        "action": "Click",
+        "post_delay": 1200,
+        "next": [
+            "AlchemyFurnace.DecomposeScreen"
+        ]
+    },
+    "AlchemyFurnace.DecomposeScreen": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            780,
+            720,
+            240
+        ],
+        "expected": "已選物品|排除高戰力",
+        "action": "DoNothing",
+        "next": [
+            "AlchemyFurnace.ExcludeHighPower.Route"
+        ]
+    },
+    "AlchemyFurnace.ExcludeHighPower.Route": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "AlchemyFurnace.ExcludeHighPower.Checked",
+            "AlchemyFurnace.ExcludeHighPower.Enable"
+        ]
+    },
+    "AlchemyFurnace.ExcludeHighPower.Checked": {
+        "recognition": "ColorMatch",
+        "roi": [
+            545,
+            885,
+            25,
+            25
+        ],
+        "method": 6,
+        "lower": [
+            0
+        ],
+        "upper": [
+            80
+        ],
+        "count": 200,
+        "action": "DoNothing",
+        "next": [
+            "AlchemyFurnace.SafeSkip"
+        ]
+    },
+    "AlchemyFurnace.ExcludeHighPower.Enable": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            535,
+            875,
+            50,
+            50
+        ],
+        "post_delay": 500,
+        "next": [
+            "AlchemyFurnace.SafeSkip"
+        ]
+    },
+    "AlchemyFurnace.ExcludeHighPower.Unchecked": {
+        "recognition": "ColorMatch",
+        "roi": [
+            545,
+            885,
+            25,
+            25
+        ],
+        "method": 6,
+        "lower": [
+            130
+        ],
+        "upper": [
+            200
+        ],
+        "count": 350,
+        "action": "DoNothing",
+        "next": [
+            "AlchemyFurnace.SafeSkip"
+        ]
+    },
+    "AlchemyFurnace.ExcludeHighPower.Disable": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            535,
+            875,
+            50,
+            50
+        ],
+        "post_delay": 500,
+        "next": [
+            "AlchemyFurnace.SafeSkip"
+        ]
+    },
+    "AlchemyFurnace.SafeSkip": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "AlchemyFurnace.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【煉金爐】已套用「排除高戰力」設定；未指定分解品級，本次不選取或分解裝備。",
+                "display": "log"
+            }
+        }
     },
     "AlchemyFurnace.Execute": {
         "recognition": "OCR",
@@ -1898,7 +2030,7 @@
         "post_delay": 800,
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【煉金爐】完成裝備分解與合成操作並返回家園首頁。",
+                "content": "【煉金爐】安全檢查完成，未分解或合成物品，已返回家園首頁。",
                 "display": "log"
             }
         }

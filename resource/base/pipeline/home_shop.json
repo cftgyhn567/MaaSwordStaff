@@ -9,15 +9,15 @@
         ]
     },
     "HomeShop.EnsureHome": {
-        "recognition": "OCR",
+        "recognition": "TemplateMatch",
         "roi": [
-            290,
-            1200,
-            140,
-            70
+            280,
+            1160,
+            180,
+            120
         ],
-        "expected": "家園",
-        "threshold": 0.2,
+        "template": "navigation/bottom-home.png",
+        "threshold": 0.75,
         "action": "DoNothing",
         "next": [
             "HomeShop.ResetToFarRight.Swipe1"
@@ -35,16 +35,16 @@
             0,
             1200,
             720,
-            70
+            80
         ],
-        "expected": "角色",
+        "expected": "角色|筆記|公會|世界|探索",
         "threshold": 0.2,
         "action": "Click",
         "target": [
-            360,
-            1200,
-            40,
-            40
+            300,
+            1160,
+            130,
+            120
         ],
         "post_delay": 800,
         "next": [
@@ -54,13 +54,8 @@
     "HomeShop.Nav.Back": {
         "max_hit": 12,
         "recognition": "DirectHit",
-        "action": "Click",
-        "target": [
-            50,
-            1150,
-            100,
-            100
-        ],
+        "action": "ClickKey",
+        "key": 4,
         "post_delay": 700,
         "next": [
             "HomeShop.Nav.ExitDialog",
@@ -95,10 +90,10 @@
         "recognition": "DirectHit",
         "action": "Click",
         "target": [
-            360,
-            1200,
-            40,
-            40
+            300,
+            1160,
+            130,
+            120
         ],
         "post_delay": 1000,
         "next": [
@@ -214,7 +209,6 @@
         "recognition": "DirectHit",
         "action": "DoNothing",
         "next": [
-            "HomeShop.FindRedDot",
             "HomeShop.DirectClick"
         ],
         "focus": {
@@ -251,15 +245,14 @@
         "recognition": "DirectHit",
         "action": "Click",
         "target": [
-            380,
-            580,
-            80,
-            80
+            150,
+            740,
+            180,
+            180
         ],
-        "post_delay": 1200,
+        "post_delay": 2000,
         "next": [
-            "HomeShop.Screen",
-            "HomeShop.Back"
+            "HomeShop.Screen"
         ]
     },
     "HomeShop.Screen": {
@@ -273,12 +266,21 @@
         "expected": "雜貨|商會|商店",
         "action": "DoNothing",
         "next": [
-            "HomeShop.Grocery.RoughStone",
-            "HomeShop.Grocery.OrdinaryFreezeDried",
-            "HomeShop.Grocery.RareTimeSand",
-            "HomeShop.Grocery.BattleEssence",
-            "HomeShop.Back"
+            "HomeShop.InspectOnly"
         ]
+    },
+    "HomeShop.InspectOnly": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "HomeShop.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】已確認進入商店；依安全設定不購買商品、不刷新商店。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.RoughStone": {
         "recognition": "OCR",
@@ -353,7 +355,7 @@
         "post_delay": 800,
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【家園商店】完成商店商品購買並返回家園首頁。",
+                "content": "【家園商店】安全檢查完成，未購買或刷新，已返回家園首頁。",
                 "display": "log"
             }
         }

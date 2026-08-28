@@ -4,7 +4,6 @@
     "label": "Maa杖劍傳說助手",
     "version": "v0.1.0",
     "description": "透過 Android 模擬器與 ADB 執行《杖劍傳說：坎斯汀之約》日常流程。",
-    "welcome": "目前為開發版本。所有消耗付費貨幣、購買、出售及分解類功能均不會自動執行。",
     "controller": [
         {
             "name": "Android",
@@ -16,10 +15,8 @@
     "resource": [
         {
             "name": "base",
-            "label": "台灣版",
-            "path": [
-                "./resource/base"
-            ]
+            "label": "台服",
+            "path": ["./resource/base"]
         }
     ],
     "group": [

@@ -93,19 +93,19 @@
         "action": "DoNothing"
     },
     "Home.EnsureHomeScreen.CheckActive": {
-        "recognition": "OCR",
+        "recognition": "TemplateMatch",
         "roi": [
-            285,
-            1180,
+            280,
+            1160,
             180,
-            100
+            120
         ],
-        "expected": "家園",
-        "threshold": 0.2,
+        "template": "navigation/bottom-home.png",
+        "threshold": 0.75,
         "action": "DoNothing",
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【導航】偵測到底部導航列「家園」文字，確認目前在家園首頁。",
+                "content": "【導航】已辨識到家園頁籤圖示，確認目前在家園首頁。",
                 "display": "log"
             }
         }
