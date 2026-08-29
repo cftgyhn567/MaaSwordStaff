@@ -12,11 +12,22 @@
             "display_short_side": 720
         }
     ],
+    "agent": [
+        {
+            "child_exec": "python",
+            "child_args": [
+                "-u",
+                "./agent/main.py"
+            ]
+        }
+    ],
     "resource": [
         {
             "name": "base",
             "label": "台服",
-            "path": ["./resource/base"]
+            "path": [
+                "./resource/base"
+            ]
         }
     ],
     "group": [

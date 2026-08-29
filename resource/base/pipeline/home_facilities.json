@@ -349,7 +349,9 @@
         "threshold": 0.3,
         "action": "DoNothing",
         "next": [
-            "Alchemy.OpenDecompose"
+            "Alchemy.OpenDecompose",
+            "Alchemy.OpenDecompose.Retry",
+            "Alchemy.Gem.Open"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
@@ -1168,7 +1170,8 @@
         "threshold": 0.3,
         "action": "DoNothing",
         "next": [
-            "Bag.Loop.UseAll"
+            "Bag.Loop.UseAll",
+            "Bag.NoMore"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
@@ -1683,7 +1686,9 @@
         "threshold": 0.3,
         "action": "DoNothing",
         "next": [
-            "HomeShop.Grocery.Tab"
+            "HomeShop.Grocery.Tab",
+            "HomeShop.Treasury.Tab",
+            "HomeShop.Back"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
@@ -2042,6 +2047,10 @@
             }
         }
     },
+    "Agent.Log": {
+        "recognition": "DirectHit",
+        "action": "DoNothing"
+    },
     "Objectives.GachaMachine.Start": {
         "recognition": "DirectHit",
         "action": "DoNothing",
@@ -2052,7 +2061,7 @@
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【時光扭蛋機】開始執行：國度扭蛋。",
+                "content": "【時光扭蛋機】開始執行：時光扭蛋機。",
                 "display": "log"
             }
         }
@@ -2419,7 +2428,8 @@
         "threshold": 0.3,
         "action": "DoNothing",
         "next": [
-            "GachaMachine.SelectNation"
+            "GachaMachine.SelectNation",
+            "GachaMachine.Realm.Route"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
@@ -2441,69 +2451,327 @@
         "action": "Click",
         "post_delay": 2000,
         "next": [
-            "GachaMachine.LogCount"
+            "GachaMachine.Realm.Route"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【時光扭蛋機】切換到「國度」扭蛋池。",
+                "content": "【時光扭蛋機】切換到「國度」分頁。",
                 "display": "log"
             }
         }
     },
-    "GachaMachine.LogCount": {
+    "GachaMachine.Realm.Route": {
         "recognition": "DirectHit",
         "action": "DoNothing",
         "next": [
-            "GachaMachine.Execute"
-        ],
-        "focus": {
-            "Node.Recognition.Succeeded": {
-                "content": "【時光扭蛋機】本次設定扭蛋次數：1 次，開始執行。",
-                "display": "log"
-            }
-        }
+            "GachaMachine.Realm.Keep"
+        ]
     },
-    "GachaMachine.Execute": {
-        "max_hit": 1,
-        "recognition": "OCR",
-        "roi": [
-            5,
-            1055,
-            355,
-            95
-        ],
-        "expected": "扭蛋1次",
-        "threshold": 0.3,
-        "action": "Click",
-        "post_delay": 4800,
+    "GachaMachine.Realm.Keep": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
         "next": [
-            "GachaMachine.Execute",
-            "GachaMachine.Verify"
+            "GachaMachine.Pull.Route"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【時光扭蛋機】點擊「扭蛋 1 次」。",
+                "content": "【時光扭蛋機】未指定國度系列，維持遊戲中目前選擇的扭蛋機。",
                 "display": "log"
             }
         }
     },
-    "GachaMachine.Verify": {
+    "GachaMachine.Realm.Open": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            645,
+            155,
+            62,
+            58
+        ],
+        "post_delay": 2200,
+        "next": [
+            "GachaMachine.Realm.Dialog",
+            "GachaMachine.Realm.Open.Retry"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【時光扭蛋機】點右上角切換鈕，開啟「切換扭蛋機」視窗…",
+                "display": "log"
+            }
+        }
+    },
+    "GachaMachine.Realm.Open.Retry": {
+        "max_hit": 3,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            645,
+            155,
+            62,
+            58
+        ],
+        "post_delay": 2200,
+        "next": [
+            "GachaMachine.Realm.Dialog",
+            "GachaMachine.Realm.Open.Retry",
+            "GachaMachine.Realm.Unavailable"
+        ]
+    },
+    "GachaMachine.Realm.Unavailable": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GachaMachine.Pull.Route"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【時光扭蛋機】開不了「切換扭蛋機」視窗，維持目前扭蛋機繼續執行。",
+                "display": "log"
+            }
+        }
+    },
+    "GachaMachine.Realm.Dialog": {
         "recognition": "OCR",
         "roi": [
-            0,
-            25,
-            420,
-            62
+            180,
+            255,
+            360,
+            70
         ],
-        "expected": "今日已開啟",
+        "expected": "切換扭蛋機",
         "threshold": 0.3,
         "action": "DoNothing",
         "next": [
+            "GachaMachine.Realm.Top1"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【時光扭蛋機】已開啟「切換扭蛋機」視窗，捲動到清單最上方…",
+                "display": "log"
+            }
+        }
+    },
+    "GachaMachine.Realm.Top1": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            360,
+            500,
+            10,
+            10
+        ],
+        "end": [
+            360,
+            880,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GachaMachine.Realm.Top2"
+        ]
+    },
+    "GachaMachine.Realm.Top2": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            360,
+            500,
+            10,
+            10
+        ],
+        "end": [
+            360,
+            880,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GachaMachine.Realm.Top3"
+        ]
+    },
+    "GachaMachine.Realm.Top3": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            360,
+            500,
+            10,
+            10
+        ],
+        "end": [
+            360,
+            880,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GachaMachine.Realm.Top4"
+        ]
+    },
+    "GachaMachine.Realm.Top4": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            360,
+            500,
+            10,
+            10
+        ],
+        "end": [
+            360,
+            880,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GachaMachine.Realm.Find"
+        ]
+    },
+    "GachaMachine.Realm.Find": {
+        "max_hit": 1,
+        "recognition": "OCR",
+        "roi": [
+            95,
+            375,
+            545,
+            565
+        ],
+        "expected": "霜焰共舞",
+        "threshold": 0.3,
+        "action": "Click",
+        "post_delay": 1200,
+        "next": [
+            "GachaMachine.Realm.Confirm",
+            "GachaMachine.Realm.ScrollDown"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【時光扭蛋機】在清單中找到指定的扭蛋機系列，選取之。",
+                "display": "log"
+            }
+        }
+    },
+    "GachaMachine.Realm.ScrollDown": {
+        "max_hit": 8,
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            360,
+            850,
+            10,
+            10
+        ],
+        "end": [
+            360,
+            520,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 1000,
+        "next": [
+            "GachaMachine.Realm.Find",
+            "GachaMachine.Realm.ScrollDown",
+            "GachaMachine.Realm.NotFound"
+        ]
+    },
+    "GachaMachine.Realm.NotFound": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GachaMachine.Realm.Confirm"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【時光扭蛋機】清單中找不到指定的扭蛋機系列，維持原本選擇。",
+                "display": "log"
+            }
+        }
+    },
+    "GachaMachine.Realm.Confirm": {
+        "recognition": "OCR",
+        "roi": [
+            230,
+            950,
+            260,
+            70
+        ],
+        "expected": "確認",
+        "threshold": 0.3,
+        "action": "Click",
+        "post_delay": 2200,
+        "next": [
+            "GachaMachine.Pull.Route"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【時光扭蛋機】按下「確認」套用扭蛋機選擇。",
+                "display": "log"
+            }
+        }
+    },
+    "GachaMachine.Pull.Route": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GachaMachine.Pull.Deduct"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【時光扭蛋機】開始依設定次數抽取…",
+                "display": "log"
+            }
+        }
+    },
+    "GachaMachine.Pull.Deduct": {
+        "recognition": "DirectHit",
+        "action": "Custom",
+        "custom_action": "PullByCount",
+        "custom_action_param": {
+            "profile": "gacha",
+            "total": 2,
+            "deduct_done": true
+        },
+        "next": [
+            "GachaMachine.Back"
+        ],
+        "on_error": [
             "GachaMachine.Back"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【時光扭蛋機】已在結果畫面看到「今日已開啟」計數，確認扭蛋實際執行。",
+                "content": "【時光扭蛋機】次數計算方式：扣除今日已抽過的次數。",
+                "display": "log"
+            }
+        }
+    },
+    "GachaMachine.Pull.Raw": {
+        "recognition": "DirectHit",
+        "action": "Custom",
+        "custom_action": "PullByCount",
+        "custom_action_param": {
+            "profile": "gacha",
+            "total": 2,
+            "deduct_done": false
+        },
+        "next": [
+            "GachaMachine.Back"
+        ],
+        "on_error": [
+            "GachaMachine.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【時光扭蛋機】次數計算方式：不扣除今日已抽過的次數。",
                 "display": "log"
             }
         }
@@ -2573,7 +2841,7 @@
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【女神像祈願】開始執行：友情祈願。",
+                "content": "【女神像祈願】開始執行：女神像祈願。",
                 "display": "log"
             }
         }
@@ -2961,7 +3229,10 @@
         "threshold": 0.3,
         "action": "DoNothing",
         "next": [
-            "GoddessStatue.SelectFriendship"
+            "GoddessStatue.Pool.Select",
+            "GoddessStatue.Pool.ScrollLeft",
+            "GoddessStatue.Pool.ScrollRight",
+            "GoddessStatue.Pool.NotFound"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
@@ -2970,136 +3241,166 @@
             }
         }
     },
-    "GoddessStatue.SelectFriendship": {
-        "recognition": "OCR",
-        "roi": [
-            395,
-            1072,
-            325,
-            66
-        ],
-        "expected": "友情祈願",
-        "threshold": 0.3,
-        "action": "Click",
-        "post_delay": 2400,
-        "next": [
-            "GoddessStatue.FriendshipReady",
-            "GoddessStatue.SelectFriendship.Retry"
-        ],
-        "focus": {
-            "Node.Recognition.Succeeded": {
-                "content": "【女神像祈願】切換到「友情祈願」。",
-                "display": "log"
-            }
-        }
-    },
-    "GoddessStatue.SelectFriendship.Retry": {
-        "max_hit": 3,
-        "recognition": "OCR",
-        "roi": [
-            395,
-            1072,
-            325,
-            66
-        ],
-        "expected": "友情祈願",
-        "threshold": 0.3,
-        "action": "Click",
-        "post_delay": 2400,
-        "next": [
-            "GoddessStatue.FriendshipReady",
-            "GoddessStatue.SelectFriendship.Retry",
-            "GoddessStatue.Failed"
-        ]
-    },
-    "GoddessStatue.Failed": {
-        "recognition": "DirectHit",
-        "action": "DoNothing",
-        "next": [
-            "GoddessStatue.Back"
-        ],
-        "focus": {
-            "Node.Recognition.Succeeded": {
-                "content": "【女神像祈願】無法切換到「友情祈願」，安全結束，未執行祈願。",
-                "display": "log"
-            }
-        }
-    },
-    "GoddessStatue.FriendshipReady": {
-        "recognition": "OCR",
-        "roi": [
-            55,
-            940,
-            310,
-            200
-        ],
-        "expected": "祈願1次",
-        "threshold": 0.3,
-        "action": "DoNothing",
-        "next": [
-            "GoddessStatue.LogCount"
-        ],
-        "focus": {
-            "Node.Recognition.Succeeded": {
-                "content": "【女神像祈願】已在友情祈願頁看到「祈願 1 次」按鈕。",
-                "display": "log"
-            }
-        }
-    },
-    "GoddessStatue.LogCount": {
-        "recognition": "DirectHit",
-        "action": "DoNothing",
-        "next": [
-            "GoddessStatue.Execute"
-        ],
-        "focus": {
-            "Node.Recognition.Succeeded": {
-                "content": "【女神像祈願】本次設定祈願次數：1 次，開始執行。",
-                "display": "log"
-            }
-        }
-    },
-    "GoddessStatue.Execute": {
+    "GoddessStatue.Pool.Select": {
         "max_hit": 1,
         "recognition": "OCR",
         "roi": [
-            55,
-            940,
-            310,
-            200
+            0,
+            1055,
+            720,
+            100
         ],
-        "expected": "祈願1次",
+        "expected": "友情祈願",
         "threshold": 0.3,
         "action": "Click",
-        "post_delay": 4800,
+        "post_delay": 2400,
         "next": [
-            "GoddessStatue.Execute",
-            "GoddessStatue.Verify"
+            "GoddessStatue.Pool.Ready",
+            "GoddessStatue.Pool.ScrollLeft",
+            "GoddessStatue.Pool.ScrollRight"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【女神像祈願】點擊「祈願 1 次」。",
+                "content": "【女神像祈願】切換到指定的祈願池。",
                 "display": "log"
             }
         }
     },
-    "GoddessStatue.Verify": {
-        "recognition": "OCR",
-        "roi": [
-            0,
-            25,
-            420,
-            62
+    "GoddessStatue.Pool.ScrollLeft": {
+        "max_hit": 3,
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            200,
+            1103,
+            10,
+            10
         ],
-        "expected": "今日已祈願",
-        "threshold": 0.3,
+        "end": [
+            660,
+            1103,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 1200,
+        "next": [
+            "GoddessStatue.Pool.Select",
+            "GoddessStatue.Pool.ScrollLeft",
+            "GoddessStatue.Pool.ScrollRight"
+        ]
+    },
+    "GoddessStatue.Pool.ScrollRight": {
+        "max_hit": 6,
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            660,
+            1103,
+            10,
+            10
+        ],
+        "end": [
+            200,
+            1103,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 1200,
+        "next": [
+            "GoddessStatue.Pool.Select",
+            "GoddessStatue.Pool.ScrollRight",
+            "GoddessStatue.Pool.NotFound"
+        ]
+    },
+    "GoddessStatue.Pool.NotFound": {
+        "recognition": "DirectHit",
         "action": "DoNothing",
         "next": [
             "GoddessStatue.Back"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【女神像祈願】已在結果畫面看到「今日已祈願」計數，確認祈願實際執行。",
+                "content": "【女神像祈願】左右捲動後仍找不到指定的祈願池，安全結束，未執行祈願。",
+                "display": "log"
+            }
+        }
+    },
+    "GoddessStatue.Pool.Ready": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            935,
+            720,
+            215
+        ],
+        "expected": "祈願\\d+次",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "GoddessStatue.Pull.Route"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【女神像祈願】已在祈願池看到抽取按鈕。",
+                "display": "log"
+            }
+        }
+    },
+    "GoddessStatue.Pull.Route": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GoddessStatue.Pull.Deduct"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【女神像祈願】開始依設定次數抽取…",
+                "display": "log"
+            }
+        }
+    },
+    "GoddessStatue.Pull.Deduct": {
+        "recognition": "DirectHit",
+        "action": "Custom",
+        "custom_action": "PullByCount",
+        "custom_action_param": {
+            "profile": "prayer",
+            "total": 2,
+            "deduct_done": true
+        },
+        "next": [
+            "GoddessStatue.Back"
+        ],
+        "on_error": [
+            "GoddessStatue.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【女神像祈願】次數計算方式：扣除今日已抽過的次數。",
+                "display": "log"
+            }
+        }
+    },
+    "GoddessStatue.Pull.Raw": {
+        "recognition": "DirectHit",
+        "action": "Custom",
+        "custom_action": "PullByCount",
+        "custom_action_param": {
+            "profile": "prayer",
+            "total": 2,
+            "deduct_done": false
+        },
+        "next": [
+            "GoddessStatue.Back"
+        ],
+        "on_error": [
+            "GoddessStatue.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【女神像祈願】次數計算方式：不扣除今日已抽過的次數。",
                 "display": "log"
             }
         }
@@ -3557,7 +3858,7 @@
         "threshold": 0.3,
         "action": "DoNothing",
         "next": [
-            "SakuraTree.LogCount"
+            "SakuraTree.Pull.Route"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
@@ -3566,91 +3867,59 @@
             }
         }
     },
-    "SakuraTree.LogCount": {
+    "SakuraTree.Pull.Route": {
         "recognition": "DirectHit",
         "action": "DoNothing",
         "next": [
-            "SakuraTree.Route"
+            "SakuraTree.Pull.Deduct"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【幻獸結緣】本次設定結緣總次數：10 次，開始執行。",
+                "content": "【幻獸結緣】開始依設定次數抽取…",
                 "display": "log"
             }
         }
     },
-    "SakuraTree.Route": {
+    "SakuraTree.Pull.Deduct": {
         "recognition": "DirectHit",
-        "action": "DoNothing",
+        "action": "Custom",
+        "custom_action": "PullByCount",
+        "custom_action_param": {
+            "profile": "sakura",
+            "total": 10,
+            "deduct_done": true
+        },
         "next": [
-            "SakuraTree.Execute10"
-        ]
-    },
-    "SakuraTree.Execute10": {
-        "max_hit": 1,
-        "recognition": "OCR",
-        "roi": [
-            365,
-            1055,
-            350,
-            95
+            "SakuraTree.Back"
         ],
-        "expected": "結緣10次",
-        "threshold": 0.3,
-        "action": "Click",
-        "post_delay": 5200,
-        "next": [
-            "SakuraTree.Execute10",
-            "SakuraTree.Verify"
-        ],
-        "focus": {
-            "Node.Recognition.Succeeded": {
-                "content": "【幻獸結緣】點擊「結緣 10 次」。",
-                "display": "log"
-            }
-        }
-    },
-    "SakuraTree.Execute1": {
-        "max_hit": 1,
-        "recognition": "OCR",
-        "roi": [
-            5,
-            1055,
-            355,
-            95
-        ],
-        "expected": "結緣1次",
-        "threshold": 0.3,
-        "action": "Click",
-        "post_delay": 5200,
-        "next": [
-            "SakuraTree.Execute1",
-            "SakuraTree.Verify"
-        ],
-        "focus": {
-            "Node.Recognition.Succeeded": {
-                "content": "【幻獸結緣】點擊「結緣 1 次」。",
-                "display": "log"
-            }
-        }
-    },
-    "SakuraTree.Verify": {
-        "recognition": "OCR",
-        "roi": [
-            130,
-            955,
-            460,
-            55
-        ],
-        "expected": "今日已結緣",
-        "threshold": 0.3,
-        "action": "DoNothing",
-        "next": [
+        "on_error": [
             "SakuraTree.Back"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【幻獸結緣】已看到「今日已結緣」計數，確認結緣實際執行。",
+                "content": "【幻獸結緣】次數計算方式：扣除今日已抽過的次數。",
+                "display": "log"
+            }
+        }
+    },
+    "SakuraTree.Pull.Raw": {
+        "recognition": "DirectHit",
+        "action": "Custom",
+        "custom_action": "PullByCount",
+        "custom_action_param": {
+            "profile": "sakura",
+            "total": 10,
+            "deduct_done": false
+        },
+        "next": [
+            "SakuraTree.Back"
+        ],
+        "on_error": [
+            "SakuraTree.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【幻獸結緣】次數計算方式：不扣除今日已抽過的次數。",
                 "display": "log"
             }
         }
@@ -3706,6 +3975,964 @@
         "focus": {
             "Node.Recognition.Succeeded": {
                 "content": "【幻獸結緣】已回到家園首頁，本任務結束。",
+                "display": "log"
+            }
+        }
+    },
+    "Objectives.HomeGifts.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "HomeGifts.EnsureHome",
+            "HomeGifts.Nav.FromOtherTab",
+            "HomeGifts.Nav.Recover"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】開始執行：掃描家園中 NPC 頭上的紫色禮物泡泡並領取。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.EnsureHome": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            280,
+            1160,
+            180,
+            120
+        ],
+        "template": "navigation/bottom-home.png",
+        "threshold": 0.75,
+        "action": "DoNothing",
+        "next": [
+            "HomeGifts.ResetRight.Swipe1"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】已辨識到家園頁籤圖示，確認目前在家園首頁。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.Nav.FromOtherTab": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1180,
+            720,
+            100
+        ],
+        "expected": "角色|筆記|公會|世界|探索",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            300,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 1200,
+        "next": [
+            "HomeGifts.EnsureHome"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】目前在其他主頁籤，點擊「家園」切換。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.Nav.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            100,
+            690,
+            260,
+            100
+        ],
+        "post_delay": 1000,
+        "next": [
+            "HomeGifts.Nav.SelectHome"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】偵測到離開遊戲彈窗，點擊取消。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.Nav.SelectHome": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            300,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 1200,
+        "next": [
+            "HomeGifts.EnsureHome"
+        ]
+    },
+    "HomeGifts.Nav.Recover": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "HomeGifts.Nav.ExitDialog",
+            "HomeGifts.EnsureHome",
+            "HomeGifts.Nav.FromOtherTab",
+            "HomeGifts.Nav.Back",
+            "HomeGifts.Nav.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】目前在子畫面，改點左下角返回按鈕回到家園首頁…",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.Nav.Back": {
+        "max_hit": 12,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            45,
+            1195,
+            60,
+            45
+        ],
+        "post_delay": 1400,
+        "next": [
+            "HomeGifts.Nav.ExitDialog",
+            "HomeGifts.EnsureHome",
+            "HomeGifts.Nav.FromOtherTab",
+            "HomeGifts.Nav.Back",
+            "HomeGifts.Nav.Failed"
+        ]
+    },
+    "HomeGifts.Nav.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】連續點擊返回按鈕仍無法回到家園首頁，已安全停止，未執行任何操作。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.ResetRight.Swipe1": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "HomeGifts.ResetRight.Swipe2"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】將家園畫面拉到最右側小屋…",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.ResetRight.Swipe2": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "HomeGifts.ResetRight.Swipe3"
+        ]
+    },
+    "HomeGifts.ResetRight.Swipe3": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "HomeGifts.ResetRight.Swipe4"
+        ]
+    },
+    "HomeGifts.ResetRight.Swipe4": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "HomeGifts.ResetRight.Swipe5"
+        ]
+    },
+    "HomeGifts.ResetRight.Swipe5": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "HomeGifts.ResetRight.Swipe6"
+        ]
+    },
+    "HomeGifts.ResetRight.Swipe6": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "HomeGifts.Scan1"
+        ]
+    },
+    "HomeGifts.Scan1": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "HomeGifts.Find1",
+            "HomeGifts.Move1"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】掃描第 1/5 個畫面位置…",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.Find1": {
+        "max_hit": 6,
+        "recognition": "TemplateMatch",
+        "roi": [
+            0,
+            240,
+            720,
+            800
+        ],
+        "template": "home/npc-gift-bubble.png",
+        "threshold": 0.75,
+        "action": "Click",
+        "target": true,
+        "post_delay": 2800,
+        "next": [
+            "HomeGifts.Letter1",
+            "HomeGifts.Recover1"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】找到紫色禮物泡泡，點擊開啟…",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.Letter1": {
+        "recognition": "OCR",
+        "roi": [
+            200,
+            845,
+            320,
+            90
+        ],
+        "expected": "領取",
+        "threshold": 0.3,
+        "action": "Click",
+        "post_delay": 3000,
+        "next": [
+            "HomeGifts.Dismiss1"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】按下「領取」收下禮物。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.Dismiss1": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            360,
+            200,
+            40,
+            40
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeGifts.Find1",
+            "HomeGifts.Move1"
+        ]
+    },
+    "HomeGifts.Recover1": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "HomeGifts.Recover1.AtHome",
+            "HomeGifts.Recover1.Back"
+        ]
+    },
+    "HomeGifts.Recover1.AtHome": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            280,
+            1160,
+            180,
+            120
+        ],
+        "template": "navigation/bottom-home.png",
+        "threshold": 0.75,
+        "action": "DoNothing",
+        "next": [
+            "HomeGifts.Move1"
+        ]
+    },
+    "HomeGifts.Recover1.Back": {
+        "max_hit": 4,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            45,
+            1195,
+            60,
+            45
+        ],
+        "post_delay": 1600,
+        "next": [
+            "HomeGifts.Recover1.AtHome",
+            "HomeGifts.Recover1.Back",
+            "HomeGifts.Move1"
+        ]
+    },
+    "HomeGifts.Move1": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 1200,
+        "next": [
+            "HomeGifts.Scan2"
+        ]
+    },
+    "HomeGifts.Scan2": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "HomeGifts.Find2",
+            "HomeGifts.Move2"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】掃描第 2/5 個畫面位置…",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.Find2": {
+        "max_hit": 6,
+        "recognition": "TemplateMatch",
+        "roi": [
+            0,
+            240,
+            720,
+            800
+        ],
+        "template": "home/npc-gift-bubble.png",
+        "threshold": 0.75,
+        "action": "Click",
+        "target": true,
+        "post_delay": 2800,
+        "next": [
+            "HomeGifts.Letter2",
+            "HomeGifts.Recover2"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】找到紫色禮物泡泡，點擊開啟…",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.Letter2": {
+        "recognition": "OCR",
+        "roi": [
+            200,
+            845,
+            320,
+            90
+        ],
+        "expected": "領取",
+        "threshold": 0.3,
+        "action": "Click",
+        "post_delay": 3000,
+        "next": [
+            "HomeGifts.Dismiss2"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】按下「領取」收下禮物。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.Dismiss2": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            360,
+            200,
+            40,
+            40
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeGifts.Find2",
+            "HomeGifts.Move2"
+        ]
+    },
+    "HomeGifts.Recover2": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "HomeGifts.Recover2.AtHome",
+            "HomeGifts.Recover2.Back"
+        ]
+    },
+    "HomeGifts.Recover2.AtHome": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            280,
+            1160,
+            180,
+            120
+        ],
+        "template": "navigation/bottom-home.png",
+        "threshold": 0.75,
+        "action": "DoNothing",
+        "next": [
+            "HomeGifts.Move2"
+        ]
+    },
+    "HomeGifts.Recover2.Back": {
+        "max_hit": 4,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            45,
+            1195,
+            60,
+            45
+        ],
+        "post_delay": 1600,
+        "next": [
+            "HomeGifts.Recover2.AtHome",
+            "HomeGifts.Recover2.Back",
+            "HomeGifts.Move2"
+        ]
+    },
+    "HomeGifts.Move2": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 1200,
+        "next": [
+            "HomeGifts.Scan3"
+        ]
+    },
+    "HomeGifts.Scan3": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "HomeGifts.Find3",
+            "HomeGifts.Move3"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】掃描第 3/5 個畫面位置…",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.Find3": {
+        "max_hit": 6,
+        "recognition": "TemplateMatch",
+        "roi": [
+            0,
+            240,
+            720,
+            800
+        ],
+        "template": "home/npc-gift-bubble.png",
+        "threshold": 0.75,
+        "action": "Click",
+        "target": true,
+        "post_delay": 2800,
+        "next": [
+            "HomeGifts.Letter3",
+            "HomeGifts.Recover3"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】找到紫色禮物泡泡，點擊開啟…",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.Letter3": {
+        "recognition": "OCR",
+        "roi": [
+            200,
+            845,
+            320,
+            90
+        ],
+        "expected": "領取",
+        "threshold": 0.3,
+        "action": "Click",
+        "post_delay": 3000,
+        "next": [
+            "HomeGifts.Dismiss3"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】按下「領取」收下禮物。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.Dismiss3": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            360,
+            200,
+            40,
+            40
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeGifts.Find3",
+            "HomeGifts.Move3"
+        ]
+    },
+    "HomeGifts.Recover3": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "HomeGifts.Recover3.AtHome",
+            "HomeGifts.Recover3.Back"
+        ]
+    },
+    "HomeGifts.Recover3.AtHome": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            280,
+            1160,
+            180,
+            120
+        ],
+        "template": "navigation/bottom-home.png",
+        "threshold": 0.75,
+        "action": "DoNothing",
+        "next": [
+            "HomeGifts.Move3"
+        ]
+    },
+    "HomeGifts.Recover3.Back": {
+        "max_hit": 4,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            45,
+            1195,
+            60,
+            45
+        ],
+        "post_delay": 1600,
+        "next": [
+            "HomeGifts.Recover3.AtHome",
+            "HomeGifts.Recover3.Back",
+            "HomeGifts.Move3"
+        ]
+    },
+    "HomeGifts.Move3": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 1200,
+        "next": [
+            "HomeGifts.Scan4"
+        ]
+    },
+    "HomeGifts.Scan4": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "HomeGifts.Find4",
+            "HomeGifts.Move4"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】掃描第 4/5 個畫面位置…",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.Find4": {
+        "max_hit": 6,
+        "recognition": "TemplateMatch",
+        "roi": [
+            0,
+            240,
+            720,
+            800
+        ],
+        "template": "home/npc-gift-bubble.png",
+        "threshold": 0.75,
+        "action": "Click",
+        "target": true,
+        "post_delay": 2800,
+        "next": [
+            "HomeGifts.Letter4",
+            "HomeGifts.Recover4"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】找到紫色禮物泡泡，點擊開啟…",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.Letter4": {
+        "recognition": "OCR",
+        "roi": [
+            200,
+            845,
+            320,
+            90
+        ],
+        "expected": "領取",
+        "threshold": 0.3,
+        "action": "Click",
+        "post_delay": 3000,
+        "next": [
+            "HomeGifts.Dismiss4"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】按下「領取」收下禮物。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.Dismiss4": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            360,
+            200,
+            40,
+            40
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeGifts.Find4",
+            "HomeGifts.Move4"
+        ]
+    },
+    "HomeGifts.Recover4": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "HomeGifts.Recover4.AtHome",
+            "HomeGifts.Recover4.Back"
+        ]
+    },
+    "HomeGifts.Recover4.AtHome": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            280,
+            1160,
+            180,
+            120
+        ],
+        "template": "navigation/bottom-home.png",
+        "threshold": 0.75,
+        "action": "DoNothing",
+        "next": [
+            "HomeGifts.Move4"
+        ]
+    },
+    "HomeGifts.Recover4.Back": {
+        "max_hit": 4,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            45,
+            1195,
+            60,
+            45
+        ],
+        "post_delay": 1600,
+        "next": [
+            "HomeGifts.Recover4.AtHome",
+            "HomeGifts.Recover4.Back",
+            "HomeGifts.Move4"
+        ]
+    },
+    "HomeGifts.Move4": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 1200,
+        "next": [
+            "HomeGifts.Scan5"
+        ]
+    },
+    "HomeGifts.Scan5": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "HomeGifts.Find5",
+            "HomeGifts.Done"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】掃描第 5/5 個畫面位置…",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.Find5": {
+        "max_hit": 6,
+        "recognition": "TemplateMatch",
+        "roi": [
+            0,
+            240,
+            720,
+            800
+        ],
+        "template": "home/npc-gift-bubble.png",
+        "threshold": 0.75,
+        "action": "Click",
+        "target": true,
+        "post_delay": 2800,
+        "next": [
+            "HomeGifts.Letter5",
+            "HomeGifts.Recover5"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】找到紫色禮物泡泡，點擊開啟…",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.Letter5": {
+        "recognition": "OCR",
+        "roi": [
+            200,
+            845,
+            320,
+            90
+        ],
+        "expected": "領取",
+        "threshold": 0.3,
+        "action": "Click",
+        "post_delay": 3000,
+        "next": [
+            "HomeGifts.Dismiss5"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】按下「領取」收下禮物。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.Dismiss5": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            360,
+            200,
+            40,
+            40
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeGifts.Find5",
+            "HomeGifts.Done"
+        ]
+    },
+    "HomeGifts.Recover5": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "HomeGifts.Recover5.AtHome",
+            "HomeGifts.Recover5.Back"
+        ]
+    },
+    "HomeGifts.Recover5.AtHome": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            280,
+            1160,
+            180,
+            120
+        ],
+        "template": "navigation/bottom-home.png",
+        "threshold": 0.75,
+        "action": "DoNothing",
+        "next": [
+            "HomeGifts.Done"
+        ]
+    },
+    "HomeGifts.Recover5.Back": {
+        "max_hit": 4,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            45,
+            1195,
+            60,
+            45
+        ],
+        "post_delay": 1600,
+        "next": [
+            "HomeGifts.Recover5.AtHome",
+            "HomeGifts.Recover5.Back",
+            "HomeGifts.Done"
+        ]
+    },
+    "HomeGifts.Done": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】已掃過整張家園地圖，禮物領取流程結束。",
                 "display": "log"
             }
         }

@@ -142,7 +142,7 @@
             "name": "GoddessStatuePrayer",
             "label": "女神像祈願",
             "entry": "Objectives.GoddessStatue.Prayer.Start",
-            "description": "至家園女神像切換到「祈願」→「友情祈願」，執行設定次數的「祈願 1 次」，並以畫面上的「今日已祈願」計數驗證。",
+            "description": "至家園女神像選擇祈願池（高階／普通／友情）後執行祈願。次數可自由輸入，流程會自動選用 100／10／1 抽按鈕，並以畫面上的「今日已祈願」計數驗證實際結果。",
             "group": [
                 "Home"
             ],
@@ -150,14 +150,16 @@
                 "Android"
             ],
             "option": [
-                "GoddessStatuePrayerCount"
+                "GoddessStatuePool",
+                "GoddessStatuePrayerCount",
+                "GoddessStatuePrayerDeduct"
             ]
         },
         {
             "name": "TimeGachaMachine",
             "label": "時光扭蛋機",
             "entry": "Objectives.GachaMachine.Start",
-            "description": "至家園時光扭蛋機切換到「國度」，執行設定次數的「扭蛋 1 次」，並以畫面上的「今日已開啟」計數驗證。",
+            "description": "至家園時光扭蛋機，可指定要切換到哪一個國度系列，再依設定次數扭蛋。次數可自由輸入，流程會自動選用 100／10／1 抽按鈕，並以畫面上的「今日已扭蛋／今日已開啟」計數驗證實際結果。",
             "group": [
                 "Home"
             ],
@@ -165,14 +167,16 @@
                 "Android"
             ],
             "option": [
-                "TimeGachaCount"
+                "TimeGachaRealm",
+                "TimeGachaCount",
+                "TimeGachaDeduct"
             ]
         },
         {
             "name": "SakuraBeastBonding",
             "label": "幻獸結緣",
             "entry": "Objectives.SakuraTree.BeastBonding.Start",
-            "description": "至家園大櫻花樹執行幻獸結緣，可設定總次數；10 的倍數使用「結緣 10 次」按鈕，其餘使用「結緣 1 次」，並以「今日已結緣」計數驗證。",
+            "description": "至家園大櫻花樹執行幻獸結緣。次數可自由輸入，流程會自動選用 100／10／1 抽按鈕湊齊次數，不會超抽；每次抽取都以畫面上的「今日已結緣」計數驗證實際結果。",
             "group": [
                 "Home"
             ],
@@ -180,7 +184,20 @@
                 "Android"
             ],
             "option": [
-                "SakuraBeastBondCount"
+                "SakuraBeastBondCount",
+                "SakuraBeastBondDeduct"
+            ]
+        },
+        {
+            "name": "HomeNpcGifts",
+            "label": "家園禮物領取",
+            "entry": "Objectives.HomeGifts.Start",
+            "description": "由最右側往左掃過整張家園地圖，找出 NPC 頭上的紫色禮物泡泡並點擊「領取」。每日可領取次數由遊戲限制，領完後按鈕消失即自動結束。",
+            "group": [
+                "Home"
+            ],
+            "controller": [
+                "Android"
             ]
         },
         {
@@ -1718,357 +1735,97 @@
             "default_case": "Enabled"
         },
         "GoddessStatuePrayerCount": {
-            "type": "select",
-            "label": "女神像：友情祈願次數",
-            "description": "切換至友情祈願後，執行指定次數的「祈願 1 次」；每次都會重新辨識按鈕位置，不會誤按 10 次。",
-            "cases": [
+            "type": "input",
+            "label": "女神像：祈願次數",
+            "description": "輸入 0～9999。流程會依剩餘次數自動選擇「祈願 100 次／10 次／1 次」；友情祈願沒有 100 次按鈕時會自動退到 10 次或 1 次。",
+            "inputs": [
                 {
-                    "name": "Count1",
-                    "label": "1 次",
-                    "pipeline_override": {
-                        "GoddessStatue.LogCount": {
-                            "focus": {
-                                "Node.Recognition.Succeeded": {
-                                    "content": "【女神像祈願】本次設定祈願次數：1 次，開始執行。",
-                                    "display": "log"
-                                }
-                            }
-                        },
-                        "GoddessStatue.Execute": {
-                            "max_hit": 1
-                        }
-                    }
-                },
-                {
-                    "name": "Count2",
-                    "label": "2 次",
-                    "pipeline_override": {
-                        "GoddessStatue.LogCount": {
-                            "focus": {
-                                "Node.Recognition.Succeeded": {
-                                    "content": "【女神像祈願】本次設定祈願次數：2 次，開始執行。",
-                                    "display": "log"
-                                }
-                            }
-                        },
-                        "GoddessStatue.Execute": {
-                            "max_hit": 2
-                        }
-                    }
-                },
-                {
-                    "name": "Count3",
-                    "label": "3 次",
-                    "pipeline_override": {
-                        "GoddessStatue.LogCount": {
-                            "focus": {
-                                "Node.Recognition.Succeeded": {
-                                    "content": "【女神像祈願】本次設定祈願次數：3 次，開始執行。",
-                                    "display": "log"
-                                }
-                            }
-                        },
-                        "GoddessStatue.Execute": {
-                            "max_hit": 3
-                        }
-                    }
-                },
-                {
-                    "name": "Count5",
-                    "label": "5 次",
-                    "pipeline_override": {
-                        "GoddessStatue.LogCount": {
-                            "focus": {
-                                "Node.Recognition.Succeeded": {
-                                    "content": "【女神像祈願】本次設定祈願次數：5 次，開始執行。",
-                                    "display": "log"
-                                }
-                            }
-                        },
-                        "GoddessStatue.Execute": {
-                            "max_hit": 5
-                        }
-                    }
-                },
-                {
-                    "name": "Count10",
-                    "label": "10 次",
-                    "pipeline_override": {
-                        "GoddessStatue.LogCount": {
-                            "focus": {
-                                "Node.Recognition.Succeeded": {
-                                    "content": "【女神像祈願】本次設定祈願次數：10 次，開始執行。",
-                                    "display": "log"
-                                }
-                            }
-                        },
-                        "GoddessStatue.Execute": {
-                            "max_hit": 10
-                        }
-                    }
-                },
-                {
-                    "name": "Count0",
-                    "label": "0 次（不執行）",
-                    "pipeline_override": {
-                        "Objectives.GoddessStatue.Prayer.Start": {
-                            "enabled": false
-                        }
-                    }
+                    "name": "Count",
+                    "label": "次數",
+                    "default": "2",
+                    "pipeline_type": "int",
+                    "verify": "^(?:0|[1-9][0-9]{0,3})$",
+                    "pattern_msg": "請輸入 0～9999 的整數。"
                 }
             ],
-            "default_case": "Count2"
+            "pipeline_override": {
+                "GoddessStatue.Pull.Deduct": {
+                    "custom_action_param": {
+                        "profile": "prayer",
+                        "total": "{Count}",
+                        "deduct_done": true
+                    }
+                },
+                "GoddessStatue.Pull.Raw": {
+                    "custom_action_param": {
+                        "profile": "prayer",
+                        "total": "{Count}",
+                        "deduct_done": false
+                    }
+                }
+            }
         },
         "TimeGachaCount": {
-            "type": "select",
-            "label": "時光扭蛋機：國度扭蛋次數",
-            "description": "切換至「國度」扭蛋池後，執行指定次數的「扭蛋 1 次」；每次都會重新辨識按鈕位置，不會誤按 10 次或 100 次。",
-            "cases": [
+            "type": "input",
+            "label": "時光扭蛋機：扭蛋次數",
+            "description": "輸入 0～9999。流程會依剩餘次數自動選擇「扭蛋 100 次／10 次／1 次」；代幣不足導致按鈕消失時會自動退到較小的按鈕。",
+            "inputs": [
                 {
-                    "name": "Count1",
-                    "label": "1 次",
-                    "pipeline_override": {
-                        "GachaMachine.LogCount": {
-                            "focus": {
-                                "Node.Recognition.Succeeded": {
-                                    "content": "【時光扭蛋機】本次設定扭蛋次數：1 次，開始執行。",
-                                    "display": "log"
-                                }
-                            }
-                        },
-                        "GachaMachine.Execute": {
-                            "max_hit": 1
-                        }
-                    }
-                },
-                {
-                    "name": "Count2",
-                    "label": "2 次",
-                    "pipeline_override": {
-                        "GachaMachine.LogCount": {
-                            "focus": {
-                                "Node.Recognition.Succeeded": {
-                                    "content": "【時光扭蛋機】本次設定扭蛋次數：2 次，開始執行。",
-                                    "display": "log"
-                                }
-                            }
-                        },
-                        "GachaMachine.Execute": {
-                            "max_hit": 2
-                        }
-                    }
-                },
-                {
-                    "name": "Count3",
-                    "label": "3 次",
-                    "pipeline_override": {
-                        "GachaMachine.LogCount": {
-                            "focus": {
-                                "Node.Recognition.Succeeded": {
-                                    "content": "【時光扭蛋機】本次設定扭蛋次數：3 次，開始執行。",
-                                    "display": "log"
-                                }
-                            }
-                        },
-                        "GachaMachine.Execute": {
-                            "max_hit": 3
-                        }
-                    }
-                },
-                {
-                    "name": "Count5",
-                    "label": "5 次",
-                    "pipeline_override": {
-                        "GachaMachine.LogCount": {
-                            "focus": {
-                                "Node.Recognition.Succeeded": {
-                                    "content": "【時光扭蛋機】本次設定扭蛋次數：5 次，開始執行。",
-                                    "display": "log"
-                                }
-                            }
-                        },
-                        "GachaMachine.Execute": {
-                            "max_hit": 5
-                        }
-                    }
-                },
-                {
-                    "name": "Count10",
-                    "label": "10 次",
-                    "pipeline_override": {
-                        "GachaMachine.LogCount": {
-                            "focus": {
-                                "Node.Recognition.Succeeded": {
-                                    "content": "【時光扭蛋機】本次設定扭蛋次數：10 次，開始執行。",
-                                    "display": "log"
-                                }
-                            }
-                        },
-                        "GachaMachine.Execute": {
-                            "max_hit": 10
-                        }
-                    }
-                },
-                {
-                    "name": "Count0",
-                    "label": "0 次（不執行）",
-                    "pipeline_override": {
-                        "Objectives.GachaMachine.Start": {
-                            "enabled": false
-                        }
-                    }
+                    "name": "Count",
+                    "label": "次數",
+                    "default": "2",
+                    "pipeline_type": "int",
+                    "verify": "^(?:0|[1-9][0-9]{0,3})$",
+                    "pattern_msg": "請輸入 0～9999 的整數。"
                 }
             ],
-            "default_case": "Count2"
+            "pipeline_override": {
+                "GachaMachine.Pull.Deduct": {
+                    "custom_action_param": {
+                        "profile": "gacha",
+                        "total": "{Count}",
+                        "deduct_done": true
+                    }
+                },
+                "GachaMachine.Pull.Raw": {
+                    "custom_action_param": {
+                        "profile": "gacha",
+                        "total": "{Count}",
+                        "deduct_done": false
+                    }
+                }
+            }
         },
         "SakuraBeastBondCount": {
-            "type": "select",
-            "label": "幻獸結緣：結緣總次數",
-            "description": "100／50／20／10 次使用「結緣 10 次」按鈕重複點擊；5／1 次使用「結緣 1 次」按鈕。",
-            "cases": [
+            "type": "input",
+            "label": "幻獸結緣：結緣次數",
+            "description": "輸入 0～9999。流程會依剩餘次數自動選擇「結緣 100 次／10 次／1 次」，剩餘不足時退到較小的按鈕，避免超抽。",
+            "inputs": [
                 {
-                    "name": "Count100",
-                    "label": "100 次",
-                    "pipeline_override": {
-                        "SakuraTree.LogCount": {
-                            "focus": {
-                                "Node.Recognition.Succeeded": {
-                                    "content": "【幻獸結緣】本次設定結緣總次數：100 次（使用「結緣 10 次」按鈕 10 回），開始執行。",
-                                    "display": "log"
-                                }
-                            }
-                        },
-                        "SakuraTree.Route": {
-                            "next": [
-                                "SakuraTree.Execute10"
-                            ]
-                        },
-                        "SakuraTree.Execute10": {
-                            "max_hit": 10
-                        }
-                    }
-                },
-                {
-                    "name": "Count50",
-                    "label": "50 次",
-                    "pipeline_override": {
-                        "SakuraTree.LogCount": {
-                            "focus": {
-                                "Node.Recognition.Succeeded": {
-                                    "content": "【幻獸結緣】本次設定結緣總次數：50 次（使用「結緣 10 次」按鈕 5 回），開始執行。",
-                                    "display": "log"
-                                }
-                            }
-                        },
-                        "SakuraTree.Route": {
-                            "next": [
-                                "SakuraTree.Execute10"
-                            ]
-                        },
-                        "SakuraTree.Execute10": {
-                            "max_hit": 5
-                        }
-                    }
-                },
-                {
-                    "name": "Count20",
-                    "label": "20 次",
-                    "pipeline_override": {
-                        "SakuraTree.LogCount": {
-                            "focus": {
-                                "Node.Recognition.Succeeded": {
-                                    "content": "【幻獸結緣】本次設定結緣總次數：20 次（使用「結緣 10 次」按鈕 2 回），開始執行。",
-                                    "display": "log"
-                                }
-                            }
-                        },
-                        "SakuraTree.Route": {
-                            "next": [
-                                "SakuraTree.Execute10"
-                            ]
-                        },
-                        "SakuraTree.Execute10": {
-                            "max_hit": 2
-                        }
-                    }
-                },
-                {
-                    "name": "Count10",
-                    "label": "10 次",
-                    "pipeline_override": {
-                        "SakuraTree.LogCount": {
-                            "focus": {
-                                "Node.Recognition.Succeeded": {
-                                    "content": "【幻獸結緣】本次設定結緣總次數：10 次（使用「結緣 10 次」按鈕 1 回），開始執行。",
-                                    "display": "log"
-                                }
-                            }
-                        },
-                        "SakuraTree.Route": {
-                            "next": [
-                                "SakuraTree.Execute10"
-                            ]
-                        },
-                        "SakuraTree.Execute10": {
-                            "max_hit": 1
-                        }
-                    }
-                },
-                {
-                    "name": "Count5",
-                    "label": "5 次",
-                    "pipeline_override": {
-                        "SakuraTree.LogCount": {
-                            "focus": {
-                                "Node.Recognition.Succeeded": {
-                                    "content": "【幻獸結緣】本次設定結緣總次數：5 次（使用「結緣 1 次」按鈕 5 回），開始執行。",
-                                    "display": "log"
-                                }
-                            }
-                        },
-                        "SakuraTree.Route": {
-                            "next": [
-                                "SakuraTree.Execute1"
-                            ]
-                        },
-                        "SakuraTree.Execute1": {
-                            "max_hit": 5
-                        }
-                    }
-                },
-                {
-                    "name": "Count1",
-                    "label": "1 次",
-                    "pipeline_override": {
-                        "SakuraTree.LogCount": {
-                            "focus": {
-                                "Node.Recognition.Succeeded": {
-                                    "content": "【幻獸結緣】本次設定結緣總次數：1 次（使用「結緣 1 次」按鈕 1 回），開始執行。",
-                                    "display": "log"
-                                }
-                            }
-                        },
-                        "SakuraTree.Route": {
-                            "next": [
-                                "SakuraTree.Execute1"
-                            ]
-                        },
-                        "SakuraTree.Execute1": {
-                            "max_hit": 1
-                        }
-                    }
-                },
-                {
-                    "name": "Count0",
-                    "label": "0 次（不執行）",
-                    "pipeline_override": {
-                        "Objectives.SakuraTree.BeastBonding.Start": {
-                            "enabled": false
-                        }
-                    }
+                    "name": "Count",
+                    "label": "次數",
+                    "default": "10",
+                    "pipeline_type": "int",
+                    "verify": "^(?:0|[1-9][0-9]{0,3})$",
+                    "pattern_msg": "請輸入 0～9999 的整數。"
                 }
             ],
-            "default_case": "Count10"
+            "pipeline_override": {
+                "SakuraTree.Pull.Deduct": {
+                    "custom_action_param": {
+                        "profile": "sakura",
+                        "total": "{Count}",
+                        "deduct_done": true
+                    }
+                },
+                "SakuraTree.Pull.Raw": {
+                    "custom_action_param": {
+                        "profile": "sakura",
+                        "total": "{Count}",
+                        "deduct_done": false
+                    }
+                }
+            }
         },
         "AlchemyDecomposeRounds": {
             "type": "select",
@@ -2184,6 +1941,318 @@
                 }
             ],
             "default_case": "Rounds6"
+        },
+        "SakuraBeastBondDeduct": {
+            "type": "switch",
+            "label": "幻獸結緣：扣除已結緣次數",
+            "description": "勾選時，上面的次數視為「今日累計目標」，流程會先讀畫面上的「今日已結緣」計數，只補足差額；取消勾選則不論今天已結緣過幾次，都固定再執行設定的次數。",
+            "cases": [
+                {
+                    "name": "Deduct",
+                    "label": "扣除（次數視為今日累計目標）",
+                    "pipeline_override": {
+                        "SakuraTree.Pull.Route": {
+                            "next": [
+                                "SakuraTree.Pull.Deduct"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Raw",
+                    "label": "不扣除（每次都執行設定次數）",
+                    "pipeline_override": {
+                        "SakuraTree.Pull.Route": {
+                            "next": [
+                                "SakuraTree.Pull.Raw"
+                            ]
+                        }
+                    }
+                }
+            ],
+            "default_case": "Deduct"
+        },
+        "GoddessStatuePool": {
+            "type": "select",
+            "label": "女神像：祈願池",
+            "description": "祈願池以橫向清單排列且可左右捲動，流程會自動捲動尋找指定的池；找不到時安全結束，不會誤抽其他池。",
+            "cases": [
+                {
+                    "name": "Friendship",
+                    "label": "友情祈願",
+                    "pipeline_override": {
+                        "GoddessStatue.Pool.Select": {
+                            "expected": "友情祈願"
+                        }
+                    }
+                },
+                {
+                    "name": "Normal",
+                    "label": "普通祈願",
+                    "pipeline_override": {
+                        "GoddessStatue.Pool.Select": {
+                            "expected": "普通祈願"
+                        }
+                    }
+                },
+                {
+                    "name": "Advanced",
+                    "label": "高階祈願",
+                    "pipeline_override": {
+                        "GoddessStatue.Pool.Select": {
+                            "expected": "高階祈願"
+                        }
+                    }
+                }
+            ],
+            "default_case": "Friendship"
+        },
+        "GoddessStatuePrayerDeduct": {
+            "type": "switch",
+            "label": "女神像：扣除已祈願次數",
+            "description": "勾選時，上面的次數視為「今日累計目標」，流程會先讀畫面上的「今日已祈願」計數，只補足差額；取消勾選則不論今天已祈願過幾次，都固定再執行設定的次數。",
+            "cases": [
+                {
+                    "name": "Deduct",
+                    "label": "扣除（次數視為今日累計目標）",
+                    "pipeline_override": {
+                        "GoddessStatue.Pull.Route": {
+                            "next": [
+                                "GoddessStatue.Pull.Deduct"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Raw",
+                    "label": "不扣除（每次都執行設定次數）",
+                    "pipeline_override": {
+                        "GoddessStatue.Pull.Route": {
+                            "next": [
+                                "GoddessStatue.Pull.Raw"
+                            ]
+                        }
+                    }
+                }
+            ],
+            "default_case": "Deduct"
+        },
+        "TimeGachaRealm": {
+            "type": "select",
+            "label": "時光扭蛋機：國度系列",
+            "description": "對應扭蛋機畫面右上角的「切換扭蛋機」。選擇後流程會開啟該視窗、捲到最上方再往下尋找指定系列，找不到時維持原本選擇。",
+            "cases": [
+                {
+                    "name": "Keep",
+                    "label": "不切換（維持遊戲中目前選擇）",
+                    "pipeline_override": {
+                        "GachaMachine.Realm.Route": {
+                            "next": [
+                                "GachaMachine.Realm.Keep"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "SenLuoYiZhen",
+                    "label": "森之國・森羅遺珍",
+                    "pipeline_override": {
+                        "GachaMachine.Realm.Route": {
+                            "next": [
+                                "GachaMachine.Realm.Open"
+                            ]
+                        },
+                        "GachaMachine.Realm.Find": {
+                            "expected": "森羅遺珍"
+                        }
+                    }
+                },
+                {
+                    "name": "JiShenMiCang",
+                    "label": "山之國・機神祕藏",
+                    "pipeline_override": {
+                        "GachaMachine.Realm.Route": {
+                            "next": [
+                                "GachaMachine.Realm.Open"
+                            ]
+                        },
+                        "GachaMachine.Realm.Find": {
+                            "expected": "機神祕藏"
+                        }
+                    }
+                },
+                {
+                    "name": "FuShiQiTan",
+                    "label": "澤之國・浮世奇譚",
+                    "pipeline_override": {
+                        "GachaMachine.Realm.Route": {
+                            "next": [
+                                "GachaMachine.Realm.Open"
+                            ]
+                        },
+                        "GachaMachine.Realm.Find": {
+                            "expected": "浮世奇譚"
+                        }
+                    }
+                },
+                {
+                    "name": "QianKunZaoHua",
+                    "label": "龍之國・乾坤造化",
+                    "pipeline_override": {
+                        "GachaMachine.Realm.Route": {
+                            "next": [
+                                "GachaMachine.Realm.Open"
+                            ]
+                        },
+                        "GachaMachine.Realm.Find": {
+                            "expected": "乾坤造化"
+                        }
+                    }
+                },
+                {
+                    "name": "DaoYanTianJi",
+                    "label": "龍之國・道衍天機",
+                    "pipeline_override": {
+                        "GachaMachine.Realm.Route": {
+                            "next": [
+                                "GachaMachine.Realm.Open"
+                            ]
+                        },
+                        "GachaMachine.Realm.Find": {
+                            "expected": "道衍天機"
+                        }
+                    }
+                },
+                {
+                    "name": "ShuGuangMiShi",
+                    "label": "羽之國・曙光祕誓",
+                    "pipeline_override": {
+                        "GachaMachine.Realm.Route": {
+                            "next": [
+                                "GachaMachine.Realm.Open"
+                            ]
+                        },
+                        "GachaMachine.Realm.Find": {
+                            "expected": "曙光祕誓"
+                        }
+                    }
+                },
+                {
+                    "name": "TianQiongShengYue",
+                    "label": "羽之國・天穹聖約",
+                    "pipeline_override": {
+                        "GachaMachine.Realm.Route": {
+                            "next": [
+                                "GachaMachine.Realm.Open"
+                            ]
+                        },
+                        "GachaMachine.Realm.Find": {
+                            "expected": "天穹聖約"
+                        }
+                    }
+                },
+                {
+                    "name": "CangHuiGuLv",
+                    "label": "羽之國・蒼輝古律",
+                    "pipeline_override": {
+                        "GachaMachine.Realm.Route": {
+                            "next": [
+                                "GachaMachine.Realm.Open"
+                            ]
+                        },
+                        "GachaMachine.Realm.Find": {
+                            "expected": "蒼輝古律"
+                        }
+                    }
+                },
+                {
+                    "name": "XieXueShengYan",
+                    "label": "哈帕迪・諧謔盛宴",
+                    "pipeline_override": {
+                        "GachaMachine.Realm.Route": {
+                            "next": [
+                                "GachaMachine.Realm.Open"
+                            ]
+                        },
+                        "GachaMachine.Realm.Find": {
+                            "expected": "諧謔盛宴"
+                        }
+                    }
+                },
+                {
+                    "name": "HuangDanXiJu",
+                    "label": "哈帕迪・荒誕喜劇",
+                    "pipeline_override": {
+                        "GachaMachine.Realm.Route": {
+                            "next": [
+                                "GachaMachine.Realm.Open"
+                            ]
+                        },
+                        "GachaMachine.Realm.Find": {
+                            "expected": "荒誕喜劇"
+                        }
+                    }
+                },
+                {
+                    "name": "QiJingHuanXiang",
+                    "label": "哈帕迪・奇境幻想",
+                    "pipeline_override": {
+                        "GachaMachine.Realm.Route": {
+                            "next": [
+                                "GachaMachine.Realm.Open"
+                            ]
+                        },
+                        "GachaMachine.Realm.Find": {
+                            "expected": "奇境幻想"
+                        }
+                    }
+                },
+                {
+                    "name": "ShuangYanGongWu",
+                    "label": "伊格尼斯・霜焰共舞",
+                    "pipeline_override": {
+                        "GachaMachine.Realm.Route": {
+                            "next": [
+                                "GachaMachine.Realm.Open"
+                            ]
+                        },
+                        "GachaMachine.Realm.Find": {
+                            "expected": "霜焰共舞"
+                        }
+                    }
+                }
+            ],
+            "default_case": "Keep"
+        },
+        "TimeGachaDeduct": {
+            "type": "switch",
+            "label": "時光扭蛋機：扣除已扭蛋次數",
+            "description": "勾選時，上面的次數視為「今日累計目標」，流程會先讀畫面上的「今日已扭蛋」計數，只補足差額；取消勾選則不論今天已扭蛋過幾次，都固定再執行設定的次數。",
+            "cases": [
+                {
+                    "name": "Deduct",
+                    "label": "扣除（次數視為今日累計目標）",
+                    "pipeline_override": {
+                        "GachaMachine.Pull.Route": {
+                            "next": [
+                                "GachaMachine.Pull.Deduct"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Raw",
+                    "label": "不扣除（每次都執行設定次數）",
+                    "pipeline_override": {
+                        "GachaMachine.Pull.Route": {
+                            "next": [
+                                "GachaMachine.Pull.Raw"
+                            ]
+                        }
+                    }
+                }
+            ],
+            "default_case": "Deduct"
         }
     }
 }
