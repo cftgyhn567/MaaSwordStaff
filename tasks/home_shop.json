@@ -4,7 +4,7 @@
             "name": "HomeShopPurchase",
             "label": "商店購物",
             "entry": "HomeShop.Start",
-            "description": "進入家園商店：雜貨第一排依折數設定購買（單擊價格按鈕即成交，已售完會略過），並領取寶庫的免費商品。不會刷新商店，也不會購買寶庫／特賣的付費商品。",
+            "description": "進入家園商店：雜貨前三排 9 格依商品種類與各自的折數上限購買（可設定每日刷新次數，刷新後重新掃描），寶庫自動領取免費商品並依每格折數上限購買，特賣依折數上限購買。所有付費購買預設關閉。",
             "group": [
                 "Home"
             ],
@@ -13,11 +13,13 @@
             ],
             "option": [
                 "HomeShopRefreshLimit",
-                "HomeShopGroceryFirstRow",
+                "HomeShopGroceryWood",
+                "HomeShopGroceryStoneBlock",
                 "HomeShopGroceryRoughStone",
                 "HomeShopGroceryRareTimeSand",
                 "HomeShopGroceryBattleEssence",
                 "HomeShopGroceryOrdinaryFreezeDried",
+                "HomeShopGroceryOther",
                 "HomeShopVaultSlot1",
                 "HomeShopVaultSlot2",
                 "HomeShopVaultSlot3",
@@ -34,72 +36,216 @@
     "option": {
         "HomeShopRefreshLimit": {
             "type": "select",
-            "label": "每日雜貨刷新次數上限",
-            "description": "一天最多主動刷新幾次；0 代表完全不刷新。每日刷新總上限為 10 次。（尚未接上流程：目前僅保留設定介面，實際購買未依此設定執行。）",
+            "label": "雜貨：每日刷新次數上限",
+            "description": "雜貨分頁右上角的刷新，每刷一次都會花金幣且費用遞增（實測 4000 → 8000 …），刷新後會重新掃一輪雜貨並依各類折數設定購買。預設不刷新。",
             "cases": [
                 {
-                    "name": "Refresh0",
-                    "label": "0 次（不刷新）"
+                    "name": "Limit0",
+                    "label": "不刷新",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.RefreshRoute": {
+                            "next": [
+                                "HomeShop.Grocery.NoRefresh"
+                            ]
+                        }
+                    }
                 },
                 {
-                    "name": "Refresh1",
-                    "label": "1 次"
+                    "name": "Limit1",
+                    "label": "最多刷新 1 次",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.RefreshRoute": {
+                            "next": [
+                                "HomeShop.Grocery.Refresh",
+                                "HomeShop.Grocery.NoRefresh"
+                            ]
+                        },
+                        "HomeShop.Grocery.Refresh": {
+                            "max_hit": 1
+                        }
+                    }
                 },
                 {
-                    "name": "Refresh2",
-                    "label": "2 次"
+                    "name": "Limit2",
+                    "label": "最多刷新 2 次",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.RefreshRoute": {
+                            "next": [
+                                "HomeShop.Grocery.Refresh",
+                                "HomeShop.Grocery.NoRefresh"
+                            ]
+                        },
+                        "HomeShop.Grocery.Refresh": {
+                            "max_hit": 2
+                        }
+                    }
                 },
                 {
-                    "name": "Refresh3",
-                    "label": "3 次"
+                    "name": "Limit3",
+                    "label": "最多刷新 3 次",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.RefreshRoute": {
+                            "next": [
+                                "HomeShop.Grocery.Refresh",
+                                "HomeShop.Grocery.NoRefresh"
+                            ]
+                        },
+                        "HomeShop.Grocery.Refresh": {
+                            "max_hit": 3
+                        }
+                    }
                 },
                 {
-                    "name": "Refresh4",
-                    "label": "4 次"
+                    "name": "Limit4",
+                    "label": "最多刷新 4 次",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.RefreshRoute": {
+                            "next": [
+                                "HomeShop.Grocery.Refresh",
+                                "HomeShop.Grocery.NoRefresh"
+                            ]
+                        },
+                        "HomeShop.Grocery.Refresh": {
+                            "max_hit": 4
+                        }
+                    }
                 },
                 {
-                    "name": "Refresh5",
-                    "label": "5 次"
+                    "name": "Limit5",
+                    "label": "最多刷新 5 次",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.RefreshRoute": {
+                            "next": [
+                                "HomeShop.Grocery.Refresh",
+                                "HomeShop.Grocery.NoRefresh"
+                            ]
+                        },
+                        "HomeShop.Grocery.Refresh": {
+                            "max_hit": 5
+                        }
+                    }
                 },
                 {
-                    "name": "Refresh6",
-                    "label": "6 次"
+                    "name": "Limit6",
+                    "label": "最多刷新 6 次",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.RefreshRoute": {
+                            "next": [
+                                "HomeShop.Grocery.Refresh",
+                                "HomeShop.Grocery.NoRefresh"
+                            ]
+                        },
+                        "HomeShop.Grocery.Refresh": {
+                            "max_hit": 6
+                        }
+                    }
                 },
                 {
-                    "name": "Refresh7",
-                    "label": "7 次"
+                    "name": "Limit7",
+                    "label": "最多刷新 7 次",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.RefreshRoute": {
+                            "next": [
+                                "HomeShop.Grocery.Refresh",
+                                "HomeShop.Grocery.NoRefresh"
+                            ]
+                        },
+                        "HomeShop.Grocery.Refresh": {
+                            "max_hit": 7
+                        }
+                    }
                 },
                 {
-                    "name": "Refresh8",
-                    "label": "8 次"
+                    "name": "Limit8",
+                    "label": "最多刷新 8 次",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.RefreshRoute": {
+                            "next": [
+                                "HomeShop.Grocery.Refresh",
+                                "HomeShop.Grocery.NoRefresh"
+                            ]
+                        },
+                        "HomeShop.Grocery.Refresh": {
+                            "max_hit": 8
+                        }
+                    }
                 },
                 {
-                    "name": "Refresh9",
-                    "label": "9 次"
+                    "name": "Limit9",
+                    "label": "最多刷新 9 次",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.RefreshRoute": {
+                            "next": [
+                                "HomeShop.Grocery.Refresh",
+                                "HomeShop.Grocery.NoRefresh"
+                            ]
+                        },
+                        "HomeShop.Grocery.Refresh": {
+                            "max_hit": 9
+                        }
+                    }
                 },
                 {
-                    "name": "Refresh10",
-                    "label": "10 次"
+                    "name": "Limit10",
+                    "label": "最多刷新 10 次",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.RefreshRoute": {
+                            "next": [
+                                "HomeShop.Grocery.Refresh",
+                                "HomeShop.Grocery.NoRefresh"
+                            ]
+                        },
+                        "HomeShop.Grocery.Refresh": {
+                            "max_hit": 10
+                        }
+                    }
                 }
             ],
-            "default_case": "Refresh3"
+            "default_case": "Limit0"
         },
-        "HomeShopGroceryFirstRow": {
+        "HomeShopGroceryWood": {
             "type": "select",
-            "label": "雜貨第一排商品",
-            "description": "第一排三個商品的折數購買策略。折數徽章位於商品左上角，符合條件才會點擊下方黃色價格按鈕。",
+            "label": "雜貨：木材",
+            "description": "第一排常見的木頭堆。以商品圖示比對判定種類，符合此折數上限才會購買。沒有折數標籤（原價）的商品一律不購買。",
             "cases": [
                 {
                     "name": "Discount10",
                     "label": "1 折以下",
                     "pipeline_override": {
-                        "HomeShop.Grocery.Slot1.Buy": {
+                        "HomeShop.Grocery.Slot1.Buy.Wood": {
+                            "enabled": true,
                             "expected": "^[1-1]折"
                         },
-                        "HomeShop.Grocery.Slot2.Buy": {
+                        "HomeShop.Grocery.Slot2.Buy.Wood": {
+                            "enabled": true,
                             "expected": "^[1-1]折"
                         },
-                        "HomeShop.Grocery.Slot3.Buy": {
+                        "HomeShop.Grocery.Slot3.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.Wood": {
+                            "enabled": true,
                             "expected": "^[1-1]折"
                         }
                     }
@@ -108,13 +254,40 @@
                     "name": "Discount20",
                     "label": "2 折以下",
                     "pipeline_override": {
-                        "HomeShop.Grocery.Slot1.Buy": {
+                        "HomeShop.Grocery.Slot1.Buy.Wood": {
+                            "enabled": true,
                             "expected": "^[1-2]折"
                         },
-                        "HomeShop.Grocery.Slot2.Buy": {
+                        "HomeShop.Grocery.Slot2.Buy.Wood": {
+                            "enabled": true,
                             "expected": "^[1-2]折"
                         },
-                        "HomeShop.Grocery.Slot3.Buy": {
+                        "HomeShop.Grocery.Slot3.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.Wood": {
+                            "enabled": true,
                             "expected": "^[1-2]折"
                         }
                     }
@@ -123,13 +296,40 @@
                     "name": "Discount30",
                     "label": "3 折以下",
                     "pipeline_override": {
-                        "HomeShop.Grocery.Slot1.Buy": {
+                        "HomeShop.Grocery.Slot1.Buy.Wood": {
+                            "enabled": true,
                             "expected": "^[1-3]折"
                         },
-                        "HomeShop.Grocery.Slot2.Buy": {
+                        "HomeShop.Grocery.Slot2.Buy.Wood": {
+                            "enabled": true,
                             "expected": "^[1-3]折"
                         },
-                        "HomeShop.Grocery.Slot3.Buy": {
+                        "HomeShop.Grocery.Slot3.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.Wood": {
+                            "enabled": true,
                             "expected": "^[1-3]折"
                         }
                     }
@@ -138,13 +338,40 @@
                     "name": "Discount40",
                     "label": "4 折以下",
                     "pipeline_override": {
-                        "HomeShop.Grocery.Slot1.Buy": {
+                        "HomeShop.Grocery.Slot1.Buy.Wood": {
+                            "enabled": true,
                             "expected": "^[1-4]折"
                         },
-                        "HomeShop.Grocery.Slot2.Buy": {
+                        "HomeShop.Grocery.Slot2.Buy.Wood": {
+                            "enabled": true,
                             "expected": "^[1-4]折"
                         },
-                        "HomeShop.Grocery.Slot3.Buy": {
+                        "HomeShop.Grocery.Slot3.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.Wood": {
+                            "enabled": true,
                             "expected": "^[1-4]折"
                         }
                     }
@@ -153,13 +380,40 @@
                     "name": "Discount50",
                     "label": "5 折以下",
                     "pipeline_override": {
-                        "HomeShop.Grocery.Slot1.Buy": {
+                        "HomeShop.Grocery.Slot1.Buy.Wood": {
+                            "enabled": true,
                             "expected": "^[1-5]折"
                         },
-                        "HomeShop.Grocery.Slot2.Buy": {
+                        "HomeShop.Grocery.Slot2.Buy.Wood": {
+                            "enabled": true,
                             "expected": "^[1-5]折"
                         },
-                        "HomeShop.Grocery.Slot3.Buy": {
+                        "HomeShop.Grocery.Slot3.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.Wood": {
+                            "enabled": true,
                             "expected": "^[1-5]折"
                         }
                     }
@@ -168,13 +422,40 @@
                     "name": "Discount60",
                     "label": "6 折以下",
                     "pipeline_override": {
-                        "HomeShop.Grocery.Slot1.Buy": {
+                        "HomeShop.Grocery.Slot1.Buy.Wood": {
+                            "enabled": true,
                             "expected": "^[1-6]折"
                         },
-                        "HomeShop.Grocery.Slot2.Buy": {
+                        "HomeShop.Grocery.Slot2.Buy.Wood": {
+                            "enabled": true,
                             "expected": "^[1-6]折"
                         },
-                        "HomeShop.Grocery.Slot3.Buy": {
+                        "HomeShop.Grocery.Slot3.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.Wood": {
+                            "enabled": true,
                             "expected": "^[1-6]折"
                         }
                     }
@@ -183,13 +464,40 @@
                     "name": "Discount70",
                     "label": "7 折以下",
                     "pipeline_override": {
-                        "HomeShop.Grocery.Slot1.Buy": {
+                        "HomeShop.Grocery.Slot1.Buy.Wood": {
+                            "enabled": true,
                             "expected": "^[1-7]折"
                         },
-                        "HomeShop.Grocery.Slot2.Buy": {
+                        "HomeShop.Grocery.Slot2.Buy.Wood": {
+                            "enabled": true,
                             "expected": "^[1-7]折"
                         },
-                        "HomeShop.Grocery.Slot3.Buy": {
+                        "HomeShop.Grocery.Slot3.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.Wood": {
+                            "enabled": true,
                             "expected": "^[1-7]折"
                         }
                     }
@@ -198,13 +506,40 @@
                     "name": "Discount80",
                     "label": "8 折以下",
                     "pipeline_override": {
-                        "HomeShop.Grocery.Slot1.Buy": {
+                        "HomeShop.Grocery.Slot1.Buy.Wood": {
+                            "enabled": true,
                             "expected": "^[1-8]折"
                         },
-                        "HomeShop.Grocery.Slot2.Buy": {
+                        "HomeShop.Grocery.Slot2.Buy.Wood": {
+                            "enabled": true,
                             "expected": "^[1-8]折"
                         },
-                        "HomeShop.Grocery.Slot3.Buy": {
+                        "HomeShop.Grocery.Slot3.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.Wood": {
+                            "enabled": true,
                             "expected": "^[1-8]折"
                         }
                     }
@@ -213,28 +548,82 @@
                     "name": "Discount90",
                     "label": "9 折以下",
                     "pipeline_override": {
-                        "HomeShop.Grocery.Slot1.Buy": {
+                        "HomeShop.Grocery.Slot1.Buy.Wood": {
+                            "enabled": true,
                             "expected": "^[1-9]折"
                         },
-                        "HomeShop.Grocery.Slot2.Buy": {
+                        "HomeShop.Grocery.Slot2.Buy.Wood": {
+                            "enabled": true,
                             "expected": "^[1-9]折"
                         },
-                        "HomeShop.Grocery.Slot3.Buy": {
+                        "HomeShop.Grocery.Slot3.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.Wood": {
+                            "enabled": true,
                             "expected": "^[1-9]折"
                         }
                     }
                 },
                 {
                     "name": "Unlimited",
-                    "label": "不限折數（全部購買）",
+                    "label": "不限折數（只要有折扣就買）",
                     "pipeline_override": {
-                        "HomeShop.Grocery.Slot1.Buy": {
+                        "HomeShop.Grocery.Slot1.Buy.Wood": {
+                            "enabled": true,
                             "expected": "^[1-9]折"
                         },
-                        "HomeShop.Grocery.Slot2.Buy": {
+                        "HomeShop.Grocery.Slot2.Buy.Wood": {
+                            "enabled": true,
                             "expected": "^[1-9]折"
                         },
-                        "HomeShop.Grocery.Slot3.Buy": {
+                        "HomeShop.Grocery.Slot3.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.Wood": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.Wood": {
+                            "enabled": true,
                             "expected": "^[1-9]折"
                         }
                     }
@@ -243,13 +632,492 @@
                     "name": "Never",
                     "label": "不購買",
                     "pipeline_override": {
-                        "HomeShop.Grocery.Slot1.Buy": {
+                        "HomeShop.Grocery.Slot1.Buy.Wood": {
                             "enabled": false
                         },
-                        "HomeShop.Grocery.Slot2.Buy": {
+                        "HomeShop.Grocery.Slot2.Buy.Wood": {
                             "enabled": false
                         },
-                        "HomeShop.Grocery.Slot3.Buy": {
+                        "HomeShop.Grocery.Slot3.Buy.Wood": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.Wood": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.Wood": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.Wood": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.Wood": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.Wood": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.Wood": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ],
+            "default_case": "Unlimited"
+        },
+        "HomeShopGroceryStoneBlock": {
+            "type": "select",
+            "label": "雜貨：石塊",
+            "description": "第一排常見的石磚堆。以商品圖示比對判定種類，符合此折數上限才會購買。沒有折數標籤（原價）的商品一律不購買。",
+            "cases": [
+                {
+                    "name": "Discount10",
+                    "label": "1 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        }
+                    }
+                },
+                {
+                    "name": "Discount20",
+                    "label": "2 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        }
+                    }
+                },
+                {
+                    "name": "Discount30",
+                    "label": "3 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        }
+                    }
+                },
+                {
+                    "name": "Discount40",
+                    "label": "4 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        }
+                    }
+                },
+                {
+                    "name": "Discount50",
+                    "label": "5 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        }
+                    }
+                },
+                {
+                    "name": "Discount60",
+                    "label": "6 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        }
+                    }
+                },
+                {
+                    "name": "Discount70",
+                    "label": "7 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        }
+                    }
+                },
+                {
+                    "name": "Discount80",
+                    "label": "8 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        }
+                    }
+                },
+                {
+                    "name": "Discount90",
+                    "label": "9 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        }
+                    }
+                },
+                {
+                    "name": "Unlimited",
+                    "label": "不限折數（只要有折扣就買）",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.StoneBlock": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        }
+                    }
+                },
+                {
+                    "name": "Never",
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.StoneBlock": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.StoneBlock": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.StoneBlock": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.StoneBlock": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.StoneBlock": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.StoneBlock": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.StoneBlock": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.StoneBlock": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.StoneBlock": {
                             "enabled": false
                         }
                     }
@@ -259,728 +1127,3217 @@
         },
         "HomeShopGroceryRoughStone": {
             "type": "select",
-            "label": "雜貨：粗煉石（黑色的鐵）",
-            "description": "第二、三排出現粗煉石時，只有折數不高於設定值才購買。（尚未接上流程：目前僅保留設定介面，實際購買未依此設定執行。）",
+            "label": "雜貨：粗煉石",
+            "description": "深藍黑色的礦石結晶，用於裝備強化。以商品圖示比對判定種類，符合此折數上限才會購買。沒有折數標籤（原價）的商品一律不購買。",
             "cases": [
                 {
                     "name": "Discount10",
-                    "label": "1 折以下"
+                    "label": "1 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount20",
-                    "label": "2 折以下"
+                    "label": "2 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount30",
-                    "label": "3 折以下"
+                    "label": "3 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount40",
-                    "label": "4 折以下"
+                    "label": "4 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount50",
-                    "label": "5 折以下"
+                    "label": "5 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount60",
-                    "label": "6 折以下"
+                    "label": "6 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount70",
-                    "label": "7 折以下"
+                    "label": "7 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount80",
-                    "label": "8 折以下"
+                    "label": "8 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount90",
-                    "label": "9 折以下"
+                    "label": "9 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        }
+                    }
                 },
                 {
                     "name": "Unlimited",
-                    "label": "不限折數"
+                    "label": "不限折數（只要有折扣就買）",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.RoughStone": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        }
+                    }
                 },
                 {
                     "name": "Never",
-                    "label": "不購買"
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.RoughStone": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.RoughStone": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.RoughStone": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.RoughStone": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.RoughStone": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.RoughStone": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.RoughStone": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.RoughStone": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.RoughStone": {
+                            "enabled": false
+                        }
+                    }
                 }
             ],
             "default_case": "Discount70"
         },
         "HomeShopGroceryRareTimeSand": {
             "type": "select",
-            "label": "雜貨：稀有的時之沙（黃色的砂）",
-            "description": "第二、三排出現稀有的時之沙時，只有折數不高於設定值才購買。（尚未接上流程：目前僅保留設定介面，實際購買未依此設定執行。）",
+            "label": "雜貨：稀有時之沙",
+            "description": "黃色的沙堆。以商品圖示比對判定種類，符合此折數上限才會購買。沒有折數標籤（原價）的商品一律不購買。",
             "cases": [
                 {
                     "name": "Discount10",
-                    "label": "1 折以下"
+                    "label": "1 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount20",
-                    "label": "2 折以下"
+                    "label": "2 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount30",
-                    "label": "3 折以下"
+                    "label": "3 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount40",
-                    "label": "4 折以下"
+                    "label": "4 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount50",
-                    "label": "5 折以下"
+                    "label": "5 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount60",
-                    "label": "6 折以下"
+                    "label": "6 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount70",
-                    "label": "7 折以下"
+                    "label": "7 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount80",
-                    "label": "8 折以下"
+                    "label": "8 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount90",
-                    "label": "9 折以下"
+                    "label": "9 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        }
+                    }
                 },
                 {
                     "name": "Unlimited",
-                    "label": "不限折數"
+                    "label": "不限折數（只要有折扣就買）",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.RareTimeSand": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        }
+                    }
                 },
                 {
                     "name": "Never",
-                    "label": "不購買"
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.RareTimeSand": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.RareTimeSand": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.RareTimeSand": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.RareTimeSand": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.RareTimeSand": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.RareTimeSand": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.RareTimeSand": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.RareTimeSand": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.RareTimeSand": {
+                            "enabled": false
+                        }
+                    }
                 }
             ],
             "default_case": "Discount80"
         },
         "HomeShopGroceryBattleEssence": {
             "type": "select",
-            "label": "雜貨：歷戰精華（紫色）",
-            "description": "第二、三排出現歷戰精華時，只有折數不高於設定值才購買。（尚未接上流程：目前僅保留設定介面，實際購買未依此設定執行。）",
+            "label": "雜貨：歷戰精華",
+            "description": "紫色的環狀結晶。以商品圖示比對判定種類，符合此折數上限才會購買。沒有折數標籤（原價）的商品一律不購買。",
             "cases": [
                 {
                     "name": "Discount10",
-                    "label": "1 折以下"
+                    "label": "1 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount20",
-                    "label": "2 折以下"
+                    "label": "2 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount30",
-                    "label": "3 折以下"
+                    "label": "3 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount40",
-                    "label": "4 折以下"
+                    "label": "4 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount50",
-                    "label": "5 折以下"
+                    "label": "5 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount60",
-                    "label": "6 折以下"
+                    "label": "6 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount70",
-                    "label": "7 折以下"
+                    "label": "7 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount80",
-                    "label": "8 折以下"
+                    "label": "8 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount90",
-                    "label": "9 折以下"
+                    "label": "9 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        }
+                    }
                 },
                 {
                     "name": "Unlimited",
-                    "label": "不限折數"
+                    "label": "不限折數（只要有折扣就買）",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.BattleEssence": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        }
+                    }
                 },
                 {
                     "name": "Never",
-                    "label": "不購買"
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.BattleEssence": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.BattleEssence": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.BattleEssence": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.BattleEssence": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.BattleEssence": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.BattleEssence": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.BattleEssence": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.BattleEssence": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.BattleEssence": {
+                            "enabled": false
+                        }
+                    }
                 }
             ],
             "default_case": "Discount90"
         },
         "HomeShopGroceryOrdinaryFreezeDried": {
             "type": "select",
-            "label": "雜貨：普通凍乾（咖啡色）",
-            "description": "第二、三排出現普通凍乾時，只有折數不高於設定值才購買。（尚未接上流程：目前僅保留設定介面，實際購買未依此設定執行。）",
+            "label": "雜貨：普通凍乾",
+            "description": "咖啡色的貓掌布袋，幻獸飼料。以商品圖示比對判定種類，符合此折數上限才會購買。沒有折數標籤（原價）的商品一律不購買。",
             "cases": [
                 {
                     "name": "Discount10",
-                    "label": "1 折以下"
+                    "label": "1 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount20",
-                    "label": "2 折以下"
+                    "label": "2 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount30",
-                    "label": "3 折以下"
+                    "label": "3 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount40",
-                    "label": "4 折以下"
+                    "label": "4 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount50",
-                    "label": "5 折以下"
+                    "label": "5 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount60",
-                    "label": "6 折以下"
+                    "label": "6 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount70",
-                    "label": "7 折以下"
+                    "label": "7 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount80",
-                    "label": "8 折以下"
+                    "label": "8 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount90",
-                    "label": "9 折以下"
+                    "label": "9 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        }
+                    }
                 },
                 {
                     "name": "Unlimited",
-                    "label": "不限折數"
+                    "label": "不限折數（只要有折扣就買）",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.OrdinaryFreezeDried": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        }
+                    }
                 },
                 {
                     "name": "Never",
-                    "label": "不購買"
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.OrdinaryFreezeDried": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.OrdinaryFreezeDried": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.OrdinaryFreezeDried": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot4.Buy.OrdinaryFreezeDried": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot5.Buy.OrdinaryFreezeDried": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot6.Buy.OrdinaryFreezeDried": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot7.Buy.OrdinaryFreezeDried": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot8.Buy.OrdinaryFreezeDried": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot9.Buy.OrdinaryFreezeDried": {
+                            "enabled": false
+                        }
+                    }
                 }
             ],
             "default_case": "Discount60"
         },
-        "HomeShopVaultSlot1": {
+        "HomeShopGroceryOther": {
             "type": "select",
-            "label": "寶庫第 1 格折數上限",
-            "description": "寶庫前三排第 1 個商品；依由左至右、由上至下編號。（尚未接上流程：目前僅保留設定介面，實際購買未依此設定執行。）",
+            "label": "雜貨：其他（第一排稀有商品）",
+            "description": "第一排低機率出現、上述六種素材以外的商品（例如飾品）。以「六種素材圖示都比不中」判定，符合此折數上限才會購買。",
             "cases": [
                 {
                     "name": "Discount10",
-                    "label": "1 折以下"
+                    "label": "1 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.Other": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.Other": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.Other": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount20",
-                    "label": "2 折以下"
+                    "label": "2 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.Other": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.Other": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.Other": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount30",
-                    "label": "3 折以下"
+                    "label": "3 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.Other": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.Other": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.Other": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount40",
-                    "label": "4 折以下"
+                    "label": "4 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.Other": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.Other": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.Other": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount50",
-                    "label": "5 折以下"
+                    "label": "5 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.Other": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.Other": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.Other": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount60",
-                    "label": "6 折以下"
+                    "label": "6 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.Other": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.Other": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.Other": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount70",
-                    "label": "7 折以下"
+                    "label": "7 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.Other": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.Other": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.Other": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount80",
-                    "label": "8 折以下"
+                    "label": "8 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.Other": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.Other": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.Other": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount90",
-                    "label": "9 折以下"
+                    "label": "9 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.Other": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.Other": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.Other": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        }
+                    }
                 },
                 {
                     "name": "Unlimited",
-                    "label": "不限折數"
+                    "label": "不限折數（只要有折扣就買）",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.Other": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.Other": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.Other": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        }
+                    }
                 },
                 {
                     "name": "Never",
-                    "label": "不購買"
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "HomeShop.Grocery.Slot1.Buy.Other": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot2.Buy.Other": {
+                            "enabled": false
+                        },
+                        "HomeShop.Grocery.Slot3.Buy.Other": {
+                            "enabled": false
+                        }
+                    }
+                }
+            ],
+            "default_case": "Unlimited"
+        },
+        "HomeShopVaultSlot1": {
+            "type": "select",
+            "label": "寶庫：第 1 格",
+            "description": "寶庫前九格商品固定、折數每日變動，使用晶石購買。第 1 格通常是每日免費體力；免費商品會另外自動領取，不受此設定影響。預設不購買。",
+            "cases": [
+                {
+                    "name": "Discount10",
+                    "label": "1 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot1.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        }
+                    }
+                },
+                {
+                    "name": "Discount20",
+                    "label": "2 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot1.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        }
+                    }
+                },
+                {
+                    "name": "Discount30",
+                    "label": "3 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot1.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        }
+                    }
+                },
+                {
+                    "name": "Discount40",
+                    "label": "4 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot1.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        }
+                    }
+                },
+                {
+                    "name": "Discount50",
+                    "label": "5 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot1.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        }
+                    }
+                },
+                {
+                    "name": "Discount60",
+                    "label": "6 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot1.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        }
+                    }
+                },
+                {
+                    "name": "Discount70",
+                    "label": "7 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot1.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        }
+                    }
+                },
+                {
+                    "name": "Discount80",
+                    "label": "8 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot1.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        }
+                    }
+                },
+                {
+                    "name": "Discount90",
+                    "label": "9 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot1.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        }
+                    }
+                },
+                {
+                    "name": "Unlimited",
+                    "label": "不限折數（只要有折扣就買）",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot1.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        }
+                    }
+                },
+                {
+                    "name": "Never",
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot1.Buy": {
+                            "enabled": false
+                        }
+                    }
                 }
             ],
             "default_case": "Never"
         },
         "HomeShopVaultSlot2": {
             "type": "select",
-            "label": "寶庫第 2 格折數上限",
-            "description": "寶庫前三排第 2 個商品；依由左至右、由上至下編號。（尚未接上流程：目前僅保留設定介面，實際購買未依此設定執行。）",
+            "label": "寶庫：第 2 格",
+            "description": "寶庫前九格商品固定、折數每日變動，使用晶石購買。預設不購買。",
             "cases": [
                 {
                     "name": "Discount10",
-                    "label": "1 折以下"
+                    "label": "1 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot2.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount20",
-                    "label": "2 折以下"
+                    "label": "2 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot2.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount30",
-                    "label": "3 折以下"
+                    "label": "3 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot2.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount40",
-                    "label": "4 折以下"
+                    "label": "4 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot2.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount50",
-                    "label": "5 折以下"
+                    "label": "5 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot2.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount60",
-                    "label": "6 折以下"
+                    "label": "6 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot2.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount70",
-                    "label": "7 折以下"
+                    "label": "7 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot2.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount80",
-                    "label": "8 折以下"
+                    "label": "8 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot2.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount90",
-                    "label": "9 折以下"
+                    "label": "9 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot2.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        }
+                    }
                 },
                 {
                     "name": "Unlimited",
-                    "label": "不限折數"
+                    "label": "不限折數（只要有折扣就買）",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot2.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        }
+                    }
                 },
                 {
                     "name": "Never",
-                    "label": "不購買"
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot2.Buy": {
+                            "enabled": false
+                        }
+                    }
                 }
             ],
             "default_case": "Never"
         },
         "HomeShopVaultSlot3": {
             "type": "select",
-            "label": "寶庫第 3 格折數上限",
-            "description": "寶庫前三排第 3 個商品；依由左至右、由上至下編號。（尚未接上流程：目前僅保留設定介面，實際購買未依此設定執行。）",
+            "label": "寶庫：第 3 格",
+            "description": "寶庫前九格商品固定、折數每日變動，使用晶石購買。預設不購買。",
             "cases": [
                 {
                     "name": "Discount10",
-                    "label": "1 折以下"
+                    "label": "1 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot3.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount20",
-                    "label": "2 折以下"
+                    "label": "2 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot3.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount30",
-                    "label": "3 折以下"
+                    "label": "3 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot3.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount40",
-                    "label": "4 折以下"
+                    "label": "4 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot3.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount50",
-                    "label": "5 折以下"
+                    "label": "5 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot3.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount60",
-                    "label": "6 折以下"
+                    "label": "6 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot3.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount70",
-                    "label": "7 折以下"
+                    "label": "7 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot3.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount80",
-                    "label": "8 折以下"
+                    "label": "8 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot3.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount90",
-                    "label": "9 折以下"
+                    "label": "9 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot3.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        }
+                    }
                 },
                 {
                     "name": "Unlimited",
-                    "label": "不限折數"
+                    "label": "不限折數（只要有折扣就買）",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot3.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        }
+                    }
                 },
                 {
                     "name": "Never",
-                    "label": "不購買"
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot3.Buy": {
+                            "enabled": false
+                        }
+                    }
                 }
             ],
             "default_case": "Never"
         },
         "HomeShopVaultSlot4": {
             "type": "select",
-            "label": "寶庫第 4 格折數上限",
-            "description": "寶庫前三排第 4 個商品；依由左至右、由上至下編號。（尚未接上流程：目前僅保留設定介面，實際購買未依此設定執行。）",
+            "label": "寶庫：第 4 格",
+            "description": "寶庫前九格商品固定、折數每日變動，使用晶石購買。預設不購買。",
             "cases": [
                 {
                     "name": "Discount10",
-                    "label": "1 折以下"
+                    "label": "1 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot4.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount20",
-                    "label": "2 折以下"
+                    "label": "2 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot4.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount30",
-                    "label": "3 折以下"
+                    "label": "3 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot4.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount40",
-                    "label": "4 折以下"
+                    "label": "4 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot4.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount50",
-                    "label": "5 折以下"
+                    "label": "5 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot4.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount60",
-                    "label": "6 折以下"
+                    "label": "6 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot4.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount70",
-                    "label": "7 折以下"
+                    "label": "7 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot4.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount80",
-                    "label": "8 折以下"
+                    "label": "8 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot4.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount90",
-                    "label": "9 折以下"
+                    "label": "9 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot4.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        }
+                    }
                 },
                 {
                     "name": "Unlimited",
-                    "label": "不限折數"
+                    "label": "不限折數（只要有折扣就買）",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot4.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        }
+                    }
                 },
                 {
                     "name": "Never",
-                    "label": "不購買"
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot4.Buy": {
+                            "enabled": false
+                        }
+                    }
                 }
             ],
             "default_case": "Never"
         },
         "HomeShopVaultSlot5": {
             "type": "select",
-            "label": "寶庫第 5 格折數上限",
-            "description": "寶庫前三排第 5 個商品；依由左至右、由上至下編號。（尚未接上流程：目前僅保留設定介面，實際購買未依此設定執行。）",
+            "label": "寶庫：第 5 格",
+            "description": "寶庫前九格商品固定、折數每日變動，使用晶石購買。預設不購買。",
             "cases": [
                 {
                     "name": "Discount10",
-                    "label": "1 折以下"
+                    "label": "1 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot5.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount20",
-                    "label": "2 折以下"
+                    "label": "2 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot5.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount30",
-                    "label": "3 折以下"
+                    "label": "3 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot5.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount40",
-                    "label": "4 折以下"
+                    "label": "4 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot5.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount50",
-                    "label": "5 折以下"
+                    "label": "5 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot5.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount60",
-                    "label": "6 折以下"
+                    "label": "6 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot5.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount70",
-                    "label": "7 折以下"
+                    "label": "7 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot5.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount80",
-                    "label": "8 折以下"
+                    "label": "8 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot5.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount90",
-                    "label": "9 折以下"
+                    "label": "9 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot5.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        }
+                    }
                 },
                 {
                     "name": "Unlimited",
-                    "label": "不限折數"
+                    "label": "不限折數（只要有折扣就買）",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot5.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        }
+                    }
                 },
                 {
                     "name": "Never",
-                    "label": "不購買"
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot5.Buy": {
+                            "enabled": false
+                        }
+                    }
                 }
             ],
             "default_case": "Never"
         },
         "HomeShopVaultSlot6": {
             "type": "select",
-            "label": "寶庫第 6 格折數上限",
-            "description": "寶庫前三排第 6 個商品；依由左至右、由上至下編號。（尚未接上流程：目前僅保留設定介面，實際購買未依此設定執行。）",
+            "label": "寶庫：第 6 格",
+            "description": "寶庫前九格商品固定、折數每日變動，使用晶石購買。預設不購買。",
             "cases": [
                 {
                     "name": "Discount10",
-                    "label": "1 折以下"
+                    "label": "1 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot6.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount20",
-                    "label": "2 折以下"
+                    "label": "2 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot6.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount30",
-                    "label": "3 折以下"
+                    "label": "3 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot6.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount40",
-                    "label": "4 折以下"
+                    "label": "4 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot6.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount50",
-                    "label": "5 折以下"
+                    "label": "5 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot6.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount60",
-                    "label": "6 折以下"
+                    "label": "6 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot6.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount70",
-                    "label": "7 折以下"
+                    "label": "7 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot6.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount80",
-                    "label": "8 折以下"
+                    "label": "8 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot6.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount90",
-                    "label": "9 折以下"
+                    "label": "9 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot6.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        }
+                    }
                 },
                 {
                     "name": "Unlimited",
-                    "label": "不限折數"
+                    "label": "不限折數（只要有折扣就買）",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot6.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        }
+                    }
                 },
                 {
                     "name": "Never",
-                    "label": "不購買"
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot6.Buy": {
+                            "enabled": false
+                        }
+                    }
                 }
             ],
             "default_case": "Never"
         },
         "HomeShopVaultSlot7": {
             "type": "select",
-            "label": "寶庫第 7 格折數上限",
-            "description": "寶庫前三排第 7 個商品；依由左至右、由上至下編號。（尚未接上流程：目前僅保留設定介面，實際購買未依此設定執行。）",
+            "label": "寶庫：第 7 格",
+            "description": "寶庫前九格商品固定、折數每日變動，使用晶石購買。預設不購買。",
             "cases": [
                 {
                     "name": "Discount10",
-                    "label": "1 折以下"
+                    "label": "1 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot7.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount20",
-                    "label": "2 折以下"
+                    "label": "2 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot7.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount30",
-                    "label": "3 折以下"
+                    "label": "3 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot7.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount40",
-                    "label": "4 折以下"
+                    "label": "4 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot7.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount50",
-                    "label": "5 折以下"
+                    "label": "5 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot7.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount60",
-                    "label": "6 折以下"
+                    "label": "6 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot7.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount70",
-                    "label": "7 折以下"
+                    "label": "7 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot7.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount80",
-                    "label": "8 折以下"
+                    "label": "8 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot7.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount90",
-                    "label": "9 折以下"
+                    "label": "9 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot7.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        }
+                    }
                 },
                 {
                     "name": "Unlimited",
-                    "label": "不限折數"
+                    "label": "不限折數（只要有折扣就買）",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot7.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        }
+                    }
                 },
                 {
                     "name": "Never",
-                    "label": "不購買"
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot7.Buy": {
+                            "enabled": false
+                        }
+                    }
                 }
             ],
             "default_case": "Never"
         },
         "HomeShopVaultSlot8": {
             "type": "select",
-            "label": "寶庫第 8 格折數上限",
-            "description": "寶庫前三排第 8 個商品；依由左至右、由上至下編號。（尚未接上流程：目前僅保留設定介面，實際購買未依此設定執行。）",
+            "label": "寶庫：第 8 格",
+            "description": "寶庫前九格商品固定、折數每日變動，使用晶石購買。預設不購買。",
             "cases": [
                 {
                     "name": "Discount10",
-                    "label": "1 折以下"
+                    "label": "1 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot8.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount20",
-                    "label": "2 折以下"
+                    "label": "2 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot8.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount30",
-                    "label": "3 折以下"
+                    "label": "3 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot8.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount40",
-                    "label": "4 折以下"
+                    "label": "4 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot8.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount50",
-                    "label": "5 折以下"
+                    "label": "5 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot8.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount60",
-                    "label": "6 折以下"
+                    "label": "6 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot8.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount70",
-                    "label": "7 折以下"
+                    "label": "7 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot8.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount80",
-                    "label": "8 折以下"
+                    "label": "8 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot8.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount90",
-                    "label": "9 折以下"
+                    "label": "9 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot8.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        }
+                    }
                 },
                 {
                     "name": "Unlimited",
-                    "label": "不限折數"
+                    "label": "不限折數（只要有折扣就買）",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot8.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        }
+                    }
                 },
                 {
                     "name": "Never",
-                    "label": "不購買"
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot8.Buy": {
+                            "enabled": false
+                        }
+                    }
                 }
             ],
             "default_case": "Never"
         },
         "HomeShopVaultSlot9": {
             "type": "select",
-            "label": "寶庫第 9 格折數上限",
-            "description": "寶庫前三排第 9 個商品；依由左至右、由上至下編號。（尚未接上流程：目前僅保留設定介面，實際購買未依此設定執行。）",
+            "label": "寶庫：第 9 格",
+            "description": "寶庫前九格商品固定、折數每日變動，使用晶石購買。預設不購買。",
             "cases": [
                 {
                     "name": "Discount10",
-                    "label": "1 折以下"
+                    "label": "1 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot9.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount20",
-                    "label": "2 折以下"
+                    "label": "2 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot9.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount30",
-                    "label": "3 折以下"
+                    "label": "3 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot9.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount40",
-                    "label": "4 折以下"
+                    "label": "4 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot9.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount50",
-                    "label": "5 折以下"
+                    "label": "5 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot9.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount60",
-                    "label": "6 折以下"
+                    "label": "6 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot9.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount70",
-                    "label": "7 折以下"
+                    "label": "7 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot9.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount80",
-                    "label": "8 折以下"
+                    "label": "8 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot9.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount90",
-                    "label": "9 折以下"
+                    "label": "9 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot9.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        }
+                    }
                 },
                 {
                     "name": "Unlimited",
-                    "label": "不限折數"
+                    "label": "不限折數（只要有折扣就買）",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot9.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        }
+                    }
                 },
                 {
                     "name": "Never",
-                    "label": "不購買"
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "HomeShop.Vault.Slot9.Buy": {
+                            "enabled": false
+                        }
+                    }
                 }
             ],
             "default_case": "Never"
         },
         "HomeShopSpecialSale": {
             "type": "select",
-            "label": "特賣商品折數上限",
-            "description": "特賣出現時，只有折數不高於設定值才購買；沒有特賣時直接略過。（尚未接上流程：目前僅保留設定介面，實際購買未依此設定執行。）",
+            "label": "特賣：折數上限",
+            "description": "特賣分頁每日不定期出現，固定只有一個商品，使用晶石購買。預設不購買。",
             "cases": [
                 {
                     "name": "Discount10",
-                    "label": "1 折以下"
+                    "label": "1 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Sale.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-1]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount20",
-                    "label": "2 折以下"
+                    "label": "2 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Sale.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-2]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount30",
-                    "label": "3 折以下"
+                    "label": "3 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Sale.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-3]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount40",
-                    "label": "4 折以下"
+                    "label": "4 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Sale.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-4]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount50",
-                    "label": "5 折以下"
+                    "label": "5 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Sale.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-5]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount60",
-                    "label": "6 折以下"
+                    "label": "6 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Sale.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-6]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount70",
-                    "label": "7 折以下"
+                    "label": "7 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Sale.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-7]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount80",
-                    "label": "8 折以下"
+                    "label": "8 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Sale.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-8]折"
+                        }
+                    }
                 },
                 {
                     "name": "Discount90",
-                    "label": "9 折以下"
+                    "label": "9 折以下",
+                    "pipeline_override": {
+                        "HomeShop.Sale.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        }
+                    }
                 },
                 {
                     "name": "Unlimited",
-                    "label": "不限折數"
+                    "label": "不限折數（只要有折扣就買）",
+                    "pipeline_override": {
+                        "HomeShop.Sale.Buy": {
+                            "enabled": true,
+                            "expected": "^[1-9]折"
+                        }
+                    }
                 },
                 {
                     "name": "Never",
-                    "label": "不購買"
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "HomeShop.Sale.Buy": {
+                            "enabled": false
+                        }
+                    }
                 }
             ],
             "default_case": "Never"

@@ -9,6 +9,10 @@
 >
 > 任務目前僅完成介面與定義建立，實際執行流程與辨識條件全部尚未生效，不可視為可用的自動化功能。
 
+## Agent
+
+部分任務（幻獸結緣、女神像祈願、時光扭蛋機的次數計算）需要 pipeline 無法表達的算術，改由 `agent/main.py` 這個 Python 子行程提供 Custom Action，MXU 會依 `interface.json` 的 `agent` 設定自行啟動它。發行套件會內嵌 Python runtime，相依套件列在 `requirements.txt`。
+
 ## 開發環境與模擬器設定
 
 - Windows 及 BlueStacks 5
@@ -32,6 +36,10 @@
 - **快速日常** (`QuickDaily`)：啟動遊戲並領取免費掛機與收益獎勵。
 - **完整日常** (`DailyFull`)：包含家園六項設施流程（幻獸結緣、女神像祈願、時光扭蛋機、商店購物、道具一鍵使用、煉金爐分解與寶石合成）、公會、筆記、地圖與領取所有獎勵。家園以外的項目多數仍為待驗證骨架。
 - **只領獎勵** (`ClaimOnly`)：僅執行家園床與推車等免費掛機收益領取。
+
+## Agent
+
+部分任務（幻獸結緣、女神像祈願、時光扭蛋機的次數計算）需要 pipeline 無法表達的算術，改由 `agent/main.py` 這個 Python 子行程提供 Custom Action，MXU 會依 `interface.json` 的 `agent` 設定自行啟動它。發行套件會內嵌 Python runtime，相依套件列在 `requirements.txt`。
 
 ## 開發
 
