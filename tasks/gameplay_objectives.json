@@ -99,18 +99,6 @@
             ]
         },
         {
-            "name": "GuildRaid",
-            "label": "公會討伐",
-            "entry": "Objectives.Pilgrimage.Weekly.GuildRaid7.Start",
-            "description": "進行公會討伐挑戰。",
-            "group": [
-                "Guild"
-            ],
-            "controller": [
-                "Android"
-            ]
-        },
-        {
             "name": "Commissions",
             "label": "委託任務",
             "entry": "Objectives.Commissions.Start",
@@ -195,33 +183,6 @@
             "description": "由最右側往左掃過整張家園地圖，找出 NPC 頭上的紫色禮物泡泡並點擊「領取」。每日可領取次數由遊戲限制，領完後按鈕消失即自動結束。",
             "group": [
                 "Home"
-            ],
-            "controller": [
-                "Android"
-            ]
-        },
-        {
-            "name": "GuildDonation",
-            "label": "公會捐贈",
-            "entry": "Objectives.Guild.Donation.Start",
-            "description": "至公會大廳執行捐贈；每日最多 5 次，第 1 次免費，後續允許消耗遊戲資源，依設定次數停止。",
-            "group": [
-                "Guild"
-            ],
-            "controller": [
-                "Android"
-            ],
-            "option": [
-                "GuildDonationCount"
-            ]
-        },
-        {
-            "name": "GuildIdleReward",
-            "label": "公會放置獎勵",
-            "entry": "Objectives.Guild.IdleReward.Start",
-            "description": "點擊公會右下角的放置獎勵爐子領取收益。",
-            "group": [
-                "Guild"
             ],
             "controller": [
                 "Android"
@@ -1634,73 +1595,6 @@
                 }
             ],
             "default_case": "No"
-        },
-        "GuildDonationCount": {
-            "type": "select",
-            "label": "每日公會捐贈次數",
-            "description": "設定今日捐贈的目標總次數。會先判斷畫面上的現有次數，只補到設定值；已達設定值就不執行。第 1 次免費，後續允許消耗遊戲資源。",
-            "cases": [
-                {
-                    "name": "Donate0",
-                    "label": "0 次（不捐贈）",
-                    "pipeline_override": {
-                        "Guild.Donation.NeedMore": {
-                            "enabled": false
-                        }
-                    }
-                },
-                {
-                    "name": "Donate1",
-                    "label": "1 次",
-                    "pipeline_override": {
-                        "Guild.Donation.NeedMore": {
-                            "enabled": true,
-                            "expected": "每日捐贈次數.*0/5"
-                        }
-                    }
-                },
-                {
-                    "name": "Donate2",
-                    "label": "2 次",
-                    "pipeline_override": {
-                        "Guild.Donation.NeedMore": {
-                            "enabled": true,
-                            "expected": "每日捐贈次數.*[01]/5"
-                        }
-                    }
-                },
-                {
-                    "name": "Donate3",
-                    "label": "3 次",
-                    "pipeline_override": {
-                        "Guild.Donation.NeedMore": {
-                            "enabled": true,
-                            "expected": "每日捐贈次數.*[0-2]/5"
-                        }
-                    }
-                },
-                {
-                    "name": "Donate4",
-                    "label": "4 次",
-                    "pipeline_override": {
-                        "Guild.Donation.NeedMore": {
-                            "enabled": true,
-                            "expected": "每日捐贈次數.*[0-3]/5"
-                        }
-                    }
-                },
-                {
-                    "name": "Donate5",
-                    "label": "5 次",
-                    "pipeline_override": {
-                        "Guild.Donation.NeedMore": {
-                            "enabled": true,
-                            "expected": "每日捐贈次數.*[0-4]/5"
-                        }
-                    }
-                }
-            ],
-            "default_case": "Donate0"
         },
         "AlchemyExcludeHighPower": {
             "type": "select",

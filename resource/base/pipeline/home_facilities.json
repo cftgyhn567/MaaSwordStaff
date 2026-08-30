@@ -23,7 +23,7 @@
             120
         ],
         "template": "navigation/bottom-home.png",
-        "threshold": 0.75,
+        "threshold": 0.9,
         "action": "DoNothing",
         "next": [
             "Alchemy.ResetRight.Swipe1"
@@ -804,7 +804,7 @@
             120
         ],
         "template": "navigation/bottom-home.png",
-        "threshold": 0.75,
+        "threshold": 0.9,
         "action": "DoNothing",
         "next": [
             "Alchemy.Done"
@@ -844,7 +844,7 @@
             120
         ],
         "template": "navigation/bottom-home.png",
-        "threshold": 0.75,
+        "threshold": 0.9,
         "action": "DoNothing",
         "next": [
             "Bag.ResetRight.Swipe1"
@@ -1293,7 +1293,7 @@
             120
         ],
         "template": "navigation/bottom-home.png",
-        "threshold": 0.75,
+        "threshold": 0.9,
         "action": "DoNothing",
         "next": [
             "Bag.Done"
@@ -1333,7 +1333,7 @@
             120
         ],
         "template": "navigation/bottom-home.png",
-        "threshold": 0.75,
+        "threshold": 0.9,
         "action": "DoNothing",
         "next": [
             "HomeShop.ResetRight.Swipe1"
@@ -6089,7 +6089,7 @@
             120
         ],
         "template": "navigation/bottom-home.png",
-        "threshold": 0.75,
+        "threshold": 0.9,
         "action": "DoNothing",
         "next": [
             "HomeShop.Done"
@@ -6133,7 +6133,7 @@
             120
         ],
         "template": "navigation/bottom-home.png",
-        "threshold": 0.75,
+        "threshold": 0.9,
         "action": "DoNothing",
         "next": [
             "GachaMachine.ResetRight.Swipe1"
@@ -6873,7 +6873,7 @@
             120
         ],
         "template": "navigation/bottom-home.png",
-        "threshold": 0.75,
+        "threshold": 0.9,
         "action": "DoNothing",
         "next": [
             "GachaMachine.Done"
@@ -6913,7 +6913,7 @@
             120
         ],
         "template": "navigation/bottom-home.png",
-        "threshold": 0.75,
+        "threshold": 0.9,
         "action": "DoNothing",
         "next": [
             "GoddessStatue.ResetRight.Swipe1"
@@ -7502,7 +7502,7 @@
             120
         ],
         "template": "navigation/bottom-home.png",
-        "threshold": 0.75,
+        "threshold": 0.9,
         "action": "DoNothing",
         "next": [
             "GoddessStatue.Done"
@@ -7542,7 +7542,7 @@
             120
         ],
         "template": "navigation/bottom-home.png",
-        "threshold": 0.75,
+        "threshold": 0.9,
         "action": "DoNothing",
         "next": [
             "SakuraTree.ResetRight.Swipe1"
@@ -8021,7 +8021,7 @@
             120
         ],
         "template": "navigation/bottom-home.png",
-        "threshold": 0.75,
+        "threshold": 0.9,
         "action": "DoNothing",
         "next": [
             "SakuraTree.Done"
@@ -8061,7 +8061,7 @@
             120
         ],
         "template": "navigation/bottom-home.png",
-        "threshold": 0.75,
+        "threshold": 0.9,
         "action": "DoNothing",
         "next": [
             "HomeGifts.ResetRight.Swipe1"
@@ -8414,7 +8414,7 @@
             120
         ],
         "template": "navigation/bottom-home.png",
-        "threshold": 0.75,
+        "threshold": 0.9,
         "action": "DoNothing",
         "next": [
             "HomeGifts.Move1"
@@ -8551,7 +8551,7 @@
             120
         ],
         "template": "navigation/bottom-home.png",
-        "threshold": 0.75,
+        "threshold": 0.9,
         "action": "DoNothing",
         "next": [
             "HomeGifts.Move2"
@@ -8688,7 +8688,7 @@
             120
         ],
         "template": "navigation/bottom-home.png",
-        "threshold": 0.75,
+        "threshold": 0.9,
         "action": "DoNothing",
         "next": [
             "HomeGifts.Move3"
@@ -8825,7 +8825,7 @@
             120
         ],
         "template": "navigation/bottom-home.png",
-        "threshold": 0.75,
+        "threshold": 0.9,
         "action": "DoNothing",
         "next": [
             "HomeGifts.Move4"
@@ -8962,7 +8962,7 @@
             120
         ],
         "template": "navigation/bottom-home.png",
-        "threshold": 0.75,
+        "threshold": 0.9,
         "action": "DoNothing",
         "next": [
             "HomeGifts.Done"

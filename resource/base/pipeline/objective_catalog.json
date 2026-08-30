@@ -181,33 +181,6 @@
             }
         }
     },
-    "Objectives.Pilgrimage.Weekly.GuildRaid7.Start": {
-        "recognition": "DirectHit",
-        "action": "DoNothing",
-        "next": [
-            "Objectives.Pilgrimage.Weekly.GuildRaid7.EnsureGuild",
-            "Objectives.Pilgrimage.Weekly.GuildRaid7.Nav.FromOtherTab",
-            "Objectives.Pilgrimage.Weekly.GuildRaid7.Nav.Back"
-        ]
-    },
-    "Objectives.Pilgrimage.Weekly.GuildRaid7.EnsureGuild": {
-        "recognition": "OCR",
-        "roi": [
-            430,
-            1200,
-            140,
-            70
-        ],
-        "expected": "公會",
-        "threshold": 0.2,
-        "action": "DoNothing",
-        "focus": {
-            "Node.Recognition.Succeeded": {
-                "content": "【導航】已確認在公會主頁，開始執行公會討伐任務。",
-                "display": "log"
-            }
-        }
-    },
     "Objectives.ConsumeStamina.Start": {
         "recognition": "DirectHit",
         "action": "DoNothing",
@@ -736,82 +709,6 @@
         "post_delay": 1000,
         "next": [
             "Objectives.Pilgrimage.Daily.ExploreFate3.EnsureWorld"
-        ]
-    },
-    "Objectives.Pilgrimage.Weekly.GuildRaid7.Nav.FromOtherTab": {
-        "recognition": "OCR",
-        "roi": [
-            0,
-            1200,
-            720,
-            70
-        ],
-        "expected": "角色",
-        "threshold": 0.2,
-        "action": "Click",
-        "target": [
-            500,
-            1220,
-            40,
-            40
-        ],
-        "post_delay": 800,
-        "next": [
-            "Objectives.Pilgrimage.Weekly.GuildRaid7.EnsureGuild"
-        ]
-    },
-    "Objectives.Pilgrimage.Weekly.GuildRaid7.Nav.Back": {
-        "max_hit": 12,
-        "recognition": "DirectHit",
-        "action": "Click",
-        "target": [
-            50,
-            1150,
-            100,
-            100
-        ],
-        "post_delay": 700,
-        "next": [
-            "Objectives.Pilgrimage.Weekly.GuildRaid7.Nav.ExitDialog",
-            "Objectives.Pilgrimage.Weekly.GuildRaid7.EnsureGuild",
-            "Objectives.Pilgrimage.Weekly.GuildRaid7.Nav.FromOtherTab",
-            "Objectives.Pilgrimage.Weekly.GuildRaid7.Nav.Back"
-        ]
-    },
-    "Objectives.Pilgrimage.Weekly.GuildRaid7.Nav.ExitDialog": {
-        "recognition": "OCR",
-        "roi": [
-            160,
-            500,
-            400,
-            210
-        ],
-        "expected": "要離開遊戲嗎",
-        "threshold": 0.2,
-        "action": "Click",
-        "target": [
-            100,
-            690,
-            260,
-            100
-        ],
-        "post_delay": 800,
-        "next": [
-            "Objectives.Pilgrimage.Weekly.GuildRaid7.Nav.SelectGuild"
-        ]
-    },
-    "Objectives.Pilgrimage.Weekly.GuildRaid7.Nav.SelectGuild": {
-        "recognition": "DirectHit",
-        "action": "Click",
-        "target": [
-            500,
-            1220,
-            40,
-            40
-        ],
-        "post_delay": 1000,
-        "next": [
-            "Objectives.Pilgrimage.Weekly.GuildRaid7.EnsureGuild"
         ]
     }
 }

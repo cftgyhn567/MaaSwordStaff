@@ -68,6 +68,20 @@ PROFILES: dict[str, dict[str, Any]] = {
         # 祈願主畫面按鈕在 y≈979，結果畫面在 y≈1103，ROI 需同時涵蓋。
         "button_roi": [0, 935, 720, 215],
     },
+    "guild_donation": {
+        "label": "公會捐贈",
+        "verb": "捐贈",
+        # 第一次是「免費捐贈」，第二次起變成「捐贈 <晨星>」且會跳出確認彈窗。
+        # 若玩家勾了「本次登入不再提醒」就不會跳，所以確認視窗是選擇性的。
+        "counters": [
+            {"roi": [180, 868, 360, 52], "pattern": r"每日捐贈次數[:：]?(\d+)"},
+        ],
+        "buttons": [
+            {"n": 1, "expected": "捐贈", "settle_ms": 2600},
+        ],
+        "button_roi": [180, 902, 360, 78],
+        "confirm": {"roi": [360, 698, 270, 82], "expected": "確定"},
+    },
     "gacha": {
         "label": "時光扭蛋機",
         "verb": "扭蛋",
@@ -195,7 +209,9 @@ class PullByCount(CustomAction):
         if not profile:
             _log(context, f"【Agent】未知的 profile「{profile_name}」，安全停止。")
             return False
-        profile.update({k: v for k, v in cfg.items() if k in ("counters", "buttons", "button_roi")})
+        profile.update(
+            {k: v for k, v in cfg.items() if k in ("counters", "buttons", "button_roi", "confirm")}
+        )
 
         label = profile["label"]
         verb = profile["verb"]
@@ -266,6 +282,17 @@ class PullByCount(CustomAction):
             button, rect = chosen
             _click(context, rect)
             clicks += 1
+
+            # 部分設施（例如公會捐贈第二次起）會跳出確認彈窗
+            confirm = profile.get("confirm")
+            if confirm:
+                time.sleep(1.0)
+                confirm_rect = _find_button(
+                    context, _screencap(context), confirm["roi"], confirm["expected"]
+                )
+                if confirm_rect:
+                    _click(context, confirm_rect)
+
             time.sleep(button.get("settle_ms", 5000) / 1000.0)
 
             image = _screencap(context)
@@ -297,6 +324,124 @@ class PullByCount(CustomAction):
             f"【{label}】完成：本次實際{verb} {done_now} 次，"
             f"今日累計 {final.value} 次（點擊 {clicks} 下）。",
         )
+        return True
+
+
+# ---------------------------------------------------------------------------
+# 冶煉工坊熔爐：租借／續租
+#
+# 按鈕組合會隨狀態變動，必須以文字定位而非固定座標：
+#   未租借、非使用中 → 「租借 <晨星>」（置中）
+#   已租借、非使用中 → 「續租 <晨星>」＋「切換」
+#   已租借且使用中   → 「續租 <晨星>」（置中）
+#   黑鐵熔爐（預設） → 「使用中」（不可點）
+# 租借與續租都會跳出確認彈窗（租借確認／續租確認）。
+# 剩餘時間顯示為「還可以使用N天HH小時MM分SS秒」，上限 7 天，每次 24 小時。
+# ---------------------------------------------------------------------------
+
+FURNACE_DEFAULTS: dict[str, Any] = {
+    "time_roi": [140, 852, 460, 52],
+    "time_pattern": r"還可以使用(\d+)天",
+    "button_roi": [90, 900, 540, 76],
+    "rent_expected": "租借",
+    "renew_expected": "續租",
+    "confirm": {"roi": [360, 698, 270, 82], "expected": "確定"},
+    "max_renew": 7,
+}
+
+
+def _read_days(context: Context, image, cfg: dict[str, Any]) -> Optional[int]:
+    """讀「還可以使用N天…」；找不到代表尚未租借。"""
+    for result in _ocr_all(context, image, cfg["time_roi"]):
+        text = (getattr(result, "text", "") or "").replace(" ", "")
+        match = re.search(cfg["time_pattern"], text)
+        if match:
+            return int(match.group(1))
+    return None
+
+
+@AgentServer.custom_action("RenewFurnace")
+class RenewFurnace(CustomAction):
+    """把指定熔爐的剩餘天數補到設定值。
+
+    custom_action_param::
+
+        {
+            "label": "黃金熔爐",
+            "target_days": 7,   # 續租到剩餘天數達到此值；0 代表不租借也不續租
+            "max_renew": 7      # 選填，安全上限
+        }
+    """
+
+    def run(self, context: Context, argv: CustomAction.RunArg):
+        try:
+            cfg = dict(FURNACE_DEFAULTS)
+            cfg.update(json.loads(argv.custom_action_param or "{}"))
+        except json.JSONDecodeError:
+            _log(context, "【熔爐】custom_action_param 不是合法 JSON，安全停止。")
+            return False
+
+        label = cfg.get("label", "熔爐")
+        try:
+            target_days = int(cfg.get("target_days", 0))
+        except (TypeError, ValueError):
+            target_days = 0
+        max_renew = int(cfg.get("max_renew", 7))
+
+        if target_days <= 0:
+            _log(context, f"【{label}】設定為不租借，僅切換熔爐種類。")
+            return True
+
+        confirm = cfg["confirm"]
+        clicks = 0
+        stalls = 0
+
+        while clicks < max_renew:
+            image = _screencap(context)
+            days = _read_days(context, image, cfg)
+
+            if days is not None and days >= target_days:
+                _log(context, f"【{label}】剩餘 {days} 天，已達設定的 {target_days} 天，不再續租。")
+                return True
+
+            expected = cfg["rent_expected"] if days is None else cfg["renew_expected"]
+            rect = _find_button(context, image, cfg["button_roi"], expected)
+            if rect is None:
+                _log(
+                    context,
+                    f"【{label}】找不到「{expected}」按鈕（可能已達租借上限或晨星不足），安全停止。",
+                )
+                break
+
+            _click(context, rect)
+            clicks += 1
+            time.sleep(1.0)
+
+            confirm_rect = _find_button(
+                context, _screencap(context), confirm["roi"], confirm["expected"]
+            )
+            if confirm_rect:
+                _click(context, confirm_rect)
+            time.sleep(2.5)
+
+            after = _read_days(context, _screencap(context), cfg)
+            if after is None or (days is not None and after <= days):
+                stalls += 1
+                if stalls >= 2:
+                    _log(
+                        context,
+                        f"【{label}】連續兩次「{expected}」後剩餘天數沒有增加，"
+                        f"判定已達上限或資源不足，安全停止。",
+                    )
+                    break
+            else:
+                stalls = 0
+
+        final = _read_days(context, _screencap(context), cfg)
+        if final is None:
+            _log(context, f"【{label}】結束時讀不到剩餘時間，無法確認結果。")
+            return False
+        _log(context, f"【{label}】完成：本次租借／續租 {clicks} 次，目前剩餘 {final} 天。")
         return True
 
 

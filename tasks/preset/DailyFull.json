@@ -30,16 +30,19 @@
                     }
                 },
                 {
+                    "name": "GuildIdleReward"
+                },
+                {
+                    "name": "GuildDonation"
+                },
+                {
                     "name": "GuildRaid"
                 },
                 {
-                    "name": "GuildDonation",
-                    "option": {
-                        "GuildDonationCount": "Donate0"
-                    }
+                    "name": "GuildShopPurchase"
                 },
                 {
-                    "name": "GuildIdleReward"
+                    "name": "GuildForge"
                 },
                 {
                     "name": "DailyDungeon"

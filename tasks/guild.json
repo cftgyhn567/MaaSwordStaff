@@ -1,0 +1,869 @@
+{
+    "task": [
+        {
+            "name": "GuildIdleReward",
+            "label": "公會放置獎勵",
+            "entry": "Objectives.Guild.IdleReward.Start",
+            "description": "點擊公會畫面右下角的放置獎勵熔爐並領取（公會幣與時之砂）。此入口固定在右下角，不受場景左右捲動影響。",
+            "group": [
+                "Guild"
+            ],
+            "controller": [
+                "Android"
+            ]
+        },
+        {
+            "name": "GuildDonation",
+            "label": "公會捐贈",
+            "entry": "Objectives.Guild.Donation.Start",
+            "description": "公會大廳 →「公會捐贈」，依設定次數捐贈，並以畫面上的「每日捐贈次數」驗證實際結果。",
+            "group": [
+                "Guild"
+            ],
+            "controller": [
+                "Android"
+            ],
+            "option": [
+                "GuildDonationCount",
+                "GuildDonationDeduct"
+            ]
+        },
+        {
+            "name": "GuildRaid",
+            "label": "公會討伐",
+            "entry": "Objectives.Guild.Raid.Start",
+            "description": "遠征之門 →「公會活動」→「公會討伐」，依設定次數挑戰，每場等到「戰鬥結束」才繼續。",
+            "group": [
+                "Guild"
+            ],
+            "controller": [
+                "Android"
+            ],
+            "option": [
+                "GuildRaidCount"
+            ]
+        },
+        {
+            "name": "GuildShopPurchase",
+            "label": "公會商店購買",
+            "entry": "Objectives.Guild.Shop.Start",
+            "description": "公會商店前 11 項商品與折數固定，可逐項設定不購買／購買 1 次／買到限購上限。使用公會幣，已售完會自動略過。",
+            "group": [
+                "Guild"
+            ],
+            "controller": [
+                "Android"
+            ],
+            "option": [
+                "GuildShopItem1",
+                "GuildShopItem2",
+                "GuildShopItem3",
+                "GuildShopItem4",
+                "GuildShopItem5",
+                "GuildShopItem6",
+                "GuildShopItem7",
+                "GuildShopItem8",
+                "GuildShopItem9",
+                "GuildShopItem10",
+                "GuildShopItem11"
+            ]
+        },
+        {
+            "name": "GuildForge",
+            "label": "冶煉工坊熔爐",
+            "entry": "Objectives.Guild.Forge.Start",
+            "description": "冶煉工坊右下角的「放置工具」，可切換黑鐵／黃金／結晶熔爐，並依設定把剩餘租借天數補到指定天數（上限 7 天，每次 24 小時）。",
+            "group": [
+                "Guild"
+            ],
+            "controller": [
+                "Android"
+            ],
+            "option": [
+                "GuildForgeType",
+                "GuildForgeRentDays"
+            ]
+        }
+    ],
+    "option": {
+        "GuildDonationCount": {
+            "type": "input",
+            "label": "公會捐贈：捐贈次數",
+            "description": "每日上限 5 次。第 1 次免費，第 2 次起消耗晨星且費用遞增（實測 20 → 50），並會跳出確認彈窗，流程會自動按確定。",
+            "inputs": [
+                {
+                    "name": "Count",
+                    "label": "次數",
+                    "default": "1",
+                    "pipeline_type": "int",
+                    "verify": "^[0-5]$",
+                    "pattern_msg": "請輸入 0～5。"
+                }
+            ],
+            "pipeline_override": {
+                "GuildDonation.Pull.Deduct": {
+                    "custom_action_param": {
+                        "profile": "guild_donation",
+                        "total": "{Count}",
+                        "deduct_done": true
+                    }
+                },
+                "GuildDonation.Pull.Raw": {
+                    "custom_action_param": {
+                        "profile": "guild_donation",
+                        "total": "{Count}",
+                        "deduct_done": false
+                    }
+                }
+            }
+        },
+        "GuildDonationDeduct": {
+            "type": "switch",
+            "label": "公會捐贈：扣除已捐贈次數",
+            "description": "勾選時，上面的次數視為「今日累計目標」，流程會先讀畫面上的「每日捐贈次數」只補足差額；取消勾選則固定再捐指定次數。",
+            "cases": [
+                {
+                    "name": "Deduct",
+                    "label": "扣除（次數視為今日累計目標）",
+                    "pipeline_override": {
+                        "GuildDonation.Pull.Route": {
+                            "next": [
+                                "GuildDonation.Pull.Deduct"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Raw",
+                    "label": "不扣除（每次都執行設定次數）",
+                    "pipeline_override": {
+                        "GuildDonation.Pull.Route": {
+                            "next": [
+                                "GuildDonation.Pull.Raw"
+                            ]
+                        }
+                    }
+                }
+            ],
+            "default_case": "Deduct"
+        },
+        "GuildRaidCount": {
+            "type": "select",
+            "label": "公會討伐：挑戰次數",
+            "description": "每日上限 2 次。一場戰鬥最多 50 回合，實測約 2～3 分鐘，流程會等到畫面出現「戰鬥結束」才繼續。",
+            "cases": [
+                {
+                    "name": "Count0",
+                    "label": "0 次（不執行）",
+                    "pipeline_override": {
+                        "GuildRaid.RaidScreen": {
+                            "next": [
+                                "GuildRaid.NoMore"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Count1",
+                    "label": "1 次",
+                    "pipeline_override": {
+                        "GuildRaid.RaidScreen": {
+                            "next": [
+                                "GuildRaid.Loop.Challenge",
+                                "GuildRaid.NoMore"
+                            ]
+                        },
+                        "GuildRaid.Loop.Challenge": {
+                            "max_hit": 1
+                        }
+                    }
+                },
+                {
+                    "name": "Count2",
+                    "label": "2 次",
+                    "pipeline_override": {
+                        "GuildRaid.RaidScreen": {
+                            "next": [
+                                "GuildRaid.Loop.Challenge",
+                                "GuildRaid.NoMore"
+                            ]
+                        },
+                        "GuildRaid.Loop.Challenge": {
+                            "max_hit": 2
+                        }
+                    }
+                }
+            ],
+            "default_case": "Count2"
+        },
+        "GuildShopItem1": {
+            "type": "select",
+            "label": "公會商店：第 1 項",
+            "description": "公會商店前 11 項商品與折數固定，使用公會幣購買。已售完會自動略過。預設不購買。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "GuildShop.Slot1.Buy": {
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "name": "Once",
+                    "label": "購買 1 次",
+                    "pipeline_override": {
+                        "GuildShop.Slot1.Buy": {
+                            "enabled": true,
+                            "max_hit": 1
+                        }
+                    }
+                },
+                {
+                    "name": "ToLimit",
+                    "label": "買到限購上限",
+                    "pipeline_override": {
+                        "GuildShop.Slot1.Buy": {
+                            "enabled": true,
+                            "max_hit": 10
+                        }
+                    }
+                }
+            ],
+            "default_case": "Never"
+        },
+        "GuildShopItem2": {
+            "type": "select",
+            "label": "公會商店：第 2 項",
+            "description": "公會商店前 11 項商品與折數固定，使用公會幣購買。已售完會自動略過。預設不購買。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "GuildShop.Slot2.Buy": {
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "name": "Once",
+                    "label": "購買 1 次",
+                    "pipeline_override": {
+                        "GuildShop.Slot2.Buy": {
+                            "enabled": true,
+                            "max_hit": 1
+                        }
+                    }
+                },
+                {
+                    "name": "ToLimit",
+                    "label": "買到限購上限",
+                    "pipeline_override": {
+                        "GuildShop.Slot2.Buy": {
+                            "enabled": true,
+                            "max_hit": 10
+                        }
+                    }
+                }
+            ],
+            "default_case": "Never"
+        },
+        "GuildShopItem3": {
+            "type": "select",
+            "label": "公會商店：第 3 項",
+            "description": "公會商店前 11 項商品與折數固定，使用公會幣購買。已售完會自動略過。預設不購買。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "GuildShop.Slot3.Buy": {
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "name": "Once",
+                    "label": "購買 1 次",
+                    "pipeline_override": {
+                        "GuildShop.Slot3.Buy": {
+                            "enabled": true,
+                            "max_hit": 1
+                        }
+                    }
+                },
+                {
+                    "name": "ToLimit",
+                    "label": "買到限購上限",
+                    "pipeline_override": {
+                        "GuildShop.Slot3.Buy": {
+                            "enabled": true,
+                            "max_hit": 10
+                        }
+                    }
+                }
+            ],
+            "default_case": "Never"
+        },
+        "GuildShopItem4": {
+            "type": "select",
+            "label": "公會商店：第 4 項",
+            "description": "公會商店前 11 項商品與折數固定，使用公會幣購買。已售完會自動略過。預設不購買。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "GuildShop.Slot4.Buy": {
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "name": "Once",
+                    "label": "購買 1 次",
+                    "pipeline_override": {
+                        "GuildShop.Slot4.Buy": {
+                            "enabled": true,
+                            "max_hit": 1
+                        }
+                    }
+                },
+                {
+                    "name": "ToLimit",
+                    "label": "買到限購上限",
+                    "pipeline_override": {
+                        "GuildShop.Slot4.Buy": {
+                            "enabled": true,
+                            "max_hit": 10
+                        }
+                    }
+                }
+            ],
+            "default_case": "Never"
+        },
+        "GuildShopItem5": {
+            "type": "select",
+            "label": "公會商店：第 5 項",
+            "description": "公會商店前 11 項商品與折數固定，使用公會幣購買。已售完會自動略過。預設不購買。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "GuildShop.Slot5.Buy": {
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "name": "Once",
+                    "label": "購買 1 次",
+                    "pipeline_override": {
+                        "GuildShop.Slot5.Buy": {
+                            "enabled": true,
+                            "max_hit": 1
+                        }
+                    }
+                },
+                {
+                    "name": "ToLimit",
+                    "label": "買到限購上限",
+                    "pipeline_override": {
+                        "GuildShop.Slot5.Buy": {
+                            "enabled": true,
+                            "max_hit": 10
+                        }
+                    }
+                }
+            ],
+            "default_case": "Never"
+        },
+        "GuildShopItem6": {
+            "type": "select",
+            "label": "公會商店：第 6 項",
+            "description": "公會商店前 11 項商品與折數固定，使用公會幣購買。已售完會自動略過。預設不購買。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "GuildShop.Slot6.Buy": {
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "name": "Once",
+                    "label": "購買 1 次",
+                    "pipeline_override": {
+                        "GuildShop.Slot6.Buy": {
+                            "enabled": true,
+                            "max_hit": 1
+                        }
+                    }
+                },
+                {
+                    "name": "ToLimit",
+                    "label": "買到限購上限",
+                    "pipeline_override": {
+                        "GuildShop.Slot6.Buy": {
+                            "enabled": true,
+                            "max_hit": 10
+                        }
+                    }
+                }
+            ],
+            "default_case": "Never"
+        },
+        "GuildShopItem7": {
+            "type": "select",
+            "label": "公會商店：第 7 項",
+            "description": "公會商店前 11 項商品與折數固定，使用公會幣購買。已售完會自動略過。預設不購買。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "GuildShop.Slot7.Buy": {
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "name": "Once",
+                    "label": "購買 1 次",
+                    "pipeline_override": {
+                        "GuildShop.Slot7.Buy": {
+                            "enabled": true,
+                            "max_hit": 1
+                        }
+                    }
+                },
+                {
+                    "name": "ToLimit",
+                    "label": "買到限購上限",
+                    "pipeline_override": {
+                        "GuildShop.Slot7.Buy": {
+                            "enabled": true,
+                            "max_hit": 10
+                        }
+                    }
+                }
+            ],
+            "default_case": "Never"
+        },
+        "GuildShopItem8": {
+            "type": "select",
+            "label": "公會商店：第 8 項",
+            "description": "公會商店前 11 項商品與折數固定，使用公會幣購買。已售完會自動略過。預設不購買。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "GuildShop.Slot8.Buy": {
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "name": "Once",
+                    "label": "購買 1 次",
+                    "pipeline_override": {
+                        "GuildShop.Slot8.Buy": {
+                            "enabled": true,
+                            "max_hit": 1
+                        }
+                    }
+                },
+                {
+                    "name": "ToLimit",
+                    "label": "買到限購上限",
+                    "pipeline_override": {
+                        "GuildShop.Slot8.Buy": {
+                            "enabled": true,
+                            "max_hit": 10
+                        }
+                    }
+                }
+            ],
+            "default_case": "Never"
+        },
+        "GuildShopItem9": {
+            "type": "select",
+            "label": "公會商店：第 9 項",
+            "description": "公會商店前 11 項商品與折數固定，使用公會幣購買。已售完會自動略過。預設不購買。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "GuildShop.Slot9.Buy": {
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "name": "Once",
+                    "label": "購買 1 次",
+                    "pipeline_override": {
+                        "GuildShop.Slot9.Buy": {
+                            "enabled": true,
+                            "max_hit": 1
+                        }
+                    }
+                },
+                {
+                    "name": "ToLimit",
+                    "label": "買到限購上限",
+                    "pipeline_override": {
+                        "GuildShop.Slot9.Buy": {
+                            "enabled": true,
+                            "max_hit": 10
+                        }
+                    }
+                }
+            ],
+            "default_case": "Never"
+        },
+        "GuildShopItem10": {
+            "type": "select",
+            "label": "公會商店：第 10 項",
+            "description": "公會商店前 11 項商品與折數固定，使用公會幣購買。已售完會自動略過。預設不購買。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "GuildShop.Slot10.Buy": {
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "name": "Once",
+                    "label": "購買 1 次",
+                    "pipeline_override": {
+                        "GuildShop.Slot10.Buy": {
+                            "enabled": true,
+                            "max_hit": 1
+                        }
+                    }
+                },
+                {
+                    "name": "ToLimit",
+                    "label": "買到限購上限",
+                    "pipeline_override": {
+                        "GuildShop.Slot10.Buy": {
+                            "enabled": true,
+                            "max_hit": 10
+                        }
+                    }
+                }
+            ],
+            "default_case": "Never"
+        },
+        "GuildShopItem11": {
+            "type": "select",
+            "label": "公會商店：第 11 項",
+            "description": "公會商店前 11 項商品與折數固定，使用公會幣購買。已售完會自動略過。預設不購買。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "GuildShop.Slot11.Buy": {
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "name": "Once",
+                    "label": "購買 1 次",
+                    "pipeline_override": {
+                        "GuildShop.Slot11.Buy": {
+                            "enabled": true,
+                            "max_hit": 1
+                        }
+                    }
+                },
+                {
+                    "name": "ToLimit",
+                    "label": "買到限購上限",
+                    "pipeline_override": {
+                        "GuildShop.Slot11.Buy": {
+                            "enabled": true,
+                            "max_hit": 10
+                        }
+                    }
+                }
+            ],
+            "default_case": "Never"
+        },
+        "GuildForgeType": {
+            "type": "select",
+            "label": "冶煉工坊：使用的熔爐",
+            "description": "選好後流程會切換到該熔爐；若尚未租借或剩餘天數不足，會依下面的天數設定租借／續租。",
+            "cases": [
+                {
+                    "name": "Iron",
+                    "label": "黑鐵熔爐（免費，+0%）",
+                    "pipeline_override": {
+                        "GuildForge.Select.Route": {
+                            "next": [
+                                "GuildForge.Select.Iron"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Gold",
+                    "label": "黃金熔爐（150 晨星/24h，+20% 鋼材／+25% 公會幣）",
+                    "pipeline_override": {
+                        "GuildForge.Select.Route": {
+                            "next": [
+                                "GuildForge.Select.Gold"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Crystal",
+                    "label": "結晶熔爐（450 晨星/24h，+40% 鋼材／+40% 公會幣）",
+                    "pipeline_override": {
+                        "GuildForge.Select.Route": {
+                            "next": [
+                                "GuildForge.Select.Crystal"
+                            ]
+                        }
+                    }
+                }
+            ],
+            "default_case": "Iron"
+        },
+        "GuildForgeRentDays": {
+            "type": "select",
+            "label": "冶煉工坊：租借／續租到剩餘天數",
+            "description": "每次租借或續租為 24 小時、消耗晨星，上限 7 天。流程會讀畫面上的「還可以使用N天」，只補到設定天數；黑鐵熔爐免費不需租借。預設不租借。",
+            "cases": [
+                {
+                    "name": "Days0",
+                    "label": "不租借（只切換熔爐）",
+                    "pipeline_override": {
+                        "GuildForge.Renew.Iron": {
+                            "custom_action_param": {
+                                "label": "Iron",
+                                "target_days": 0
+                            }
+                        },
+                        "GuildForge.Renew.Gold": {
+                            "custom_action_param": {
+                                "label": "Gold",
+                                "target_days": 0
+                            }
+                        },
+                        "GuildForge.Renew.Crystal": {
+                            "custom_action_param": {
+                                "label": "Crystal",
+                                "target_days": 0
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "Days1",
+                    "label": "補到剩餘 1 天",
+                    "pipeline_override": {
+                        "GuildForge.Renew.Iron": {
+                            "custom_action_param": {
+                                "label": "Iron",
+                                "target_days": 1,
+                                "max_renew": 7
+                            }
+                        },
+                        "GuildForge.Renew.Gold": {
+                            "custom_action_param": {
+                                "label": "Gold",
+                                "target_days": 1,
+                                "max_renew": 7
+                            }
+                        },
+                        "GuildForge.Renew.Crystal": {
+                            "custom_action_param": {
+                                "label": "Crystal",
+                                "target_days": 1,
+                                "max_renew": 7
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "Days2",
+                    "label": "補到剩餘 2 天",
+                    "pipeline_override": {
+                        "GuildForge.Renew.Iron": {
+                            "custom_action_param": {
+                                "label": "Iron",
+                                "target_days": 2,
+                                "max_renew": 7
+                            }
+                        },
+                        "GuildForge.Renew.Gold": {
+                            "custom_action_param": {
+                                "label": "Gold",
+                                "target_days": 2,
+                                "max_renew": 7
+                            }
+                        },
+                        "GuildForge.Renew.Crystal": {
+                            "custom_action_param": {
+                                "label": "Crystal",
+                                "target_days": 2,
+                                "max_renew": 7
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "Days3",
+                    "label": "補到剩餘 3 天",
+                    "pipeline_override": {
+                        "GuildForge.Renew.Iron": {
+                            "custom_action_param": {
+                                "label": "Iron",
+                                "target_days": 3,
+                                "max_renew": 7
+                            }
+                        },
+                        "GuildForge.Renew.Gold": {
+                            "custom_action_param": {
+                                "label": "Gold",
+                                "target_days": 3,
+                                "max_renew": 7
+                            }
+                        },
+                        "GuildForge.Renew.Crystal": {
+                            "custom_action_param": {
+                                "label": "Crystal",
+                                "target_days": 3,
+                                "max_renew": 7
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "Days4",
+                    "label": "補到剩餘 4 天",
+                    "pipeline_override": {
+                        "GuildForge.Renew.Iron": {
+                            "custom_action_param": {
+                                "label": "Iron",
+                                "target_days": 4,
+                                "max_renew": 7
+                            }
+                        },
+                        "GuildForge.Renew.Gold": {
+                            "custom_action_param": {
+                                "label": "Gold",
+                                "target_days": 4,
+                                "max_renew": 7
+                            }
+                        },
+                        "GuildForge.Renew.Crystal": {
+                            "custom_action_param": {
+                                "label": "Crystal",
+                                "target_days": 4,
+                                "max_renew": 7
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "Days5",
+                    "label": "補到剩餘 5 天",
+                    "pipeline_override": {
+                        "GuildForge.Renew.Iron": {
+                            "custom_action_param": {
+                                "label": "Iron",
+                                "target_days": 5,
+                                "max_renew": 7
+                            }
+                        },
+                        "GuildForge.Renew.Gold": {
+                            "custom_action_param": {
+                                "label": "Gold",
+                                "target_days": 5,
+                                "max_renew": 7
+                            }
+                        },
+                        "GuildForge.Renew.Crystal": {
+                            "custom_action_param": {
+                                "label": "Crystal",
+                                "target_days": 5,
+                                "max_renew": 7
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "Days6",
+                    "label": "補到剩餘 6 天",
+                    "pipeline_override": {
+                        "GuildForge.Renew.Iron": {
+                            "custom_action_param": {
+                                "label": "Iron",
+                                "target_days": 6,
+                                "max_renew": 7
+                            }
+                        },
+                        "GuildForge.Renew.Gold": {
+                            "custom_action_param": {
+                                "label": "Gold",
+                                "target_days": 6,
+                                "max_renew": 7
+                            }
+                        },
+                        "GuildForge.Renew.Crystal": {
+                            "custom_action_param": {
+                                "label": "Crystal",
+                                "target_days": 6,
+                                "max_renew": 7
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "Days7",
+                    "label": "補到剩餘 7 天",
+                    "pipeline_override": {
+                        "GuildForge.Renew.Iron": {
+                            "custom_action_param": {
+                                "label": "Iron",
+                                "target_days": 7,
+                                "max_renew": 7
+                            }
+                        },
+                        "GuildForge.Renew.Gold": {
+                            "custom_action_param": {
+                                "label": "Gold",
+                                "target_days": 7,
+                                "max_renew": 7
+                            }
+                        },
+                        "GuildForge.Renew.Crystal": {
+                            "custom_action_param": {
+                                "label": "Crystal",
+                                "target_days": 7,
+                                "max_renew": 7
+                            }
+                        }
+                    }
+                }
+            ],
+            "default_case": "Days0"
+        }
+    }
+}

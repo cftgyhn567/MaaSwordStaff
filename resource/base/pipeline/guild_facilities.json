@@ -1,0 +1,3500 @@
+{
+    "Objectives.Guild.IdleReward.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildIdle.EnsureGuild",
+            "GuildIdle.Nav.FromOtherTab",
+            "GuildIdle.Nav.Recover"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會放置獎勵】開始執行：領取公會放置獎勵。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildIdle.EnsureGuild": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1230,
+            720,
+            60
+        ],
+        "expected": "公會",
+        "threshold": 0.5,
+        "action": "DoNothing",
+        "next": [
+            "GuildIdle.Claim"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會放置獎勵】底部導航列顯示「公會」，確認目前在公會主頁。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildIdle.Nav.FromOtherTab": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1180,
+            720,
+            100
+        ],
+        "expected": "角色|筆記|家園|世界|探索",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            420,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 1400,
+        "next": [
+            "GuildIdle.EnsureGuild"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會放置獎勵】目前在其他主頁籤，點擊「公會」切換。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildIdle.Nav.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            100,
+            690,
+            260,
+            100
+        ],
+        "post_delay": 1000,
+        "next": [
+            "GuildIdle.Nav.SelectGuild"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會放置獎勵】偵測到離開遊戲彈窗，點擊取消。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildIdle.Nav.SelectGuild": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            420,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 1400,
+        "next": [
+            "GuildIdle.EnsureGuild"
+        ]
+    },
+    "GuildIdle.Nav.Recover": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildIdle.Nav.ExitDialog",
+            "GuildIdle.EnsureGuild",
+            "GuildIdle.Nav.FromOtherTab",
+            "GuildIdle.Nav.Back",
+            "GuildIdle.Nav.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會放置獎勵】目前在子畫面，點左下角返回按鈕回到公會主頁…",
+                "display": "log"
+            }
+        }
+    },
+    "GuildIdle.Nav.Back": {
+        "max_hit": 12,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            45,
+            1195,
+            60,
+            45
+        ],
+        "post_delay": 1400,
+        "next": [
+            "GuildIdle.Nav.ExitDialog",
+            "GuildIdle.EnsureGuild",
+            "GuildIdle.Nav.FromOtherTab",
+            "GuildIdle.Nav.Back",
+            "GuildIdle.Nav.Failed"
+        ]
+    },
+    "GuildIdle.Nav.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會放置獎勵】連續點擊返回按鈕仍無法回到公會主頁，已安全停止，未執行任何操作。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildIdle.Claim": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            602,
+            945,
+            50,
+            50
+        ],
+        "post_delay": 2800,
+        "next": [
+            "GuildIdle.Rewarded",
+            "GuildIdle.Nothing"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會放置獎勵】點擊畫面右下角的放置獎勵熔爐…",
+                "display": "log"
+            }
+        }
+    },
+    "GuildIdle.Rewarded": {
+        "recognition": "OCR",
+        "roi": [
+            140,
+            330,
+            440,
+            95
+        ],
+        "expected": "獲得獎勵",
+        "threshold": 0.3,
+        "action": "Click",
+        "target": true,
+        "post_delay": 1800,
+        "next": [
+            "GuildIdle.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會放置獎勵】已領取放置獎勵，關閉獎勵提示。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildIdle.Nothing": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildIdle.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會放置獎勵】沒有出現獎勵提示，判定目前沒有可領取的放置獎勵。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildIdle.Back": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildIdle.Back.AtGuild",
+            "GuildIdle.Back.Press"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會放置獎勵】流程結束，準備返回公會主頁…",
+                "display": "log"
+            }
+        }
+    },
+    "GuildIdle.Back.Press": {
+        "max_hit": 6,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            45,
+            1195,
+            60,
+            45
+        ],
+        "post_delay": 1600,
+        "next": [
+            "GuildIdle.Back.AtGuild",
+            "GuildIdle.Back.Press"
+        ]
+    },
+    "GuildIdle.Back.AtGuild": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1230,
+            720,
+            60
+        ],
+        "expected": "公會",
+        "threshold": 0.5,
+        "action": "DoNothing",
+        "next": [
+            "GuildIdle.Done"
+        ]
+    },
+    "GuildIdle.Done": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會放置獎勵】已回到公會主頁，本任務結束。",
+                "display": "log"
+            }
+        }
+    },
+    "Objectives.Guild.Donation.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildDonation.EnsureGuild",
+            "GuildDonation.Nav.FromOtherTab",
+            "GuildDonation.Nav.Recover"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會捐贈】開始執行：公會捐贈。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildDonation.EnsureGuild": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1230,
+            720,
+            60
+        ],
+        "expected": "公會",
+        "threshold": 0.5,
+        "action": "DoNothing",
+        "next": [
+            "GuildDonation.ResetRight.Swipe1"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會捐贈】底部導航列顯示「公會」，確認目前在公會主頁。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildDonation.Nav.FromOtherTab": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1180,
+            720,
+            100
+        ],
+        "expected": "角色|筆記|家園|世界|探索",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            420,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 1400,
+        "next": [
+            "GuildDonation.EnsureGuild"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會捐贈】目前在其他主頁籤，點擊「公會」切換。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildDonation.Nav.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            100,
+            690,
+            260,
+            100
+        ],
+        "post_delay": 1000,
+        "next": [
+            "GuildDonation.Nav.SelectGuild"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會捐贈】偵測到離開遊戲彈窗，點擊取消。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildDonation.Nav.SelectGuild": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            420,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 1400,
+        "next": [
+            "GuildDonation.EnsureGuild"
+        ]
+    },
+    "GuildDonation.Nav.Recover": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildDonation.Nav.ExitDialog",
+            "GuildDonation.EnsureGuild",
+            "GuildDonation.Nav.FromOtherTab",
+            "GuildDonation.Nav.Back",
+            "GuildDonation.Nav.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會捐贈】目前在子畫面，點左下角返回按鈕回到公會主頁…",
+                "display": "log"
+            }
+        }
+    },
+    "GuildDonation.Nav.Back": {
+        "max_hit": 12,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            45,
+            1195,
+            60,
+            45
+        ],
+        "post_delay": 1400,
+        "next": [
+            "GuildDonation.Nav.ExitDialog",
+            "GuildDonation.EnsureGuild",
+            "GuildDonation.Nav.FromOtherTab",
+            "GuildDonation.Nav.Back",
+            "GuildDonation.Nav.Failed"
+        ]
+    },
+    "GuildDonation.Nav.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會捐贈】連續點擊返回按鈕仍無法回到公會主頁，已安全停止，未執行任何操作。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildDonation.ResetRight.Swipe1": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildDonation.ResetRight.Swipe2"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會捐贈】將公會場景推到最右側…",
+                "display": "log"
+            }
+        }
+    },
+    "GuildDonation.ResetRight.Swipe2": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildDonation.ResetRight.Swipe3"
+        ]
+    },
+    "GuildDonation.ResetRight.Swipe3": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildDonation.ResetRight.Swipe4"
+        ]
+    },
+    "GuildDonation.ResetRight.Swipe4": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildDonation.ResetRight.Swipe5"
+        ]
+    },
+    "GuildDonation.ResetRight.Swipe5": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildDonation.ResetRight.Swipe6"
+        ]
+    },
+    "GuildDonation.ResetRight.Swipe6": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildDonation.ResetRight.Swipe7"
+        ]
+    },
+    "GuildDonation.ResetRight.Swipe7": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildDonation.ResetRight.Swipe8"
+        ]
+    },
+    "GuildDonation.ResetRight.Swipe8": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildDonation.ResetRight.Swipe9"
+        ]
+    },
+    "GuildDonation.ResetRight.Swipe9": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildDonation.MoveLeft.Swipe1"
+        ]
+    },
+    "GuildDonation.MoveLeft.Swipe1": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildDonation.Enter"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會捐贈】往左移動 1 格到公會大廳…",
+                "display": "log"
+            }
+        }
+    },
+    "GuildDonation.Enter": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            380,
+            720,
+            400
+        ],
+        "expected": "公會大廳",
+        "threshold": 0.3,
+        "action": "Click",
+        "target": true,
+        "target_offset": [
+            0,
+            -40,
+            0,
+            0
+        ],
+        "post_delay": 3200,
+        "next": [
+            "GuildDonation.Screen",
+            "GuildDonation.Enter.Retry"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會捐贈】點擊「公會大廳」，等待「領地|升級」畫面…",
+                "display": "log"
+            }
+        }
+    },
+    "GuildDonation.Enter.Retry": {
+        "max_hit": 3,
+        "recognition": "OCR",
+        "roi": [
+            0,
+            380,
+            720,
+            400
+        ],
+        "expected": "公會大廳",
+        "threshold": 0.3,
+        "action": "Click",
+        "target": true,
+        "target_offset": [
+            0,
+            -40,
+            0,
+            0
+        ],
+        "post_delay": 3200,
+        "next": [
+            "GuildDonation.Screen",
+            "GuildDonation.Enter.Retry",
+            "GuildDonation.Enter.Failed"
+        ]
+    },
+    "GuildDonation.Enter.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會捐贈】找不到或無法進入「公會大廳」，已安全停止，未執行任何操作。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildDonation.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            330,
+            1180,
+            390,
+            90
+        ],
+        "expected": "領地|升級",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "GuildDonation.Open",
+            "GuildDonation.Open.Retry",
+            "GuildDonation.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會捐贈】已確認進入「領地|升級」畫面。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildDonation.Open": {
+        "recognition": "OCR",
+        "roi": [
+            130,
+            1080,
+            170,
+            70
+        ],
+        "expected": "公會捐贈",
+        "threshold": 0.3,
+        "action": "Click",
+        "target": true,
+        "target_offset": [
+            0,
+            -30,
+            0,
+            0
+        ],
+        "post_delay": 3200,
+        "next": [
+            "GuildDonation.Dialog",
+            "GuildDonation.Open.Retry"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會捐贈】開啟「公會捐贈」…",
+                "display": "log"
+            }
+        }
+    },
+    "GuildDonation.Open.Retry": {
+        "max_hit": 3,
+        "recognition": "OCR",
+        "roi": [
+            130,
+            1080,
+            170,
+            70
+        ],
+        "expected": "公會捐贈",
+        "threshold": 0.3,
+        "action": "Click",
+        "target": true,
+        "target_offset": [
+            0,
+            -30,
+            0,
+            0
+        ],
+        "post_delay": 3200,
+        "next": [
+            "GuildDonation.Dialog",
+            "GuildDonation.Open.Retry",
+            "GuildDonation.Back"
+        ]
+    },
+    "GuildDonation.Dialog": {
+        "recognition": "OCR",
+        "roi": [
+            180,
+            866,
+            360,
+            54
+        ],
+        "expected": "每日捐贈次數",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "GuildDonation.Pull.Route"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會捐贈】已進入捐贈視窗。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildDonation.Pull.Route": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildDonation.Pull.Deduct"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會捐贈】開始依設定次數捐贈…",
+                "display": "log"
+            }
+        }
+    },
+    "GuildDonation.Pull.Deduct": {
+        "recognition": "DirectHit",
+        "action": "Custom",
+        "custom_action": "PullByCount",
+        "custom_action_param": {
+            "profile": "guild_donation",
+            "total": 1,
+            "deduct_done": true
+        },
+        "next": [
+            "GuildDonation.Back"
+        ],
+        "on_error": [
+            "GuildDonation.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會捐贈】次數計算方式：扣除今日已捐贈的次數。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildDonation.Pull.Raw": {
+        "recognition": "DirectHit",
+        "action": "Custom",
+        "custom_action": "PullByCount",
+        "custom_action_param": {
+            "profile": "guild_donation",
+            "total": 1,
+            "deduct_done": false
+        },
+        "next": [
+            "GuildDonation.Back"
+        ],
+        "on_error": [
+            "GuildDonation.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會捐贈】次數計算方式：不扣除今日已捐贈的次數。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildDonation.Back": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildDonation.Back.AtGuild",
+            "GuildDonation.Back.Press"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會捐贈】流程結束，準備返回公會主頁…",
+                "display": "log"
+            }
+        }
+    },
+    "GuildDonation.Back.Press": {
+        "max_hit": 6,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            45,
+            1195,
+            60,
+            45
+        ],
+        "post_delay": 1600,
+        "next": [
+            "GuildDonation.Back.AtGuild",
+            "GuildDonation.Back.Press"
+        ]
+    },
+    "GuildDonation.Back.AtGuild": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1230,
+            720,
+            60
+        ],
+        "expected": "公會",
+        "threshold": 0.5,
+        "action": "DoNothing",
+        "next": [
+            "GuildDonation.Done"
+        ]
+    },
+    "GuildDonation.Done": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會捐贈】已回到公會主頁，本任務結束。",
+                "display": "log"
+            }
+        }
+    },
+    "Objectives.Guild.Raid.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildRaid.EnsureGuild",
+            "GuildRaid.Nav.FromOtherTab",
+            "GuildRaid.Nav.Recover"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會討伐】開始執行：公會討伐。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildRaid.EnsureGuild": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1230,
+            720,
+            60
+        ],
+        "expected": "公會",
+        "threshold": 0.5,
+        "action": "DoNothing",
+        "next": [
+            "GuildRaid.ResetRight.Swipe1"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會討伐】底部導航列顯示「公會」，確認目前在公會主頁。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildRaid.Nav.FromOtherTab": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1180,
+            720,
+            100
+        ],
+        "expected": "角色|筆記|家園|世界|探索",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            420,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 1400,
+        "next": [
+            "GuildRaid.EnsureGuild"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會討伐】目前在其他主頁籤，點擊「公會」切換。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildRaid.Nav.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            100,
+            690,
+            260,
+            100
+        ],
+        "post_delay": 1000,
+        "next": [
+            "GuildRaid.Nav.SelectGuild"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會討伐】偵測到離開遊戲彈窗，點擊取消。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildRaid.Nav.SelectGuild": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            420,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 1400,
+        "next": [
+            "GuildRaid.EnsureGuild"
+        ]
+    },
+    "GuildRaid.Nav.Recover": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildRaid.Nav.ExitDialog",
+            "GuildRaid.EnsureGuild",
+            "GuildRaid.Nav.FromOtherTab",
+            "GuildRaid.Nav.Back",
+            "GuildRaid.Nav.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會討伐】目前在子畫面，點左下角返回按鈕回到公會主頁…",
+                "display": "log"
+            }
+        }
+    },
+    "GuildRaid.Nav.Back": {
+        "max_hit": 12,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            45,
+            1195,
+            60,
+            45
+        ],
+        "post_delay": 1400,
+        "next": [
+            "GuildRaid.Nav.ExitDialog",
+            "GuildRaid.EnsureGuild",
+            "GuildRaid.Nav.FromOtherTab",
+            "GuildRaid.Nav.Back",
+            "GuildRaid.Nav.Failed"
+        ]
+    },
+    "GuildRaid.Nav.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會討伐】連續點擊返回按鈕仍無法回到公會主頁，已安全停止，未執行任何操作。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildRaid.ResetRight.Swipe1": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildRaid.ResetRight.Swipe2"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會討伐】將公會場景推到最右側…",
+                "display": "log"
+            }
+        }
+    },
+    "GuildRaid.ResetRight.Swipe2": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildRaid.ResetRight.Swipe3"
+        ]
+    },
+    "GuildRaid.ResetRight.Swipe3": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildRaid.ResetRight.Swipe4"
+        ]
+    },
+    "GuildRaid.ResetRight.Swipe4": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildRaid.ResetRight.Swipe5"
+        ]
+    },
+    "GuildRaid.ResetRight.Swipe5": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildRaid.ResetRight.Swipe6"
+        ]
+    },
+    "GuildRaid.ResetRight.Swipe6": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildRaid.ResetRight.Swipe7"
+        ]
+    },
+    "GuildRaid.ResetRight.Swipe7": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildRaid.ResetRight.Swipe8"
+        ]
+    },
+    "GuildRaid.ResetRight.Swipe8": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildRaid.ResetRight.Swipe9"
+        ]
+    },
+    "GuildRaid.ResetRight.Swipe9": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildRaid.MoveLeft.Swipe1"
+        ]
+    },
+    "GuildRaid.MoveLeft.Swipe1": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildRaid.Enter"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會討伐】往左移動 1 格到遠征之門…",
+                "display": "log"
+            }
+        }
+    },
+    "GuildRaid.Enter": {
+        "recognition": "OCR",
+        "roi": [
+            300,
+            780,
+            420,
+            250
+        ],
+        "expected": "遠征之門",
+        "threshold": 0.3,
+        "action": "Click",
+        "target": true,
+        "target_offset": [
+            0,
+            -40,
+            0,
+            0
+        ],
+        "post_delay": 3200,
+        "next": [
+            "GuildRaid.Screen",
+            "GuildRaid.Enter.Retry"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會討伐】點擊「遠征之門」，等待「公會活動」畫面…",
+                "display": "log"
+            }
+        }
+    },
+    "GuildRaid.Enter.Retry": {
+        "max_hit": 3,
+        "recognition": "OCR",
+        "roi": [
+            300,
+            780,
+            420,
+            250
+        ],
+        "expected": "遠征之門",
+        "threshold": 0.3,
+        "action": "Click",
+        "target": true,
+        "target_offset": [
+            0,
+            -40,
+            0,
+            0
+        ],
+        "post_delay": 3200,
+        "next": [
+            "GuildRaid.Screen",
+            "GuildRaid.Enter.Retry",
+            "GuildRaid.Enter.Failed"
+        ]
+    },
+    "GuildRaid.Enter.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會討伐】找不到或無法進入「遠征之門」，已安全停止，未執行任何操作。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildRaid.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            10,
+            20,
+            320,
+            80
+        ],
+        "expected": "公會活動",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "GuildRaid.OpenRaid",
+            "GuildRaid.OpenRaid.Retry",
+            "GuildRaid.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會討伐】已確認進入「公會活動」畫面。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildRaid.OpenRaid": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            410,
+            720,
+            290
+        ],
+        "expected": "公會討伐",
+        "threshold": 0.3,
+        "action": "Click",
+        "target": true,
+        "post_delay": 4500,
+        "next": [
+            "GuildRaid.RaidScreen",
+            "GuildRaid.OpenRaid.Retry"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會討伐】開啟「公會討伐」…",
+                "display": "log"
+            }
+        }
+    },
+    "GuildRaid.OpenRaid.Retry": {
+        "max_hit": 3,
+        "recognition": "OCR",
+        "roi": [
+            0,
+            410,
+            720,
+            290
+        ],
+        "expected": "公會討伐",
+        "threshold": 0.3,
+        "action": "Click",
+        "target": true,
+        "post_delay": 4500,
+        "next": [
+            "GuildRaid.RaidScreen",
+            "GuildRaid.OpenRaid.Retry",
+            "GuildRaid.Back"
+        ]
+    },
+    "GuildRaid.RaidScreen": {
+        "recognition": "OCR",
+        "roi": [
+            200,
+            30,
+            350,
+            52
+        ],
+        "expected": "今日剩餘討伐次數",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "GuildRaid.Loop.Challenge",
+            "GuildRaid.NoMore"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會討伐】已進入公會討伐畫面。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildRaid.Loop.Challenge": {
+        "max_hit": 2,
+        "recognition": "OCR",
+        "roi": [
+            210,
+            950,
+            300,
+            70
+        ],
+        "expected": "挑戰",
+        "threshold": 0.3,
+        "action": "Click",
+        "post_delay": 3500,
+        "timeout": 90000,
+        "next": [
+            "GuildRaid.Prepare",
+            "GuildRaid.NoMore"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會討伐】點擊「挑戰」，等待戰鬥準備畫面…",
+                "display": "log"
+            }
+        }
+    },
+    "GuildRaid.Prepare": {
+        "recognition": "OCR",
+        "roi": [
+            190,
+            915,
+            340,
+            80
+        ],
+        "expected": "開始戰鬥",
+        "threshold": 0.3,
+        "action": "Click",
+        "post_delay": 5000,
+        "timeout": 360000,
+        "next": [
+            "GuildRaid.BattleEnd"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會討伐】開始戰鬥，等待戰鬥結束…",
+                "display": "log"
+            }
+        }
+    },
+    "GuildRaid.BattleEnd": {
+        "recognition": "OCR",
+        "roi": [
+            180,
+            250,
+            360,
+            90
+        ],
+        "expected": "戰鬥結束",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "post_delay": 2500,
+        "next": [
+            "GuildRaid.CloseResult"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會討伐】戰鬥結束，關閉結算畫面。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildRaid.CloseResult": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            300,
+            850,
+            120,
+            60
+        ],
+        "post_delay": 3500,
+        "next": [
+            "GuildRaid.Loop.Challenge",
+            "GuildRaid.NoMore"
+        ]
+    },
+    "GuildRaid.NoMore": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildRaid.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會討伐】已達設定次數或今日討伐次數用完，結束討伐。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildRaid.Back": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildRaid.Back.AtGuild",
+            "GuildRaid.Back.Press"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會討伐】流程結束，準備返回公會主頁…",
+                "display": "log"
+            }
+        }
+    },
+    "GuildRaid.Back.Press": {
+        "max_hit": 6,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            45,
+            1195,
+            60,
+            45
+        ],
+        "post_delay": 1600,
+        "next": [
+            "GuildRaid.Back.AtGuild",
+            "GuildRaid.Back.Press"
+        ]
+    },
+    "GuildRaid.Back.AtGuild": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1230,
+            720,
+            60
+        ],
+        "expected": "公會",
+        "threshold": 0.5,
+        "action": "DoNothing",
+        "next": [
+            "GuildRaid.Done"
+        ]
+    },
+    "GuildRaid.Done": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會討伐】已回到公會主頁，本任務結束。",
+                "display": "log"
+            }
+        }
+    },
+    "Objectives.Guild.Shop.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.EnsureGuild",
+            "GuildShop.Nav.FromOtherTab",
+            "GuildShop.Nav.Recover"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】開始執行：公會商店購買。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.EnsureGuild": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1230,
+            720,
+            60
+        ],
+        "expected": "公會",
+        "threshold": 0.5,
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.ResetRight.Swipe1"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】底部導航列顯示「公會」，確認目前在公會主頁。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.Nav.FromOtherTab": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1180,
+            720,
+            100
+        ],
+        "expected": "角色|筆記|家園|世界|探索",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            420,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 1400,
+        "next": [
+            "GuildShop.EnsureGuild"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】目前在其他主頁籤，點擊「公會」切換。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.Nav.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            100,
+            690,
+            260,
+            100
+        ],
+        "post_delay": 1000,
+        "next": [
+            "GuildShop.Nav.SelectGuild"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】偵測到離開遊戲彈窗，點擊取消。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.Nav.SelectGuild": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            420,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 1400,
+        "next": [
+            "GuildShop.EnsureGuild"
+        ]
+    },
+    "GuildShop.Nav.Recover": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.Nav.ExitDialog",
+            "GuildShop.EnsureGuild",
+            "GuildShop.Nav.FromOtherTab",
+            "GuildShop.Nav.Back",
+            "GuildShop.Nav.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】目前在子畫面，點左下角返回按鈕回到公會主頁…",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.Nav.Back": {
+        "max_hit": 12,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            45,
+            1195,
+            60,
+            45
+        ],
+        "post_delay": 1400,
+        "next": [
+            "GuildShop.Nav.ExitDialog",
+            "GuildShop.EnsureGuild",
+            "GuildShop.Nav.FromOtherTab",
+            "GuildShop.Nav.Back",
+            "GuildShop.Nav.Failed"
+        ]
+    },
+    "GuildShop.Nav.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】連續點擊返回按鈕仍無法回到公會主頁，已安全停止，未執行任何操作。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.ResetRight.Swipe1": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildShop.ResetRight.Swipe2"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】將公會場景推到最右側…",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.ResetRight.Swipe2": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildShop.ResetRight.Swipe3"
+        ]
+    },
+    "GuildShop.ResetRight.Swipe3": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildShop.ResetRight.Swipe4"
+        ]
+    },
+    "GuildShop.ResetRight.Swipe4": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildShop.ResetRight.Swipe5"
+        ]
+    },
+    "GuildShop.ResetRight.Swipe5": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildShop.ResetRight.Swipe6"
+        ]
+    },
+    "GuildShop.ResetRight.Swipe6": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildShop.ResetRight.Swipe7"
+        ]
+    },
+    "GuildShop.ResetRight.Swipe7": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildShop.ResetRight.Swipe8"
+        ]
+    },
+    "GuildShop.ResetRight.Swipe8": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildShop.ResetRight.Swipe9"
+        ]
+    },
+    "GuildShop.ResetRight.Swipe9": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildShop.Enter"
+        ]
+    },
+    "GuildShop.Enter": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            780,
+            400,
+            120
+        ],
+        "expected": "商店",
+        "threshold": 0.3,
+        "action": "Click",
+        "target": true,
+        "target_offset": [
+            0,
+            -40,
+            0,
+            0
+        ],
+        "post_delay": 3200,
+        "next": [
+            "GuildShop.Screen",
+            "GuildShop.Enter.Retry"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】點擊「商店」，等待「商店」畫面…",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.Enter.Retry": {
+        "max_hit": 3,
+        "recognition": "OCR",
+        "roi": [
+            0,
+            780,
+            400,
+            120
+        ],
+        "expected": "商店",
+        "threshold": 0.3,
+        "action": "Click",
+        "target": true,
+        "target_offset": [
+            0,
+            -40,
+            0,
+            0
+        ],
+        "post_delay": 3200,
+        "next": [
+            "GuildShop.Screen",
+            "GuildShop.Enter.Retry",
+            "GuildShop.Enter.Failed"
+        ]
+    },
+    "GuildShop.Enter.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】找不到或無法進入「商店」，已安全停止，未執行任何操作。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            10,
+            20,
+            300,
+            80
+        ],
+        "expected": "商店",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.ScrollTop",
+            "GuildShop.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】已確認進入「商店」畫面。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.ScrollTop": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            360,
+            400,
+            10,
+            10
+        ],
+        "end": [
+            360,
+            950,
+            10,
+            10
+        ],
+        "duration": 450,
+        "repeat": 5,
+        "repeat_delay": 700,
+        "post_delay": 1600,
+        "next": [
+            "GuildShop.Slot1"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】捲動到商品清單最上方…",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.Slot1": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.Slot1.SoldOut",
+            "GuildShop.Slot1.Buy",
+            "GuildShop.Slot1.Skip"
+        ]
+    },
+    "GuildShop.Slot1.SoldOut": {
+        "recognition": "OCR",
+        "roi": [
+            32,
+            265,
+            200,
+            56
+        ],
+        "expected": "售完",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.Slot2"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】第 1 項已售完，略過。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.Slot1.Buy": {
+        "enabled": false,
+        "max_hit": 1,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            52,
+            383,
+            160,
+            44
+        ],
+        "post_delay": 2400,
+        "next": [
+            "GuildShop.Slot1"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】購買第 1 項。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.Slot1.Skip": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.Slot2"
+        ]
+    },
+    "GuildShop.Slot2": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.Slot2.SoldOut",
+            "GuildShop.Slot2.Buy",
+            "GuildShop.Slot2.Skip"
+        ]
+    },
+    "GuildShop.Slot2.SoldOut": {
+        "recognition": "OCR",
+        "roi": [
+            260,
+            265,
+            200,
+            56
+        ],
+        "expected": "售完",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.Slot3"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】第 2 項已售完，略過。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.Slot2.Buy": {
+        "enabled": false,
+        "max_hit": 1,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            280,
+            383,
+            160,
+            44
+        ],
+        "post_delay": 2400,
+        "next": [
+            "GuildShop.Slot2"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】購買第 2 項。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.Slot2.Skip": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.Slot3"
+        ]
+    },
+    "GuildShop.Slot3": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.Slot3.SoldOut",
+            "GuildShop.Slot3.Buy",
+            "GuildShop.Slot3.Skip"
+        ]
+    },
+    "GuildShop.Slot3.SoldOut": {
+        "recognition": "OCR",
+        "roi": [
+            489,
+            265,
+            200,
+            56
+        ],
+        "expected": "售完",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.Slot4"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】第 3 項已售完，略過。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.Slot3.Buy": {
+        "enabled": false,
+        "max_hit": 1,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            509,
+            383,
+            160,
+            44
+        ],
+        "post_delay": 2400,
+        "next": [
+            "GuildShop.Slot3"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】購買第 3 項。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.Slot3.Skip": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.Slot4"
+        ]
+    },
+    "GuildShop.Slot4": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.Slot4.SoldOut",
+            "GuildShop.Slot4.Buy",
+            "GuildShop.Slot4.Skip"
+        ]
+    },
+    "GuildShop.Slot4.SoldOut": {
+        "recognition": "OCR",
+        "roi": [
+            32,
+            560,
+            200,
+            56
+        ],
+        "expected": "售完",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.Slot5"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】第 4 項已售完，略過。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.Slot4.Buy": {
+        "enabled": false,
+        "max_hit": 1,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            52,
+            678,
+            160,
+            44
+        ],
+        "post_delay": 2400,
+        "next": [
+            "GuildShop.Slot4"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】購買第 4 項。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.Slot4.Skip": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.Slot5"
+        ]
+    },
+    "GuildShop.Slot5": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.Slot5.SoldOut",
+            "GuildShop.Slot5.Buy",
+            "GuildShop.Slot5.Skip"
+        ]
+    },
+    "GuildShop.Slot5.SoldOut": {
+        "recognition": "OCR",
+        "roi": [
+            260,
+            560,
+            200,
+            56
+        ],
+        "expected": "售完",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.Slot6"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】第 5 項已售完，略過。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.Slot5.Buy": {
+        "enabled": false,
+        "max_hit": 1,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            280,
+            678,
+            160,
+            44
+        ],
+        "post_delay": 2400,
+        "next": [
+            "GuildShop.Slot5"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】購買第 5 項。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.Slot5.Skip": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.Slot6"
+        ]
+    },
+    "GuildShop.Slot6": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.Slot6.SoldOut",
+            "GuildShop.Slot6.Buy",
+            "GuildShop.Slot6.Skip"
+        ]
+    },
+    "GuildShop.Slot6.SoldOut": {
+        "recognition": "OCR",
+        "roi": [
+            489,
+            560,
+            200,
+            56
+        ],
+        "expected": "售完",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.Slot7"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】第 6 項已售完，略過。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.Slot6.Buy": {
+        "enabled": false,
+        "max_hit": 1,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            509,
+            678,
+            160,
+            44
+        ],
+        "post_delay": 2400,
+        "next": [
+            "GuildShop.Slot6"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】購買第 6 項。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.Slot6.Skip": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.Slot7"
+        ]
+    },
+    "GuildShop.Slot7": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.Slot7.SoldOut",
+            "GuildShop.Slot7.Buy",
+            "GuildShop.Slot7.Skip"
+        ]
+    },
+    "GuildShop.Slot7.SoldOut": {
+        "recognition": "OCR",
+        "roi": [
+            32,
+            856,
+            200,
+            56
+        ],
+        "expected": "售完",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.Slot8"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】第 7 項已售完，略過。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.Slot7.Buy": {
+        "enabled": false,
+        "max_hit": 1,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            52,
+            974,
+            160,
+            44
+        ],
+        "post_delay": 2400,
+        "next": [
+            "GuildShop.Slot7"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】購買第 7 項。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.Slot7.Skip": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.Slot8"
+        ]
+    },
+    "GuildShop.Slot8": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.Slot8.SoldOut",
+            "GuildShop.Slot8.Buy",
+            "GuildShop.Slot8.Skip"
+        ]
+    },
+    "GuildShop.Slot8.SoldOut": {
+        "recognition": "OCR",
+        "roi": [
+            260,
+            856,
+            200,
+            56
+        ],
+        "expected": "售完",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.Slot9"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】第 8 項已售完，略過。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.Slot8.Buy": {
+        "enabled": false,
+        "max_hit": 1,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            280,
+            974,
+            160,
+            44
+        ],
+        "post_delay": 2400,
+        "next": [
+            "GuildShop.Slot8"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】購買第 8 項。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.Slot8.Skip": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.Slot9"
+        ]
+    },
+    "GuildShop.Slot9": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.Slot9.SoldOut",
+            "GuildShop.Slot9.Buy",
+            "GuildShop.Slot9.Skip"
+        ]
+    },
+    "GuildShop.Slot9.SoldOut": {
+        "recognition": "OCR",
+        "roi": [
+            489,
+            856,
+            200,
+            56
+        ],
+        "expected": "售完",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.ScrollBottom"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】第 9 項已售完，略過。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.Slot9.Buy": {
+        "enabled": false,
+        "max_hit": 1,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            509,
+            974,
+            160,
+            44
+        ],
+        "post_delay": 2400,
+        "next": [
+            "GuildShop.Slot9"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】購買第 9 項。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.Slot9.Skip": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.ScrollBottom"
+        ]
+    },
+    "GuildShop.Slot10": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.Slot10.SoldOut",
+            "GuildShop.Slot10.Buy",
+            "GuildShop.Slot10.Skip"
+        ]
+    },
+    "GuildShop.Slot10.SoldOut": {
+        "recognition": "OCR",
+        "roi": [
+            32,
+            646,
+            200,
+            56
+        ],
+        "expected": "售完",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.Slot11"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】第 10 項已售完，略過。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.Slot10.Buy": {
+        "enabled": false,
+        "max_hit": 1,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            52,
+            764,
+            160,
+            44
+        ],
+        "post_delay": 2400,
+        "next": [
+            "GuildShop.Slot10"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】購買第 10 項。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.Slot10.Skip": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.Slot11"
+        ]
+    },
+    "GuildShop.Slot11": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.Slot11.SoldOut",
+            "GuildShop.Slot11.Buy",
+            "GuildShop.Slot11.Skip"
+        ]
+    },
+    "GuildShop.Slot11.SoldOut": {
+        "recognition": "OCR",
+        "roi": [
+            260,
+            646,
+            200,
+            56
+        ],
+        "expected": "售完",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】第 11 項已售完，略過。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.Slot11.Buy": {
+        "enabled": false,
+        "max_hit": 1,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            280,
+            764,
+            160,
+            44
+        ],
+        "post_delay": 2400,
+        "next": [
+            "GuildShop.Slot11"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】購買第 11 項。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.Slot11.Skip": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.Back"
+        ]
+    },
+    "GuildShop.ScrollBottom": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            360,
+            950,
+            10,
+            10
+        ],
+        "end": [
+            360,
+            400,
+            10,
+            10
+        ],
+        "duration": 450,
+        "repeat": 5,
+        "repeat_delay": 700,
+        "post_delay": 1600,
+        "next": [
+            "GuildShop.Slot10"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】捲動到商品清單最下方，處理第 10、11 項…",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.Back": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.Back.AtGuild",
+            "GuildShop.Back.Press"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】流程結束，準備返回公會主頁…",
+                "display": "log"
+            }
+        }
+    },
+    "GuildShop.Back.Press": {
+        "max_hit": 6,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            45,
+            1195,
+            60,
+            45
+        ],
+        "post_delay": 1600,
+        "next": [
+            "GuildShop.Back.AtGuild",
+            "GuildShop.Back.Press"
+        ]
+    },
+    "GuildShop.Back.AtGuild": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1230,
+            720,
+            60
+        ],
+        "expected": "公會",
+        "threshold": 0.5,
+        "action": "DoNothing",
+        "next": [
+            "GuildShop.Done"
+        ]
+    },
+    "GuildShop.Done": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會商店】已回到公會主頁，本任務結束。",
+                "display": "log"
+            }
+        }
+    },
+    "Objectives.Guild.Forge.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildForge.EnsureGuild",
+            "GuildForge.Nav.FromOtherTab",
+            "GuildForge.Nav.Recover"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【冶煉工坊熔爐】開始執行：切換／續租冶煉工坊熔爐。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildForge.EnsureGuild": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1230,
+            720,
+            60
+        ],
+        "expected": "公會",
+        "threshold": 0.5,
+        "action": "DoNothing",
+        "next": [
+            "GuildForge.ResetRight.Swipe1"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【冶煉工坊熔爐】底部導航列顯示「公會」，確認目前在公會主頁。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildForge.Nav.FromOtherTab": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1180,
+            720,
+            100
+        ],
+        "expected": "角色|筆記|家園|世界|探索",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            420,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 1400,
+        "next": [
+            "GuildForge.EnsureGuild"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【冶煉工坊熔爐】目前在其他主頁籤，點擊「公會」切換。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildForge.Nav.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.2,
+        "action": "Click",
+        "target": [
+            100,
+            690,
+            260,
+            100
+        ],
+        "post_delay": 1000,
+        "next": [
+            "GuildForge.Nav.SelectGuild"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【冶煉工坊熔爐】偵測到離開遊戲彈窗，點擊取消。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildForge.Nav.SelectGuild": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            420,
+            1160,
+            130,
+            120
+        ],
+        "post_delay": 1400,
+        "next": [
+            "GuildForge.EnsureGuild"
+        ]
+    },
+    "GuildForge.Nav.Recover": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildForge.Nav.ExitDialog",
+            "GuildForge.EnsureGuild",
+            "GuildForge.Nav.FromOtherTab",
+            "GuildForge.Nav.Back",
+            "GuildForge.Nav.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【冶煉工坊熔爐】目前在子畫面，點左下角返回按鈕回到公會主頁…",
+                "display": "log"
+            }
+        }
+    },
+    "GuildForge.Nav.Back": {
+        "max_hit": 12,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            45,
+            1195,
+            60,
+            45
+        ],
+        "post_delay": 1400,
+        "next": [
+            "GuildForge.Nav.ExitDialog",
+            "GuildForge.EnsureGuild",
+            "GuildForge.Nav.FromOtherTab",
+            "GuildForge.Nav.Back",
+            "GuildForge.Nav.Failed"
+        ]
+    },
+    "GuildForge.Nav.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【冶煉工坊熔爐】連續點擊返回按鈕仍無法回到公會主頁，已安全停止，未執行任何操作。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildForge.ResetRight.Swipe1": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildForge.ResetRight.Swipe2"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【冶煉工坊熔爐】將公會場景推到最右側…",
+                "display": "log"
+            }
+        }
+    },
+    "GuildForge.ResetRight.Swipe2": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildForge.ResetRight.Swipe3"
+        ]
+    },
+    "GuildForge.ResetRight.Swipe3": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildForge.ResetRight.Swipe4"
+        ]
+    },
+    "GuildForge.ResetRight.Swipe4": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildForge.ResetRight.Swipe5"
+        ]
+    },
+    "GuildForge.ResetRight.Swipe5": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildForge.ResetRight.Swipe6"
+        ]
+    },
+    "GuildForge.ResetRight.Swipe6": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildForge.ResetRight.Swipe7"
+        ]
+    },
+    "GuildForge.ResetRight.Swipe7": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildForge.ResetRight.Swipe8"
+        ]
+    },
+    "GuildForge.ResetRight.Swipe8": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildForge.ResetRight.Swipe9"
+        ]
+    },
+    "GuildForge.ResetRight.Swipe9": {
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            600,
+            650,
+            10,
+            10
+        ],
+        "end": [
+            120,
+            650,
+            10,
+            10
+        ],
+        "duration": 400,
+        "post_delay": 900,
+        "next": [
+            "GuildForge.Enter"
+        ]
+    },
+    "GuildForge.Enter": {
+        "recognition": "OCR",
+        "roi": [
+            200,
+            420,
+            520,
+            120
+        ],
+        "expected": "冶煉工坊",
+        "threshold": 0.3,
+        "action": "Click",
+        "target": true,
+        "target_offset": [
+            0,
+            -40,
+            0,
+            0
+        ],
+        "post_delay": 3200,
+        "next": [
+            "GuildForge.Screen",
+            "GuildForge.Enter.Retry"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【冶煉工坊熔爐】點擊「冶煉工坊」，等待「冶煉工坊」畫面…",
+                "display": "log"
+            }
+        }
+    },
+    "GuildForge.Enter.Retry": {
+        "max_hit": 3,
+        "recognition": "OCR",
+        "roi": [
+            200,
+            420,
+            520,
+            120
+        ],
+        "expected": "冶煉工坊",
+        "threshold": 0.3,
+        "action": "Click",
+        "target": true,
+        "target_offset": [
+            0,
+            -40,
+            0,
+            0
+        ],
+        "post_delay": 3200,
+        "next": [
+            "GuildForge.Screen",
+            "GuildForge.Enter.Retry",
+            "GuildForge.Enter.Failed"
+        ]
+    },
+    "GuildForge.Enter.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【冶煉工坊熔爐】找不到或無法進入「冶煉工坊」，已安全停止，未執行任何操作。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildForge.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            10,
+            20,
+            320,
+            80
+        ],
+        "expected": "冶煉工坊",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "GuildForge.OpenTool",
+            "GuildForge.OpenTool.Retry",
+            "GuildForge.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【冶煉工坊熔爐】已確認進入「冶煉工坊」畫面。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildForge.OpenTool": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            600,
+            1055,
+            80,
+            62
+        ],
+        "post_delay": 3000,
+        "next": [
+            "GuildForge.Dialog",
+            "GuildForge.OpenTool.Retry"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【冶煉工坊熔爐】點擊右下角熔爐按鈕，開啟「放置工具」…",
+                "display": "log"
+            }
+        }
+    },
+    "GuildForge.OpenTool.Retry": {
+        "max_hit": 3,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            600,
+            1055,
+            80,
+            62
+        ],
+        "post_delay": 3000,
+        "next": [
+            "GuildForge.Dialog",
+            "GuildForge.OpenTool.Retry",
+            "GuildForge.Back"
+        ]
+    },
+    "GuildForge.Dialog": {
+        "recognition": "OCR",
+        "roi": [
+            200,
+            205,
+            320,
+            75
+        ],
+        "expected": "放置工具",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "GuildForge.Select.Route"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【冶煉工坊熔爐】已開啟「放置工具」視窗。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildForge.Select.Route": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildForge.Select.Iron"
+        ]
+    },
+    "GuildForge.Select.Iron": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            219,
+            519,
+            64,
+            64
+        ],
+        "post_delay": 2200,
+        "next": [
+            "GuildForge.Renew.Iron"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【冶煉工坊熔爐】選擇「黑鐵熔爐」。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildForge.Renew.Iron": {
+        "recognition": "DirectHit",
+        "action": "Custom",
+        "custom_action": "RenewFurnace",
+        "custom_action_param": {
+            "label": "黑鐵熔爐",
+            "target_days": 0
+        },
+        "next": [
+            "GuildForge.Switch",
+            "GuildForge.AlreadyActive"
+        ],
+        "on_error": [
+            "GuildForge.Switch",
+            "GuildForge.AlreadyActive"
+        ]
+    },
+    "GuildForge.Select.Gold": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            341,
+            519,
+            64,
+            64
+        ],
+        "post_delay": 2200,
+        "next": [
+            "GuildForge.Renew.Gold"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【冶煉工坊熔爐】選擇「黃金熔爐」。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildForge.Renew.Gold": {
+        "recognition": "DirectHit",
+        "action": "Custom",
+        "custom_action": "RenewFurnace",
+        "custom_action_param": {
+            "label": "黃金熔爐",
+            "target_days": 0
+        },
+        "next": [
+            "GuildForge.Switch",
+            "GuildForge.AlreadyActive"
+        ],
+        "on_error": [
+            "GuildForge.Switch",
+            "GuildForge.AlreadyActive"
+        ]
+    },
+    "GuildForge.Select.Crystal": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            464,
+            519,
+            64,
+            64
+        ],
+        "post_delay": 2200,
+        "next": [
+            "GuildForge.Renew.Crystal"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【冶煉工坊熔爐】選擇「結晶熔爐」。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildForge.Renew.Crystal": {
+        "recognition": "DirectHit",
+        "action": "Custom",
+        "custom_action": "RenewFurnace",
+        "custom_action_param": {
+            "label": "結晶熔爐",
+            "target_days": 0
+        },
+        "next": [
+            "GuildForge.Switch",
+            "GuildForge.AlreadyActive"
+        ],
+        "on_error": [
+            "GuildForge.Switch",
+            "GuildForge.AlreadyActive"
+        ]
+    },
+    "GuildForge.Switch": {
+        "recognition": "OCR",
+        "roi": [
+            90,
+            895,
+            570,
+            84
+        ],
+        "expected": "切換",
+        "threshold": 0.3,
+        "action": "Click",
+        "post_delay": 2800,
+        "next": [
+            "GuildForge.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【冶煉工坊熔爐】按下「切換」，將此熔爐設為使用中。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildForge.AlreadyActive": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildForge.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【冶煉工坊熔爐】畫面上沒有「切換」按鈕，代表此熔爐已是使用中或尚未租借。",
+                "display": "log"
+            }
+        }
+    },
+    "GuildForge.Back": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildForge.Back.AtGuild",
+            "GuildForge.Back.Press"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【冶煉工坊熔爐】流程結束，準備返回公會主頁…",
+                "display": "log"
+            }
+        }
+    },
+    "GuildForge.Back.Press": {
+        "max_hit": 6,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            45,
+            1195,
+            60,
+            45
+        ],
+        "post_delay": 1600,
+        "next": [
+            "GuildForge.Back.AtGuild",
+            "GuildForge.Back.Press"
+        ]
+    },
+    "GuildForge.Back.AtGuild": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1230,
+            720,
+            60
+        ],
+        "expected": "公會",
+        "threshold": 0.5,
+        "action": "DoNothing",
+        "next": [
+            "GuildForge.Done"
+        ]
+    },
+    "GuildForge.Done": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【冶煉工坊熔爐】已回到公會主頁，本任務結束。",
+                "display": "log"
+            }
+        }
+    }
+}
