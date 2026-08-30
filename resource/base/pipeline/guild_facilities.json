@@ -628,7 +628,8 @@
         "duration": 400,
         "post_delay": 900,
         "next": [
-            "GuildDonation.Enter"
+            "GuildDonation.Enter",
+            "GuildDonation.Enter.Failed"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
@@ -1280,7 +1281,8 @@
         "duration": 400,
         "post_delay": 900,
         "next": [
-            "GuildRaid.Enter"
+            "GuildRaid.Enter",
+            "GuildRaid.Enter.Failed"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
@@ -1483,11 +1485,25 @@
         "post_delay": 5000,
         "timeout": 360000,
         "next": [
-            "GuildRaid.BattleEnd"
+            "GuildRaid.BattleEnd",
+            "GuildRaid.BattleTimeout"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
                 "content": "【公會討伐】開始戰鬥，等待戰鬥結束…",
+                "display": "log"
+            }
+        }
+    },
+    "GuildRaid.BattleTimeout": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildRaid.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【公會討伐】等待逾時仍未看到「戰鬥結束」，安全結束並返回。",
                 "display": "log"
             }
         }
@@ -1941,7 +1957,8 @@
         "duration": 400,
         "post_delay": 900,
         "next": [
-            "GuildShop.Enter"
+            "GuildShop.Enter",
+            "GuildShop.Enter.Failed"
         ]
     },
     "GuildShop.Enter": {
@@ -3138,7 +3155,8 @@
         "duration": 400,
         "post_delay": 900,
         "next": [
-            "GuildForge.Enter"
+            "GuildForge.Enter",
+            "GuildForge.Enter.Failed"
         ]
     },
     "GuildForge.Enter": {

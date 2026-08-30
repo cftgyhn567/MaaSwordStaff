@@ -16,6 +16,7 @@
     "packageManager": "pnpm@11.5.1",
     "private": true,
     "scripts": {
+        "audit:pipeline": "node tools/audit-pipeline.mjs",
         "check": "pnpm format:check && pnpm check:schema && pnpm check:maa",
         "check:maa": "pnpm exec maa-tools check",
         "check:schema": "node tools/validate-schema.mjs",

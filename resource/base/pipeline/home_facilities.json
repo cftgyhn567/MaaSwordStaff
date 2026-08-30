@@ -535,7 +535,7 @@
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【煉金爐】勾選可分解的裝備品級（普通／稀有／史詩／傳說）…",
+                "content": "【煉金爐】勾選可分解的裝備品級（普通裝備／稀有裝備／史詩裝備／傳說裝備／幻獸碎片／古遺物碎片）…",
                 "display": "log"
             }
         }
@@ -577,6 +577,34 @@
             28,
             26
         ],
+        "post_delay": 1000,
+        "next": [
+            "Alchemy.Loop.SelectBeastShard"
+        ]
+    },
+    "Alchemy.Loop.SelectBeastShard": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            627,
+            948,
+            28,
+            26
+        ],
+        "post_delay": 1000,
+        "next": [
+            "Alchemy.Loop.SelectRelicShard"
+        ]
+    },
+    "Alchemy.Loop.SelectRelicShard": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            98,
+            998,
+            28,
+            26
+        ],
         "post_delay": 1200,
         "next": [
             "Alchemy.Loop.NothingLeft",
@@ -595,7 +623,9 @@
         "threshold": 0.3,
         "action": "DoNothing",
         "next": [
-            "Alchemy.Gem.Open"
+            "Alchemy.Gem.Open",
+            "Alchemy.Gem.Open.Retry",
+            "Alchemy.Back"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
@@ -655,7 +685,9 @@
         "action": "DoNothing",
         "post_delay": 1200,
         "next": [
-            "Alchemy.Gem.Open"
+            "Alchemy.Gem.Open",
+            "Alchemy.Gem.Open.Retry",
+            "Alchemy.Back"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
@@ -1745,6 +1777,7 @@
             "HomeShop.Grocery.Slot1.Cat.BattleEssence",
             "HomeShop.Grocery.Slot1.Cat.OrdinaryFreezeDried",
             "HomeShop.Grocery.Slot1.Buy.Other",
+            "HomeShop.Grocery.Slot1.BuyAny.Other",
             "HomeShop.Grocery.Slot1.Skip"
         ]
     },
@@ -1782,8 +1815,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot1.Buy.Wood",
+            "HomeShop.Grocery.Slot1.BuyAny.Wood",
             "HomeShop.Grocery.Slot1.Skip.Wood"
         ]
+    },
+    "HomeShop.Grocery.Slot1.BuyAny.Wood": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            52,
+            388,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot2"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 1 排第 1 格是木材，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot1.Buy.Wood": {
         "recognition": "OCR",
@@ -1839,8 +1894,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot1.Buy.StoneBlock",
+            "HomeShop.Grocery.Slot1.BuyAny.StoneBlock",
             "HomeShop.Grocery.Slot1.Skip.StoneBlock"
         ]
+    },
+    "HomeShop.Grocery.Slot1.BuyAny.StoneBlock": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            52,
+            388,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot2"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 1 排第 1 格是石塊，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot1.Buy.StoneBlock": {
         "recognition": "OCR",
@@ -1896,8 +1973,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot1.Buy.RoughStone",
+            "HomeShop.Grocery.Slot1.BuyAny.RoughStone",
             "HomeShop.Grocery.Slot1.Skip.RoughStone"
         ]
+    },
+    "HomeShop.Grocery.Slot1.BuyAny.RoughStone": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            52,
+            388,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot2"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 1 排第 1 格是粗煉石，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot1.Buy.RoughStone": {
         "recognition": "OCR",
@@ -1953,8 +2052,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot1.Buy.RareTimeSand",
+            "HomeShop.Grocery.Slot1.BuyAny.RareTimeSand",
             "HomeShop.Grocery.Slot1.Skip.RareTimeSand"
         ]
+    },
+    "HomeShop.Grocery.Slot1.BuyAny.RareTimeSand": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            52,
+            388,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot2"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 1 排第 1 格是稀有時之沙，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot1.Buy.RareTimeSand": {
         "recognition": "OCR",
@@ -2010,8 +2131,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot1.Buy.BattleEssence",
+            "HomeShop.Grocery.Slot1.BuyAny.BattleEssence",
             "HomeShop.Grocery.Slot1.Skip.BattleEssence"
         ]
+    },
+    "HomeShop.Grocery.Slot1.BuyAny.BattleEssence": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            52,
+            388,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot2"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 1 排第 1 格是歷戰精華，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot1.Buy.BattleEssence": {
         "recognition": "OCR",
@@ -2067,8 +2210,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot1.Buy.OrdinaryFreezeDried",
+            "HomeShop.Grocery.Slot1.BuyAny.OrdinaryFreezeDried",
             "HomeShop.Grocery.Slot1.Skip.OrdinaryFreezeDried"
         ]
+    },
+    "HomeShop.Grocery.Slot1.BuyAny.OrdinaryFreezeDried": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            52,
+            388,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot2"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 1 排第 1 格是普通凍乾，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot1.Buy.OrdinaryFreezeDried": {
         "recognition": "OCR",
@@ -2107,6 +2272,27 @@
         "focus": {
             "Node.Recognition.Succeeded": {
                 "content": "【家園商店】雜貨第 1 排第 1 格是普通凍乾，折數不符合設定或無折扣，未購買。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Grocery.Slot1.BuyAny.Other": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            52,
+            388,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot2"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 1 排第 1 格是「其他」商品，依「不限折數」設定購買。",
                 "display": "log"
             }
         }
@@ -2158,6 +2344,7 @@
             "HomeShop.Grocery.Slot2.Cat.BattleEssence",
             "HomeShop.Grocery.Slot2.Cat.OrdinaryFreezeDried",
             "HomeShop.Grocery.Slot2.Buy.Other",
+            "HomeShop.Grocery.Slot2.BuyAny.Other",
             "HomeShop.Grocery.Slot2.Skip"
         ]
     },
@@ -2195,8 +2382,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot2.Buy.Wood",
+            "HomeShop.Grocery.Slot2.BuyAny.Wood",
             "HomeShop.Grocery.Slot2.Skip.Wood"
         ]
+    },
+    "HomeShop.Grocery.Slot2.BuyAny.Wood": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            280,
+            388,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot3"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 1 排第 2 格是木材，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot2.Buy.Wood": {
         "recognition": "OCR",
@@ -2252,8 +2461,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot2.Buy.StoneBlock",
+            "HomeShop.Grocery.Slot2.BuyAny.StoneBlock",
             "HomeShop.Grocery.Slot2.Skip.StoneBlock"
         ]
+    },
+    "HomeShop.Grocery.Slot2.BuyAny.StoneBlock": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            280,
+            388,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot3"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 1 排第 2 格是石塊，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot2.Buy.StoneBlock": {
         "recognition": "OCR",
@@ -2309,8 +2540,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot2.Buy.RoughStone",
+            "HomeShop.Grocery.Slot2.BuyAny.RoughStone",
             "HomeShop.Grocery.Slot2.Skip.RoughStone"
         ]
+    },
+    "HomeShop.Grocery.Slot2.BuyAny.RoughStone": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            280,
+            388,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot3"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 1 排第 2 格是粗煉石，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot2.Buy.RoughStone": {
         "recognition": "OCR",
@@ -2366,8 +2619,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot2.Buy.RareTimeSand",
+            "HomeShop.Grocery.Slot2.BuyAny.RareTimeSand",
             "HomeShop.Grocery.Slot2.Skip.RareTimeSand"
         ]
+    },
+    "HomeShop.Grocery.Slot2.BuyAny.RareTimeSand": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            280,
+            388,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot3"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 1 排第 2 格是稀有時之沙，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot2.Buy.RareTimeSand": {
         "recognition": "OCR",
@@ -2423,8 +2698,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot2.Buy.BattleEssence",
+            "HomeShop.Grocery.Slot2.BuyAny.BattleEssence",
             "HomeShop.Grocery.Slot2.Skip.BattleEssence"
         ]
+    },
+    "HomeShop.Grocery.Slot2.BuyAny.BattleEssence": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            280,
+            388,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot3"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 1 排第 2 格是歷戰精華，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot2.Buy.BattleEssence": {
         "recognition": "OCR",
@@ -2480,8 +2777,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot2.Buy.OrdinaryFreezeDried",
+            "HomeShop.Grocery.Slot2.BuyAny.OrdinaryFreezeDried",
             "HomeShop.Grocery.Slot2.Skip.OrdinaryFreezeDried"
         ]
+    },
+    "HomeShop.Grocery.Slot2.BuyAny.OrdinaryFreezeDried": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            280,
+            388,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot3"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 1 排第 2 格是普通凍乾，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot2.Buy.OrdinaryFreezeDried": {
         "recognition": "OCR",
@@ -2520,6 +2839,27 @@
         "focus": {
             "Node.Recognition.Succeeded": {
                 "content": "【家園商店】雜貨第 1 排第 2 格是普通凍乾，折數不符合設定或無折扣，未購買。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Grocery.Slot2.BuyAny.Other": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            280,
+            388,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot3"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 1 排第 2 格是「其他」商品，依「不限折數」設定購買。",
                 "display": "log"
             }
         }
@@ -2571,6 +2911,7 @@
             "HomeShop.Grocery.Slot3.Cat.BattleEssence",
             "HomeShop.Grocery.Slot3.Cat.OrdinaryFreezeDried",
             "HomeShop.Grocery.Slot3.Buy.Other",
+            "HomeShop.Grocery.Slot3.BuyAny.Other",
             "HomeShop.Grocery.Slot3.Skip"
         ]
     },
@@ -2608,8 +2949,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot3.Buy.Wood",
+            "HomeShop.Grocery.Slot3.BuyAny.Wood",
             "HomeShop.Grocery.Slot3.Skip.Wood"
         ]
+    },
+    "HomeShop.Grocery.Slot3.BuyAny.Wood": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            508,
+            388,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot4"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 1 排第 3 格是木材，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot3.Buy.Wood": {
         "recognition": "OCR",
@@ -2665,8 +3028,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot3.Buy.StoneBlock",
+            "HomeShop.Grocery.Slot3.BuyAny.StoneBlock",
             "HomeShop.Grocery.Slot3.Skip.StoneBlock"
         ]
+    },
+    "HomeShop.Grocery.Slot3.BuyAny.StoneBlock": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            508,
+            388,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot4"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 1 排第 3 格是石塊，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot3.Buy.StoneBlock": {
         "recognition": "OCR",
@@ -2722,8 +3107,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot3.Buy.RoughStone",
+            "HomeShop.Grocery.Slot3.BuyAny.RoughStone",
             "HomeShop.Grocery.Slot3.Skip.RoughStone"
         ]
+    },
+    "HomeShop.Grocery.Slot3.BuyAny.RoughStone": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            508,
+            388,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot4"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 1 排第 3 格是粗煉石，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot3.Buy.RoughStone": {
         "recognition": "OCR",
@@ -2779,8 +3186,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot3.Buy.RareTimeSand",
+            "HomeShop.Grocery.Slot3.BuyAny.RareTimeSand",
             "HomeShop.Grocery.Slot3.Skip.RareTimeSand"
         ]
+    },
+    "HomeShop.Grocery.Slot3.BuyAny.RareTimeSand": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            508,
+            388,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot4"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 1 排第 3 格是稀有時之沙，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot3.Buy.RareTimeSand": {
         "recognition": "OCR",
@@ -2836,8 +3265,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot3.Buy.BattleEssence",
+            "HomeShop.Grocery.Slot3.BuyAny.BattleEssence",
             "HomeShop.Grocery.Slot3.Skip.BattleEssence"
         ]
+    },
+    "HomeShop.Grocery.Slot3.BuyAny.BattleEssence": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            508,
+            388,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot4"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 1 排第 3 格是歷戰精華，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot3.Buy.BattleEssence": {
         "recognition": "OCR",
@@ -2893,8 +3344,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot3.Buy.OrdinaryFreezeDried",
+            "HomeShop.Grocery.Slot3.BuyAny.OrdinaryFreezeDried",
             "HomeShop.Grocery.Slot3.Skip.OrdinaryFreezeDried"
         ]
+    },
+    "HomeShop.Grocery.Slot3.BuyAny.OrdinaryFreezeDried": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            508,
+            388,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot4"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 1 排第 3 格是普通凍乾，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot3.Buy.OrdinaryFreezeDried": {
         "recognition": "OCR",
@@ -2933,6 +3406,27 @@
         "focus": {
             "Node.Recognition.Succeeded": {
                 "content": "【家園商店】雜貨第 1 排第 3 格是普通凍乾，折數不符合設定或無折扣，未購買。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Grocery.Slot3.BuyAny.Other": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            508,
+            388,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot4"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 1 排第 3 格是「其他」商品，依「不限折數」設定購買。",
                 "display": "log"
             }
         }
@@ -3020,8 +3514,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot4.Buy.Wood",
+            "HomeShop.Grocery.Slot4.BuyAny.Wood",
             "HomeShop.Grocery.Slot4.Skip.Wood"
         ]
+    },
+    "HomeShop.Grocery.Slot4.BuyAny.Wood": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            52,
+            670,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot5"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 2 排第 1 格是木材，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot4.Buy.Wood": {
         "recognition": "OCR",
@@ -3077,8 +3593,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot4.Buy.StoneBlock",
+            "HomeShop.Grocery.Slot4.BuyAny.StoneBlock",
             "HomeShop.Grocery.Slot4.Skip.StoneBlock"
         ]
+    },
+    "HomeShop.Grocery.Slot4.BuyAny.StoneBlock": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            52,
+            670,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot5"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 2 排第 1 格是石塊，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot4.Buy.StoneBlock": {
         "recognition": "OCR",
@@ -3134,8 +3672,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot4.Buy.RoughStone",
+            "HomeShop.Grocery.Slot4.BuyAny.RoughStone",
             "HomeShop.Grocery.Slot4.Skip.RoughStone"
         ]
+    },
+    "HomeShop.Grocery.Slot4.BuyAny.RoughStone": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            52,
+            670,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot5"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 2 排第 1 格是粗煉石，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot4.Buy.RoughStone": {
         "recognition": "OCR",
@@ -3191,8 +3751,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot4.Buy.RareTimeSand",
+            "HomeShop.Grocery.Slot4.BuyAny.RareTimeSand",
             "HomeShop.Grocery.Slot4.Skip.RareTimeSand"
         ]
+    },
+    "HomeShop.Grocery.Slot4.BuyAny.RareTimeSand": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            52,
+            670,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot5"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 2 排第 1 格是稀有時之沙，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot4.Buy.RareTimeSand": {
         "recognition": "OCR",
@@ -3248,8 +3830,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot4.Buy.BattleEssence",
+            "HomeShop.Grocery.Slot4.BuyAny.BattleEssence",
             "HomeShop.Grocery.Slot4.Skip.BattleEssence"
         ]
+    },
+    "HomeShop.Grocery.Slot4.BuyAny.BattleEssence": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            52,
+            670,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot5"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 2 排第 1 格是歷戰精華，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot4.Buy.BattleEssence": {
         "recognition": "OCR",
@@ -3305,8 +3909,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot4.Buy.OrdinaryFreezeDried",
+            "HomeShop.Grocery.Slot4.BuyAny.OrdinaryFreezeDried",
             "HomeShop.Grocery.Slot4.Skip.OrdinaryFreezeDried"
         ]
+    },
+    "HomeShop.Grocery.Slot4.BuyAny.OrdinaryFreezeDried": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            52,
+            670,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot5"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 2 排第 1 格是普通凍乾，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot4.Buy.OrdinaryFreezeDried": {
         "recognition": "OCR",
@@ -3404,8 +4030,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot5.Buy.Wood",
+            "HomeShop.Grocery.Slot5.BuyAny.Wood",
             "HomeShop.Grocery.Slot5.Skip.Wood"
         ]
+    },
+    "HomeShop.Grocery.Slot5.BuyAny.Wood": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            280,
+            670,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot6"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 2 排第 2 格是木材，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot5.Buy.Wood": {
         "recognition": "OCR",
@@ -3461,8 +4109,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot5.Buy.StoneBlock",
+            "HomeShop.Grocery.Slot5.BuyAny.StoneBlock",
             "HomeShop.Grocery.Slot5.Skip.StoneBlock"
         ]
+    },
+    "HomeShop.Grocery.Slot5.BuyAny.StoneBlock": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            280,
+            670,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot6"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 2 排第 2 格是石塊，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot5.Buy.StoneBlock": {
         "recognition": "OCR",
@@ -3518,8 +4188,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot5.Buy.RoughStone",
+            "HomeShop.Grocery.Slot5.BuyAny.RoughStone",
             "HomeShop.Grocery.Slot5.Skip.RoughStone"
         ]
+    },
+    "HomeShop.Grocery.Slot5.BuyAny.RoughStone": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            280,
+            670,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot6"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 2 排第 2 格是粗煉石，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot5.Buy.RoughStone": {
         "recognition": "OCR",
@@ -3575,8 +4267,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot5.Buy.RareTimeSand",
+            "HomeShop.Grocery.Slot5.BuyAny.RareTimeSand",
             "HomeShop.Grocery.Slot5.Skip.RareTimeSand"
         ]
+    },
+    "HomeShop.Grocery.Slot5.BuyAny.RareTimeSand": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            280,
+            670,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot6"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 2 排第 2 格是稀有時之沙，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot5.Buy.RareTimeSand": {
         "recognition": "OCR",
@@ -3632,8 +4346,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot5.Buy.BattleEssence",
+            "HomeShop.Grocery.Slot5.BuyAny.BattleEssence",
             "HomeShop.Grocery.Slot5.Skip.BattleEssence"
         ]
+    },
+    "HomeShop.Grocery.Slot5.BuyAny.BattleEssence": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            280,
+            670,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot6"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 2 排第 2 格是歷戰精華，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot5.Buy.BattleEssence": {
         "recognition": "OCR",
@@ -3689,8 +4425,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot5.Buy.OrdinaryFreezeDried",
+            "HomeShop.Grocery.Slot5.BuyAny.OrdinaryFreezeDried",
             "HomeShop.Grocery.Slot5.Skip.OrdinaryFreezeDried"
         ]
+    },
+    "HomeShop.Grocery.Slot5.BuyAny.OrdinaryFreezeDried": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            280,
+            670,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot6"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 2 排第 2 格是普通凍乾，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot5.Buy.OrdinaryFreezeDried": {
         "recognition": "OCR",
@@ -3788,8 +4546,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot6.Buy.Wood",
+            "HomeShop.Grocery.Slot6.BuyAny.Wood",
             "HomeShop.Grocery.Slot6.Skip.Wood"
         ]
+    },
+    "HomeShop.Grocery.Slot6.BuyAny.Wood": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            508,
+            670,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot7"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 2 排第 3 格是木材，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot6.Buy.Wood": {
         "recognition": "OCR",
@@ -3845,8 +4625,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot6.Buy.StoneBlock",
+            "HomeShop.Grocery.Slot6.BuyAny.StoneBlock",
             "HomeShop.Grocery.Slot6.Skip.StoneBlock"
         ]
+    },
+    "HomeShop.Grocery.Slot6.BuyAny.StoneBlock": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            508,
+            670,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot7"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 2 排第 3 格是石塊，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot6.Buy.StoneBlock": {
         "recognition": "OCR",
@@ -3902,8 +4704,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot6.Buy.RoughStone",
+            "HomeShop.Grocery.Slot6.BuyAny.RoughStone",
             "HomeShop.Grocery.Slot6.Skip.RoughStone"
         ]
+    },
+    "HomeShop.Grocery.Slot6.BuyAny.RoughStone": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            508,
+            670,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot7"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 2 排第 3 格是粗煉石，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot6.Buy.RoughStone": {
         "recognition": "OCR",
@@ -3959,8 +4783,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot6.Buy.RareTimeSand",
+            "HomeShop.Grocery.Slot6.BuyAny.RareTimeSand",
             "HomeShop.Grocery.Slot6.Skip.RareTimeSand"
         ]
+    },
+    "HomeShop.Grocery.Slot6.BuyAny.RareTimeSand": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            508,
+            670,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot7"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 2 排第 3 格是稀有時之沙，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot6.Buy.RareTimeSand": {
         "recognition": "OCR",
@@ -4016,8 +4862,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot6.Buy.BattleEssence",
+            "HomeShop.Grocery.Slot6.BuyAny.BattleEssence",
             "HomeShop.Grocery.Slot6.Skip.BattleEssence"
         ]
+    },
+    "HomeShop.Grocery.Slot6.BuyAny.BattleEssence": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            508,
+            670,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot7"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 2 排第 3 格是歷戰精華，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot6.Buy.BattleEssence": {
         "recognition": "OCR",
@@ -4073,8 +4941,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot6.Buy.OrdinaryFreezeDried",
+            "HomeShop.Grocery.Slot6.BuyAny.OrdinaryFreezeDried",
             "HomeShop.Grocery.Slot6.Skip.OrdinaryFreezeDried"
         ]
+    },
+    "HomeShop.Grocery.Slot6.BuyAny.OrdinaryFreezeDried": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            508,
+            670,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot7"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 2 排第 3 格是普通凍乾，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot6.Buy.OrdinaryFreezeDried": {
         "recognition": "OCR",
@@ -4172,8 +5062,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot7.Buy.Wood",
+            "HomeShop.Grocery.Slot7.BuyAny.Wood",
             "HomeShop.Grocery.Slot7.Skip.Wood"
         ]
+    },
+    "HomeShop.Grocery.Slot7.BuyAny.Wood": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            52,
+            952,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot8"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 3 排第 1 格是木材，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot7.Buy.Wood": {
         "recognition": "OCR",
@@ -4229,8 +5141,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot7.Buy.StoneBlock",
+            "HomeShop.Grocery.Slot7.BuyAny.StoneBlock",
             "HomeShop.Grocery.Slot7.Skip.StoneBlock"
         ]
+    },
+    "HomeShop.Grocery.Slot7.BuyAny.StoneBlock": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            52,
+            952,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot8"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 3 排第 1 格是石塊，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot7.Buy.StoneBlock": {
         "recognition": "OCR",
@@ -4286,8 +5220,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot7.Buy.RoughStone",
+            "HomeShop.Grocery.Slot7.BuyAny.RoughStone",
             "HomeShop.Grocery.Slot7.Skip.RoughStone"
         ]
+    },
+    "HomeShop.Grocery.Slot7.BuyAny.RoughStone": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            52,
+            952,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot8"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 3 排第 1 格是粗煉石，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot7.Buy.RoughStone": {
         "recognition": "OCR",
@@ -4343,8 +5299,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot7.Buy.RareTimeSand",
+            "HomeShop.Grocery.Slot7.BuyAny.RareTimeSand",
             "HomeShop.Grocery.Slot7.Skip.RareTimeSand"
         ]
+    },
+    "HomeShop.Grocery.Slot7.BuyAny.RareTimeSand": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            52,
+            952,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot8"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 3 排第 1 格是稀有時之沙，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot7.Buy.RareTimeSand": {
         "recognition": "OCR",
@@ -4400,8 +5378,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot7.Buy.BattleEssence",
+            "HomeShop.Grocery.Slot7.BuyAny.BattleEssence",
             "HomeShop.Grocery.Slot7.Skip.BattleEssence"
         ]
+    },
+    "HomeShop.Grocery.Slot7.BuyAny.BattleEssence": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            52,
+            952,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot8"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 3 排第 1 格是歷戰精華，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot7.Buy.BattleEssence": {
         "recognition": "OCR",
@@ -4457,8 +5457,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot7.Buy.OrdinaryFreezeDried",
+            "HomeShop.Grocery.Slot7.BuyAny.OrdinaryFreezeDried",
             "HomeShop.Grocery.Slot7.Skip.OrdinaryFreezeDried"
         ]
+    },
+    "HomeShop.Grocery.Slot7.BuyAny.OrdinaryFreezeDried": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            52,
+            952,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot8"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 3 排第 1 格是普通凍乾，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot7.Buy.OrdinaryFreezeDried": {
         "recognition": "OCR",
@@ -4556,8 +5578,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot8.Buy.Wood",
+            "HomeShop.Grocery.Slot8.BuyAny.Wood",
             "HomeShop.Grocery.Slot8.Skip.Wood"
         ]
+    },
+    "HomeShop.Grocery.Slot8.BuyAny.Wood": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            280,
+            952,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot9"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 3 排第 2 格是木材，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot8.Buy.Wood": {
         "recognition": "OCR",
@@ -4613,8 +5657,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot8.Buy.StoneBlock",
+            "HomeShop.Grocery.Slot8.BuyAny.StoneBlock",
             "HomeShop.Grocery.Slot8.Skip.StoneBlock"
         ]
+    },
+    "HomeShop.Grocery.Slot8.BuyAny.StoneBlock": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            280,
+            952,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot9"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 3 排第 2 格是石塊，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot8.Buy.StoneBlock": {
         "recognition": "OCR",
@@ -4670,8 +5736,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot8.Buy.RoughStone",
+            "HomeShop.Grocery.Slot8.BuyAny.RoughStone",
             "HomeShop.Grocery.Slot8.Skip.RoughStone"
         ]
+    },
+    "HomeShop.Grocery.Slot8.BuyAny.RoughStone": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            280,
+            952,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot9"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 3 排第 2 格是粗煉石，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot8.Buy.RoughStone": {
         "recognition": "OCR",
@@ -4727,8 +5815,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot8.Buy.RareTimeSand",
+            "HomeShop.Grocery.Slot8.BuyAny.RareTimeSand",
             "HomeShop.Grocery.Slot8.Skip.RareTimeSand"
         ]
+    },
+    "HomeShop.Grocery.Slot8.BuyAny.RareTimeSand": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            280,
+            952,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot9"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 3 排第 2 格是稀有時之沙，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot8.Buy.RareTimeSand": {
         "recognition": "OCR",
@@ -4784,8 +5894,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot8.Buy.BattleEssence",
+            "HomeShop.Grocery.Slot8.BuyAny.BattleEssence",
             "HomeShop.Grocery.Slot8.Skip.BattleEssence"
         ]
+    },
+    "HomeShop.Grocery.Slot8.BuyAny.BattleEssence": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            280,
+            952,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot9"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 3 排第 2 格是歷戰精華，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot8.Buy.BattleEssence": {
         "recognition": "OCR",
@@ -4841,8 +5973,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot8.Buy.OrdinaryFreezeDried",
+            "HomeShop.Grocery.Slot8.BuyAny.OrdinaryFreezeDried",
             "HomeShop.Grocery.Slot8.Skip.OrdinaryFreezeDried"
         ]
+    },
+    "HomeShop.Grocery.Slot8.BuyAny.OrdinaryFreezeDried": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            280,
+            952,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.Slot9"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 3 排第 2 格是普通凍乾，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot8.Buy.OrdinaryFreezeDried": {
         "recognition": "OCR",
@@ -4940,8 +6094,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot9.Buy.Wood",
+            "HomeShop.Grocery.Slot9.BuyAny.Wood",
             "HomeShop.Grocery.Slot9.Skip.Wood"
         ]
+    },
+    "HomeShop.Grocery.Slot9.BuyAny.Wood": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            508,
+            952,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.RefreshRoute"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 3 排第 3 格是木材，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot9.Buy.Wood": {
         "recognition": "OCR",
@@ -4997,8 +6173,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot9.Buy.StoneBlock",
+            "HomeShop.Grocery.Slot9.BuyAny.StoneBlock",
             "HomeShop.Grocery.Slot9.Skip.StoneBlock"
         ]
+    },
+    "HomeShop.Grocery.Slot9.BuyAny.StoneBlock": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            508,
+            952,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.RefreshRoute"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 3 排第 3 格是石塊，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot9.Buy.StoneBlock": {
         "recognition": "OCR",
@@ -5054,8 +6252,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot9.Buy.RoughStone",
+            "HomeShop.Grocery.Slot9.BuyAny.RoughStone",
             "HomeShop.Grocery.Slot9.Skip.RoughStone"
         ]
+    },
+    "HomeShop.Grocery.Slot9.BuyAny.RoughStone": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            508,
+            952,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.RefreshRoute"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 3 排第 3 格是粗煉石，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot9.Buy.RoughStone": {
         "recognition": "OCR",
@@ -5111,8 +6331,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot9.Buy.RareTimeSand",
+            "HomeShop.Grocery.Slot9.BuyAny.RareTimeSand",
             "HomeShop.Grocery.Slot9.Skip.RareTimeSand"
         ]
+    },
+    "HomeShop.Grocery.Slot9.BuyAny.RareTimeSand": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            508,
+            952,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.RefreshRoute"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 3 排第 3 格是稀有時之沙，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot9.Buy.RareTimeSand": {
         "recognition": "OCR",
@@ -5168,8 +6410,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot9.Buy.BattleEssence",
+            "HomeShop.Grocery.Slot9.BuyAny.BattleEssence",
             "HomeShop.Grocery.Slot9.Skip.BattleEssence"
         ]
+    },
+    "HomeShop.Grocery.Slot9.BuyAny.BattleEssence": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            508,
+            952,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.RefreshRoute"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 3 排第 3 格是歷戰精華，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot9.Buy.BattleEssence": {
         "recognition": "OCR",
@@ -5225,8 +6489,30 @@
         "action": "DoNothing",
         "next": [
             "HomeShop.Grocery.Slot9.Buy.OrdinaryFreezeDried",
+            "HomeShop.Grocery.Slot9.BuyAny.OrdinaryFreezeDried",
             "HomeShop.Grocery.Slot9.Skip.OrdinaryFreezeDried"
         ]
+    },
+    "HomeShop.Grocery.Slot9.BuyAny.OrdinaryFreezeDried": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            508,
+            952,
+            160,
+            44
+        ],
+        "post_delay": 2000,
+        "next": [
+            "HomeShop.Grocery.RefreshRoute"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】雜貨第 3 排第 3 格是普通凍乾，依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
     },
     "HomeShop.Grocery.Slot9.Buy.OrdinaryFreezeDried": {
         "recognition": "OCR",
@@ -5375,6 +6661,7 @@
         "next": [
             "HomeShop.Vault.Slot1.SoldOut",
             "HomeShop.Vault.Slot1.Buy",
+            "HomeShop.Vault.Slot1.BuyAny",
             "HomeShop.Vault.Slot1.Skip"
         ]
     },
@@ -5401,6 +6688,7 @@
     },
     "HomeShop.Vault.Slot1.Buy": {
         "enabled": false,
+        "max_hit": 1,
         "recognition": "OCR",
         "roi": [
             6,
@@ -5417,13 +6705,35 @@
             160,
             44
         ],
-        "post_delay": 2000,
+        "post_delay": 2200,
         "next": [
-            "HomeShop.Vault.Slot2"
+            "HomeShop.Vault.Slot1"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
                 "content": "【家園商店】寶庫第 1 格折數符合設定，購買。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Vault.Slot1.BuyAny": {
+        "enabled": false,
+        "max_hit": 1,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            52,
+            388,
+            160,
+            44
+        ],
+        "post_delay": 2200,
+        "next": [
+            "HomeShop.Vault.Slot1"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】寶庫第 1 格依「不限折數」設定購買。",
                 "display": "log"
             }
         }
@@ -5441,6 +6751,7 @@
         "next": [
             "HomeShop.Vault.Slot2.SoldOut",
             "HomeShop.Vault.Slot2.Buy",
+            "HomeShop.Vault.Slot2.BuyAny",
             "HomeShop.Vault.Slot2.Skip"
         ]
     },
@@ -5467,6 +6778,7 @@
     },
     "HomeShop.Vault.Slot2.Buy": {
         "enabled": false,
+        "max_hit": 1,
         "recognition": "OCR",
         "roi": [
             235,
@@ -5483,13 +6795,35 @@
             160,
             44
         ],
-        "post_delay": 2000,
+        "post_delay": 2200,
         "next": [
-            "HomeShop.Vault.Slot3"
+            "HomeShop.Vault.Slot2"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
                 "content": "【家園商店】寶庫第 2 格折數符合設定，購買。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Vault.Slot2.BuyAny": {
+        "enabled": false,
+        "max_hit": 1,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            280,
+            388,
+            160,
+            44
+        ],
+        "post_delay": 2200,
+        "next": [
+            "HomeShop.Vault.Slot2"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】寶庫第 2 格依「不限折數」設定購買。",
                 "display": "log"
             }
         }
@@ -5507,6 +6841,7 @@
         "next": [
             "HomeShop.Vault.Slot3.SoldOut",
             "HomeShop.Vault.Slot3.Buy",
+            "HomeShop.Vault.Slot3.BuyAny",
             "HomeShop.Vault.Slot3.Skip"
         ]
     },
@@ -5533,6 +6868,7 @@
     },
     "HomeShop.Vault.Slot3.Buy": {
         "enabled": false,
+        "max_hit": 2,
         "recognition": "OCR",
         "roi": [
             464,
@@ -5549,13 +6885,35 @@
             160,
             44
         ],
-        "post_delay": 2000,
+        "post_delay": 2200,
         "next": [
-            "HomeShop.Vault.Slot4"
+            "HomeShop.Vault.Slot3"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
                 "content": "【家園商店】寶庫第 3 格折數符合設定，購買。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Vault.Slot3.BuyAny": {
+        "enabled": false,
+        "max_hit": 2,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            508,
+            388,
+            160,
+            44
+        ],
+        "post_delay": 2200,
+        "next": [
+            "HomeShop.Vault.Slot3"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】寶庫第 3 格依「不限折數」設定購買。",
                 "display": "log"
             }
         }
@@ -5573,6 +6931,7 @@
         "next": [
             "HomeShop.Vault.Slot4.SoldOut",
             "HomeShop.Vault.Slot4.Buy",
+            "HomeShop.Vault.Slot4.BuyAny",
             "HomeShop.Vault.Slot4.Skip"
         ]
     },
@@ -5599,6 +6958,7 @@
     },
     "HomeShop.Vault.Slot4.Buy": {
         "enabled": false,
+        "max_hit": 1,
         "recognition": "OCR",
         "roi": [
             6,
@@ -5615,13 +6975,35 @@
             160,
             44
         ],
-        "post_delay": 2000,
+        "post_delay": 2200,
         "next": [
-            "HomeShop.Vault.Slot5"
+            "HomeShop.Vault.Slot4"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
                 "content": "【家園商店】寶庫第 4 格折數符合設定，購買。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Vault.Slot4.BuyAny": {
+        "enabled": false,
+        "max_hit": 1,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            52,
+            670,
+            160,
+            44
+        ],
+        "post_delay": 2200,
+        "next": [
+            "HomeShop.Vault.Slot4"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】寶庫第 4 格依「不限折數」設定購買。",
                 "display": "log"
             }
         }
@@ -5639,6 +7021,7 @@
         "next": [
             "HomeShop.Vault.Slot5.SoldOut",
             "HomeShop.Vault.Slot5.Buy",
+            "HomeShop.Vault.Slot5.BuyAny",
             "HomeShop.Vault.Slot5.Skip"
         ]
     },
@@ -5665,6 +7048,7 @@
     },
     "HomeShop.Vault.Slot5.Buy": {
         "enabled": false,
+        "max_hit": 1,
         "recognition": "OCR",
         "roi": [
             235,
@@ -5681,13 +7065,35 @@
             160,
             44
         ],
-        "post_delay": 2000,
+        "post_delay": 2200,
         "next": [
-            "HomeShop.Vault.Slot6"
+            "HomeShop.Vault.Slot5"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
                 "content": "【家園商店】寶庫第 5 格折數符合設定，購買。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Vault.Slot5.BuyAny": {
+        "enabled": false,
+        "max_hit": 1,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            280,
+            670,
+            160,
+            44
+        ],
+        "post_delay": 2200,
+        "next": [
+            "HomeShop.Vault.Slot5"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】寶庫第 5 格依「不限折數」設定購買。",
                 "display": "log"
             }
         }
@@ -5705,6 +7111,7 @@
         "next": [
             "HomeShop.Vault.Slot6.SoldOut",
             "HomeShop.Vault.Slot6.Buy",
+            "HomeShop.Vault.Slot6.BuyAny",
             "HomeShop.Vault.Slot6.Skip"
         ]
     },
@@ -5731,6 +7138,7 @@
     },
     "HomeShop.Vault.Slot6.Buy": {
         "enabled": false,
+        "max_hit": 1,
         "recognition": "OCR",
         "roi": [
             464,
@@ -5747,13 +7155,35 @@
             160,
             44
         ],
-        "post_delay": 2000,
+        "post_delay": 2200,
         "next": [
-            "HomeShop.Vault.Slot7"
+            "HomeShop.Vault.Slot6"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
                 "content": "【家園商店】寶庫第 6 格折數符合設定，購買。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Vault.Slot6.BuyAny": {
+        "enabled": false,
+        "max_hit": 1,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            508,
+            670,
+            160,
+            44
+        ],
+        "post_delay": 2200,
+        "next": [
+            "HomeShop.Vault.Slot6"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】寶庫第 6 格依「不限折數」設定購買。",
                 "display": "log"
             }
         }
@@ -5771,6 +7201,7 @@
         "next": [
             "HomeShop.Vault.Slot7.SoldOut",
             "HomeShop.Vault.Slot7.Buy",
+            "HomeShop.Vault.Slot7.BuyAny",
             "HomeShop.Vault.Slot7.Skip"
         ]
     },
@@ -5797,6 +7228,7 @@
     },
     "HomeShop.Vault.Slot7.Buy": {
         "enabled": false,
+        "max_hit": 1,
         "recognition": "OCR",
         "roi": [
             6,
@@ -5813,13 +7245,35 @@
             160,
             44
         ],
-        "post_delay": 2000,
+        "post_delay": 2200,
         "next": [
-            "HomeShop.Vault.Slot8"
+            "HomeShop.Vault.Slot7"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
                 "content": "【家園商店】寶庫第 7 格折數符合設定，購買。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Vault.Slot7.BuyAny": {
+        "enabled": false,
+        "max_hit": 1,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            52,
+            952,
+            160,
+            44
+        ],
+        "post_delay": 2200,
+        "next": [
+            "HomeShop.Vault.Slot7"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】寶庫第 7 格依「不限折數」設定購買。",
                 "display": "log"
             }
         }
@@ -5837,6 +7291,7 @@
         "next": [
             "HomeShop.Vault.Slot8.SoldOut",
             "HomeShop.Vault.Slot8.Buy",
+            "HomeShop.Vault.Slot8.BuyAny",
             "HomeShop.Vault.Slot8.Skip"
         ]
     },
@@ -5863,6 +7318,7 @@
     },
     "HomeShop.Vault.Slot8.Buy": {
         "enabled": false,
+        "max_hit": 1,
         "recognition": "OCR",
         "roi": [
             235,
@@ -5879,13 +7335,35 @@
             160,
             44
         ],
-        "post_delay": 2000,
+        "post_delay": 2200,
         "next": [
-            "HomeShop.Vault.Slot9"
+            "HomeShop.Vault.Slot8"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
                 "content": "【家園商店】寶庫第 8 格折數符合設定，購買。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Vault.Slot8.BuyAny": {
+        "enabled": false,
+        "max_hit": 1,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            280,
+            952,
+            160,
+            44
+        ],
+        "post_delay": 2200,
+        "next": [
+            "HomeShop.Vault.Slot8"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】寶庫第 8 格依「不限折數」設定購買。",
                 "display": "log"
             }
         }
@@ -5903,6 +7381,7 @@
         "next": [
             "HomeShop.Vault.Slot9.SoldOut",
             "HomeShop.Vault.Slot9.Buy",
+            "HomeShop.Vault.Slot9.BuyAny",
             "HomeShop.Vault.Slot9.Skip"
         ]
     },
@@ -5918,7 +7397,8 @@
         "threshold": 0.3,
         "action": "DoNothing",
         "next": [
-            "HomeShop.Sale.Tab"
+            "HomeShop.Sale.Tab",
+            "HomeShop.Back"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
@@ -5929,6 +7409,7 @@
     },
     "HomeShop.Vault.Slot9.Buy": {
         "enabled": false,
+        "max_hit": 1,
         "recognition": "OCR",
         "roi": [
             464,
@@ -5945,9 +7426,9 @@
             160,
             44
         ],
-        "post_delay": 2000,
+        "post_delay": 2200,
         "next": [
-            "HomeShop.Sale.Tab"
+            "HomeShop.Vault.Slot9"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
@@ -5956,11 +7437,34 @@
             }
         }
     },
+    "HomeShop.Vault.Slot9.BuyAny": {
+        "enabled": false,
+        "max_hit": 1,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            508,
+            952,
+            160,
+            44
+        ],
+        "post_delay": 2200,
+        "next": [
+            "HomeShop.Vault.Slot9"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】寶庫第 9 格依「不限折數」設定購買。",
+                "display": "log"
+            }
+        }
+    },
     "HomeShop.Vault.Slot9.Skip": {
         "recognition": "DirectHit",
         "action": "DoNothing",
         "next": [
-            "HomeShop.Sale.Tab"
+            "HomeShop.Sale.Tab",
+            "HomeShop.Back"
         ]
     },
     "HomeShop.Sale.Tab": {
@@ -5978,6 +7482,7 @@
         "next": [
             "HomeShop.Sale.SoldOut",
             "HomeShop.Sale.Buy",
+            "HomeShop.Sale.BuyAny",
             "HomeShop.Sale.Skip"
         ],
         "focus": {
@@ -6033,6 +7538,27 @@
         "focus": {
             "Node.Recognition.Succeeded": {
                 "content": "【家園商店】特賣商品折數符合設定，購買。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeShop.Sale.BuyAny": {
+        "enabled": false,
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            277,
+            866,
+            160,
+            48
+        ],
+        "post_delay": 2400,
+        "next": [
+            "HomeShop.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園商店】特賣依「不限折數」設定購買。",
                 "display": "log"
             }
         }
@@ -6691,7 +8217,9 @@
         "duration": 400,
         "post_delay": 900,
         "next": [
-            "GachaMachine.Realm.Find"
+            "GachaMachine.Realm.Find",
+            "GachaMachine.Realm.ScrollDown",
+            "GachaMachine.Realm.NotFound"
         ]
     },
     "GachaMachine.Realm.Find": {
@@ -6746,7 +8274,8 @@
         "recognition": "DirectHit",
         "action": "DoNothing",
         "next": [
-            "GachaMachine.Realm.Confirm"
+            "GachaMachine.Realm.Confirm",
+            "GachaMachine.Pull.Route"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
@@ -8348,6 +9877,12 @@
         "threshold": 0.75,
         "action": "Click",
         "target": true,
+        "target_offset": [
+            0,
+            55,
+            0,
+            0
+        ],
         "post_delay": 2800,
         "next": [
             "HomeGifts.Letter1",
@@ -8485,6 +10020,12 @@
         "threshold": 0.75,
         "action": "Click",
         "target": true,
+        "target_offset": [
+            0,
+            55,
+            0,
+            0
+        ],
         "post_delay": 2800,
         "next": [
             "HomeGifts.Letter2",
@@ -8622,6 +10163,12 @@
         "threshold": 0.75,
         "action": "Click",
         "target": true,
+        "target_offset": [
+            0,
+            55,
+            0,
+            0
+        ],
         "post_delay": 2800,
         "next": [
             "HomeGifts.Letter3",
@@ -8759,6 +10306,12 @@
         "threshold": 0.75,
         "action": "Click",
         "target": true,
+        "target_offset": [
+            0,
+            55,
+            0,
+            0
+        ],
         "post_delay": 2800,
         "next": [
             "HomeGifts.Letter4",
@@ -8896,6 +10449,12 @@
         "threshold": 0.75,
         "action": "Click",
         "target": true,
+        "target_offset": [
+            0,
+            55,
+            0,
+            0
+        ],
         "post_delay": 2800,
         "next": [
             "HomeGifts.Letter5",
