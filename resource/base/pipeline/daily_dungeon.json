@@ -1,0 +1,1164 @@
+{
+    "Objectives.Daily.Dungeon1.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Dungeon.EnsureNote",
+            "Dungeon.Nav.FromOtherTab",
+            "Dungeon.Nav.Recover"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】開始執行：從筆記進入日常副本。",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.EnsureNote": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1200,
+            720,
+            80
+        ],
+        "expected": "筆記",
+        "threshold": 0.5,
+        "action": "DoNothing",
+        "timeout": 8000,
+        "next": [
+            "Dungeon.Open"
+        ],
+        "on_error": [
+            "Dungeon.Open.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】底部導航列顯示「筆記」，確認在筆記主頁。",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Nav.FromOtherTab": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1180,
+            720,
+            100
+        ],
+        "expected": "角色|家園|世界|公會",
+        "threshold": 0.5,
+        "action": "Click",
+        "target": [
+            180,
+            1200,
+            120,
+            70
+        ],
+        "post_delay": 1400,
+        "next": [
+            "Dungeon.EnsureNote"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】目前在其他主頁籤，點擊「筆記」切換。",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Nav.Recover": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Dungeon.Nav.LeaveMap",
+            "Dungeon.Nav.ExitDialog",
+            "Dungeon.EnsureNote",
+            "Dungeon.Nav.FromOtherTab",
+            "Dungeon.Nav.Back",
+            "Dungeon.Nav.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】目前在子畫面，按返回鍵回到主頁籤…",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Nav.Back": {
+        "max_hit": 10,
+        "recognition": "DirectHit",
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 1600,
+        "next": [
+            "Dungeon.Nav.LeaveMap",
+            "Dungeon.Nav.ExitDialog",
+            "Dungeon.EnsureNote",
+            "Dungeon.Nav.FromOtherTab",
+            "Dungeon.Nav.Back",
+            "Dungeon.Nav.Failed"
+        ]
+    },
+    "Dungeon.Nav.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.3,
+        "action": "Click",
+        "target": [
+            188,
+            713,
+            75,
+            44
+        ],
+        "post_delay": 1200,
+        "next": [
+            "Dungeon.Nav.SelectNote"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】偵測到離開遊戲彈窗，點擊取消。",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Nav.SelectNote": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            180,
+            1200,
+            120,
+            70
+        ],
+        "post_delay": 1600,
+        "next": [
+            "Dungeon.EnsureNote"
+        ]
+    },
+    "Dungeon.Nav.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】連續返回後仍無法回到筆記主頁，已安全停止，未執行任何操作。",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Open": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            0,
+            120,
+            410,
+            180
+        ],
+        "template": "note/daily-dungeon-title.png",
+        "threshold": 0.7,
+        "action": "Click",
+        "post_delay": 3000,
+        "timeout": 15000,
+        "next": [
+            "Dungeon.List",
+            "Dungeon.Open.Retry"
+        ],
+        "on_error": [
+            "Dungeon.Open.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】點擊筆記上的「日常副本」，等待副本清單…",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Open.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】在筆記頁找不到「日常副本」入口，已安全停止，未執行任何操作。",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.List": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            20,
+            420,
+            70
+        ],
+        "expected": "日常副本",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "Dungeon.Select.Route"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】已進入副本清單。",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Select.Route": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Dungeon.Select.Slot3"
+        ]
+    },
+    "Dungeon.Select.Slot1": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            300,
+            300,
+            120,
+            60
+        ],
+        "post_delay": 2600,
+        "next": [
+            "Dungeon.Detail"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】選擇清單第 1 個副本。",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Select.Slot2": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            300,
+            640,
+            120,
+            60
+        ],
+        "post_delay": 2600,
+        "next": [
+            "Dungeon.Detail"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】選擇清單第 2 個副本。",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Select.Slot3": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            300,
+            975,
+            120,
+            60
+        ],
+        "post_delay": 2600,
+        "next": [
+            "Dungeon.Detail"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】選擇清單第 3 個副本。",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Detail": {
+        "recognition": "OCR",
+        "roi": [
+            40,
+            1050,
+            330,
+            80
+        ],
+        "expected": "前往副本",
+        "threshold": 0.5,
+        "action": "DoNothing",
+        "timeout": 15000,
+        "next": [
+            "Dungeon.Detail.Title"
+        ],
+        "on_error": [
+            "Dungeon.Detail.Mismatch"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】已進入副本詳情頁。",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Detail.Title": {
+        "recognition": "OCR",
+        "roi": [
+            100,
+            170,
+            520,
+            80
+        ],
+        "expected": "冰凌尖塔",
+        "threshold": 0.5,
+        "action": "DoNothing",
+        "next": [
+            "Dungeon.Purchase.Route"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】副本名稱與設定相符。",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Detail.Mismatch": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】詳情頁標題與設定的副本不符（清單順序可能已變動），已安全停止，未進入副本。",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Purchase.Route": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Dungeon.Goto"
+        ]
+    },
+    "Dungeon.Purchase.Open": {
+        "max_hit": 1,
+        "recognition": "OCR",
+        "roi": [
+            230,
+            1000,
+            300,
+            60
+        ],
+        "expected": "每日[領领][獎奖]次[數数]",
+        "threshold": 0.3,
+        "action": "Click",
+        "target": [
+            484,
+            1023,
+            22,
+            22
+        ],
+        "post_delay": 1200,
+        "timeout": 8000,
+        "next": [
+            "Dungeon.Purchase.Dialog"
+        ],
+        "on_error": [
+            "Dungeon.Goto"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】開啟領獎次數購買視窗…",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Purchase.Dialog": {
+        "recognition": "OCR",
+        "roi": [
+            80,
+            300,
+            560,
+            560
+        ],
+        "expected": "今日限[購购]",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "Dungeon.Purchase.Buy"
+        ]
+    },
+    "Dungeon.Purchase.Buy": {
+        "recognition": "DirectHit",
+        "action": "Custom",
+        "custom_action": "BuyLimitedCount",
+        "custom_action_param": {
+            "label": "日常副本領獎次數",
+            "total": 0,
+            "limit_roi": [
+                330,
+                750,
+                300,
+                70
+            ],
+            "plus_target": [
+                580,
+                625,
+                60,
+                60
+            ],
+            "buy_roi": [
+                370,
+                780,
+                260,
+                110
+            ],
+            "cancel_target": [
+                228,
+                743,
+                120,
+                60
+            ]
+        },
+        "post_delay": 1500,
+        "next": [
+            "Dungeon.Purchase.Close"
+        ]
+    },
+    "Dungeon.Purchase.Close": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "timeout": 8000,
+        "next": [
+            "Dungeon.Goto"
+        ],
+        "on_error": [
+            "Dungeon.Purchase.Dismiss"
+        ]
+    },
+    "Dungeon.Purchase.Dismiss": {
+        "max_hit": 3,
+        "recognition": "DirectHit",
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 1000,
+        "timeout": 8000,
+        "next": [
+            "Dungeon.Goto"
+        ],
+        "on_error": [
+            "Dungeon.Done"
+        ]
+    },
+    "Dungeon.Goto": {
+        "recognition": "OCR",
+        "roi": [
+            40,
+            1050,
+            330,
+            80
+        ],
+        "expected": "前往副本",
+        "threshold": 0.5,
+        "action": "Click",
+        "post_delay": 1500,
+        "timeout": 10000,
+        "next": [
+            "Dungeon.Goto.Confirm"
+        ],
+        "on_error": [
+            "Dungeon.Goto.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】點擊「前往副本」…",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Goto.Confirm": {
+        "recognition": "OCR",
+        "roi": [
+            80,
+            450,
+            560,
+            260
+        ],
+        "expected": "挑戰副本嗎",
+        "threshold": 0.3,
+        "action": "Click",
+        "target": [
+            455,
+            713,
+            74,
+            44
+        ],
+        "post_delay": 12000,
+        "timeout": 40000,
+        "next": [
+            "Dungeon.Map"
+        ],
+        "on_error": [
+            "Dungeon.Goto.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】確認前往副本，等待地圖載入…",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Goto.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】無法從詳情頁前往副本地圖，已安全停止。",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Map": {
+        "recognition": "OCR",
+        "roi": [
+            560,
+            1210,
+            160,
+            70
+        ],
+        "expected": "探索",
+        "threshold": 0.5,
+        "action": "DoNothing",
+        "timeout": 30000,
+        "next": [
+            "Dungeon.Loop.Enter"
+        ],
+        "on_error": [
+            "Dungeon.Done"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】已抵達副本所在地圖。",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Loop.Enter": {
+        "max_hit": 4,
+        "recognition": "OCR",
+        "roi": [
+            560,
+            1210,
+            160,
+            70
+        ],
+        "expected": "探索",
+        "threshold": 0.5,
+        "action": "Click",
+        "target": [
+            300,
+            460,
+            120,
+            120
+        ],
+        "post_delay": 2500,
+        "timeout": 10000,
+        "next": [
+            "Dungeon.Gate"
+        ],
+        "on_error": [
+            "Dungeon.Gate.Retry"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】點擊人物上方的副本入口…",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Gate.Retry": {
+        "max_hit": 3,
+        "recognition": "OCR",
+        "roi": [
+            560,
+            1210,
+            160,
+            70
+        ],
+        "expected": "探索",
+        "threshold": 0.5,
+        "action": "Click",
+        "target": [
+            300,
+            420,
+            120,
+            160
+        ],
+        "post_delay": 2500,
+        "timeout": 10000,
+        "next": [
+            "Dungeon.Gate"
+        ],
+        "on_error": [
+            "Dungeon.Gate.Failed"
+        ]
+    },
+    "Dungeon.Gate.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Dungeon.Exit"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】點不開地圖上的副本入口，已安全停止。",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Gate": {
+        "recognition": "OCR",
+        "roi": [
+            40,
+            1040,
+            330,
+            80
+        ],
+        "expected": "[組组][隊队]",
+        "threshold": 0.5,
+        "action": "DoNothing",
+        "next": [
+            "Dungeon.Party.Route"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】已開啟副本入口，準備組隊。",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Party.Route": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Dungeon.Party.Open"
+        ]
+    },
+    "Dungeon.Party.Open": {
+        "recognition": "OCR",
+        "roi": [
+            40,
+            1040,
+            330,
+            80
+        ],
+        "expected": "[組组][隊队]",
+        "threshold": 0.5,
+        "action": "Click",
+        "post_delay": 1800,
+        "next": [
+            "Dungeon.Party.Fill",
+            "Dungeon.Enter"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】開啟隊伍視窗…",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Party.Fill": {
+        "recognition": "DirectHit",
+        "action": "Custom",
+        "custom_action": "FillPartyWithPartners",
+        "custom_action_param": {
+            "label": "日常副本"
+        },
+        "post_delay": 1200,
+        "next": [
+            "Dungeon.Party.Close"
+        ]
+    },
+    "Dungeon.Party.Close": {
+        "recognition": "DirectHit",
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 1600,
+        "timeout": 12000,
+        "next": [
+            "Dungeon.LeaveMapDialog",
+            "Dungeon.Enter",
+            "Dungeon.Party.Incomplete"
+        ],
+        "on_error": [
+            "Dungeon.Enter.Failed"
+        ]
+    },
+    "Dungeon.Enter": {
+        "recognition": "OCR",
+        "roi": [
+            380,
+            1040,
+            320,
+            80
+        ],
+        "expected": "進入副本",
+        "threshold": 0.5,
+        "action": "Click",
+        "post_delay": 8000,
+        "timeout": 60000,
+        "next": [
+            "Dungeon.Battle.Prepare"
+        ],
+        "on_error": [
+            "Dungeon.Enter.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】點擊「進入副本」，等待戰鬥準備畫面…",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Enter.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Dungeon.Exit"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】隊伍未就緒或找不到「進入副本」按鈕，已安全停止，未進入戰鬥。",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Battle.Prepare": {
+        "max_hit": 40,
+        "recognition": "OCR",
+        "roi": [
+            190,
+            915,
+            340,
+            85
+        ],
+        "expected": "開始戰鬥",
+        "threshold": 0.5,
+        "action": "Click",
+        "post_delay": 5000,
+        "timeout": 420000,
+        "next": [
+            "Dungeon.Battle.Wait",
+            "Dungeon.Battle.Prepare"
+        ],
+        "on_error": [
+            "Dungeon.Battle.Timeout"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】點擊「開始戰鬥」（副本為多層連戰，每層結束會再出現此按鈕）…",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Battle.Wait": {
+        "recognition": "OCR",
+        "roi": [
+            300,
+            1170,
+            420,
+            90
+        ],
+        "expected": "[領领]取[獎奖][勵励]|已[領领]取|[領领][獎奖]次[數数]已用盡",
+        "threshold": 0.5,
+        "action": "DoNothing",
+        "post_delay": 1500,
+        "timeout": 15000,
+        "next": [
+            "Dungeon.Claim",
+            "Dungeon.Claim.Exhausted",
+            "Dungeon.Claim.Done"
+        ],
+        "on_error": [
+            "Dungeon.Result.Leave"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】戰鬥結束，已出現結算畫面。",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Battle.Timeout": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Dungeon.Exit"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】等待逾時仍未看到結算畫面，安全結束本任務。",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Claim": {
+        "recognition": "OCR",
+        "roi": [
+            300,
+            1170,
+            420,
+            90
+        ],
+        "expected": "[領领]取[獎奖][勵励]",
+        "threshold": 0.5,
+        "action": "Click",
+        "post_delay": 1800,
+        "timeout": 12000,
+        "next": [
+            "Dungeon.Claim.NoCount",
+            "Dungeon.Claim.Confirm",
+            "Dungeon.Claim.Done"
+        ],
+        "on_error": [
+            "Dungeon.Result.Leave"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】點擊「領取獎勵」…",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Claim.Confirm": {
+        "recognition": "OCR",
+        "roi": [
+            80,
+            450,
+            560,
+            180
+        ],
+        "expected": "[領领][獎奖]次[數数]",
+        "threshold": 0.3,
+        "action": "Click",
+        "target": [
+            455,
+            713,
+            74,
+            44
+        ],
+        "post_delay": 3000,
+        "timeout": 12000,
+        "next": [
+            "Dungeon.Claim.Done"
+        ],
+        "on_error": [
+            "Dungeon.Result.Leave"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】確認消耗領獎次數並領取本次獎勵。",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Claim.Done": {
+        "recognition": "OCR",
+        "roi": [
+            300,
+            1170,
+            420,
+            90
+        ],
+        "expected": "已[領领]取",
+        "threshold": 0.5,
+        "action": "DoNothing",
+        "next": [
+            "Dungeon.Result.Leave"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】結算畫面顯示「已領取」，本次獎勵確實入手。",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Result.Leave": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            45,
+            1190,
+            60,
+            55
+        ],
+        "post_delay": 8000,
+        "timeout": 30000,
+        "next": [
+            "Dungeon.Injured",
+            "Dungeon.Loop.Enter",
+            "Dungeon.Exit"
+        ],
+        "on_error": [
+            "Dungeon.Done"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】離開結算畫面…",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Injured": {
+        "recognition": "OCR",
+        "roi": [
+            100,
+            680,
+            520,
+            80
+        ],
+        "expected": "角色重傷",
+        "threshold": 0.3,
+        "action": "Click",
+        "target": [
+            400,
+            800,
+            180,
+            28
+        ],
+        "post_delay": 8000,
+        "timeout": 30000,
+        "next": [
+            "Dungeon.Loop.Enter",
+            "Dungeon.Exit"
+        ],
+        "on_error": [
+            "Dungeon.Done"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】角色重傷，使用料理一鍵治療後繼續。",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Done": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】已完成設定的挑戰次數，本任務結束。",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Party.Incomplete": {
+        "recognition": "OCR",
+        "roi": [
+            380,
+            1040,
+            320,
+            80
+        ],
+        "expected": "[配配][對对]",
+        "threshold": 0.5,
+        "action": "DoNothing",
+        "next": [
+            "Dungeon.Exit"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】隊伍未補滿（右側仍是「配對」而非「進入副本」），已安全停止，未使用配對邀請其他玩家。",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.LeaveMapDialog": {
+        "recognition": "OCR",
+        "roi": [
+            80,
+            450,
+            560,
+            200
+        ],
+        "expected": "[離离]開地[圖图]",
+        "threshold": 0.3,
+        "action": "Click",
+        "target": [
+            188,
+            713,
+            75,
+            44
+        ],
+        "post_delay": 1500,
+        "timeout": 10000,
+        "next": [
+            "Dungeon.Gate.Retry"
+        ],
+        "on_error": [
+            "Dungeon.Exit"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】誤觸「離開地圖」彈窗，已點取消留在地圖。",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Nav.LeaveMap": {
+        "recognition": "OCR",
+        "roi": [
+            80,
+            450,
+            560,
+            200
+        ],
+        "expected": "[離离]開地[圖图]",
+        "threshold": 0.3,
+        "action": "Click",
+        "target": [
+            455,
+            713,
+            74,
+            44
+        ],
+        "post_delay": 9000,
+        "next": [
+            "Dungeon.EnsureNote",
+            "Dungeon.Nav.FromOtherTab",
+            "Dungeon.Nav.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】目前在世界地圖，確認離開地圖並解散隊伍後回到主頁籤。",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Claim.NoCount": {
+        "recognition": "OCR",
+        "roi": [
+            80,
+            450,
+            560,
+            180
+        ],
+        "expected": "可[領领][獎奖]次[數数][:：]?s*0",
+        "threshold": 0.3,
+        "action": "Click",
+        "target": [
+            188,
+            713,
+            75,
+            44
+        ],
+        "post_delay": 1500,
+        "next": [
+            "Dungeon.Result.Leave"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】今日領獎次數已用完（可領獎次數：0），點取消不消耗任何資源。",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Claim.Exhausted": {
+        "recognition": "OCR",
+        "roi": [
+            300,
+            1170,
+            420,
+            90
+        ],
+        "expected": "[領领][獎奖]次[數数]已用盡",
+        "threshold": 0.5,
+        "action": "DoNothing",
+        "next": [
+            "Dungeon.Result.Leave"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】結算畫面顯示「領獎次數已用盡」，本次不領獎（今日免費與已購買的領獎次數都用完了）。",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Exit": {
+        "recognition": "OCR",
+        "roi": [
+            560,
+            1210,
+            160,
+            70
+        ],
+        "expected": "探索",
+        "threshold": 0.5,
+        "action": "Click",
+        "target": [
+            45,
+            1190,
+            60,
+            55
+        ],
+        "post_delay": 2000,
+        "timeout": 10000,
+        "next": [
+            "Dungeon.Exit.Confirm"
+        ],
+        "on_error": [
+            "Dungeon.Done"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】已完成設定的挑戰次數，離開地圖…",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Exit.Confirm": {
+        "recognition": "OCR",
+        "roi": [
+            80,
+            450,
+            560,
+            200
+        ],
+        "expected": "[離离]開地[圖图]",
+        "threshold": 0.3,
+        "action": "Click",
+        "target": [
+            455,
+            713,
+            74,
+            44
+        ],
+        "post_delay": 9000,
+        "timeout": 20000,
+        "next": [
+            "Dungeon.Done"
+        ]
+    },
+    "Dungeon.Open.Retry": {
+        "max_hit": 3,
+        "recognition": "TemplateMatch",
+        "roi": [
+            0,
+            120,
+            410,
+            180
+        ],
+        "template": "note/daily-dungeon-title.png",
+        "threshold": 0.7,
+        "action": "Click",
+        "post_delay": 3000,
+        "timeout": 15000,
+        "next": [
+            "Dungeon.List",
+            "Dungeon.Open.Retry"
+        ],
+        "on_error": [
+            "Dungeon.Open.Failed"
+        ]
+    }
+}

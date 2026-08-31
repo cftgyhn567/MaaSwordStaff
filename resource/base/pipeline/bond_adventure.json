@@ -1,0 +1,513 @@
+{
+    "Objectives.BondAdventureScenicDispatch.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Bond.EnsureNote",
+            "Bond.Nav.FromOtherTab",
+            "Bond.Nav.Recover"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【羈絆冒險】開始執行：收取已結束的奇景委派，並把空著的奇景重新派出。",
+                "display": "log"
+            }
+        }
+    },
+    "Bond.EnsureNote": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1200,
+            720,
+            80
+        ],
+        "expected": "筆記",
+        "threshold": 0.5,
+        "action": "DoNothing",
+        "timeout": 8000,
+        "next": [
+            "Bond.Open"
+        ],
+        "on_error": [
+            "Bond.Open.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【羈絆冒險】底部導航列顯示「筆記」，確認在筆記主頁。",
+                "display": "log"
+            }
+        }
+    },
+    "Bond.Nav.FromOtherTab": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1180,
+            720,
+            100
+        ],
+        "expected": "角色|家園|世界|公會",
+        "threshold": 0.5,
+        "action": "Click",
+        "target": [
+            180,
+            1200,
+            120,
+            70
+        ],
+        "post_delay": 1400,
+        "next": [
+            "Bond.EnsureNote"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【羈絆冒險】目前在其他主頁籤，點擊「筆記」切換。",
+                "display": "log"
+            }
+        }
+    },
+    "Bond.Nav.Recover": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Bond.Nav.LeaveMap",
+            "Bond.Nav.ExitDialog",
+            "Bond.EnsureNote",
+            "Bond.Nav.FromOtherTab",
+            "Bond.Nav.Back",
+            "Bond.Nav.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【羈絆冒險】目前在子畫面，按返回鍵回到主頁籤…",
+                "display": "log"
+            }
+        }
+    },
+    "Bond.Nav.Back": {
+        "max_hit": 10,
+        "recognition": "DirectHit",
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 1600,
+        "next": [
+            "Bond.Nav.LeaveMap",
+            "Bond.Nav.ExitDialog",
+            "Bond.EnsureNote",
+            "Bond.Nav.FromOtherTab",
+            "Bond.Nav.Back",
+            "Bond.Nav.Failed"
+        ]
+    },
+    "Bond.Nav.LeaveMap": {
+        "recognition": "OCR",
+        "roi": [
+            80,
+            450,
+            560,
+            200
+        ],
+        "expected": "[離离]開地[圖图]",
+        "threshold": 0.3,
+        "action": "Click",
+        "target": [
+            455,
+            713,
+            74,
+            44
+        ],
+        "post_delay": 9000,
+        "next": [
+            "Bond.EnsureNote",
+            "Bond.Nav.FromOtherTab",
+            "Bond.Nav.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【羈絆冒險】目前在世界地圖，確認離開地圖後回到主頁籤。",
+                "display": "log"
+            }
+        }
+    },
+    "Bond.Nav.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.3,
+        "action": "Click",
+        "target": [
+            188,
+            713,
+            75,
+            44
+        ],
+        "post_delay": 1200,
+        "next": [
+            "Bond.Nav.SelectNote"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【羈絆冒險】偵測到離開遊戲彈窗，點擊取消。",
+                "display": "log"
+            }
+        }
+    },
+    "Bond.Nav.SelectNote": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            180,
+            1200,
+            120,
+            70
+        ],
+        "post_delay": 1600,
+        "next": [
+            "Bond.EnsureNote"
+        ]
+    },
+    "Bond.Nav.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【羈絆冒險】連續返回後仍無法回到筆記主頁，已安全停止，未執行任何操作。",
+                "display": "log"
+            }
+        }
+    },
+    "Bond.Open": {
+        "recognition": "TemplateMatch",
+        "roi": [
+            400,
+            120,
+            320,
+            190
+        ],
+        "template": "note/bond-adventure-title.png",
+        "threshold": 0.7,
+        "action": "Click",
+        "post_delay": 3000,
+        "timeout": 15000,
+        "next": [
+            "Bond.Screen",
+            "Bond.Open.Retry"
+        ],
+        "on_error": [
+            "Bond.Open.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【羈絆冒險】點擊筆記上的「羈絆冒險」…",
+                "display": "log"
+            }
+        }
+    },
+    "Bond.Open.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【羈絆冒險】找不到「羈絆冒險」入口，已安全停止，未執行任何操作。",
+                "display": "log"
+            }
+        }
+    },
+    "Bond.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            10,
+            320,
+            80
+        ],
+        "expected": "羈絆冒險",
+        "threshold": 0.5,
+        "action": "DoNothing",
+        "timeout": 10000,
+        "next": [
+            "Bond.Report"
+        ],
+        "on_error": [
+            "Bond.Open.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【羈絆冒險】已進入羈絆冒險畫面。",
+                "display": "log"
+            }
+        }
+    },
+    "Bond.Report": {
+        "recognition": "DirectHit",
+        "pre_delay": 1500,
+        "action": "Custom",
+        "custom_action": "BondScenicReport",
+        "custom_action_param": {
+            "expected_total": 4
+        },
+        "post_delay": 500,
+        "timeout": 8000,
+        "next": [
+            "Bond.Loop.Ready",
+            "Bond.Loop.Empty"
+        ],
+        "on_error": [
+            "Bond.Done"
+        ]
+    },
+    "Bond.Loop.Ready": {
+        "max_hit": 8,
+        "recognition": "TemplateMatch",
+        "roi": [
+            0,
+            150,
+            720,
+            900
+        ],
+        "template": "note/bond-spot-ready.png",
+        "threshold": 0.85,
+        "order_by": "Vertical",
+        "action": "Click",
+        "target": true,
+        "target_offset": [
+            -30,
+            50,
+            0,
+            0
+        ],
+        "post_delay": 2500,
+        "timeout": 10000,
+        "next": [
+            "Bond.Collect.Result"
+        ],
+        "on_error": [
+            "Bond.Loop.Empty",
+            "Bond.Done"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【羈絆冒險】點擊有紅點的奇景，收取已結束的委派…",
+                "display": "log"
+            }
+        }
+    },
+    "Bond.Collect.Result": {
+        "max_hit": 6,
+        "recognition": "OCR",
+        "roi": [
+            100,
+            200,
+            520,
+            180
+        ],
+        "expected": "委派結束",
+        "threshold": 0.5,
+        "action": "Click",
+        "target": [
+            280,
+            960,
+            160,
+            80
+        ],
+        "post_delay": 2500,
+        "timeout": 15000,
+        "next": [
+            "Bond.Collect.Result",
+            "Bond.Loop.Ready",
+            "Bond.Loop.Empty"
+        ],
+        "on_error": [
+            "Bond.Done"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【羈絆冒險】出現「委派結束」結算，收取獎勵並關閉。",
+                "display": "log"
+            }
+        }
+    },
+    "Bond.Loop.Empty": {
+        "max_hit": 8,
+        "recognition": "TemplateMatch",
+        "roi": [
+            0,
+            150,
+            720,
+            900
+        ],
+        "template": "note/bond-spot-empty.png",
+        "threshold": 0.85,
+        "order_by": "Vertical",
+        "action": "Click",
+        "target": true,
+        "target_offset": [
+            -30,
+            50,
+            0,
+            0
+        ],
+        "post_delay": 2500,
+        "timeout": 10000,
+        "next": [
+            "Bond.Dispatch.Dialog"
+        ],
+        "on_error": [
+            "Bond.Done"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【羈絆冒險】點擊空著的奇景，準備派出委派…",
+                "display": "log"
+            }
+        }
+    },
+    "Bond.Dispatch.Dialog": {
+        "recognition": "OCR",
+        "roi": [
+            40,
+            1050,
+            300,
+            80
+        ],
+        "expected": "快速選擇",
+        "threshold": 0.5,
+        "action": "Click",
+        "target": true,
+        "post_delay": 1500,
+        "timeout": 10000,
+        "next": [
+            "Bond.Dispatch.Start"
+        ],
+        "on_error": [
+            "Bond.Dispatch.Cancel"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【羈絆冒險】委派設定畫面：點「快速選擇」自動挑選委派成員。",
+                "display": "log"
+            }
+        }
+    },
+    "Bond.Dispatch.Start": {
+        "recognition": "OCR",
+        "roi": [
+            380,
+            1050,
+            300,
+            80
+        ],
+        "expected": "開始委派",
+        "threshold": 0.5,
+        "action": "Click",
+        "target": true,
+        "post_delay": 3000,
+        "timeout": 15000,
+        "next": [
+            "Bond.Dispatch.Started",
+            "Bond.Loop.Ready",
+            "Bond.Loop.Empty"
+        ],
+        "on_error": [
+            "Bond.Done"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【羈絆冒險】點擊「開始委派」。",
+                "display": "log"
+            }
+        }
+    },
+    "Bond.Dispatch.Cancel": {
+        "recognition": "DirectHit",
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 1500,
+        "next": [
+            "Bond.Done"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【羈絆冒險】委派設定畫面不如預期（可能沒有可派的成員），已關閉視窗並安全停止。",
+                "display": "log"
+            }
+        }
+    },
+    "Bond.Done": {
+        "recognition": "DirectHit",
+        "action": "Custom",
+        "custom_action": "BondScenicReport",
+        "custom_action_param": {
+            "expected_total": 4
+        },
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【羈絆冒險】流程結束，重新清點奇景狀態。",
+                "display": "log"
+            }
+        }
+    },
+    "Bond.Dispatch.Started": {
+        "max_hit": 6,
+        "recognition": "OCR",
+        "roi": [
+            100,
+            330,
+            520,
+            180
+        ],
+        "expected": "委派開始",
+        "threshold": 0.5,
+        "action": "Click",
+        "target": [
+            280,
+            960,
+            160,
+            80
+        ],
+        "post_delay": 2500,
+        "timeout": 15000,
+        "next": [
+            "Bond.Dispatch.Started",
+            "Bond.Loop.Ready",
+            "Bond.Loop.Empty"
+        ],
+        "on_error": [
+            "Bond.Done"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【羈絆冒險】出現「委派開始」動畫，點掉後繼續處理下一個奇景。",
+                "display": "log"
+            }
+        }
+    },
+    "Bond.Open.Retry": {
+        "max_hit": 3,
+        "recognition": "TemplateMatch",
+        "roi": [
+            400,
+            120,
+            320,
+            190
+        ],
+        "template": "note/bond-adventure-title.png",
+        "threshold": 0.7,
+        "action": "Click",
+        "post_delay": 3000,
+        "timeout": 15000,
+        "next": [
+            "Bond.Screen",
+            "Bond.Open.Retry"
+        ],
+        "on_error": [
+            "Bond.Open.Failed"
+        ]
+    }
+}

@@ -2,76 +2,42 @@
     "Objectives.MaterialRealm.Start": {
         "recognition": "DirectHit",
         "action": "DoNothing",
-        "anchor": "Navigation.Root.RetryTask",
-        "post_delay": 1000,
-        "timeout": 5000,
         "next": [
             "MaterialRealm.EnsureNote",
             "MaterialRealm.Nav.FromOtherTab",
-            "MaterialRealm.Nav.Back"
-        ],
-        "on_error": [
-            "Navigation.Root.Recovery.Start"
-        ]
-    },
-    "MaterialRealm.EnsureNote": {
-        "recognition": "OCR",
-        "roi": [
-            180,
-            1200,
-            140,
-            70
-        ],
-        "expected": "筆記",
-        "threshold": 0.2,
-        "action": "DoNothing",
-        "next": [
-            "MaterialRealm.Note.Screen",
-            "MaterialRealm.Menu.Iron"
+            "MaterialRealm.Nav.Recover"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【導航】已確認在筆記主頁，開始執行素材秘境任務。",
+                "content": "【素材祕境】開始執行：筆記 →「素材祕境」，依設定處理四個礦洞。",
                 "display": "log"
             }
         }
     },
-    "MaterialRealm.Home": {
-        "recognition": "OCR",
-        "roi": [
-            285,
-            1180,
-            180,
-            100
-        ],
-        "expected": "家園",
-        "threshold": 0.2,
-        "action": "Click",
-        "target": [
-            165,
-            1160,
-            130,
-            120
-        ],
-        "post_delay": 800,
-        "next": [
-            "MaterialRealm.Note.Screen"
-        ]
-    },
-    "MaterialRealm.Note.Screen": {
+    "MaterialRealm.EnsureNote": {
         "recognition": "OCR",
         "roi": [
             0,
-            130,
+            1200,
             720,
-            1080
+            80
         ],
-        "expected": "日常副本|羈絆冒險|素材.*境",
-        "threshold": 0.2,
+        "expected": "筆記",
+        "threshold": 0.5,
         "action": "DoNothing",
+        "timeout": 8000,
         "next": [
             "MaterialRealm.Note.Entry"
-        ]
+        ],
+        "on_error": [
+            "MaterialRealm.Open.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【素材祕境】底部導航列顯示「筆記」，確認在筆記主頁。",
+                "display": "log"
+            }
+        }
     },
     "MaterialRealm.Note.Entry": {
         "recognition": "OCR",
@@ -82,12 +48,24 @@
             280
         ],
         "expected": "素材.*境",
-        "threshold": 0.2,
+        "threshold": 0.4,
         "action": "Click",
-        "post_delay": 800,
+        "target": true,
+        "post_delay": 2500,
+        "timeout": 12000,
         "next": [
-            "MaterialRealm.Menu.Iron"
-        ]
+            "MaterialRealm.Menu.Iron",
+            "MaterialRealm.Note.Entry.Retry"
+        ],
+        "on_error": [
+            "MaterialRealm.Open.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【素材祕境】點擊筆記上的「素材祕境」…",
+                "display": "log"
+            }
+        }
     },
     "MaterialRealm.Menu.Iron": {
         "recognition": "OCR",
@@ -100,8 +78,12 @@
         "expected": "鐵石礦洞",
         "threshold": 0.2,
         "action": "DoNothing",
+        "timeout": 10000,
         "next": [
             "MaterialRealm.Iron.Enter"
+        ],
+        "on_error": [
+            "MaterialRealm.Open.Failed"
         ]
     },
     "MaterialRealm.Iron.Enter": {
@@ -137,19 +119,30 @@
         ]
     },
     "MaterialRealm.Iron.Purchase.Open": {
+        "enabled": false,
         "max_hit": 1,
         "recognition": "DirectHit",
         "action": "Click",
         "target": [
-            670,
+            682,
+            44,
             20,
-            50,
-            70
+            20
         ],
-        "post_delay": 500,
+        "post_delay": 1200,
+        "timeout": 8000,
         "next": [
             "MaterialRealm.Iron.Purchase.Dialog"
-        ]
+        ],
+        "on_error": [
+            "MaterialRealm.Iron.Quick.Route"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【素材祕境】開啟鐵石礦洞的購買視窗…",
+                "display": "log"
+            }
+        }
     },
     "MaterialRealm.Iron.Purchase.Dialog": {
         "recognition": "OCR",
@@ -157,32 +150,18 @@
             80,
             300,
             560,
-            620
+            560
         ],
-        "expected": "購買鐵礦錘|購買.*錘",
-        "threshold": 0.2,
+        "expected": "今日限[購购]",
+        "threshold": 0.3,
         "action": "DoNothing",
+        "timeout": 8000,
         "next": [
-            "MaterialRealm.Iron.Purchase.CapReached",
-            "MaterialRealm.Iron.Purchase.Available"
-        ]
-    },
-    "MaterialRealm.Iron.Purchase.Confirm": {
-        "recognition": "OCR",
-        "roi": [
-            360,
-            780,
-            270,
-            110
+            "MaterialRealm.Iron.Purchase.Buy"
         ],
-        "expected": "購買.*",
-        "threshold": 0.2,
-        "action": "Click",
-        "post_delay": 600,
-        "next": [
-            "MaterialRealm.Iron.RewardOverlay",
+        "on_error": [
             "MaterialRealm.Iron.Purchase.DialogAfter",
-            "MaterialRealm.Iron.DetailAfterPurchase"
+            "MaterialRealm.Iron.Quick.Route"
         ]
     },
     "MaterialRealm.Iron.RewardOverlay": {
@@ -230,6 +209,7 @@
         "expected": "鐵石礦洞",
         "threshold": 0.2,
         "action": "DoNothing",
+        "timeout": 8000,
         "next": [
             "MaterialRealm.Iron.Quick.Route"
         ]
@@ -404,19 +384,30 @@
         ]
     },
     "MaterialRealm.Gold.Purchase.Open": {
+        "enabled": false,
         "max_hit": 1,
         "recognition": "DirectHit",
         "action": "Click",
         "target": [
-            670,
+            682,
+            44,
             20,
-            50,
-            70
+            20
         ],
-        "post_delay": 500,
+        "post_delay": 1200,
+        "timeout": 8000,
         "next": [
             "MaterialRealm.Gold.Purchase.Dialog"
-        ]
+        ],
+        "on_error": [
+            "MaterialRealm.Gold.Quick.Route"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【素材祕境】開啟黃金礦洞的購買視窗…",
+                "display": "log"
+            }
+        }
     },
     "MaterialRealm.Gold.Purchase.Dialog": {
         "recognition": "OCR",
@@ -424,32 +415,18 @@
             80,
             300,
             560,
-            620
+            560
         ],
-        "expected": "購買.*",
-        "threshold": 0.2,
+        "expected": "今日限[購购]",
+        "threshold": 0.3,
         "action": "DoNothing",
+        "timeout": 8000,
         "next": [
-            "MaterialRealm.Gold.Purchase.CapReached",
-            "MaterialRealm.Gold.Purchase.Available"
-        ]
-    },
-    "MaterialRealm.Gold.Purchase.Confirm": {
-        "recognition": "OCR",
-        "roi": [
-            360,
-            780,
-            270,
-            110
+            "MaterialRealm.Gold.Purchase.Buy"
         ],
-        "expected": "購買.*",
-        "threshold": 0.2,
-        "action": "Click",
-        "post_delay": 600,
-        "next": [
-            "MaterialRealm.Gold.RewardOverlay",
+        "on_error": [
             "MaterialRealm.Gold.Purchase.DialogAfter",
-            "MaterialRealm.Gold.DetailAfterPurchase"
+            "MaterialRealm.Gold.Quick.Route"
         ]
     },
     "MaterialRealm.Gold.RewardOverlay": {
@@ -497,6 +474,7 @@
         "expected": "黃金礦洞",
         "threshold": 0.2,
         "action": "DoNothing",
+        "timeout": 8000,
         "next": [
             "MaterialRealm.Gold.Quick.Route"
         ]
@@ -671,19 +649,30 @@
         ]
     },
     "MaterialRealm.Monster.Purchase.Open": {
+        "enabled": false,
         "max_hit": 1,
         "recognition": "DirectHit",
         "action": "Click",
         "target": [
-            670,
+            682,
+            44,
             20,
-            50,
-            70
+            20
         ],
-        "post_delay": 500,
+        "post_delay": 1200,
+        "timeout": 8000,
         "next": [
             "MaterialRealm.Monster.Purchase.Dialog"
-        ]
+        ],
+        "on_error": [
+            "MaterialRealm.Monster.Quick.Route"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【素材祕境】開啟怪物洞窟的購買視窗…",
+                "display": "log"
+            }
+        }
     },
     "MaterialRealm.Monster.Purchase.Dialog": {
         "recognition": "OCR",
@@ -691,32 +680,18 @@
             80,
             300,
             560,
-            620
+            560
         ],
-        "expected": "購買.*",
-        "threshold": 0.2,
+        "expected": "今日限[購购]",
+        "threshold": 0.3,
         "action": "DoNothing",
+        "timeout": 8000,
         "next": [
-            "MaterialRealm.Monster.Purchase.CapReached",
-            "MaterialRealm.Monster.Purchase.Available"
-        ]
-    },
-    "MaterialRealm.Monster.Purchase.Confirm": {
-        "recognition": "OCR",
-        "roi": [
-            360,
-            780,
-            270,
-            110
+            "MaterialRealm.Monster.Purchase.Buy"
         ],
-        "expected": "購買.*",
-        "threshold": 0.2,
-        "action": "Click",
-        "post_delay": 600,
-        "next": [
-            "MaterialRealm.Monster.RewardOverlay",
+        "on_error": [
             "MaterialRealm.Monster.Purchase.DialogAfter",
-            "MaterialRealm.Monster.DetailAfterPurchase"
+            "MaterialRealm.Monster.Quick.Route"
         ]
     },
     "MaterialRealm.Monster.RewardOverlay": {
@@ -764,6 +739,7 @@
         "expected": "怪物洞窟",
         "threshold": 0.2,
         "action": "DoNothing",
+        "timeout": 8000,
         "next": [
             "MaterialRealm.Monster.Quick.Route"
         ]
@@ -938,19 +914,30 @@
         ]
     },
     "MaterialRealm.Sand.Purchase.Open": {
+        "enabled": false,
         "max_hit": 1,
         "recognition": "DirectHit",
         "action": "Click",
         "target": [
-            670,
+            682,
+            44,
             20,
-            50,
-            70
+            20
         ],
-        "post_delay": 500,
+        "post_delay": 1200,
+        "timeout": 8000,
         "next": [
             "MaterialRealm.Sand.Purchase.Dialog"
-        ]
+        ],
+        "on_error": [
+            "MaterialRealm.Sand.Quick.Route"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【素材祕境】開啟砂石礦洞的購買視窗…",
+                "display": "log"
+            }
+        }
     },
     "MaterialRealm.Sand.Purchase.Dialog": {
         "recognition": "OCR",
@@ -958,32 +945,18 @@
             80,
             300,
             560,
-            620
+            560
         ],
-        "expected": "購買.*",
-        "threshold": 0.2,
+        "expected": "今日限[購购]",
+        "threshold": 0.3,
         "action": "DoNothing",
+        "timeout": 8000,
         "next": [
-            "MaterialRealm.Sand.Purchase.CapReached",
-            "MaterialRealm.Sand.Purchase.Available"
-        ]
-    },
-    "MaterialRealm.Sand.Purchase.Confirm": {
-        "recognition": "OCR",
-        "roi": [
-            360,
-            780,
-            270,
-            110
+            "MaterialRealm.Sand.Purchase.Buy"
         ],
-        "expected": "購買.*",
-        "threshold": 0.2,
-        "action": "Click",
-        "post_delay": 600,
-        "next": [
-            "MaterialRealm.Sand.RewardOverlay",
+        "on_error": [
             "MaterialRealm.Sand.Purchase.DialogAfter",
-            "MaterialRealm.Sand.DetailAfterPurchase"
+            "MaterialRealm.Sand.Quick.Route"
         ]
     },
     "MaterialRealm.Sand.RewardOverlay": {
@@ -1031,6 +1004,7 @@
         "expected": "砂石礦洞",
         "threshold": 0.2,
         "action": "DoNothing",
+        "timeout": 8000,
         "next": [
             "MaterialRealm.Sand.Quick.Route"
         ]
@@ -1159,298 +1133,55 @@
     },
     "MaterialRealm.Done": {
         "recognition": "DirectHit",
-        "action": "DoNothing"
-    },
-    "MaterialRealm.Iron.Purchase.CapReached": {
-        "recognition": "OCR",
-        "roi": [
-            360,
-            720,
-            260,
-            100
-        ],
-        "expected": "今日限購.*20/20",
-        "threshold": 0.2,
-        "action": "Click",
-        "target": [
-            230,
-            835
-        ],
-        "post_delay": 400,
-        "next": [
-            "MaterialRealm.Iron.DetailAfterPurchase"
-        ],
+        "action": "DoNothing",
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "鐵石礦洞今日已購買 20/20 次，略過購買。",
+                "content": "【素材祕境】四個礦洞處理完畢，本任務結束。",
                 "display": "log"
             }
         }
-    },
-    "MaterialRealm.Iron.Purchase.Available": {
-        "recognition": "OCR",
-        "roi": [
-            360,
-            720,
-            260,
-            100
-        ],
-        "expected": "今日限購.*(?:[0-9]|1[0-9])/20",
-        "threshold": 0.2,
-        "action": "DoNothing",
-        "next": [
-            "MaterialRealm.Iron.Purchase.Adjust"
-        ]
-    },
-    "MaterialRealm.Iron.Purchase.Adjust": {
-        "recognition": "DirectHit",
-        "action": "DoNothing",
-        "next": [
-            "MaterialRealm.Iron.Purchase.Plus",
-            "MaterialRealm.Iron.Purchase.Confirm"
-        ]
-    },
-    "MaterialRealm.Iron.Purchase.Plus": {
-        "recognition": "DirectHit",
-        "action": "Click",
-        "target": [
-            535,
-            700
-        ],
-        "repeat": 1,
-        "repeat_delay": 100,
-        "post_delay": 200,
-        "next": [
-            "MaterialRealm.Iron.Purchase.Confirm"
-        ]
-    },
-    "MaterialRealm.Gold.Purchase.CapReached": {
-        "recognition": "OCR",
-        "roi": [
-            360,
-            720,
-            260,
-            100
-        ],
-        "expected": "今日限購.*20/20",
-        "threshold": 0.2,
-        "action": "Click",
-        "target": [
-            230,
-            835
-        ],
-        "post_delay": 400,
-        "next": [
-            "MaterialRealm.Gold.DetailAfterPurchase"
-        ],
-        "focus": {
-            "Node.Recognition.Succeeded": {
-                "content": "黃金礦洞今日已購買 20/20 次，略過購買。",
-                "display": "log"
-            }
-        }
-    },
-    "MaterialRealm.Gold.Purchase.Available": {
-        "recognition": "OCR",
-        "roi": [
-            360,
-            720,
-            260,
-            100
-        ],
-        "expected": "今日限購.*(?:[0-9]|1[0-9])/20",
-        "threshold": 0.2,
-        "action": "DoNothing",
-        "next": [
-            "MaterialRealm.Gold.Purchase.Adjust"
-        ]
-    },
-    "MaterialRealm.Gold.Purchase.Adjust": {
-        "recognition": "DirectHit",
-        "action": "DoNothing",
-        "next": [
-            "MaterialRealm.Gold.Purchase.Plus",
-            "MaterialRealm.Gold.Purchase.Confirm"
-        ]
-    },
-    "MaterialRealm.Gold.Purchase.Plus": {
-        "recognition": "DirectHit",
-        "action": "Click",
-        "target": [
-            535,
-            700
-        ],
-        "repeat": 1,
-        "repeat_delay": 100,
-        "post_delay": 200,
-        "next": [
-            "MaterialRealm.Gold.Purchase.Confirm"
-        ]
-    },
-    "MaterialRealm.Monster.Purchase.CapReached": {
-        "recognition": "OCR",
-        "roi": [
-            360,
-            720,
-            260,
-            100
-        ],
-        "expected": "今日限購.*20/20",
-        "threshold": 0.2,
-        "action": "Click",
-        "target": [
-            230,
-            835
-        ],
-        "post_delay": 400,
-        "next": [
-            "MaterialRealm.Monster.DetailAfterPurchase"
-        ],
-        "focus": {
-            "Node.Recognition.Succeeded": {
-                "content": "怪物洞窟今日已購買 20/20 次，略過購買。",
-                "display": "log"
-            }
-        }
-    },
-    "MaterialRealm.Monster.Purchase.Available": {
-        "recognition": "OCR",
-        "roi": [
-            360,
-            720,
-            260,
-            100
-        ],
-        "expected": "今日限購.*(?:[0-9]|1[0-9])/20",
-        "threshold": 0.2,
-        "action": "DoNothing",
-        "next": [
-            "MaterialRealm.Monster.Purchase.Adjust"
-        ]
-    },
-    "MaterialRealm.Monster.Purchase.Adjust": {
-        "recognition": "DirectHit",
-        "action": "DoNothing",
-        "next": [
-            "MaterialRealm.Monster.Purchase.Plus",
-            "MaterialRealm.Monster.Purchase.Confirm"
-        ]
-    },
-    "MaterialRealm.Monster.Purchase.Plus": {
-        "recognition": "DirectHit",
-        "action": "Click",
-        "target": [
-            535,
-            700
-        ],
-        "repeat": 1,
-        "repeat_delay": 100,
-        "post_delay": 200,
-        "next": [
-            "MaterialRealm.Monster.Purchase.Confirm"
-        ]
-    },
-    "MaterialRealm.Sand.Purchase.CapReached": {
-        "recognition": "OCR",
-        "roi": [
-            360,
-            720,
-            260,
-            100
-        ],
-        "expected": "今日限購.*20/20",
-        "threshold": 0.2,
-        "action": "Click",
-        "target": [
-            230,
-            835
-        ],
-        "post_delay": 400,
-        "next": [
-            "MaterialRealm.Sand.DetailAfterPurchase"
-        ],
-        "focus": {
-            "Node.Recognition.Succeeded": {
-                "content": "砂石礦洞今日已購買 20/20 次，略過購買。",
-                "display": "log"
-            }
-        }
-    },
-    "MaterialRealm.Sand.Purchase.Available": {
-        "recognition": "OCR",
-        "roi": [
-            360,
-            720,
-            260,
-            100
-        ],
-        "expected": "今日限購.*(?:[0-9]|1[0-9])/20",
-        "threshold": 0.2,
-        "action": "DoNothing",
-        "next": [
-            "MaterialRealm.Sand.Purchase.Adjust"
-        ]
-    },
-    "MaterialRealm.Sand.Purchase.Adjust": {
-        "recognition": "DirectHit",
-        "action": "DoNothing",
-        "next": [
-            "MaterialRealm.Sand.Purchase.Plus",
-            "MaterialRealm.Sand.Purchase.Confirm"
-        ]
-    },
-    "MaterialRealm.Sand.Purchase.Plus": {
-        "recognition": "DirectHit",
-        "action": "Click",
-        "target": [
-            535,
-            700
-        ],
-        "repeat": 1,
-        "repeat_delay": 100,
-        "post_delay": 200,
-        "next": [
-            "MaterialRealm.Sand.Purchase.Confirm"
-        ]
     },
     "MaterialRealm.Nav.FromOtherTab": {
         "recognition": "OCR",
         "roi": [
             0,
-            1200,
+            1180,
             720,
-            70
-        ],
-        "expected": "角色",
-        "threshold": 0.2,
-        "action": "Click",
-        "target": [
-            250,
-            1220,
-            40,
-            40
-        ],
-        "post_delay": 800,
-        "next": [
-            "MaterialRealm.EnsureNote"
-        ]
-    },
-    "MaterialRealm.Nav.Back": {
-        "max_hit": 12,
-        "recognition": "DirectHit",
-        "action": "Click",
-        "target": [
-            50,
-            1150,
-            100,
             100
         ],
-        "post_delay": 700,
+        "expected": "角色|家園|世界|公會",
+        "threshold": 0.5,
+        "action": "Click",
+        "target": [
+            180,
+            1200,
+            120,
+            70
+        ],
+        "post_delay": 1400,
         "next": [
+            "MaterialRealm.EnsureNote"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【素材祕境】目前在其他主頁籤，點擊「筆記」切換。",
+                "display": "log"
+            }
+        }
+    },
+    "MaterialRealm.Nav.Back": {
+        "max_hit": 10,
+        "recognition": "DirectHit",
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 1600,
+        "next": [
+            "MaterialRealm.Nav.LeaveMap",
             "MaterialRealm.Nav.ExitDialog",
             "MaterialRealm.EnsureNote",
             "MaterialRealm.Nav.FromOtherTab",
-            "MaterialRealm.Nav.Back"
+            "MaterialRealm.Nav.Back",
+            "MaterialRealm.Nav.Failed"
         ]
     },
     "MaterialRealm.Nav.ExitDialog": {
@@ -1462,31 +1193,300 @@
             210
         ],
         "expected": "要離開遊戲嗎",
-        "threshold": 0.2,
+        "threshold": 0.3,
         "action": "Click",
         "target": [
-            100,
-            690,
-            260,
-            100
+            188,
+            713,
+            75,
+            44
         ],
-        "post_delay": 800,
+        "post_delay": 1200,
         "next": [
             "MaterialRealm.Nav.SelectNote"
-        ]
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【素材祕境】偵測到離開遊戲彈窗，點擊取消。",
+                "display": "log"
+            }
+        }
     },
     "MaterialRealm.Nav.SelectNote": {
         "recognition": "DirectHit",
         "action": "Click",
         "target": [
-            250,
-            1220,
-            40,
-            40
+            180,
+            1200,
+            120,
+            70
         ],
-        "post_delay": 1000,
+        "post_delay": 1600,
         "next": [
             "MaterialRealm.EnsureNote"
+        ]
+    },
+    "MaterialRealm.Iron.Purchase.Buy": {
+        "recognition": "DirectHit",
+        "action": "Custom",
+        "custom_action": "BuyLimitedCount",
+        "custom_action_param": {
+            "label": "鐵石礦洞",
+            "total": 0,
+            "limit_roi": [
+                380,
+                745,
+                260,
+                60
+            ],
+            "plus_target": [
+                524,
+                686,
+                24,
+                24
+            ],
+            "buy_roi": [
+                390,
+                795,
+                240,
+                70
+            ],
+            "cancel_target": [
+                194,
+                812,
+                68,
+                40
+            ]
+        },
+        "post_delay": 1500,
+        "timeout": 10000,
+        "next": [
+            "MaterialRealm.Iron.RewardOverlay",
+            "MaterialRealm.Iron.Purchase.DialogAfter",
+            "MaterialRealm.Iron.DetailAfterPurchase"
+        ],
+        "on_error": [
+            "MaterialRealm.Iron.Quick.Route"
+        ]
+    },
+    "MaterialRealm.Gold.Purchase.Buy": {
+        "recognition": "DirectHit",
+        "action": "Custom",
+        "custom_action": "BuyLimitedCount",
+        "custom_action_param": {
+            "label": "黃金礦洞",
+            "total": 0,
+            "limit_roi": [
+                380,
+                745,
+                260,
+                60
+            ],
+            "plus_target": [
+                524,
+                686,
+                24,
+                24
+            ],
+            "buy_roi": [
+                390,
+                795,
+                240,
+                70
+            ],
+            "cancel_target": [
+                194,
+                812,
+                68,
+                40
+            ]
+        },
+        "post_delay": 1500,
+        "timeout": 10000,
+        "next": [
+            "MaterialRealm.Gold.RewardOverlay",
+            "MaterialRealm.Gold.Purchase.DialogAfter",
+            "MaterialRealm.Gold.DetailAfterPurchase"
+        ],
+        "on_error": [
+            "MaterialRealm.Gold.Quick.Route"
+        ]
+    },
+    "MaterialRealm.Monster.Purchase.Buy": {
+        "recognition": "DirectHit",
+        "action": "Custom",
+        "custom_action": "BuyLimitedCount",
+        "custom_action_param": {
+            "label": "怪物洞窟",
+            "total": 0,
+            "limit_roi": [
+                380,
+                745,
+                260,
+                60
+            ],
+            "plus_target": [
+                524,
+                686,
+                24,
+                24
+            ],
+            "buy_roi": [
+                390,
+                795,
+                240,
+                70
+            ],
+            "cancel_target": [
+                194,
+                812,
+                68,
+                40
+            ]
+        },
+        "post_delay": 1500,
+        "timeout": 10000,
+        "next": [
+            "MaterialRealm.Monster.RewardOverlay",
+            "MaterialRealm.Monster.Purchase.DialogAfter",
+            "MaterialRealm.Monster.DetailAfterPurchase"
+        ],
+        "on_error": [
+            "MaterialRealm.Monster.Quick.Route"
+        ]
+    },
+    "MaterialRealm.Sand.Purchase.Buy": {
+        "recognition": "DirectHit",
+        "action": "Custom",
+        "custom_action": "BuyLimitedCount",
+        "custom_action_param": {
+            "label": "砂石礦洞",
+            "total": 0,
+            "limit_roi": [
+                380,
+                745,
+                260,
+                60
+            ],
+            "plus_target": [
+                524,
+                686,
+                24,
+                24
+            ],
+            "buy_roi": [
+                390,
+                795,
+                240,
+                70
+            ],
+            "cancel_target": [
+                194,
+                812,
+                68,
+                40
+            ]
+        },
+        "post_delay": 1500,
+        "timeout": 10000,
+        "next": [
+            "MaterialRealm.Sand.RewardOverlay",
+            "MaterialRealm.Sand.Purchase.DialogAfter",
+            "MaterialRealm.Sand.DetailAfterPurchase"
+        ],
+        "on_error": [
+            "MaterialRealm.Sand.Quick.Route"
+        ]
+    },
+    "MaterialRealm.Nav.Recover": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "MaterialRealm.Nav.LeaveMap",
+            "MaterialRealm.Nav.ExitDialog",
+            "MaterialRealm.EnsureNote",
+            "MaterialRealm.Nav.FromOtherTab",
+            "MaterialRealm.Nav.Back",
+            "MaterialRealm.Nav.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【素材祕境】目前在子畫面，按返回鍵回到主頁籤…",
+                "display": "log"
+            }
+        }
+    },
+    "MaterialRealm.Nav.LeaveMap": {
+        "recognition": "OCR",
+        "roi": [
+            80,
+            450,
+            560,
+            200
+        ],
+        "expected": "[離离]開地[圖图]",
+        "threshold": 0.3,
+        "action": "Click",
+        "target": [
+            455,
+            713,
+            74,
+            44
+        ],
+        "post_delay": 9000,
+        "next": [
+            "MaterialRealm.EnsureNote",
+            "MaterialRealm.Nav.FromOtherTab",
+            "MaterialRealm.Nav.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【素材祕境】目前在世界地圖，確認離開地圖後回到主頁籤。",
+                "display": "log"
+            }
+        }
+    },
+    "MaterialRealm.Nav.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【素材祕境】連續返回後仍無法回到筆記主頁，已安全停止，未執行任何操作。",
+                "display": "log"
+            }
+        }
+    },
+    "MaterialRealm.Open.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【素材祕境】找不到「素材祕境」入口，已安全停止，未執行任何操作。",
+                "display": "log"
+            }
+        }
+    },
+    "MaterialRealm.Note.Entry.Retry": {
+        "max_hit": 3,
+        "recognition": "OCR",
+        "roi": [
+            0,
+            900,
+            430,
+            280
+        ],
+        "expected": "素材.*境",
+        "threshold": 0.4,
+        "action": "Click",
+        "target": true,
+        "post_delay": 2500,
+        "timeout": 12000,
+        "next": [
+            "MaterialRealm.Menu.Iron",
+            "MaterialRealm.Note.Entry.Retry"
+        ],
+        "on_error": [
+            "MaterialRealm.Open.Failed"
         ]
     }
 }

@@ -1,0 +1,1319 @@
+{
+    "Objectives.Daily.Arena1.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Arena.EnsureNote",
+            "Arena.Nav.FromOtherTab",
+            "Arena.Nav.Recover"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】開始執行：筆記 →「競技」→「競技場」。",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.EnsureNote": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1200,
+            720,
+            80
+        ],
+        "expected": "筆記",
+        "threshold": 0.5,
+        "action": "DoNothing",
+        "timeout": 8000,
+        "next": [
+            "Arena.OpenSection"
+        ],
+        "on_error": [
+            "Arena.Open.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】底部導航列顯示「筆記」，確認在筆記主頁。",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.Nav.FromOtherTab": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1180,
+            720,
+            100
+        ],
+        "expected": "角色|家園|世界|公會",
+        "threshold": 0.5,
+        "action": "Click",
+        "target": [
+            180,
+            1200,
+            120,
+            70
+        ],
+        "post_delay": 1400,
+        "next": [
+            "Arena.EnsureNote"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】目前在其他主頁籤，點擊「筆記」切換。",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.Nav.Recover": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Arena.Nav.LeaveMap",
+            "Arena.Nav.ExitDialog",
+            "Arena.EnsureNote",
+            "Arena.Nav.FromOtherTab",
+            "Arena.Nav.Back",
+            "Arena.Nav.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】目前在子畫面，按返回鍵回到主頁籤…",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.Nav.Back": {
+        "max_hit": 10,
+        "recognition": "DirectHit",
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 1600,
+        "next": [
+            "Arena.Nav.LeaveMap",
+            "Arena.Nav.ExitDialog",
+            "Arena.EnsureNote",
+            "Arena.Nav.FromOtherTab",
+            "Arena.Nav.Back",
+            "Arena.Nav.Failed"
+        ]
+    },
+    "Arena.Nav.LeaveMap": {
+        "recognition": "OCR",
+        "roi": [
+            80,
+            450,
+            560,
+            200
+        ],
+        "expected": "[離离]開地[圖图]",
+        "threshold": 0.3,
+        "action": "Click",
+        "target": [
+            455,
+            713,
+            74,
+            44
+        ],
+        "post_delay": 9000,
+        "next": [
+            "Arena.EnsureNote",
+            "Arena.Nav.FromOtherTab",
+            "Arena.Nav.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】目前在世界地圖，確認離開地圖後回到主頁籤。",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.Nav.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.3,
+        "action": "Click",
+        "target": [
+            188,
+            713,
+            75,
+            44
+        ],
+        "post_delay": 1200,
+        "next": [
+            "Arena.Nav.SelectNote"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】偵測到離開遊戲彈窗，點擊取消。",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.Nav.SelectNote": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            180,
+            1200,
+            120,
+            70
+        ],
+        "post_delay": 1600,
+        "next": [
+            "Arena.EnsureNote"
+        ]
+    },
+    "Arena.Nav.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】連續返回後仍無法回到筆記主頁，已安全停止，未執行任何操作。",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.OpenSection": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            700,
+            410,
+            180
+        ],
+        "expected": "競技",
+        "threshold": 0.5,
+        "action": "Click",
+        "post_delay": 2500,
+        "timeout": 12000,
+        "next": [
+            "Arena.Section",
+            "Arena.OpenSection.Retry"
+        ],
+        "on_error": [
+            "Arena.Open.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】點擊筆記上的「競技」…",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.OpenSection.Retry": {
+        "max_hit": 3,
+        "recognition": "OCR",
+        "roi": [
+            0,
+            700,
+            410,
+            180
+        ],
+        "expected": "競技",
+        "threshold": 0.5,
+        "action": "Click",
+        "post_delay": 2500,
+        "timeout": 12000,
+        "next": [
+            "Arena.Section",
+            "Arena.OpenSection.Retry"
+        ],
+        "on_error": [
+            "Arena.Open.Failed"
+        ]
+    },
+    "Arena.Section": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            10,
+            300,
+            70
+        ],
+        "expected": "競技",
+        "threshold": 0.5,
+        "action": "DoNothing",
+        "timeout": 8000,
+        "next": [
+            "Arena.OpenArena"
+        ],
+        "on_error": [
+            "Arena.Open.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】已進入競技清單（競技場／挑戰賽／界域挑戰賽）。",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.OpenArena": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            250,
+            500,
+            180
+        ],
+        "expected": "競技場",
+        "threshold": 0.5,
+        "action": "Click",
+        "post_delay": 3500,
+        "timeout": 15000,
+        "next": [
+            "Arena.Screen",
+            "Arena.OpenArena.Retry"
+        ],
+        "on_error": [
+            "Arena.Open.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】點擊第一個模式「競技場」…",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.OpenArena.Retry": {
+        "max_hit": 3,
+        "recognition": "OCR",
+        "roi": [
+            0,
+            250,
+            500,
+            180
+        ],
+        "expected": "競技場",
+        "threshold": 0.5,
+        "action": "Click",
+        "post_delay": 3500,
+        "timeout": 15000,
+        "next": [
+            "Arena.Screen",
+            "Arena.OpenArena.Retry"
+        ],
+        "on_error": [
+            "Arena.Open.Failed"
+        ]
+    },
+    "Arena.Open.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】找不到競技場入口，已安全停止，未執行任何操作。",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            430,
+            30,
+            180,
+            50
+        ],
+        "expected": "[0-9]+/20",
+        "threshold": 0.4,
+        "action": "DoNothing",
+        "timeout": 10000,
+        "next": [
+            "Arena.Purchase.Route"
+        ],
+        "on_error": [
+            "Arena.Open.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】已進入競技場，右上角可讀到今日挑戰次數。",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.Purchase.Route": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Arena.Battle.Route"
+        ]
+    },
+    "Arena.Purchase.Open": {
+        "max_hit": 1,
+        "recognition": "OCR",
+        "roi": [
+            430,
+            30,
+            180,
+            50
+        ],
+        "expected": "[0-9]+/20",
+        "threshold": 0.4,
+        "action": "Click",
+        "target": [
+            576,
+            41,
+            22,
+            22
+        ],
+        "post_delay": 1500,
+        "timeout": 8000,
+        "next": [
+            "Arena.Purchase.Dialog"
+        ],
+        "on_error": [
+            "Arena.Battle.Route"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】開啟競技場券購買視窗…",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.Purchase.Dialog": {
+        "recognition": "OCR",
+        "roi": [
+            80,
+            300,
+            560,
+            560
+        ],
+        "expected": "今日限[購购]",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "timeout": 8000,
+        "next": [
+            "Arena.Purchase.Buy"
+        ],
+        "on_error": [
+            "Arena.Purchase.Dismiss"
+        ]
+    },
+    "Arena.Purchase.Buy": {
+        "recognition": "DirectHit",
+        "action": "Custom",
+        "custom_action": "BuyLimitedCount",
+        "custom_action_param": {
+            "label": "競技場券",
+            "total": 0,
+            "limit_roi": [
+                380,
+                740,
+                260,
+                60
+            ],
+            "plus_target": [
+                524,
+                688,
+                24,
+                24
+            ],
+            "buy_roi": [
+                390,
+                800,
+                240,
+                70
+            ],
+            "cancel_target": [
+                194,
+                812,
+                68,
+                40
+            ]
+        },
+        "post_delay": 1500,
+        "timeout": 8000,
+        "next": [
+            "Arena.Screen.Again"
+        ],
+        "on_error": [
+            "Arena.Purchase.Dismiss"
+        ]
+    },
+    "Arena.Purchase.Dismiss": {
+        "max_hit": 3,
+        "recognition": "DirectHit",
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 1200,
+        "timeout": 8000,
+        "next": [
+            "Arena.Screen.Again",
+            "Arena.Purchase.Dismiss"
+        ],
+        "on_error": [
+            "Arena.Done"
+        ]
+    },
+    "Arena.Screen.Again": {
+        "recognition": "OCR",
+        "roi": [
+            430,
+            30,
+            180,
+            50
+        ],
+        "expected": "[0-9]+/20",
+        "threshold": 0.4,
+        "action": "DoNothing",
+        "timeout": 10000,
+        "next": [
+            "Arena.Battle.Route"
+        ],
+        "on_error": [
+            "Arena.Done"
+        ]
+    },
+    "Arena.Battle.Route": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Arena.Battle.Loop",
+            "Arena.Shop.Route"
+        ]
+    },
+    "Arena.Battle.Loop": {
+        "max_hit": 20,
+        "recognition": "OCR",
+        "roi": [
+            430,
+            30,
+            180,
+            50
+        ],
+        "expected": "[1-9][0-9]*/20",
+        "threshold": 0.4,
+        "action": "Click",
+        "target": [
+            598,
+            884,
+            44,
+            44
+        ],
+        "post_delay": 2000,
+        "timeout": 10000,
+        "next": [
+            "Arena.Battle.Confirm"
+        ],
+        "on_error": [
+            "Arena.Shop.Route"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】挑戰次數還有剩，點擊最右側對手…",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.Battle.NoTicket": {
+        "recognition": "OCR",
+        "roi": [
+            430,
+            30,
+            180,
+            50
+        ],
+        "expected": "0/20",
+        "threshold": 0.4,
+        "action": "DoNothing",
+        "next": [
+            "Arena.Shop.Route"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】今日挑戰次數已用完（0/20），不再挑戰。",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.Battle.Confirm": {
+        "recognition": "OCR",
+        "roi": [
+            200,
+            230,
+            320,
+            70
+        ],
+        "expected": "排位挑戰",
+        "threshold": 0.5,
+        "action": "Click",
+        "target": [
+            300,
+            880,
+            120,
+            42
+        ],
+        "post_delay": 4000,
+        "timeout": 15000,
+        "next": [
+            "Arena.Battle.Result"
+        ],
+        "on_error": [
+            "Arena.Battle.Cancel"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】確認對手後點擊「挑戰」（消耗 1 張競技場券）…",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.Battle.Cancel": {
+        "max_hit": 3,
+        "recognition": "DirectHit",
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 1500,
+        "timeout": 10000,
+        "next": [
+            "Arena.Battle.Loop",
+            "Arena.Shop.Route"
+        ],
+        "on_error": [
+            "Arena.Done"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】挑戰視窗沒有如預期進入戰鬥，已關閉視窗。",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.Battle.Result": {
+        "max_hit": 6,
+        "recognition": "OCR",
+        "roi": [
+            150,
+            170,
+            420,
+            140
+        ],
+        "expected": "挑戰勝利|挑戰失敗",
+        "threshold": 0.5,
+        "action": "Click",
+        "target": [
+            100,
+            1140,
+            200,
+            40
+        ],
+        "post_delay": 2500,
+        "timeout": 20000,
+        "next": [
+            "Arena.Battle.Result",
+            "Arena.Battle.Loop",
+            "Arena.Battle.NoTicket",
+            "Arena.Shop.Route"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】戰鬥結束，關閉結算畫面。",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.Shop.Route": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Arena.Done"
+        ]
+    },
+    "Arena.Shop.Open": {
+        "recognition": "OCR",
+        "roi": [
+            400,
+            1180,
+            200,
+            90
+        ],
+        "expected": "競技商店",
+        "threshold": 0.5,
+        "action": "Click",
+        "post_delay": 2500,
+        "timeout": 12000,
+        "next": [
+            "Arena.Shop.Screen",
+            "Arena.Shop.Open.Retry"
+        ],
+        "on_error": [
+            "Arena.Done"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】切換到「競技商店」…",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.Shop.Open.Retry": {
+        "max_hit": 3,
+        "recognition": "OCR",
+        "roi": [
+            400,
+            1180,
+            200,
+            90
+        ],
+        "expected": "競技商店",
+        "threshold": 0.5,
+        "action": "Click",
+        "post_delay": 2500,
+        "timeout": 12000,
+        "next": [
+            "Arena.Shop.Screen",
+            "Arena.Shop.Open.Retry"
+        ],
+        "on_error": [
+            "Arena.Done"
+        ]
+    },
+    "Arena.Shop.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            90,
+            400,
+            50
+        ],
+        "expected": "刷新[時时][間间]",
+        "threshold": 0.4,
+        "action": "DoNothing",
+        "timeout": 10000,
+        "next": [
+            "Arena.Shop.Slot1"
+        ],
+        "on_error": [
+            "Arena.Done"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】已進入競技商店（3×3 共 9 格，使用決鬥幣，點價格鍵會直接成交、沒有確認視窗）。",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.Shop.Slot1": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Arena.Shop.Slot1.SoldOut",
+            "Arena.Shop.Slot1.Buy",
+            "Arena.Shop.Slot1.Skip"
+        ]
+    },
+    "Arena.Shop.Slot1.SoldOut": {
+        "recognition": "OCR",
+        "roi": [
+            20,
+            258,
+            220,
+            50
+        ],
+        "expected": "售完",
+        "threshold": 0.4,
+        "action": "DoNothing",
+        "next": [
+            "Arena.Shop.Slot2"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】商店第 1 項已售完或限購用盡，略過。",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.Shop.Slot1.Buy": {
+        "enabled": false,
+        "max_hit": 1,
+        "recognition": "OCR",
+        "roi": [
+            20,
+            258,
+            220,
+            50
+        ],
+        "expected": "限[購购][1-9]次",
+        "threshold": 0.4,
+        "action": "Click",
+        "target": [
+            55,
+            368,
+            150,
+            42
+        ],
+        "post_delay": 2000,
+        "next": [
+            "Arena.Shop.Slot1"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】購買商店第 1 項（決鬥幣，點下去即成交）。",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.Shop.Slot1.Skip": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Arena.Shop.Slot2"
+        ]
+    },
+    "Arena.Shop.Slot2": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Arena.Shop.Slot2.SoldOut",
+            "Arena.Shop.Slot2.Buy",
+            "Arena.Shop.Slot2.Skip"
+        ]
+    },
+    "Arena.Shop.Slot2.SoldOut": {
+        "recognition": "OCR",
+        "roi": [
+            254,
+            258,
+            220,
+            50
+        ],
+        "expected": "售完",
+        "threshold": 0.4,
+        "action": "DoNothing",
+        "next": [
+            "Arena.Shop.Slot3"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】商店第 2 項已售完或限購用盡，略過。",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.Shop.Slot2.Buy": {
+        "enabled": false,
+        "max_hit": 1,
+        "recognition": "OCR",
+        "roi": [
+            254,
+            258,
+            220,
+            50
+        ],
+        "expected": "限[購购][1-9]次",
+        "threshold": 0.4,
+        "action": "Click",
+        "target": [
+            289,
+            368,
+            150,
+            42
+        ],
+        "post_delay": 2000,
+        "next": [
+            "Arena.Shop.Slot2"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】購買商店第 2 項（決鬥幣，點下去即成交）。",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.Shop.Slot2.Skip": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Arena.Shop.Slot3"
+        ]
+    },
+    "Arena.Shop.Slot3": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Arena.Shop.Slot3.SoldOut",
+            "Arena.Shop.Slot3.Buy",
+            "Arena.Shop.Slot3.Skip"
+        ]
+    },
+    "Arena.Shop.Slot3.SoldOut": {
+        "recognition": "OCR",
+        "roi": [
+            488,
+            258,
+            220,
+            50
+        ],
+        "expected": "售完",
+        "threshold": 0.4,
+        "action": "DoNothing",
+        "next": [
+            "Arena.Shop.Slot4"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】商店第 3 項已售完或限購用盡，略過。",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.Shop.Slot3.Buy": {
+        "enabled": false,
+        "max_hit": 1,
+        "recognition": "OCR",
+        "roi": [
+            488,
+            258,
+            220,
+            50
+        ],
+        "expected": "限[購购][1-9]次",
+        "threshold": 0.4,
+        "action": "Click",
+        "target": [
+            523,
+            368,
+            150,
+            42
+        ],
+        "post_delay": 2000,
+        "next": [
+            "Arena.Shop.Slot3"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】購買商店第 3 項（決鬥幣，點下去即成交）。",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.Shop.Slot3.Skip": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Arena.Shop.Slot4"
+        ]
+    },
+    "Arena.Shop.Slot4": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Arena.Shop.Slot4.SoldOut",
+            "Arena.Shop.Slot4.Buy",
+            "Arena.Shop.Slot4.Skip"
+        ]
+    },
+    "Arena.Shop.Slot4.SoldOut": {
+        "recognition": "OCR",
+        "roi": [
+            20,
+            620,
+            220,
+            50
+        ],
+        "expected": "售完",
+        "threshold": 0.4,
+        "action": "DoNothing",
+        "next": [
+            "Arena.Shop.Slot5"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】商店第 4 項已售完或限購用盡，略過。",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.Shop.Slot4.Buy": {
+        "enabled": false,
+        "max_hit": 1,
+        "recognition": "OCR",
+        "roi": [
+            20,
+            620,
+            220,
+            50
+        ],
+        "expected": "限[購购][1-9]次",
+        "threshold": 0.4,
+        "action": "Click",
+        "target": [
+            55,
+            651,
+            150,
+            42
+        ],
+        "post_delay": 2000,
+        "next": [
+            "Arena.Shop.Slot4"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】購買商店第 4 項（決鬥幣，點下去即成交）。",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.Shop.Slot4.Skip": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Arena.Shop.Slot5"
+        ]
+    },
+    "Arena.Shop.Slot5": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Arena.Shop.Slot5.SoldOut",
+            "Arena.Shop.Slot5.Buy",
+            "Arena.Shop.Slot5.Skip"
+        ]
+    },
+    "Arena.Shop.Slot5.SoldOut": {
+        "recognition": "OCR",
+        "roi": [
+            254,
+            620,
+            220,
+            50
+        ],
+        "expected": "售完",
+        "threshold": 0.4,
+        "action": "DoNothing",
+        "next": [
+            "Arena.Shop.Slot6"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】商店第 5 項已售完或限購用盡，略過。",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.Shop.Slot5.Buy": {
+        "enabled": false,
+        "max_hit": 1,
+        "recognition": "OCR",
+        "roi": [
+            254,
+            620,
+            220,
+            50
+        ],
+        "expected": "限[購购][1-9]次",
+        "threshold": 0.4,
+        "action": "Click",
+        "target": [
+            289,
+            651,
+            150,
+            42
+        ],
+        "post_delay": 2000,
+        "next": [
+            "Arena.Shop.Slot5"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】購買商店第 5 項（決鬥幣，點下去即成交）。",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.Shop.Slot5.Skip": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Arena.Shop.Slot6"
+        ]
+    },
+    "Arena.Shop.Slot6": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Arena.Shop.Slot6.SoldOut",
+            "Arena.Shop.Slot6.Buy",
+            "Arena.Shop.Slot6.Skip"
+        ]
+    },
+    "Arena.Shop.Slot6.SoldOut": {
+        "recognition": "OCR",
+        "roi": [
+            488,
+            620,
+            220,
+            50
+        ],
+        "expected": "售完",
+        "threshold": 0.4,
+        "action": "DoNothing",
+        "next": [
+            "Arena.Shop.Slot7"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】商店第 6 項已售完或限購用盡，略過。",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.Shop.Slot6.Buy": {
+        "enabled": false,
+        "max_hit": 1,
+        "recognition": "OCR",
+        "roi": [
+            488,
+            620,
+            220,
+            50
+        ],
+        "expected": "限[購购][1-9]次",
+        "threshold": 0.4,
+        "action": "Click",
+        "target": [
+            523,
+            651,
+            150,
+            42
+        ],
+        "post_delay": 2000,
+        "next": [
+            "Arena.Shop.Slot6"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】購買商店第 6 項（決鬥幣，點下去即成交）。",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.Shop.Slot6.Skip": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Arena.Shop.Slot7"
+        ]
+    },
+    "Arena.Shop.Slot7": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Arena.Shop.Slot7.SoldOut",
+            "Arena.Shop.Slot7.Buy",
+            "Arena.Shop.Slot7.Skip"
+        ]
+    },
+    "Arena.Shop.Slot7.SoldOut": {
+        "recognition": "OCR",
+        "roi": [
+            20,
+            902,
+            220,
+            50
+        ],
+        "expected": "售完",
+        "threshold": 0.4,
+        "action": "DoNothing",
+        "next": [
+            "Arena.Shop.Slot8"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】商店第 7 項已售完或限購用盡，略過。",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.Shop.Slot7.Buy": {
+        "enabled": false,
+        "max_hit": 1,
+        "recognition": "OCR",
+        "roi": [
+            20,
+            902,
+            220,
+            50
+        ],
+        "expected": "限[購购][1-9]次",
+        "threshold": 0.4,
+        "action": "Click",
+        "target": [
+            55,
+            934,
+            150,
+            42
+        ],
+        "post_delay": 2000,
+        "next": [
+            "Arena.Shop.Slot7"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】購買商店第 7 項（決鬥幣，點下去即成交）。",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.Shop.Slot7.Skip": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Arena.Shop.Slot8"
+        ]
+    },
+    "Arena.Shop.Slot8": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Arena.Shop.Slot8.SoldOut",
+            "Arena.Shop.Slot8.Buy",
+            "Arena.Shop.Slot8.Skip"
+        ]
+    },
+    "Arena.Shop.Slot8.SoldOut": {
+        "recognition": "OCR",
+        "roi": [
+            254,
+            902,
+            220,
+            50
+        ],
+        "expected": "售完",
+        "threshold": 0.4,
+        "action": "DoNothing",
+        "next": [
+            "Arena.Shop.Slot9"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】商店第 8 項已售完或限購用盡，略過。",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.Shop.Slot8.Buy": {
+        "enabled": false,
+        "max_hit": 1,
+        "recognition": "OCR",
+        "roi": [
+            254,
+            902,
+            220,
+            50
+        ],
+        "expected": "限[購购][1-9]次",
+        "threshold": 0.4,
+        "action": "Click",
+        "target": [
+            289,
+            934,
+            150,
+            42
+        ],
+        "post_delay": 2000,
+        "next": [
+            "Arena.Shop.Slot8"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】購買商店第 8 項（決鬥幣，點下去即成交）。",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.Shop.Slot8.Skip": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Arena.Shop.Slot9"
+        ]
+    },
+    "Arena.Shop.Slot9": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Arena.Shop.Slot9.SoldOut",
+            "Arena.Shop.Slot9.Buy",
+            "Arena.Shop.Slot9.Skip"
+        ]
+    },
+    "Arena.Shop.Slot9.SoldOut": {
+        "recognition": "OCR",
+        "roi": [
+            488,
+            902,
+            220,
+            50
+        ],
+        "expected": "售完",
+        "threshold": 0.4,
+        "action": "DoNothing",
+        "next": [
+            "Arena.Done"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】商店第 9 項已售完或限購用盡，略過。",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.Shop.Slot9.Buy": {
+        "enabled": false,
+        "max_hit": 1,
+        "recognition": "OCR",
+        "roi": [
+            488,
+            902,
+            220,
+            50
+        ],
+        "expected": "限[購购][1-9]次",
+        "threshold": 0.4,
+        "action": "Click",
+        "target": [
+            523,
+            934,
+            150,
+            42
+        ],
+        "post_delay": 2000,
+        "next": [
+            "Arena.Shop.Slot9"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】購買商店第 9 項（決鬥幣，點下去即成交）。",
+                "display": "log"
+            }
+        }
+    },
+    "Arena.Shop.Slot9.Skip": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Arena.Done"
+        ]
+    },
+    "Arena.Done": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【競技場】本任務結束。",
+                "display": "log"
+            }
+        }
+    }
+}

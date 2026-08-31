@@ -4,48 +4,74 @@
             "name": "DailyDungeon",
             "label": "日常副本",
             "entry": "Objectives.Daily.Dungeon1.Start",
-            "description": "透過「筆記」進入日常副本進行挑戰。",
+            "description": "筆記 →「日常副本」→ 選定副本 → 前往副本地圖 → 點人物上方的入口 → 用夥伴組隊 → 進入副本 → 開始戰鬥 → 結算頁領取獎勵，依設定次數重複。角色重傷時會用料理一鍵治療後繼續。",
             "group": [
                 "Note"
             ],
             "controller": [
                 "Android"
+            ],
+            "option": [
+                "DailyDungeonTarget",
+                "DailyDungeonBattleCount",
+                "DailyDungeonPurchaseCount"
             ]
         },
         {
             "name": "ArenaChallenge",
             "label": "競技場挑戰",
             "entry": "Objectives.Daily.Arena1.Start",
-            "description": "筆記 → 競技；只處理第一個競技模式，在四個項目中選擇最右側的一個，戰鬥 3 次。",
+            "description": "筆記 →「競技」→「競技場」。三件事：右上角購買競技場券、挑戰四位對手中最右邊那位、切換到競技商店逐格購買。三者都可個別設定，預設只挑戰、不購買。",
             "group": [
                 "Note"
             ],
             "controller": [
                 "Android"
+            ],
+            "option": [
+                "ArenaTicketPurchaseCount",
+                "ArenaBattleCount",
+                "ArenaShopItem1",
+                "ArenaShopItem2",
+                "ArenaShopItem3",
+                "ArenaShopItem4",
+                "ArenaShopItem5",
+                "ArenaShopItem6",
+                "ArenaShopItem7",
+                "ArenaShopItem8",
+                "ArenaShopItem9"
             ]
         },
         {
             "name": "BeastTrial",
             "label": "聖獸試煉",
             "entry": "Objectives.Daily.BeastTrialReward1.Start",
-            "description": "筆記 → 每日活動 → 聖獸試煉 → 前往地圖 → 點人物上方入口 → 組隊 → 夥伴任選一人 → 進入副本。",
+            "description": "筆記 →「每日活動」→「聖獸試煉」→ 前往地圖 → 點人物上方的聖獸 → 用夥伴組隊 → 進入試煉 → 開始戰鬥 → 等到「戰鬥結束」→ 離開地圖。",
             "group": [
                 "Note"
             ],
             "controller": [
                 "Android"
+            ],
+            "option": [
+                "BeastTrialRunCount",
+                "BeastTrialParty"
             ]
         },
         {
             "name": "PhantomRealm",
             "label": "雙影幻境",
             "entry": "Objectives.Daily.PhantomRealmWave3.Start",
-            "description": "筆記 → 每日活動 → 雙影幻境 → 前往地圖 → 點人物上方入口 → 組隊 → 夥伴任選一人 → 進入副本。",
+            "description": "筆記 →「每日活動」→「雙影幻境」→ 前往地圖 → 點人物上方的幻境入口 → 用夥伴組隊 → 進入幻境 → 開始戰鬥 → 等到「戰鬥結束」→ 離開地圖。",
             "group": [
                 "Note"
             ],
             "controller": [
                 "Android"
+            ],
+            "option": [
+                "PhantomRunCount",
+                "PhantomParty"
             ]
         },
         {
@@ -72,6 +98,18 @@
                 "MaterialSandPurchaseCount",
                 "MaterialSandQuickMining",
                 "MaterialSandMiningCount"
+            ]
+        },
+        {
+            "name": "MapExploreClaim",
+            "label": "地圖探索領取",
+            "entry": "Objectives.MapExplore.Claim.Start",
+            "description": "筆記的「地圖探索」右上角有紅點時代表裡面有東西可領。目前處理每天可領 1 次的命運果實；已領過會顯示倒數，流程不會重複點。",
+            "group": [
+                "Note"
+            ],
+            "controller": [
+                "Android"
             ]
         },
         {
@@ -223,8 +261,8 @@
     "option": {
         "MaterialIronPurchaseCount": {
             "type": "select",
-            "label": "鐵石礦洞：本次購買數量",
-            "description": "開啟購買視窗後先辨識「今日限購 x/20」，再於同一次購買中設定數量。0 不購買；若設定量超過今日剩餘上限，遊戲會停在可購買上限。",
+            "label": "鐵石礦洞：購買次數",
+            "description": "鐵石礦洞右上角的 ＋（每次 60 晨星、可購買 鐵礦錘），今日限購 20 次。設定值視為今日累計目標，流程會先讀「今日限購 a/20」扣掉今日已購買的次數，只補差額。預設不購買。",
             "cases": [
                 {
                     "name": "Buy0",
@@ -237,260 +275,781 @@
                 },
                 {
                     "name": "Buy1",
-                    "label": "1 個",
+                    "label": "買到今日累計 1 次",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Iron.Purchase.Plus": {
-                            "enabled": false
+                        "MaterialRealm.Iron.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "鐵石礦洞",
+                                "total": 1,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy2",
-                    "label": "2 個",
+                    "label": "買到今日累計 2 次",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Iron.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 1
+                        "MaterialRealm.Iron.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "鐵石礦洞",
+                                "total": 2,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy3",
-                    "label": "3 個",
+                    "label": "買到今日累計 3 次",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Iron.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 2
+                        "MaterialRealm.Iron.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "鐵石礦洞",
+                                "total": 3,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy4",
-                    "label": "4 個",
+                    "label": "買到今日累計 4 次",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Iron.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 3
+                        "MaterialRealm.Iron.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "鐵石礦洞",
+                                "total": 4,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy5",
-                    "label": "5 個",
+                    "label": "買到今日累計 5 次",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Iron.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 4
+                        "MaterialRealm.Iron.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "鐵石礦洞",
+                                "total": 5,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy6",
-                    "label": "6 個",
+                    "label": "買到今日累計 6 次",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Iron.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 5
+                        "MaterialRealm.Iron.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "鐵石礦洞",
+                                "total": 6,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy7",
-                    "label": "7 個",
+                    "label": "買到今日累計 7 次",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Iron.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 6
+                        "MaterialRealm.Iron.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "鐵石礦洞",
+                                "total": 7,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy8",
-                    "label": "8 個",
+                    "label": "買到今日累計 8 次",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Iron.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 7
+                        "MaterialRealm.Iron.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "鐵石礦洞",
+                                "total": 8,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy9",
-                    "label": "9 個",
+                    "label": "買到今日累計 9 次",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Iron.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 8
+                        "MaterialRealm.Iron.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "鐵石礦洞",
+                                "total": 9,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy10",
-                    "label": "10 個",
+                    "label": "買到今日累計 10 次",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Iron.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 9
+                        "MaterialRealm.Iron.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "鐵石礦洞",
+                                "total": 10,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy11",
-                    "label": "11 個",
+                    "label": "買到今日累計 11 次",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Iron.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 10
+                        "MaterialRealm.Iron.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "鐵石礦洞",
+                                "total": 11,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy12",
-                    "label": "12 個",
+                    "label": "買到今日累計 12 次",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Iron.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 11
+                        "MaterialRealm.Iron.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "鐵石礦洞",
+                                "total": 12,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy13",
-                    "label": "13 個",
+                    "label": "買到今日累計 13 次",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Iron.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 12
+                        "MaterialRealm.Iron.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "鐵石礦洞",
+                                "total": 13,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy14",
-                    "label": "14 個",
+                    "label": "買到今日累計 14 次",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Iron.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 13
+                        "MaterialRealm.Iron.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "鐵石礦洞",
+                                "total": 14,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy15",
-                    "label": "15 個",
+                    "label": "買到今日累計 15 次",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Iron.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 14
+                        "MaterialRealm.Iron.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "鐵石礦洞",
+                                "total": 15,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy16",
-                    "label": "16 個",
+                    "label": "買到今日累計 16 次",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Iron.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 15
+                        "MaterialRealm.Iron.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "鐵石礦洞",
+                                "total": 16,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy17",
-                    "label": "17 個",
+                    "label": "買到今日累計 17 次",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Iron.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 16
+                        "MaterialRealm.Iron.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "鐵石礦洞",
+                                "total": 17,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy18",
-                    "label": "18 個",
+                    "label": "買到今日累計 18 次",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Iron.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 17
+                        "MaterialRealm.Iron.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "鐵石礦洞",
+                                "total": 18,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy19",
-                    "label": "19 個",
+                    "label": "買到今日累計 19 次",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Iron.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 18
+                        "MaterialRealm.Iron.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "鐵石礦洞",
+                                "total": 19,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy20",
-                    "label": "20 個",
+                    "label": "買到今日累計 20 次",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Iron.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 19
+                        "MaterialRealm.Iron.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "鐵石礦洞",
+                                "total": 20,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 }
@@ -551,8 +1110,8 @@
         },
         "MaterialGoldPurchaseCount": {
             "type": "select",
-            "label": "黃金礦洞：本次購買數量",
-            "description": "開啟購買視窗後先辨識「今日限購 x/20」，再於同一次購買中設定數量。0 不購買；若設定量超過今日剩餘上限，遊戲會停在可購買上限。",
+            "label": "黃金礦洞：購買次數",
+            "description": "黃金礦洞右上角的 ＋（每次 60 晨星、可購買 金礦錘），今日限購 20 次。設定值視為今日累計目標，流程會先讀「今日限購 a/20」扣掉今日已購買的次數，只補差額。預設不購買。",
             "cases": [
                 {
                     "name": "Buy0",
@@ -565,260 +1124,781 @@
                 },
                 {
                     "name": "Buy1",
-                    "label": "1 個",
+                    "label": "買到今日累計 1 次",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Gold.Purchase.Plus": {
-                            "enabled": false
+                        "MaterialRealm.Gold.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "黃金礦洞",
+                                "total": 1,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy2",
-                    "label": "2 個",
+                    "label": "買到今日累計 2 次",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Gold.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 1
+                        "MaterialRealm.Gold.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "黃金礦洞",
+                                "total": 2,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy3",
-                    "label": "3 個",
+                    "label": "買到今日累計 3 次",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Gold.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 2
+                        "MaterialRealm.Gold.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "黃金礦洞",
+                                "total": 3,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy4",
-                    "label": "4 個",
+                    "label": "買到今日累計 4 次",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Gold.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 3
+                        "MaterialRealm.Gold.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "黃金礦洞",
+                                "total": 4,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy5",
-                    "label": "5 個",
+                    "label": "買到今日累計 5 次",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Gold.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 4
+                        "MaterialRealm.Gold.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "黃金礦洞",
+                                "total": 5,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy6",
-                    "label": "6 個",
+                    "label": "買到今日累計 6 次",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Gold.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 5
+                        "MaterialRealm.Gold.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "黃金礦洞",
+                                "total": 6,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy7",
-                    "label": "7 個",
+                    "label": "買到今日累計 7 次",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Gold.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 6
+                        "MaterialRealm.Gold.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "黃金礦洞",
+                                "total": 7,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy8",
-                    "label": "8 個",
+                    "label": "買到今日累計 8 次",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Gold.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 7
+                        "MaterialRealm.Gold.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "黃金礦洞",
+                                "total": 8,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy9",
-                    "label": "9 個",
+                    "label": "買到今日累計 9 次",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Gold.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 8
+                        "MaterialRealm.Gold.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "黃金礦洞",
+                                "total": 9,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy10",
-                    "label": "10 個",
+                    "label": "買到今日累計 10 次",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Gold.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 9
+                        "MaterialRealm.Gold.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "黃金礦洞",
+                                "total": 10,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy11",
-                    "label": "11 個",
+                    "label": "買到今日累計 11 次",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Gold.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 10
+                        "MaterialRealm.Gold.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "黃金礦洞",
+                                "total": 11,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy12",
-                    "label": "12 個",
+                    "label": "買到今日累計 12 次",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Gold.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 11
+                        "MaterialRealm.Gold.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "黃金礦洞",
+                                "total": 12,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy13",
-                    "label": "13 個",
+                    "label": "買到今日累計 13 次",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Gold.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 12
+                        "MaterialRealm.Gold.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "黃金礦洞",
+                                "total": 13,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy14",
-                    "label": "14 個",
+                    "label": "買到今日累計 14 次",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Gold.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 13
+                        "MaterialRealm.Gold.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "黃金礦洞",
+                                "total": 14,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy15",
-                    "label": "15 個",
+                    "label": "買到今日累計 15 次",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Gold.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 14
+                        "MaterialRealm.Gold.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "黃金礦洞",
+                                "total": 15,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy16",
-                    "label": "16 個",
+                    "label": "買到今日累計 16 次",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Gold.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 15
+                        "MaterialRealm.Gold.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "黃金礦洞",
+                                "total": 16,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy17",
-                    "label": "17 個",
+                    "label": "買到今日累計 17 次",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Gold.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 16
+                        "MaterialRealm.Gold.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "黃金礦洞",
+                                "total": 17,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy18",
-                    "label": "18 個",
+                    "label": "買到今日累計 18 次",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Gold.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 17
+                        "MaterialRealm.Gold.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "黃金礦洞",
+                                "total": 18,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy19",
-                    "label": "19 個",
+                    "label": "買到今日累計 19 次",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Gold.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 18
+                        "MaterialRealm.Gold.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "黃金礦洞",
+                                "total": 19,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy20",
-                    "label": "20 個",
+                    "label": "買到今日累計 20 次",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Gold.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 19
+                        "MaterialRealm.Gold.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "黃金礦洞",
+                                "total": 20,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 }
@@ -879,8 +1959,8 @@
         },
         "MaterialMonsterPurchaseCount": {
             "type": "select",
-            "label": "怪物洞窟：本次購買數量",
-            "description": "開啟購買視窗後先辨識「今日限購 x/20」，再於同一次購買中設定數量。0 不購買；若設定量超過今日剩餘上限，遊戲會停在可購買上限。",
+            "label": "怪物洞窟：購買次數",
+            "description": "怪物洞窟右上角的 ＋（每次 60 晨星、可購買 討伐令），今日限購 20 次。設定值視為今日累計目標，流程會先讀「今日限購 a/20」扣掉今日已購買的次數，只補差額。預設不購買。",
             "cases": [
                 {
                     "name": "Buy0",
@@ -893,260 +1973,781 @@
                 },
                 {
                     "name": "Buy1",
-                    "label": "1 個",
+                    "label": "買到今日累計 1 次",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Monster.Purchase.Plus": {
-                            "enabled": false
+                        "MaterialRealm.Monster.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "怪物洞窟",
+                                "total": 1,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy2",
-                    "label": "2 個",
+                    "label": "買到今日累計 2 次",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Monster.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 1
+                        "MaterialRealm.Monster.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "怪物洞窟",
+                                "total": 2,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy3",
-                    "label": "3 個",
+                    "label": "買到今日累計 3 次",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Monster.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 2
+                        "MaterialRealm.Monster.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "怪物洞窟",
+                                "total": 3,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy4",
-                    "label": "4 個",
+                    "label": "買到今日累計 4 次",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Monster.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 3
+                        "MaterialRealm.Monster.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "怪物洞窟",
+                                "total": 4,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy5",
-                    "label": "5 個",
+                    "label": "買到今日累計 5 次",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Monster.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 4
+                        "MaterialRealm.Monster.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "怪物洞窟",
+                                "total": 5,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy6",
-                    "label": "6 個",
+                    "label": "買到今日累計 6 次",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Monster.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 5
+                        "MaterialRealm.Monster.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "怪物洞窟",
+                                "total": 6,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy7",
-                    "label": "7 個",
+                    "label": "買到今日累計 7 次",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Monster.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 6
+                        "MaterialRealm.Monster.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "怪物洞窟",
+                                "total": 7,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy8",
-                    "label": "8 個",
+                    "label": "買到今日累計 8 次",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Monster.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 7
+                        "MaterialRealm.Monster.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "怪物洞窟",
+                                "total": 8,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy9",
-                    "label": "9 個",
+                    "label": "買到今日累計 9 次",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Monster.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 8
+                        "MaterialRealm.Monster.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "怪物洞窟",
+                                "total": 9,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy10",
-                    "label": "10 個",
+                    "label": "買到今日累計 10 次",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Monster.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 9
+                        "MaterialRealm.Monster.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "怪物洞窟",
+                                "total": 10,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy11",
-                    "label": "11 個",
+                    "label": "買到今日累計 11 次",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Monster.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 10
+                        "MaterialRealm.Monster.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "怪物洞窟",
+                                "total": 11,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy12",
-                    "label": "12 個",
+                    "label": "買到今日累計 12 次",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Monster.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 11
+                        "MaterialRealm.Monster.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "怪物洞窟",
+                                "total": 12,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy13",
-                    "label": "13 個",
+                    "label": "買到今日累計 13 次",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Monster.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 12
+                        "MaterialRealm.Monster.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "怪物洞窟",
+                                "total": 13,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy14",
-                    "label": "14 個",
+                    "label": "買到今日累計 14 次",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Monster.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 13
+                        "MaterialRealm.Monster.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "怪物洞窟",
+                                "total": 14,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy15",
-                    "label": "15 個",
+                    "label": "買到今日累計 15 次",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Monster.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 14
+                        "MaterialRealm.Monster.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "怪物洞窟",
+                                "total": 15,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy16",
-                    "label": "16 個",
+                    "label": "買到今日累計 16 次",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Monster.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 15
+                        "MaterialRealm.Monster.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "怪物洞窟",
+                                "total": 16,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy17",
-                    "label": "17 個",
+                    "label": "買到今日累計 17 次",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Monster.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 16
+                        "MaterialRealm.Monster.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "怪物洞窟",
+                                "total": 17,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy18",
-                    "label": "18 個",
+                    "label": "買到今日累計 18 次",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Monster.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 17
+                        "MaterialRealm.Monster.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "怪物洞窟",
+                                "total": 18,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy19",
-                    "label": "19 個",
+                    "label": "買到今日累計 19 次",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Monster.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 18
+                        "MaterialRealm.Monster.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "怪物洞窟",
+                                "total": 19,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy20",
-                    "label": "20 個",
+                    "label": "買到今日累計 20 次",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Monster.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 19
+                        "MaterialRealm.Monster.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "怪物洞窟",
+                                "total": 20,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 }
@@ -1207,8 +2808,8 @@
         },
         "MaterialSandPurchaseCount": {
             "type": "select",
-            "label": "砂石礦洞：本次購買數量",
-            "description": "開啟購買視窗後先辨識「今日限購 x/20」，再於同一次購買中設定數量。0 不購買；若設定量超過今日剩餘上限，遊戲會停在可購買上限。",
+            "label": "砂石礦洞：購買次數",
+            "description": "砂石礦洞右上角的 ＋（每次 60 晨星、可購買 砂礦鏟），今日限購 20 次。設定值視為今日累計目標，流程會先讀「今日限購 a/20」扣掉今日已購買的次數，只補差額。預設不購買。",
             "cases": [
                 {
                     "name": "Buy0",
@@ -1221,260 +2822,781 @@
                 },
                 {
                     "name": "Buy1",
-                    "label": "1 個",
+                    "label": "買到今日累計 1 次",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Sand.Purchase.Plus": {
-                            "enabled": false
+                        "MaterialRealm.Sand.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "砂石礦洞",
+                                "total": 1,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy2",
-                    "label": "2 個",
+                    "label": "買到今日累計 2 次",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Sand.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 1
+                        "MaterialRealm.Sand.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "砂石礦洞",
+                                "total": 2,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy3",
-                    "label": "3 個",
+                    "label": "買到今日累計 3 次",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Sand.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 2
+                        "MaterialRealm.Sand.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "砂石礦洞",
+                                "total": 3,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy4",
-                    "label": "4 個",
+                    "label": "買到今日累計 4 次",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Sand.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 3
+                        "MaterialRealm.Sand.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "砂石礦洞",
+                                "total": 4,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy5",
-                    "label": "5 個",
+                    "label": "買到今日累計 5 次",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Sand.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 4
+                        "MaterialRealm.Sand.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "砂石礦洞",
+                                "total": 5,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy6",
-                    "label": "6 個",
+                    "label": "買到今日累計 6 次",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Sand.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 5
+                        "MaterialRealm.Sand.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "砂石礦洞",
+                                "total": 6,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy7",
-                    "label": "7 個",
+                    "label": "買到今日累計 7 次",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Sand.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 6
+                        "MaterialRealm.Sand.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "砂石礦洞",
+                                "total": 7,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy8",
-                    "label": "8 個",
+                    "label": "買到今日累計 8 次",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Sand.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 7
+                        "MaterialRealm.Sand.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "砂石礦洞",
+                                "total": 8,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy9",
-                    "label": "9 個",
+                    "label": "買到今日累計 9 次",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Sand.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 8
+                        "MaterialRealm.Sand.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "砂石礦洞",
+                                "total": 9,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy10",
-                    "label": "10 個",
+                    "label": "買到今日累計 10 次",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Sand.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 9
+                        "MaterialRealm.Sand.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "砂石礦洞",
+                                "total": 10,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy11",
-                    "label": "11 個",
+                    "label": "買到今日累計 11 次",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Sand.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 10
+                        "MaterialRealm.Sand.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "砂石礦洞",
+                                "total": 11,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy12",
-                    "label": "12 個",
+                    "label": "買到今日累計 12 次",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Sand.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 11
+                        "MaterialRealm.Sand.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "砂石礦洞",
+                                "total": 12,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy13",
-                    "label": "13 個",
+                    "label": "買到今日累計 13 次",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Sand.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 12
+                        "MaterialRealm.Sand.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "砂石礦洞",
+                                "total": 13,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy14",
-                    "label": "14 個",
+                    "label": "買到今日累計 14 次",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Sand.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 13
+                        "MaterialRealm.Sand.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "砂石礦洞",
+                                "total": 14,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy15",
-                    "label": "15 個",
+                    "label": "買到今日累計 15 次",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Sand.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 14
+                        "MaterialRealm.Sand.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "砂石礦洞",
+                                "total": 15,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy16",
-                    "label": "16 個",
+                    "label": "買到今日累計 16 次",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Sand.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 15
+                        "MaterialRealm.Sand.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "砂石礦洞",
+                                "total": 16,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy17",
-                    "label": "17 個",
+                    "label": "買到今日累計 17 次",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Sand.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 16
+                        "MaterialRealm.Sand.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "砂石礦洞",
+                                "total": 17,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy18",
-                    "label": "18 個",
+                    "label": "買到今日累計 18 次",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Sand.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 17
+                        "MaterialRealm.Sand.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "砂石礦洞",
+                                "total": 18,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy19",
-                    "label": "19 個",
+                    "label": "買到今日累計 19 次",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Sand.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 18
+                        "MaterialRealm.Sand.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "砂石礦洞",
+                                "total": 19,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 },
                 {
                     "name": "Buy20",
-                    "label": "20 個",
+                    "label": "買到今日累計 20 次",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
                         },
-                        "MaterialRealm.Sand.Purchase.Plus": {
-                            "enabled": true,
-                            "repeat": 19
+                        "MaterialRealm.Sand.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "砂石礦洞",
+                                "total": 20,
+                                "limit_roi": [
+                                    380,
+                                    745,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    686,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    795,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
                         }
                     }
                 }
@@ -1842,7 +3964,7 @@
             "description": "勾選時，上面的次數視為「今日累計目標」，流程會先讀畫面上的「今日已結緣」計數，只補足差額；取消勾選則不論今天已結緣過幾次，都固定再執行設定的次數。",
             "cases": [
                 {
-                    "name": "Deduct",
+                    "name": "Yes",
                     "label": "扣除（次數視為今日累計目標）",
                     "pipeline_override": {
                         "SakuraTree.Pull.Route": {
@@ -1853,7 +3975,7 @@
                     }
                 },
                 {
-                    "name": "Raw",
+                    "name": "No",
                     "label": "不扣除（每次都執行設定次數）",
                     "pipeline_override": {
                         "SakuraTree.Pull.Route": {
@@ -1864,7 +3986,7 @@
                     }
                 }
             ],
-            "default_case": "Deduct"
+            "default_case": "Yes"
         },
         "GoddessStatuePool": {
             "type": "select",
@@ -1907,7 +4029,7 @@
             "description": "勾選時，上面的次數視為「今日累計目標」，流程會先讀畫面上的「今日已祈願」計數，只補足差額；取消勾選則不論今天已祈願過幾次，都固定再執行設定的次數。",
             "cases": [
                 {
-                    "name": "Deduct",
+                    "name": "Yes",
                     "label": "扣除（次數視為今日累計目標）",
                     "pipeline_override": {
                         "GoddessStatue.Pull.Route": {
@@ -1918,7 +4040,7 @@
                     }
                 },
                 {
-                    "name": "Raw",
+                    "name": "No",
                     "label": "不扣除（每次都執行設定次數）",
                     "pipeline_override": {
                         "GoddessStatue.Pull.Route": {
@@ -1929,7 +4051,7 @@
                     }
                 }
             ],
-            "default_case": "Deduct"
+            "default_case": "Yes"
         },
         "TimeGachaRealm": {
             "type": "select",
@@ -2124,7 +4246,7 @@
             "description": "勾選時，上面的次數視為「今日累計目標」，流程會先讀畫面上的「今日已扭蛋」計數，只補足差額；取消勾選則不論今天已扭蛋過幾次，都固定再執行設定的次數。",
             "cases": [
                 {
-                    "name": "Deduct",
+                    "name": "Yes",
                     "label": "扣除（次數視為今日累計目標）",
                     "pipeline_override": {
                         "GachaMachine.Pull.Route": {
@@ -2135,7 +4257,7 @@
                     }
                 },
                 {
-                    "name": "Raw",
+                    "name": "No",
                     "label": "不扣除（每次都執行設定次數）",
                     "pipeline_override": {
                         "GachaMachine.Pull.Route": {
@@ -2146,7 +4268,1324 @@
                     }
                 }
             ],
-            "default_case": "Deduct"
+            "default_case": "Yes"
+        },
+        "DailyDungeonTarget": {
+            "type": "select",
+            "label": "日常副本：要打哪一個副本",
+            "description": "副本清單固定 3 個，依清單由上到下排序。進入詳情頁後會用標題文字確認，和設定不符就安全停止，不會誤打別的副本。",
+            "cases": [
+                {
+                    "name": "Slot1",
+                    "label": "第 1 個（泰坦熱氣球）",
+                    "pipeline_override": {
+                        "Dungeon.Select.Route": {
+                            "next": [
+                                "Dungeon.Select.Slot1"
+                            ]
+                        },
+                        "Dungeon.Detail.Title": {
+                            "expected": "泰坦熱氣球"
+                        }
+                    }
+                },
+                {
+                    "name": "Slot2",
+                    "label": "第 2 個（星空之城）",
+                    "pipeline_override": {
+                        "Dungeon.Select.Route": {
+                            "next": [
+                                "Dungeon.Select.Slot2"
+                            ]
+                        },
+                        "Dungeon.Detail.Title": {
+                            "expected": "星空之城"
+                        }
+                    }
+                },
+                {
+                    "name": "Slot3",
+                    "label": "第 3 個（冰凌尖塔）",
+                    "pipeline_override": {
+                        "Dungeon.Select.Route": {
+                            "next": [
+                                "Dungeon.Select.Slot3"
+                            ]
+                        },
+                        "Dungeon.Detail.Title": {
+                            "expected": "冰凌尖塔"
+                        }
+                    }
+                }
+            ],
+            "default_case": "Slot3"
+        },
+        "DailyDungeonBattleCount": {
+            "type": "select",
+            "label": "日常副本：挑戰次數",
+            "description": "每次挑戰都會消耗體力並在結算頁點「領取獎勵」；領獎次數用完後仍可挑戰，只是不再有獎勵。上限 6 次，預設 4 次。",
+            "cases": [
+                {
+                    "name": "Count0",
+                    "label": "0 次（不執行）",
+                    "pipeline_override": {
+                        "Dungeon.Map": {
+                            "next": [
+                                "Dungeon.Done"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Count1",
+                    "label": "1 次",
+                    "pipeline_override": {
+                        "Dungeon.Map": {
+                            "next": [
+                                "Dungeon.Loop.Enter"
+                            ]
+                        },
+                        "Dungeon.Loop.Enter": {
+                            "max_hit": 1
+                        }
+                    }
+                },
+                {
+                    "name": "Count2",
+                    "label": "2 次",
+                    "pipeline_override": {
+                        "Dungeon.Map": {
+                            "next": [
+                                "Dungeon.Loop.Enter"
+                            ]
+                        },
+                        "Dungeon.Loop.Enter": {
+                            "max_hit": 2
+                        }
+                    }
+                },
+                {
+                    "name": "Count3",
+                    "label": "3 次",
+                    "pipeline_override": {
+                        "Dungeon.Map": {
+                            "next": [
+                                "Dungeon.Loop.Enter"
+                            ]
+                        },
+                        "Dungeon.Loop.Enter": {
+                            "max_hit": 3
+                        }
+                    }
+                },
+                {
+                    "name": "Count4",
+                    "label": "4 次",
+                    "pipeline_override": {
+                        "Dungeon.Map": {
+                            "next": [
+                                "Dungeon.Loop.Enter"
+                            ]
+                        },
+                        "Dungeon.Loop.Enter": {
+                            "max_hit": 4
+                        }
+                    }
+                },
+                {
+                    "name": "Count5",
+                    "label": "5 次",
+                    "pipeline_override": {
+                        "Dungeon.Map": {
+                            "next": [
+                                "Dungeon.Loop.Enter"
+                            ]
+                        },
+                        "Dungeon.Loop.Enter": {
+                            "max_hit": 5
+                        }
+                    }
+                },
+                {
+                    "name": "Count6",
+                    "label": "6 次",
+                    "pipeline_override": {
+                        "Dungeon.Map": {
+                            "next": [
+                                "Dungeon.Loop.Enter"
+                            ]
+                        },
+                        "Dungeon.Loop.Enter": {
+                            "max_hit": 6
+                        }
+                    }
+                }
+            ],
+            "default_case": "Count4"
+        },
+        "DailyDungeonPurchaseCount": {
+            "type": "select",
+            "label": "日常副本：購買領獎次數",
+            "description": "詳情頁「每日領獎次數」旁的 ＋，每次 100 晨星，今日限購 2 次。設定值視為今日累計目標，流程會先讀「今日限購 a/2」扣掉已購買的次數。預設不購買。",
+            "cases": [
+                {
+                    "name": "Count0",
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "Dungeon.Purchase.Route": {
+                            "next": [
+                                "Dungeon.Goto"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Count1",
+                    "label": "買到今日累計 1 次",
+                    "pipeline_override": {
+                        "Dungeon.Purchase.Route": {
+                            "next": [
+                                "Dungeon.Purchase.Open"
+                            ]
+                        },
+                        "Dungeon.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "日常副本領獎次數",
+                                "total": 1,
+                                "limit_roi": [
+                                    400,
+                                    660,
+                                    240,
+                                    60
+                                ],
+                                "plus_target": [
+                                    575,
+                                    620,
+                                    45,
+                                    45
+                                ],
+                                "buy_roi": [
+                                    400,
+                                    700,
+                                    240,
+                                    80
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    722,
+                                    66,
+                                    39
+                                ]
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "Count2",
+                    "label": "買到今日累計 2 次",
+                    "pipeline_override": {
+                        "Dungeon.Purchase.Route": {
+                            "next": [
+                                "Dungeon.Purchase.Open"
+                            ]
+                        },
+                        "Dungeon.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "日常副本領獎次數",
+                                "total": 2,
+                                "limit_roi": [
+                                    400,
+                                    660,
+                                    240,
+                                    60
+                                ],
+                                "plus_target": [
+                                    575,
+                                    620,
+                                    45,
+                                    45
+                                ],
+                                "buy_roi": [
+                                    400,
+                                    700,
+                                    240,
+                                    80
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    722,
+                                    66,
+                                    39
+                                ]
+                            }
+                        }
+                    }
+                }
+            ],
+            "default_case": "Count0"
+        },
+        "BeastTrialRunCount": {
+            "type": "select",
+            "label": "聖獸試煉：挑戰次數",
+            "description": "聖獸每隔一段時間輪換，人物會自動傳送到聖獸下方。一場為 10 回合的傷害戰，實測約 1～2 分鐘，獎勵依當日最高傷害發放，通常 1 次即可。",
+            "cases": [
+                {
+                    "name": "Count0",
+                    "label": "0 次（不執行）",
+                    "pipeline_override": {
+                        "BeastTrial.Map": {
+                            "next": [
+                                "BeastTrial.Exit"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Count1",
+                    "label": "1 次",
+                    "pipeline_override": {
+                        "BeastTrial.Map": {
+                            "next": [
+                                "BeastTrial.Loop.Enter"
+                            ]
+                        },
+                        "BeastTrial.Loop.Enter": {
+                            "max_hit": 1
+                        }
+                    }
+                },
+                {
+                    "name": "Count2",
+                    "label": "2 次",
+                    "pipeline_override": {
+                        "BeastTrial.Map": {
+                            "next": [
+                                "BeastTrial.Loop.Enter"
+                            ]
+                        },
+                        "BeastTrial.Loop.Enter": {
+                            "max_hit": 2
+                        }
+                    }
+                },
+                {
+                    "name": "Count3",
+                    "label": "3 次",
+                    "pipeline_override": {
+                        "BeastTrial.Map": {
+                            "next": [
+                                "BeastTrial.Loop.Enter"
+                            ]
+                        },
+                        "BeastTrial.Loop.Enter": {
+                            "max_hit": 3
+                        }
+                    }
+                }
+            ],
+            "default_case": "Count1"
+        },
+        "BeastTrialParty": {
+            "type": "select",
+            "label": "聖獸試煉：組隊",
+            "description": "隊伍上限 6 人。只邀請「夥伴」分頁的 AI 夥伴，不會邀請或配對其他玩家。",
+            "cases": [
+                {
+                    "name": "FillPartners",
+                    "label": "用夥伴補滿隊伍",
+                    "pipeline_override": {
+                        "BeastTrial.Party.Route": {
+                            "next": [
+                                "BeastTrial.Party.Open"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "KeepCurrent",
+                    "label": "不組隊（沿用目前隊伍）",
+                    "pipeline_override": {
+                        "BeastTrial.Party.Route": {
+                            "next": [
+                                "BeastTrial.Enter",
+                                "BeastTrial.Party.Incomplete"
+                            ]
+                        }
+                    }
+                }
+            ],
+            "default_case": "FillPartners"
+        },
+        "PhantomRunCount": {
+            "type": "select",
+            "label": "雙影幻境：挑戰次數",
+            "description": "固定在龍之國·幻天鼎，隊伍上限 2 人且會要求特定職業（夥伴清單會自動只列出可用的）。目標是擊破第 3 波，戰敗會使角色重傷，流程會用料理一鍵治療。",
+            "cases": [
+                {
+                    "name": "Count0",
+                    "label": "0 次（不執行）",
+                    "pipeline_override": {
+                        "Phantom.Map": {
+                            "next": [
+                                "Phantom.Exit"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Count1",
+                    "label": "1 次",
+                    "pipeline_override": {
+                        "Phantom.Map": {
+                            "next": [
+                                "Phantom.Loop.Enter"
+                            ]
+                        },
+                        "Phantom.Loop.Enter": {
+                            "max_hit": 1
+                        }
+                    }
+                },
+                {
+                    "name": "Count2",
+                    "label": "2 次",
+                    "pipeline_override": {
+                        "Phantom.Map": {
+                            "next": [
+                                "Phantom.Loop.Enter"
+                            ]
+                        },
+                        "Phantom.Loop.Enter": {
+                            "max_hit": 2
+                        }
+                    }
+                },
+                {
+                    "name": "Count3",
+                    "label": "3 次",
+                    "pipeline_override": {
+                        "Phantom.Map": {
+                            "next": [
+                                "Phantom.Loop.Enter"
+                            ]
+                        },
+                        "Phantom.Loop.Enter": {
+                            "max_hit": 3
+                        }
+                    }
+                }
+            ],
+            "default_case": "Count1"
+        },
+        "PhantomParty": {
+            "type": "select",
+            "label": "雙影幻境：組隊",
+            "description": "隊伍上限 2 人，需要 1 位符合當日職業需求的隊友。只邀請「夥伴」分頁的 AI 夥伴，不會邀請或配對其他玩家。",
+            "cases": [
+                {
+                    "name": "FillPartners",
+                    "label": "用夥伴補滿隊伍",
+                    "pipeline_override": {
+                        "Phantom.Party.Route": {
+                            "next": [
+                                "Phantom.Party.Open"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "KeepCurrent",
+                    "label": "不組隊（沿用目前隊伍）",
+                    "pipeline_override": {
+                        "Phantom.Party.Route": {
+                            "next": [
+                                "Phantom.Enter",
+                                "Phantom.Party.Incomplete"
+                            ]
+                        }
+                    }
+                }
+            ],
+            "default_case": "FillPartners"
+        },
+        "ArenaTicketPurchaseCount": {
+            "type": "select",
+            "label": "競技場：購買競技場券",
+            "description": "右上角「挑戰次數」旁的 ＋，每張 10 晨星、今日限購 8 張。設定值視為今日累計目標，流程會先讀「今日限購 a/8」扣掉已購買的張數。預設不購買。",
+            "cases": [
+                {
+                    "name": "Count0",
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "Arena.Purchase.Route": {
+                            "next": [
+                                "Arena.Battle.Route"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Count1",
+                    "label": "買到今日累計 1 張",
+                    "pipeline_override": {
+                        "Arena.Purchase.Route": {
+                            "next": [
+                                "Arena.Purchase.Open"
+                            ]
+                        },
+                        "Arena.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "競技場券",
+                                "total": 1,
+                                "limit_roi": [
+                                    380,
+                                    740,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    688,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    800,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "Count2",
+                    "label": "買到今日累計 2 張",
+                    "pipeline_override": {
+                        "Arena.Purchase.Route": {
+                            "next": [
+                                "Arena.Purchase.Open"
+                            ]
+                        },
+                        "Arena.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "競技場券",
+                                "total": 2,
+                                "limit_roi": [
+                                    380,
+                                    740,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    688,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    800,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "Count3",
+                    "label": "買到今日累計 3 張",
+                    "pipeline_override": {
+                        "Arena.Purchase.Route": {
+                            "next": [
+                                "Arena.Purchase.Open"
+                            ]
+                        },
+                        "Arena.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "競技場券",
+                                "total": 3,
+                                "limit_roi": [
+                                    380,
+                                    740,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    688,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    800,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "Count4",
+                    "label": "買到今日累計 4 張",
+                    "pipeline_override": {
+                        "Arena.Purchase.Route": {
+                            "next": [
+                                "Arena.Purchase.Open"
+                            ]
+                        },
+                        "Arena.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "競技場券",
+                                "total": 4,
+                                "limit_roi": [
+                                    380,
+                                    740,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    688,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    800,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "Count5",
+                    "label": "買到今日累計 5 張",
+                    "pipeline_override": {
+                        "Arena.Purchase.Route": {
+                            "next": [
+                                "Arena.Purchase.Open"
+                            ]
+                        },
+                        "Arena.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "競技場券",
+                                "total": 5,
+                                "limit_roi": [
+                                    380,
+                                    740,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    688,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    800,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "Count6",
+                    "label": "買到今日累計 6 張",
+                    "pipeline_override": {
+                        "Arena.Purchase.Route": {
+                            "next": [
+                                "Arena.Purchase.Open"
+                            ]
+                        },
+                        "Arena.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "競技場券",
+                                "total": 6,
+                                "limit_roi": [
+                                    380,
+                                    740,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    688,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    800,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "Count7",
+                    "label": "買到今日累計 7 張",
+                    "pipeline_override": {
+                        "Arena.Purchase.Route": {
+                            "next": [
+                                "Arena.Purchase.Open"
+                            ]
+                        },
+                        "Arena.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "競技場券",
+                                "total": 7,
+                                "limit_roi": [
+                                    380,
+                                    740,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    688,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    800,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
+                        }
+                    }
+                },
+                {
+                    "name": "Count8",
+                    "label": "買到今日累計 8 張",
+                    "pipeline_override": {
+                        "Arena.Purchase.Route": {
+                            "next": [
+                                "Arena.Purchase.Open"
+                            ]
+                        },
+                        "Arena.Purchase.Buy": {
+                            "custom_action_param": {
+                                "label": "競技場券",
+                                "total": 8,
+                                "limit_roi": [
+                                    380,
+                                    740,
+                                    260,
+                                    60
+                                ],
+                                "plus_target": [
+                                    524,
+                                    688,
+                                    24,
+                                    24
+                                ],
+                                "buy_roi": [
+                                    390,
+                                    800,
+                                    240,
+                                    70
+                                ],
+                                "cancel_target": [
+                                    194,
+                                    812,
+                                    68,
+                                    40
+                                ]
+                            }
+                        }
+                    }
+                }
+            ],
+            "default_case": "Count0"
+        },
+        "ArenaBattleCount": {
+            "type": "select",
+            "label": "競技場：挑戰次數",
+            "description": "固定挑戰「選擇對手」四位中最右邊那位（排名最低、戰力最弱）。每場消耗 1 張競技場券，戰鬥為自動結算。預設用完目前剩餘的券。",
+            "cases": [
+                {
+                    "name": "All",
+                    "label": "用完剩餘次數（預設）",
+                    "pipeline_override": {
+                        "Arena.Battle.Route": {
+                            "next": [
+                                "Arena.Battle.Loop",
+                                "Arena.Shop.Route"
+                            ]
+                        },
+                        "Arena.Battle.Loop": {
+                            "max_hit": 20
+                        }
+                    }
+                },
+                {
+                    "name": "Count0",
+                    "label": "0 次（不挑戰）",
+                    "pipeline_override": {
+                        "Arena.Battle.Route": {
+                            "next": [
+                                "Arena.Shop.Route"
+                            ]
+                        }
+                    }
+                },
+                {
+                    "name": "Count1",
+                    "label": "1 次",
+                    "pipeline_override": {
+                        "Arena.Battle.Route": {
+                            "next": [
+                                "Arena.Battle.Loop",
+                                "Arena.Shop.Route"
+                            ]
+                        },
+                        "Arena.Battle.Loop": {
+                            "max_hit": 1
+                        }
+                    }
+                },
+                {
+                    "name": "Count2",
+                    "label": "2 次",
+                    "pipeline_override": {
+                        "Arena.Battle.Route": {
+                            "next": [
+                                "Arena.Battle.Loop",
+                                "Arena.Shop.Route"
+                            ]
+                        },
+                        "Arena.Battle.Loop": {
+                            "max_hit": 2
+                        }
+                    }
+                },
+                {
+                    "name": "Count3",
+                    "label": "3 次",
+                    "pipeline_override": {
+                        "Arena.Battle.Route": {
+                            "next": [
+                                "Arena.Battle.Loop",
+                                "Arena.Shop.Route"
+                            ]
+                        },
+                        "Arena.Battle.Loop": {
+                            "max_hit": 3
+                        }
+                    }
+                },
+                {
+                    "name": "Count5",
+                    "label": "5 次",
+                    "pipeline_override": {
+                        "Arena.Battle.Route": {
+                            "next": [
+                                "Arena.Battle.Loop",
+                                "Arena.Shop.Route"
+                            ]
+                        },
+                        "Arena.Battle.Loop": {
+                            "max_hit": 5
+                        }
+                    }
+                },
+                {
+                    "name": "Count10",
+                    "label": "10 次",
+                    "pipeline_override": {
+                        "Arena.Battle.Route": {
+                            "next": [
+                                "Arena.Battle.Loop",
+                                "Arena.Shop.Route"
+                            ]
+                        },
+                        "Arena.Battle.Loop": {
+                            "max_hit": 10
+                        }
+                    }
+                }
+            ],
+            "default_case": "All"
+        },
+        "ArenaShopItem1": {
+            "type": "select",
+            "label": "競技商店：第 1 項",
+            "description": "競技商店為 3×3 共 9 格，由左至右、由上至下編號，使用決鬥幣。點下價格鍵會直接成交、沒有確認視窗；已售完或限購用盡會自動略過。預設不購買。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "Arena.Shop.Slot1.Buy": {
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "name": "Once",
+                    "label": "購買 1 次",
+                    "pipeline_override": {
+                        "Arena.Shop.Route": {
+                            "next": [
+                                "Arena.Shop.Open"
+                            ]
+                        },
+                        "Arena.Shop.Slot1.Buy": {
+                            "enabled": true,
+                            "max_hit": 1
+                        }
+                    }
+                },
+                {
+                    "name": "ToLimit",
+                    "label": "買到限購上限",
+                    "pipeline_override": {
+                        "Arena.Shop.Route": {
+                            "next": [
+                                "Arena.Shop.Open"
+                            ]
+                        },
+                        "Arena.Shop.Slot1.Buy": {
+                            "enabled": true,
+                            "max_hit": 9
+                        }
+                    }
+                }
+            ],
+            "default_case": "Never"
+        },
+        "ArenaShopItem2": {
+            "type": "select",
+            "label": "競技商店：第 2 項",
+            "description": "競技商店為 3×3 共 9 格，由左至右、由上至下編號，使用決鬥幣。點下價格鍵會直接成交、沒有確認視窗；已售完或限購用盡會自動略過。預設不購買。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "Arena.Shop.Slot2.Buy": {
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "name": "Once",
+                    "label": "購買 1 次",
+                    "pipeline_override": {
+                        "Arena.Shop.Route": {
+                            "next": [
+                                "Arena.Shop.Open"
+                            ]
+                        },
+                        "Arena.Shop.Slot2.Buy": {
+                            "enabled": true,
+                            "max_hit": 1
+                        }
+                    }
+                },
+                {
+                    "name": "ToLimit",
+                    "label": "買到限購上限",
+                    "pipeline_override": {
+                        "Arena.Shop.Route": {
+                            "next": [
+                                "Arena.Shop.Open"
+                            ]
+                        },
+                        "Arena.Shop.Slot2.Buy": {
+                            "enabled": true,
+                            "max_hit": 9
+                        }
+                    }
+                }
+            ],
+            "default_case": "Never"
+        },
+        "ArenaShopItem3": {
+            "type": "select",
+            "label": "競技商店：第 3 項",
+            "description": "競技商店為 3×3 共 9 格，由左至右、由上至下編號，使用決鬥幣。點下價格鍵會直接成交、沒有確認視窗；已售完或限購用盡會自動略過。預設不購買。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "Arena.Shop.Slot3.Buy": {
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "name": "Once",
+                    "label": "購買 1 次",
+                    "pipeline_override": {
+                        "Arena.Shop.Route": {
+                            "next": [
+                                "Arena.Shop.Open"
+                            ]
+                        },
+                        "Arena.Shop.Slot3.Buy": {
+                            "enabled": true,
+                            "max_hit": 1
+                        }
+                    }
+                },
+                {
+                    "name": "ToLimit",
+                    "label": "買到限購上限",
+                    "pipeline_override": {
+                        "Arena.Shop.Route": {
+                            "next": [
+                                "Arena.Shop.Open"
+                            ]
+                        },
+                        "Arena.Shop.Slot3.Buy": {
+                            "enabled": true,
+                            "max_hit": 9
+                        }
+                    }
+                }
+            ],
+            "default_case": "Never"
+        },
+        "ArenaShopItem4": {
+            "type": "select",
+            "label": "競技商店：第 4 項",
+            "description": "競技商店為 3×3 共 9 格，由左至右、由上至下編號，使用決鬥幣。點下價格鍵會直接成交、沒有確認視窗；已售完或限購用盡會自動略過。預設不購買。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "Arena.Shop.Slot4.Buy": {
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "name": "Once",
+                    "label": "購買 1 次",
+                    "pipeline_override": {
+                        "Arena.Shop.Route": {
+                            "next": [
+                                "Arena.Shop.Open"
+                            ]
+                        },
+                        "Arena.Shop.Slot4.Buy": {
+                            "enabled": true,
+                            "max_hit": 1
+                        }
+                    }
+                },
+                {
+                    "name": "ToLimit",
+                    "label": "買到限購上限",
+                    "pipeline_override": {
+                        "Arena.Shop.Route": {
+                            "next": [
+                                "Arena.Shop.Open"
+                            ]
+                        },
+                        "Arena.Shop.Slot4.Buy": {
+                            "enabled": true,
+                            "max_hit": 9
+                        }
+                    }
+                }
+            ],
+            "default_case": "Never"
+        },
+        "ArenaShopItem5": {
+            "type": "select",
+            "label": "競技商店：第 5 項",
+            "description": "競技商店為 3×3 共 9 格，由左至右、由上至下編號，使用決鬥幣。點下價格鍵會直接成交、沒有確認視窗；已售完或限購用盡會自動略過。預設不購買。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "Arena.Shop.Slot5.Buy": {
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "name": "Once",
+                    "label": "購買 1 次",
+                    "pipeline_override": {
+                        "Arena.Shop.Route": {
+                            "next": [
+                                "Arena.Shop.Open"
+                            ]
+                        },
+                        "Arena.Shop.Slot5.Buy": {
+                            "enabled": true,
+                            "max_hit": 1
+                        }
+                    }
+                },
+                {
+                    "name": "ToLimit",
+                    "label": "買到限購上限",
+                    "pipeline_override": {
+                        "Arena.Shop.Route": {
+                            "next": [
+                                "Arena.Shop.Open"
+                            ]
+                        },
+                        "Arena.Shop.Slot5.Buy": {
+                            "enabled": true,
+                            "max_hit": 9
+                        }
+                    }
+                }
+            ],
+            "default_case": "Never"
+        },
+        "ArenaShopItem6": {
+            "type": "select",
+            "label": "競技商店：第 6 項",
+            "description": "競技商店為 3×3 共 9 格，由左至右、由上至下編號，使用決鬥幣。點下價格鍵會直接成交、沒有確認視窗；已售完或限購用盡會自動略過。預設不購買。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "Arena.Shop.Slot6.Buy": {
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "name": "Once",
+                    "label": "購買 1 次",
+                    "pipeline_override": {
+                        "Arena.Shop.Route": {
+                            "next": [
+                                "Arena.Shop.Open"
+                            ]
+                        },
+                        "Arena.Shop.Slot6.Buy": {
+                            "enabled": true,
+                            "max_hit": 1
+                        }
+                    }
+                },
+                {
+                    "name": "ToLimit",
+                    "label": "買到限購上限",
+                    "pipeline_override": {
+                        "Arena.Shop.Route": {
+                            "next": [
+                                "Arena.Shop.Open"
+                            ]
+                        },
+                        "Arena.Shop.Slot6.Buy": {
+                            "enabled": true,
+                            "max_hit": 9
+                        }
+                    }
+                }
+            ],
+            "default_case": "Never"
+        },
+        "ArenaShopItem7": {
+            "type": "select",
+            "label": "競技商店：第 7 項",
+            "description": "競技商店為 3×3 共 9 格，由左至右、由上至下編號，使用決鬥幣。點下價格鍵會直接成交、沒有確認視窗；已售完或限購用盡會自動略過。預設不購買。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "Arena.Shop.Slot7.Buy": {
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "name": "Once",
+                    "label": "購買 1 次",
+                    "pipeline_override": {
+                        "Arena.Shop.Route": {
+                            "next": [
+                                "Arena.Shop.Open"
+                            ]
+                        },
+                        "Arena.Shop.Slot7.Buy": {
+                            "enabled": true,
+                            "max_hit": 1
+                        }
+                    }
+                },
+                {
+                    "name": "ToLimit",
+                    "label": "買到限購上限",
+                    "pipeline_override": {
+                        "Arena.Shop.Route": {
+                            "next": [
+                                "Arena.Shop.Open"
+                            ]
+                        },
+                        "Arena.Shop.Slot7.Buy": {
+                            "enabled": true,
+                            "max_hit": 9
+                        }
+                    }
+                }
+            ],
+            "default_case": "Never"
+        },
+        "ArenaShopItem8": {
+            "type": "select",
+            "label": "競技商店：第 8 項",
+            "description": "競技商店為 3×3 共 9 格，由左至右、由上至下編號，使用決鬥幣。點下價格鍵會直接成交、沒有確認視窗；已售完或限購用盡會自動略過。預設不購買。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "Arena.Shop.Slot8.Buy": {
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "name": "Once",
+                    "label": "購買 1 次",
+                    "pipeline_override": {
+                        "Arena.Shop.Route": {
+                            "next": [
+                                "Arena.Shop.Open"
+                            ]
+                        },
+                        "Arena.Shop.Slot8.Buy": {
+                            "enabled": true,
+                            "max_hit": 1
+                        }
+                    }
+                },
+                {
+                    "name": "ToLimit",
+                    "label": "買到限購上限",
+                    "pipeline_override": {
+                        "Arena.Shop.Route": {
+                            "next": [
+                                "Arena.Shop.Open"
+                            ]
+                        },
+                        "Arena.Shop.Slot8.Buy": {
+                            "enabled": true,
+                            "max_hit": 9
+                        }
+                    }
+                }
+            ],
+            "default_case": "Never"
+        },
+        "ArenaShopItem9": {
+            "type": "select",
+            "label": "競技商店：第 9 項",
+            "description": "競技商店為 3×3 共 9 格，由左至右、由上至下編號，使用決鬥幣。點下價格鍵會直接成交、沒有確認視窗；已售完或限購用盡會自動略過。預設不購買。",
+            "cases": [
+                {
+                    "name": "Never",
+                    "label": "不購買",
+                    "pipeline_override": {
+                        "Arena.Shop.Slot9.Buy": {
+                            "enabled": false
+                        }
+                    }
+                },
+                {
+                    "name": "Once",
+                    "label": "購買 1 次",
+                    "pipeline_override": {
+                        "Arena.Shop.Route": {
+                            "next": [
+                                "Arena.Shop.Open"
+                            ]
+                        },
+                        "Arena.Shop.Slot9.Buy": {
+                            "enabled": true,
+                            "max_hit": 1
+                        }
+                    }
+                },
+                {
+                    "name": "ToLimit",
+                    "label": "買到限購上限",
+                    "pipeline_override": {
+                        "Arena.Shop.Route": {
+                            "next": [
+                                "Arena.Shop.Open"
+                            ]
+                        },
+                        "Arena.Shop.Slot9.Buy": {
+                            "enabled": true,
+                            "max_hit": 9
+                        }
+                    }
+                }
+            ],
+            "default_case": "Never"
         }
     }
 }

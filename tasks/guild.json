@@ -123,7 +123,7 @@
             "description": "勾選時，上面的次數視為「今日累計目標」，流程會先讀畫面上的「每日捐贈次數」只補足差額；取消勾選則固定再捐指定次數。",
             "cases": [
                 {
-                    "name": "Deduct",
+                    "name": "Yes",
                     "label": "扣除（次數視為今日累計目標）",
                     "pipeline_override": {
                         "GuildDonation.Pull.Route": {
@@ -134,7 +134,7 @@
                     }
                 },
                 {
-                    "name": "Raw",
+                    "name": "No",
                     "label": "不扣除（每次都執行設定次數）",
                     "pipeline_override": {
                         "GuildDonation.Pull.Route": {
@@ -145,7 +145,7 @@
                     }
                 }
             ],
-            "default_case": "Deduct"
+            "default_case": "Yes"
         },
         "GuildRaidCount": {
             "type": "select",

@@ -1,20 +1,20 @@
 {
-    "Objectives.Daily.PhantomRealmWave3.Start": {
+    "Objectives.Daily.BeastTrialReward1.Start": {
         "recognition": "DirectHit",
         "action": "DoNothing",
         "next": [
-            "Phantom.EnsureNote",
-            "Phantom.Nav.FromOtherTab",
-            "Phantom.Nav.Recover"
+            "BeastTrial.EnsureNote",
+            "BeastTrial.Nav.FromOtherTab",
+            "BeastTrial.Nav.Recover"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【雙影幻境】開始執行：從筆記的每日活動進入雙影幻境。",
+                "content": "【聖獸試煉】開始執行：從筆記的每日活動進入聖獸試煉。",
                 "display": "log"
             }
         }
     },
-    "Phantom.EnsureNote": {
+    "BeastTrial.EnsureNote": {
         "recognition": "OCR",
         "roi": [
             0,
@@ -27,19 +27,19 @@
         "action": "DoNothing",
         "timeout": 8000,
         "next": [
-            "Phantom.OpenActivities"
+            "BeastTrial.OpenActivities"
         ],
         "on_error": [
-            "Phantom.Open.Failed"
+            "BeastTrial.Open.Failed"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【雙影幻境】底部導航列顯示「筆記」，確認在筆記主頁。",
+                "content": "【聖獸試煉】底部導航列顯示「筆記」，確認在筆記主頁。",
                 "display": "log"
             }
         }
     },
-    "Phantom.Nav.FromOtherTab": {
+    "BeastTrial.Nav.FromOtherTab": {
         "recognition": "OCR",
         "roi": [
             0,
@@ -58,49 +58,49 @@
         ],
         "post_delay": 1400,
         "next": [
-            "Phantom.EnsureNote"
+            "BeastTrial.EnsureNote"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【雙影幻境】目前在其他主頁籤，點擊「筆記」切換。",
+                "content": "【聖獸試煉】目前在其他主頁籤，點擊「筆記」切換。",
                 "display": "log"
             }
         }
     },
-    "Phantom.Nav.Recover": {
+    "BeastTrial.Nav.Recover": {
         "recognition": "DirectHit",
         "action": "DoNothing",
         "next": [
-            "Phantom.Nav.LeaveMap",
-            "Phantom.Nav.ExitDialog",
-            "Phantom.EnsureNote",
-            "Phantom.Nav.FromOtherTab",
-            "Phantom.Nav.Back",
-            "Phantom.Nav.Failed"
+            "BeastTrial.Nav.LeaveMap",
+            "BeastTrial.Nav.ExitDialog",
+            "BeastTrial.EnsureNote",
+            "BeastTrial.Nav.FromOtherTab",
+            "BeastTrial.Nav.Back",
+            "BeastTrial.Nav.Failed"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【雙影幻境】目前在子畫面，按返回鍵回到主頁籤…",
+                "content": "【聖獸試煉】目前在子畫面，按返回鍵回到主頁籤…",
                 "display": "log"
             }
         }
     },
-    "Phantom.Nav.Back": {
+    "BeastTrial.Nav.Back": {
         "max_hit": 10,
         "recognition": "DirectHit",
         "action": "ClickKey",
         "key": 4,
         "post_delay": 1600,
         "next": [
-            "Phantom.Nav.LeaveMap",
-            "Phantom.Nav.ExitDialog",
-            "Phantom.EnsureNote",
-            "Phantom.Nav.FromOtherTab",
-            "Phantom.Nav.Back",
-            "Phantom.Nav.Failed"
+            "BeastTrial.Nav.LeaveMap",
+            "BeastTrial.Nav.ExitDialog",
+            "BeastTrial.EnsureNote",
+            "BeastTrial.Nav.FromOtherTab",
+            "BeastTrial.Nav.Back",
+            "BeastTrial.Nav.Failed"
         ]
     },
-    "Phantom.Nav.LeaveMap": {
+    "BeastTrial.Nav.LeaveMap": {
         "recognition": "OCR",
         "roi": [
             80,
@@ -119,18 +119,18 @@
         ],
         "post_delay": 9000,
         "next": [
-            "Phantom.EnsureNote",
-            "Phantom.Nav.FromOtherTab",
-            "Phantom.Nav.Back"
+            "BeastTrial.EnsureNote",
+            "BeastTrial.Nav.FromOtherTab",
+            "BeastTrial.Nav.Back"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【雙影幻境】目前在世界地圖，確認離開地圖並解散隊伍後回到主頁籤。",
+                "content": "【聖獸試煉】目前在世界地圖，確認離開地圖並解散隊伍後回到主頁籤。",
                 "display": "log"
             }
         }
     },
-    "Phantom.Nav.ExitDialog": {
+    "BeastTrial.Nav.ExitDialog": {
         "recognition": "OCR",
         "roi": [
             160,
@@ -149,16 +149,16 @@
         ],
         "post_delay": 1200,
         "next": [
-            "Phantom.Nav.SelectNote"
+            "BeastTrial.Nav.SelectNote"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【雙影幻境】偵測到離開遊戲彈窗，點擊取消。",
+                "content": "【聖獸試煉】偵測到離開遊戲彈窗，點擊取消。",
                 "display": "log"
             }
         }
     },
-    "Phantom.Nav.SelectNote": {
+    "BeastTrial.Nav.SelectNote": {
         "recognition": "DirectHit",
         "action": "Click",
         "target": [
@@ -169,20 +169,20 @@
         ],
         "post_delay": 1600,
         "next": [
-            "Phantom.EnsureNote"
+            "BeastTrial.EnsureNote"
         ]
     },
-    "Phantom.Nav.Failed": {
+    "BeastTrial.Nav.Failed": {
         "recognition": "DirectHit",
         "action": "DoNothing",
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【雙影幻境】連續返回後仍無法回到筆記主頁，已安全停止，未執行任何操作。",
+                "content": "【聖獸試煉】連續返回後仍無法回到筆記主頁，已安全停止，未執行任何操作。",
                 "display": "log"
             }
         }
     },
-    "Phantom.OpenActivities": {
+    "BeastTrial.OpenActivities": {
         "recognition": "OCR",
         "roi": [
             400,
@@ -196,20 +196,20 @@
         "post_delay": 2500,
         "timeout": 12000,
         "next": [
-            "Phantom.Activities",
-            "Phantom.OpenActivities.Retry"
+            "BeastTrial.Activities",
+            "BeastTrial.OpenActivities.Retry"
         ],
         "on_error": [
-            "Phantom.Open.Failed"
+            "BeastTrial.Open.Failed"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【雙影幻境】點擊筆記上的「每日活動」…",
+                "content": "【聖獸試煉】點擊筆記上的「每日活動」…",
                 "display": "log"
             }
         }
     },
-    "Phantom.Activities": {
+    "BeastTrial.Activities": {
         "recognition": "OCR",
         "roi": [
             0,
@@ -222,56 +222,56 @@
         "action": "DoNothing",
         "timeout": 8000,
         "next": [
-            "Phantom.OpenSelf"
+            "BeastTrial.OpenSelf"
         ],
         "on_error": [
-            "Phantom.Open.Failed"
+            "BeastTrial.Open.Failed"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【雙影幻境】已進入每日活動清單。",
+                "content": "【聖獸試煉】已進入每日活動清單。",
                 "display": "log"
             }
         }
     },
-    "Phantom.OpenSelf": {
+    "BeastTrial.OpenSelf": {
         "recognition": "OCR",
         "roi": [
             0,
-            530,
+            250,
             720,
             180
         ],
-        "expected": "雙影幻境",
+        "expected": "聖獸試煉",
         "threshold": 0.5,
         "action": "Click",
         "post_delay": 3000,
         "timeout": 12000,
         "next": [
-            "Phantom.Detail",
-            "Phantom.OpenSelf.Retry"
+            "BeastTrial.Detail",
+            "BeastTrial.OpenSelf.Retry"
         ],
         "on_error": [
-            "Phantom.Open.Failed"
+            "BeastTrial.Open.Failed"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【雙影幻境】點擊「雙影幻境」…",
+                "content": "【聖獸試煉】點擊「聖獸試煉」…",
                 "display": "log"
             }
         }
     },
-    "Phantom.Open.Failed": {
+    "BeastTrial.Open.Failed": {
         "recognition": "DirectHit",
         "action": "DoNothing",
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【雙影幻境】找不到雙影幻境的入口，已安全停止，未執行任何操作。",
+                "content": "【聖獸試煉】找不到聖獸試煉的入口，已安全停止，未執行任何操作。",
                 "display": "log"
             }
         }
     },
-    "Phantom.Detail": {
+    "BeastTrial.Detail": {
         "recognition": "OCR",
         "roi": [
             40,
@@ -285,19 +285,19 @@
         "post_delay": 1500,
         "timeout": 12000,
         "next": [
-            "Phantom.Goto.Confirm"
+            "BeastTrial.Goto.Confirm"
         ],
         "on_error": [
-            "Phantom.Goto.Failed"
+            "BeastTrial.Goto.Failed"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【雙影幻境】已進入詳情頁，點擊「前往地圖」…",
+                "content": "【聖獸試煉】已進入詳情頁，點擊「前往地圖」…",
                 "display": "log"
             }
         }
     },
-    "Phantom.Goto.Confirm": {
+    "BeastTrial.Goto.Confirm": {
         "recognition": "OCR",
         "roi": [
             80,
@@ -305,7 +305,7 @@
             560,
             260
         ],
-        "expected": "所在區域",
+        "expected": "聖獸試煉嗎",
         "threshold": 0.3,
         "action": "Click",
         "target": [
@@ -317,29 +317,29 @@
         "post_delay": 12000,
         "timeout": 40000,
         "next": [
-            "Phantom.Map"
+            "BeastTrial.Map"
         ],
         "on_error": [
-            "Phantom.Goto.Failed"
+            "BeastTrial.Goto.Failed"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【雙影幻境】確認前往，等待地圖載入…",
+                "content": "【聖獸試煉】確認前往，等待地圖載入…",
                 "display": "log"
             }
         }
     },
-    "Phantom.Goto.Failed": {
+    "BeastTrial.Goto.Failed": {
         "recognition": "DirectHit",
         "action": "DoNothing",
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【雙影幻境】無法從詳情頁前往地圖，已安全停止。",
+                "content": "【聖獸試煉】無法從詳情頁前往地圖，已安全停止。",
                 "display": "log"
             }
         }
     },
-    "Phantom.Map": {
+    "BeastTrial.Map": {
         "recognition": "OCR",
         "roi": [
             560,
@@ -352,19 +352,19 @@
         "action": "DoNothing",
         "timeout": 30000,
         "next": [
-            "Phantom.Loop.Enter"
+            "BeastTrial.Loop.Enter"
         ],
         "on_error": [
-            "Phantom.Done"
+            "BeastTrial.Done"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【雙影幻境】已抵達地圖，人物已傳送到目標下方。",
+                "content": "【聖獸試煉】已抵達地圖，人物已傳送到目標下方。",
                 "display": "log"
             }
         }
     },
-    "Phantom.Loop.Enter": {
+    "BeastTrial.Loop.Enter": {
         "max_hit": 1,
         "recognition": "OCR",
         "roi": [
@@ -378,26 +378,26 @@
         "action": "Click",
         "target": [
             320,
-            370,
+            390,
             80,
             80
         ],
         "post_delay": 2500,
         "timeout": 10000,
         "next": [
-            "Phantom.Gate"
+            "BeastTrial.Gate"
         ],
         "on_error": [
-            "Phantom.Gate.Retry"
+            "BeastTrial.Gate.Retry"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【雙影幻境】點擊人物上方的入口…",
+                "content": "【聖獸試煉】點擊人物上方的入口…",
                 "display": "log"
             }
         }
     },
-    "Phantom.Gate.Retry": {
+    "BeastTrial.Gate.Retry": {
         "max_hit": 3,
         "recognition": "OCR",
         "roi": [
@@ -411,33 +411,33 @@
         "action": "Click",
         "target": [
             300,
-            320,
+            340,
             120,
             160
         ],
         "post_delay": 2500,
         "timeout": 10000,
         "next": [
-            "Phantom.Gate"
+            "BeastTrial.Gate"
         ],
         "on_error": [
-            "Phantom.Gate.Failed"
+            "BeastTrial.Gate.Failed"
         ]
     },
-    "Phantom.Gate.Failed": {
+    "BeastTrial.Gate.Failed": {
         "recognition": "DirectHit",
         "action": "DoNothing",
         "next": [
-            "Phantom.Exit"
+            "BeastTrial.Exit"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【雙影幻境】點不開地圖上的入口，已安全停止。",
+                "content": "【聖獸試煉】點不開地圖上的入口，已安全停止。",
                 "display": "log"
             }
         }
     },
-    "Phantom.Gate": {
+    "BeastTrial.Gate": {
         "recognition": "OCR",
         "roi": [
             40,
@@ -449,23 +449,23 @@
         "threshold": 0.5,
         "action": "DoNothing",
         "next": [
-            "Phantom.Party.Route"
+            "BeastTrial.Party.Route"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【雙影幻境】已開啟入口視窗，準備組隊。",
+                "content": "【聖獸試煉】已開啟入口視窗，準備組隊。",
                 "display": "log"
             }
         }
     },
-    "Phantom.Party.Route": {
+    "BeastTrial.Party.Route": {
         "recognition": "DirectHit",
         "action": "DoNothing",
         "next": [
-            "Phantom.Party.Open"
+            "BeastTrial.Party.Open"
         ]
     },
-    "Phantom.Party.Open": {
+    "BeastTrial.Party.Open": {
         "recognition": "OCR",
         "roi": [
             40,
@@ -478,44 +478,44 @@
         "action": "Click",
         "post_delay": 1800,
         "next": [
-            "Phantom.Party.Fill",
-            "Phantom.Enter"
+            "BeastTrial.Party.Fill",
+            "BeastTrial.Enter"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【雙影幻境】開啟隊伍視窗…",
+                "content": "【聖獸試煉】開啟隊伍視窗…",
                 "display": "log"
             }
         }
     },
-    "Phantom.Party.Fill": {
+    "BeastTrial.Party.Fill": {
         "recognition": "DirectHit",
         "action": "Custom",
         "custom_action": "FillPartyWithPartners",
         "custom_action_param": {
-            "label": "雙影幻境"
+            "label": "聖獸試煉"
         },
         "post_delay": 1200,
         "next": [
-            "Phantom.Party.Close"
+            "BeastTrial.Party.Close"
         ]
     },
-    "Phantom.Party.Close": {
+    "BeastTrial.Party.Close": {
         "recognition": "DirectHit",
         "action": "ClickKey",
         "key": 4,
         "post_delay": 1600,
         "timeout": 12000,
         "next": [
-            "Phantom.LeaveMapDialog",
-            "Phantom.Enter",
-            "Phantom.Party.Incomplete"
+            "BeastTrial.LeaveMapDialog",
+            "BeastTrial.Enter",
+            "BeastTrial.Party.Incomplete"
         ],
         "on_error": [
-            "Phantom.Enter.Failed"
+            "BeastTrial.Enter.Failed"
         ]
     },
-    "Phantom.Party.Incomplete": {
+    "BeastTrial.Party.Incomplete": {
         "recognition": "OCR",
         "roi": [
             380,
@@ -527,16 +527,16 @@
         "threshold": 0.5,
         "action": "DoNothing",
         "next": [
-            "Phantom.Exit"
+            "BeastTrial.Exit"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【雙影幻境】隊伍未補滿（右側仍是「配對」而非進場按鈕），已安全停止，未使用配對邀請其他玩家。",
+                "content": "【聖獸試煉】隊伍未補滿（右側仍是「配對」而非進場按鈕），已安全停止，未使用配對邀請其他玩家。",
                 "display": "log"
             }
         }
     },
-    "Phantom.LeaveMapDialog": {
+    "BeastTrial.LeaveMapDialog": {
         "recognition": "OCR",
         "roi": [
             80,
@@ -556,19 +556,19 @@
         "post_delay": 1500,
         "timeout": 10000,
         "next": [
-            "Phantom.Gate.Retry"
+            "BeastTrial.Gate.Retry"
         ],
         "on_error": [
-            "Phantom.Exit"
+            "BeastTrial.Exit"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【雙影幻境】誤觸「離開地圖」彈窗，已點取消留在地圖。",
+                "content": "【聖獸試煉】誤觸「離開地圖」彈窗，已點取消留在地圖。",
                 "display": "log"
             }
         }
     },
-    "Phantom.Enter": {
+    "BeastTrial.Enter": {
         "recognition": "OCR",
         "roi": [
             380,
@@ -576,38 +576,38 @@
             320,
             110
         ],
-        "expected": "進入幻境",
+        "expected": "進入試煉",
         "threshold": 0.5,
         "action": "Click",
         "post_delay": 8000,
         "timeout": 60000,
         "next": [
-            "Phantom.Battle.Prepare"
+            "BeastTrial.Battle.Prepare"
         ],
         "on_error": [
-            "Phantom.Enter.Failed"
+            "BeastTrial.Enter.Failed"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【雙影幻境】點擊「進入幻境」，等待戰鬥準備畫面…",
+                "content": "【聖獸試煉】點擊「進入試煉」，等待戰鬥準備畫面…",
                 "display": "log"
             }
         }
     },
-    "Phantom.Enter.Failed": {
+    "BeastTrial.Enter.Failed": {
         "recognition": "DirectHit",
         "action": "DoNothing",
         "next": [
-            "Phantom.Exit"
+            "BeastTrial.Exit"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【雙影幻境】隊伍未就緒或找不到「進入幻境」，已安全停止，未進入戰鬥。",
+                "content": "【聖獸試煉】隊伍未就緒或找不到「進入試煉」，已安全停止，未進入戰鬥。",
                 "display": "log"
             }
         }
     },
-    "Phantom.Battle.Prepare": {
+    "BeastTrial.Battle.Prepare": {
         "max_hit": 40,
         "recognition": "OCR",
         "roi": [
@@ -622,33 +622,33 @@
         "post_delay": 5000,
         "timeout": 420000,
         "next": [
-            "Phantom.Battle.End",
-            "Phantom.Battle.Prepare"
+            "BeastTrial.Battle.End",
+            "BeastTrial.Battle.Prepare"
         ],
         "on_error": [
-            "Phantom.Battle.Timeout"
+            "BeastTrial.Battle.Timeout"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【雙影幻境】點擊「開始戰鬥」，等待戰鬥結束…",
+                "content": "【聖獸試煉】點擊「開始戰鬥」，等待戰鬥結束…",
                 "display": "log"
             }
         }
     },
-    "Phantom.Battle.Timeout": {
+    "BeastTrial.Battle.Timeout": {
         "recognition": "DirectHit",
         "action": "DoNothing",
         "next": [
-            "Phantom.Exit"
+            "BeastTrial.Exit"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【雙影幻境】等待逾時仍未看到「戰鬥結束」，安全結束本任務。",
+                "content": "【聖獸試煉】等待逾時仍未看到「戰鬥結束」，安全結束本任務。",
                 "display": "log"
             }
         }
     },
-    "Phantom.Battle.End": {
+    "BeastTrial.Battle.End": {
         "recognition": "OCR",
         "roi": [
             150,
@@ -661,16 +661,16 @@
         "action": "DoNothing",
         "post_delay": 2000,
         "next": [
-            "Phantom.Battle.Close"
+            "BeastTrial.Battle.Close"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【雙影幻境】戰鬥結束，讀取結算畫面。",
+                "content": "【聖獸試煉】戰鬥結束，讀取結算畫面。",
                 "display": "log"
             }
         }
     },
-    "Phantom.Battle.Close": {
+    "BeastTrial.Battle.Close": {
         "max_hit": 6,
         "recognition": "OCR",
         "roi": [
@@ -686,22 +686,22 @@
         "post_delay": 6000,
         "timeout": 30000,
         "next": [
-            "Phantom.Injured",
-            "Phantom.Loop.Enter",
-            "Phantom.Exit",
-            "Phantom.Battle.Close"
+            "BeastTrial.Injured",
+            "BeastTrial.Loop.Enter",
+            "BeastTrial.Exit",
+            "BeastTrial.Battle.Close"
         ],
         "on_error": [
-            "Phantom.Done"
+            "BeastTrial.Done"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【雙影幻境】結算畫面顯示「點擊空白處關閉」，點擊關閉…",
+                "content": "【聖獸試煉】結算畫面顯示「點擊空白處關閉」，點擊關閉…",
                 "display": "log"
             }
         }
     },
-    "Phantom.Injured": {
+    "BeastTrial.Injured": {
         "recognition": "OCR",
         "roi": [
             100,
@@ -721,20 +721,20 @@
         "post_delay": 8000,
         "timeout": 30000,
         "next": [
-            "Phantom.Loop.Enter",
-            "Phantom.Exit"
+            "BeastTrial.Loop.Enter",
+            "BeastTrial.Exit"
         ],
         "on_error": [
-            "Phantom.Done"
+            "BeastTrial.Done"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【雙影幻境】角色重傷，使用料理一鍵治療後繼續。",
+                "content": "【聖獸試煉】角色重傷，使用料理一鍵治療後繼續。",
                 "display": "log"
             }
         }
     },
-    "Phantom.Exit": {
+    "BeastTrial.Exit": {
         "recognition": "OCR",
         "roi": [
             560,
@@ -754,19 +754,19 @@
         "post_delay": 2000,
         "timeout": 10000,
         "next": [
-            "Phantom.Exit.Confirm"
+            "BeastTrial.Exit.Confirm"
         ],
         "on_error": [
-            "Phantom.Done"
+            "BeastTrial.Done"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【雙影幻境】流程結束，離開地圖…",
+                "content": "【聖獸試煉】流程結束，離開地圖…",
                 "display": "log"
             }
         }
     },
-    "Phantom.Exit.Confirm": {
+    "BeastTrial.Exit.Confirm": {
         "recognition": "OCR",
         "roi": [
             80,
@@ -786,20 +786,20 @@
         "post_delay": 9000,
         "timeout": 20000,
         "next": [
-            "Phantom.Done"
+            "BeastTrial.Done"
         ]
     },
-    "Phantom.Done": {
+    "BeastTrial.Done": {
         "recognition": "DirectHit",
         "action": "DoNothing",
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【雙影幻境】本任務結束。",
+                "content": "【聖獸試煉】本任務結束。",
                 "display": "log"
             }
         }
     },
-    "Phantom.OpenActivities.Retry": {
+    "BeastTrial.OpenActivities.Retry": {
         "max_hit": 3,
         "recognition": "OCR",
         "roi": [
@@ -814,33 +814,33 @@
         "post_delay": 2500,
         "timeout": 12000,
         "next": [
-            "Phantom.Activities",
-            "Phantom.OpenActivities.Retry"
+            "BeastTrial.Activities",
+            "BeastTrial.OpenActivities.Retry"
         ],
         "on_error": [
-            "Phantom.Open.Failed"
+            "BeastTrial.Open.Failed"
         ]
     },
-    "Phantom.OpenSelf.Retry": {
+    "BeastTrial.OpenSelf.Retry": {
         "max_hit": 3,
         "recognition": "OCR",
         "roi": [
             0,
-            530,
+            250,
             720,
             180
         ],
-        "expected": "雙影幻境",
+        "expected": "聖獸試煉",
         "threshold": 0.5,
         "action": "Click",
         "post_delay": 3000,
         "timeout": 12000,
         "next": [
-            "Phantom.Detail",
-            "Phantom.OpenSelf.Retry"
+            "BeastTrial.Detail",
+            "BeastTrial.OpenSelf.Retry"
         ],
         "on_error": [
-            "Phantom.Open.Failed"
+            "BeastTrial.Open.Failed"
         ]
     }
 }

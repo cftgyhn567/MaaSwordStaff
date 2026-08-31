@@ -1,0 +1,370 @@
+{
+    "Objectives.MapExplore.Claim.Start": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "MapExplore.EnsureNote",
+            "MapExplore.Nav.FromOtherTab",
+            "MapExplore.Nav.Recover"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【地圖探索】開始執行：筆記 →「地圖探索」→ 領取每日 1 次的命運果實。",
+                "display": "log"
+            }
+        }
+    },
+    "MapExplore.EnsureNote": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1200,
+            720,
+            80
+        ],
+        "expected": "筆記",
+        "threshold": 0.5,
+        "action": "DoNothing",
+        "timeout": 8000,
+        "next": [
+            "MapExplore.Open"
+        ],
+        "on_error": [
+            "MapExplore.Open.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【地圖探索】底部導航列顯示「筆記」，確認在筆記主頁。",
+                "display": "log"
+            }
+        }
+    },
+    "MapExplore.Nav.FromOtherTab": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            1180,
+            720,
+            100
+        ],
+        "expected": "角色|家園|世界|公會",
+        "threshold": 0.5,
+        "action": "Click",
+        "target": [
+            180,
+            1200,
+            120,
+            70
+        ],
+        "post_delay": 1400,
+        "next": [
+            "MapExplore.EnsureNote"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【地圖探索】目前在其他主頁籤，點擊「筆記」切換。",
+                "display": "log"
+            }
+        }
+    },
+    "MapExplore.Nav.Recover": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "MapExplore.Nav.LeaveMap",
+            "MapExplore.Nav.ExitDialog",
+            "MapExplore.EnsureNote",
+            "MapExplore.Nav.FromOtherTab",
+            "MapExplore.Nav.Back",
+            "MapExplore.Nav.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【地圖探索】目前在子畫面，按返回鍵回到主頁籤…",
+                "display": "log"
+            }
+        }
+    },
+    "MapExplore.Nav.Back": {
+        "max_hit": 10,
+        "recognition": "DirectHit",
+        "action": "ClickKey",
+        "key": 4,
+        "post_delay": 1600,
+        "next": [
+            "MapExplore.Nav.LeaveMap",
+            "MapExplore.Nav.ExitDialog",
+            "MapExplore.EnsureNote",
+            "MapExplore.Nav.FromOtherTab",
+            "MapExplore.Nav.Back",
+            "MapExplore.Nav.Failed"
+        ]
+    },
+    "MapExplore.Nav.LeaveMap": {
+        "recognition": "OCR",
+        "roi": [
+            80,
+            450,
+            560,
+            200
+        ],
+        "expected": "[離离]開地[圖图]",
+        "threshold": 0.3,
+        "action": "Click",
+        "target": [
+            455,
+            713,
+            74,
+            44
+        ],
+        "post_delay": 9000,
+        "next": [
+            "MapExplore.EnsureNote",
+            "MapExplore.Nav.FromOtherTab",
+            "MapExplore.Nav.Back"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【地圖探索】目前在世界地圖，確認離開地圖後回到主頁籤。",
+                "display": "log"
+            }
+        }
+    },
+    "MapExplore.Nav.ExitDialog": {
+        "recognition": "OCR",
+        "roi": [
+            160,
+            500,
+            400,
+            210
+        ],
+        "expected": "要離開遊戲嗎",
+        "threshold": 0.3,
+        "action": "Click",
+        "target": [
+            188,
+            713,
+            75,
+            44
+        ],
+        "post_delay": 1200,
+        "next": [
+            "MapExplore.Nav.SelectNote"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【地圖探索】偵測到離開遊戲彈窗，點擊取消。",
+                "display": "log"
+            }
+        }
+    },
+    "MapExplore.Nav.SelectNote": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            180,
+            1200,
+            120,
+            70
+        ],
+        "post_delay": 1600,
+        "next": [
+            "MapExplore.EnsureNote"
+        ]
+    },
+    "MapExplore.Nav.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【地圖探索】連續返回後仍無法回到筆記主頁，已安全停止，未執行任何操作。",
+                "display": "log"
+            }
+        }
+    },
+    "MapExplore.Open": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            600,
+            410,
+            180
+        ],
+        "expected": "地[圖图]探索",
+        "threshold": 0.5,
+        "action": "Click",
+        "target": true,
+        "post_delay": 2500,
+        "timeout": 12000,
+        "next": [
+            "MapExplore.Screen",
+            "MapExplore.Open.Retry"
+        ],
+        "on_error": [
+            "MapExplore.Open.Failed"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【地圖探索】點擊筆記上的「地圖探索」…",
+                "display": "log"
+            }
+        }
+    },
+    "MapExplore.Open.Retry": {
+        "max_hit": 3,
+        "recognition": "OCR",
+        "roi": [
+            0,
+            600,
+            410,
+            180
+        ],
+        "expected": "地[圖图]探索",
+        "threshold": 0.5,
+        "action": "Click",
+        "target": true,
+        "post_delay": 2500,
+        "timeout": 12000,
+        "next": [
+            "MapExplore.Screen",
+            "MapExplore.Open.Retry"
+        ],
+        "on_error": [
+            "MapExplore.Open.Failed"
+        ]
+    },
+    "MapExplore.Open.Failed": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【地圖探索】找不到「地圖探索」入口，已安全停止，未執行任何操作。",
+                "display": "log"
+            }
+        }
+    },
+    "MapExplore.Screen": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            10,
+            300,
+            70
+        ],
+        "expected": "地[圖图]探索",
+        "threshold": 0.5,
+        "action": "DoNothing",
+        "timeout": 10000,
+        "next": [
+            "MapExplore.Fruit.Ready",
+            "MapExplore.Fruit.Waiting"
+        ],
+        "on_error": [
+            "MapExplore.Done"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【地圖探索】已進入地圖探索頁（體力採集／命運果實）。",
+                "display": "log"
+            }
+        }
+    },
+    "MapExplore.Fruit.Ready": {
+        "recognition": "OCR",
+        "roi": [
+            20,
+            590,
+            320,
+            80
+        ],
+        "expected": "可[領领]取",
+        "threshold": 0.5,
+        "action": "Click",
+        "target": true,
+        "target_offset": [
+            0,
+            -30,
+            0,
+            0
+        ],
+        "post_delay": 2500,
+        "timeout": 12000,
+        "next": [
+            "MapExplore.Fruit.Claimed"
+        ],
+        "on_error": [
+            "MapExplore.Fruit.Unknown"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【地圖探索】命運果實顯示「可領取」，點擊領取…",
+                "display": "log"
+            }
+        }
+    },
+    "MapExplore.Fruit.Claimed": {
+        "recognition": "OCR",
+        "roi": [
+            20,
+            600,
+            320,
+            70
+        ],
+        "expected": "[0-9]{2}:[0-9]{2}:[0-9]{2}",
+        "threshold": 0.4,
+        "action": "DoNothing",
+        "next": [
+            "MapExplore.Done"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【地圖探索】命運果實已領取，欄位改為下次可領取的倒數。",
+                "display": "log"
+            }
+        }
+    },
+    "MapExplore.Fruit.Waiting": {
+        "recognition": "OCR",
+        "roi": [
+            20,
+            600,
+            320,
+            70
+        ],
+        "expected": "[0-9]{2}:[0-9]{2}:[0-9]{2}",
+        "threshold": 0.4,
+        "action": "DoNothing",
+        "next": [
+            "MapExplore.Done"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【地圖探索】命運果實今天已經領過（顯示倒數計時），不重複領取。",
+                "display": "log"
+            }
+        }
+    },
+    "MapExplore.Fruit.Unknown": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "MapExplore.Done"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【地圖探索】點擊後沒看到倒數計時，無法確認命運果實是否入手，請自行確認。",
+                "display": "log"
+            }
+        }
+    },
+    "MapExplore.Done": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【地圖探索】本任務結束。",
+                "display": "log"
+            }
+        }
+    }
+}

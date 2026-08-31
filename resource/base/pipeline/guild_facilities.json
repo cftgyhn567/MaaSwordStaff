@@ -830,7 +830,7 @@
             "GuildDonation.Back"
         ],
         "on_error": [
-            "GuildDonation.Back"
+            "GuildDonation.Pull.Recover"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
@@ -852,7 +852,7 @@
             "GuildDonation.Back"
         ],
         "on_error": [
-            "GuildDonation.Back"
+            "GuildDonation.Pull.Recover"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
@@ -860,6 +860,13 @@
                 "display": "log"
             }
         }
+    },
+    "GuildDonation.Pull.Recover": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GuildDonation.Back"
+        ]
     },
     "GuildDonation.Back": {
         "recognition": "DirectHit",
@@ -3347,8 +3354,7 @@
             "GuildForge.AlreadyActive"
         ],
         "on_error": [
-            "GuildForge.Switch",
-            "GuildForge.AlreadyActive"
+            "GuildForge.Renew.Recover"
         ]
     },
     "GuildForge.Select.Gold": {
@@ -3384,8 +3390,7 @@
             "GuildForge.AlreadyActive"
         ],
         "on_error": [
-            "GuildForge.Switch",
-            "GuildForge.AlreadyActive"
+            "GuildForge.Renew.Recover"
         ]
     },
     "GuildForge.Select.Crystal": {
@@ -3421,6 +3426,13 @@
             "GuildForge.AlreadyActive"
         ],
         "on_error": [
+            "GuildForge.Renew.Recover"
+        ]
+    },
+    "GuildForge.Renew.Recover": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
             "GuildForge.Switch",
             "GuildForge.AlreadyActive"
         ]

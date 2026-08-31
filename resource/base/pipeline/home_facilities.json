@@ -8332,7 +8332,7 @@
             "GachaMachine.Back"
         ],
         "on_error": [
-            "GachaMachine.Back"
+            "GachaMachine.Pull.Recover"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
@@ -8354,7 +8354,7 @@
             "GachaMachine.Back"
         ],
         "on_error": [
-            "GachaMachine.Back"
+            "GachaMachine.Pull.Recover"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
@@ -8362,6 +8362,13 @@
                 "display": "log"
             }
         }
+    },
+    "GachaMachine.Pull.Recover": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GachaMachine.Back"
+        ]
     },
     "GachaMachine.Back": {
         "recognition": "DirectHit",
@@ -8961,7 +8968,7 @@
             "GoddessStatue.Back"
         ],
         "on_error": [
-            "GoddessStatue.Back"
+            "GoddessStatue.Pull.Recover"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
@@ -8983,7 +8990,7 @@
             "GoddessStatue.Back"
         ],
         "on_error": [
-            "GoddessStatue.Back"
+            "GoddessStatue.Pull.Recover"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
@@ -8991,6 +8998,13 @@
                 "display": "log"
             }
         }
+    },
+    "GoddessStatue.Pull.Recover": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "GoddessStatue.Back"
+        ]
     },
     "GoddessStatue.Back": {
         "recognition": "DirectHit",
@@ -9480,7 +9494,7 @@
             "SakuraTree.Back"
         ],
         "on_error": [
-            "SakuraTree.Back"
+            "SakuraTree.Pull.Recover"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
@@ -9502,7 +9516,7 @@
             "SakuraTree.Back"
         ],
         "on_error": [
-            "SakuraTree.Back"
+            "SakuraTree.Pull.Recover"
         ],
         "focus": {
             "Node.Recognition.Succeeded": {
@@ -9510,6 +9524,13 @@
                 "display": "log"
             }
         }
+    },
+    "SakuraTree.Pull.Recover": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "SakuraTree.Back"
+        ]
     },
     "SakuraTree.Back": {
         "recognition": "DirectHit",
