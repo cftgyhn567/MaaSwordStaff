@@ -120,9 +120,12 @@ try {
     );
 
     const executableName = runtimePlatform.startsWith("win-") ? "mxu.exe" : "mxu";
-    const builtExecutable = join(cargoTargetRoot, "release", executableName);
+    let builtExecutable = join(cargoTargetRoot, targetTriple, "release", executableName);
     if (!existsSync(builtExecutable)) {
-        throw new Error(`Custom MXU executable was not produced: ${builtExecutable}`);
+        builtExecutable = join(cargoTargetRoot, "release", executableName);
+    }
+    if (!existsSync(builtExecutable)) {
+        throw new Error(`Custom MXU executable was not produced. Looked for: ${builtExecutable}`);
     }
 
     const stagedRuntime = join(workRoot, `runtime-${runtimePlatform}`);
