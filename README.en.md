@@ -11,23 +11,22 @@ An Android ADB automation project for the Taiwan release of _杖劍傳說：坎�
 
 The project entry configuration is `interface.json`; tasks live in `tasks/` and Pipeline resources live in `resource/base/`.
 
-Install dependencies and run the complete validation suite:
+The current interface imports 23 public tasks and three presets. See the [project knowledge base](./docs/README.md) for the architecture, task status, validation workflow, release process, and troubleshooting notes.
+
+Install dependencies and run the regular development checks:
 
 ```bash
 pnpm install
-pnpm sync:runtime
-pnpm build:mxu
 pnpm check
+pnpm check:py
+pnpm audit:pipeline
 ```
 
-Two tasks are currently available:
+`pnpm sync:runtime` and `pnpm build:mxu` are release preparation steps; follow the [release guide](./docs/release.md) when packaging.
 
-- **Startup and screen recognition test** launches the game and recognizes the exploration, home, or guild-channel screen.
-- **Collect home idle rewards** returns to Home, then handles the bed's blue-star reward and the cart's yellow-item reward. The cart reward overlay is closed with Android Back.
+`QuickDaily` and `ClaimOnly` currently both contain only `ClaimAllRewards`; that root presently ends after collecting the Home bed and cart rewards and does not launch the game. `DailyFull` adds all 23 tasks and can perform purchases, pulls, item use, dismantling, and healing, so review every option before running it.
 
-The Home workflow recognizes only stable UI prompts and text. It does not use scenery or background colors for positioning, so morning, noon, dusk, and night palettes do not affect its decisions. Missing or already-collected rewards are safely skipped after a short search without swiping the scene or clicking fixed coordinates.
-
-The regression suite currently includes the default nighttime scenery and retained screenshots from earlier scenery variants. Player names and chat content are redacted from test assets.
+The offline regression suite uses redacted screenshots. A passing recognition test does not prove ADB connectivity, input, or an end-to-end game result.
 
 ## Release
 

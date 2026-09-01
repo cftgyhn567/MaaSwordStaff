@@ -9,10 +9,6 @@
 >
 > 遊戲更新、畫面縮放、語言或帳號進度差異都可能影響辨識結果；部分流程尚未涵蓋所有帳號狀態，首次使用請逐項測試並留意執行日誌。
 
-## Agent
-
-部分任務（幻獸結緣、女神像祈願、時光扭蛋機的次數計算）需要 pipeline 無法表達的算術，改由 `agent/main.py` 這個 Python 子行程提供 Custom Action，MXU 會依 `interface.json` 的 `agent` 設定自行啟動它。發行套件會內嵌 Python runtime，相依套件列在 `requirements.txt`。
-
 ## 開發環境與模擬器設定
 
 - Windows 及 BlueStacks 5
@@ -33,9 +29,9 @@
 
 專案內建三種常用預設組合，可於 MXU 介面一鍵載入套用：
 
-- **快速日常** (`QuickDaily`)：啟動遊戲並領取免費掛機與收益獎勵。
-- **完整日常** (`DailyFull`)：包含家園六項設施流程（幻獸結緣、女神像祈願、時光扭蛋機、商店購物、道具一鍵使用、煉金爐分解與寶石合成）、公會、筆記、地圖與領取所有獎勵。家園以外的項目多數仍為待驗證骨架。
-- **只領獎勵** (`ClaimOnly`)：僅執行家園床與推車等免費掛機收益領取。
+- **快速日常** (`QuickDaily`)：目前只加入 `ClaimAllRewards`；實際只執行家園床與推車收益領取，不會自動啟動遊戲。
+- **完整日常** (`DailyFull`)：依序加入目前全部 23 個公開任務。包含購買、抽取、道具使用、分解與治療等會改變帳號狀態的操作，執行前請逐項確認選項。
+- **只領獎勵** (`ClaimOnly`)：目前同樣只加入 `ClaimAllRewards`，行為與快速日常相同。
 
 ## Agent
 
@@ -45,14 +41,18 @@
 
 專案入口為 `interface.json`，任務定義位於 `tasks/`，Pipeline 與辨識資源位於 `resource/base/`。
 
-安裝依賴並同步執行階段與檢查：
+完整的架構、23 個任務狀態、開發驗證、發布與疑難排解請見 [專案知識庫](./docs/README.md)。
+
+安裝依賴並執行日常開發檢查：
 
 ```bash
 pnpm install
-pnpm sync:runtime
-pnpm build:mxu
 pnpm check
+pnpm check:py
+pnpm audit:pipeline
 ```
+
+`pnpm sync:runtime` 與 `pnpm build:mxu` 用於發行準備，請依 [發布流程](./docs/release.md) 執行。
 
 ## 發布
 
