@@ -82,6 +82,7 @@ git diff --check
 ## Git 與發布
 
 - 沒有明確要求就不要 commit；「commit 上去」視為本機 commit，不代表 push。
+- Commit 的標題前面必須加上日期，例如 `2026.09.01 fix(build): ...`。
 - 只 stage 本次已審查檔案；先查看完整 status 與 diff，保留使用者無關修改。
 - 正式版本需同步 `interface.json`、`package.json`、`maa-project.json`、`pyproject.toml` 與 `vX.Y.Z` tag。
 - 發布前跑完整檢查；`pnpm release:dry-run` 不是可執行包證據。
