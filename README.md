@@ -7,7 +7,7 @@
 > [!WARNING]
 > 目前連線僅在開發者本機的 BlueStacks 5 上測試，尚未確認是否支援其他模擬器；使用前必須在模擬器中開啟 ADB。
 >
-> 任務目前僅完成介面與定義建立，實際執行流程與辨識條件全部尚未生效，不可視為可用的自動化功能。
+> 遊戲更新、畫面縮放、語言或帳號進度差異都可能影響辨識結果；部分流程尚未涵蓋所有帳號狀態，首次使用請逐項測試並留意執行日誌。
 
 ## Agent
 
@@ -55,6 +55,6 @@ pnpm check
 
 ## 發布
 
-推送 `v0.1.0` 形式的 tag 後，GitHub Actions 會執行檢查並建立 MXU 發行包。
+推送 `v1.0.0` 形式的 tag 後，GitHub Actions 會執行檢查並建立 MXU 發行包。
 
 English documentation: [README.en.md](./README.en.md)

@@ -1,6 +1,6 @@
 [project]
 name = "maa-sword-staff-agent"
-version = "0.1.0"
+version = "1.0.0"
 description = "MaaSwordStaff 的 Custom Action Agent，提供 pipeline 無法表達的次數計算。"
 requires-python = ">=3.12"
 dependencies = ["maafw==5.12.3"]

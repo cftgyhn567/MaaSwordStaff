@@ -19,6 +19,7 @@
         "audit:pipeline": "node tools/audit-pipeline.mjs",
         "check": "pnpm format:check && pnpm check:schema && pnpm check:maa",
         "check:maa": "pnpm exec maa-tools check",
+        "check:py": "python -m py_compile agent/bootstrap.py agent/main.py",
         "check:schema": "node tools/validate-schema.mjs",
         "format": "prettier --write .",
         "format:check": "prettier --check .",
@@ -26,5 +27,5 @@
         "sync:runtime": "node tools/sync-runtime.mjs"
     },
     "type": "module",
-    "version": "0.1.0"
+    "version": "1.0.0"
 }

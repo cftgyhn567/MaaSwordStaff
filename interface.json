@@ -2,7 +2,8 @@
     "interface_version": 2,
     "name": "maa-sword-staff",
     "label": "Maa杖劍傳說助手",
-    "version": "v0.1.0",
+    "version": "v1.0.0",
+    "github": "https://github.com/cftgyhn567/MaaSwordStaff",
     "description": "透過 Android 模擬器與 ADB 執行《杖劍傳說：坎斯汀之約》日常流程。",
     "controller": [
         {

@@ -5,7 +5,7 @@ An Android ADB automation project for the Taiwan release of _杖劍傳說：坎�
 > [!WARNING]
 > Connectivity has only been tested with the developer's local BlueStacks 5 instance. Support for other emulators has not been verified, and ADB must be enabled in the emulator before use.
 >
-> Tasks currently exist only as UI entries and definitions. Their execution flows and recognition conditions are all non-functional and must not be considered usable automation.
+> Game updates, display scaling, language, and account progression can affect recognition. Some workflows have not been verified against every account state, so test tasks individually and monitor the execution log on first use.
 
 ## Development
 
@@ -29,6 +29,6 @@ The regression suite currently includes the default nighttime scenery and retain
 
 ## Release
 
-Pushing a tag such as `v0.1.0` triggers validation and an MFAAvalonia release build.
+Pushing a tag such as `v1.0.0` triggers validation and an MXU release build.
 
 Chinese documentation: [README.md](./README.md)
