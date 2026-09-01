@@ -126,7 +126,8 @@ jobs:
           fi
           for pkg_dir in "${package_dirs[@]}"; do
             gui=$(basename "$pkg_dir" | sed 's/^package-//')
-            archive="Maa杖劍傳說助手-${{ matrix.artifact_os }}-${{ matrix.arch }}-${GITHUB_REF_NAME}-${gui^^}.${{ matrix.ext }}"
+            gui_upper=$(echo "$gui" | tr '[:lower:]' '[:upper:]')
+            archive="Maa杖劍傳說助手-${{ matrix.artifact_os }}-${{ matrix.arch }}-${GITHUB_REF_NAME}-${gui_upper}.${{ matrix.ext }}"
             (
               cd "$pkg_dir"
               if [[ "${{ matrix.ext }}" == "zip" ]]; then
