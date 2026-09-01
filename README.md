@@ -50,11 +50,14 @@
 ```bash
 pnpm install
 pnpm sync:runtime
+pnpm build:mxu
 pnpm check
 ```
 
 ## 發布
 
-推送 `v1.0.0` 形式的 tag 後，GitHub Actions 會執行檢查並建立 MXU 發行包。
+本專案使用固定在 MXU `v2.4.5` 的客製修補版，在沒有 MirrorChyan RID 時直接以 GitHub Releases 檢查、下載及安裝更新。修補檔與重現建置方式記錄於 [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md)。
+
+推送 `v1.0.0` 形式的 tag 後，GitHub Actions 會執行檢查、編譯客製 MXU，並建立各平台發行包。GitHub Release 必須保留 Actions 產生的 `*-MXU` 資產，後續版本才能由介面自動選取正確的作業系統與架構。
 
 English documentation: [README.en.md](./README.en.md)

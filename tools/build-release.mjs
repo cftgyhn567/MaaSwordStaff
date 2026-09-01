@@ -17,6 +17,7 @@ const dryRun = process.argv.includes("--dry-run");
 const projectSlug = "maa-sword-staff";
 const releaseArtifactName = "Maa杖劍傳說助手";
 const requirementsMarker = ".create-maa-project-requirements.sha256";
+const githubOnlyMxuCommit = "115fcb39d75718f8bd53e76511322660b8af00ec";
 mkdirSync("dist", {recursive: true});
 
 const project = readJson("maa-project.json");
@@ -152,6 +153,9 @@ for (const guiKey of enabledGuis) {
             console.warn(`[WARN] ${gui.suffix} runtime not found at ${guiPath}, skipping.`);
             continue;
         }
+        if (guiKey === "mxu" && interfaceJson.github && !interfaceJson.mirrorchyan_rid) {
+            verifyGithubOnlyMxuRuntime(guiPath);
+        }
         for (const path of packagePaths) {
             if (!existsSync(path)) {
                 throw new Error(`release package path is missing: ${path}`);
@@ -286,9 +290,23 @@ function optionalPackagePaths() {
         "data",
         "README.md",
         "LICENSE",
+        "THIRD_PARTY_NOTICES.md",
         "CONTACT",
         "setup-bluestacks-adb.ps1",
     ];
+}
+
+function verifyGithubOnlyMxuRuntime(runtimePath) {
+    const markerPath = join(runtimePath, "mxu-github-only.json");
+    if (!existsSync(markerPath)) {
+        throw new Error(
+            `GitHub-only releases require a custom MXU runtime. Run pnpm build:mxu for ${runtimePlatform}.`,
+        );
+    }
+    const marker = readJson(markerPath);
+    if (marker.upstream_commit !== githubOnlyMxuCommit) {
+        throw new Error(`Custom MXU runtime has unexpected upstream commit: ${marker.upstream_commit ?? "missing"}`);
+    }
 }
 
 function packageHasAgent(interfaceJson) {

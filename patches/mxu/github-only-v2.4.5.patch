@@ -1,0 +1,388 @@
+diff --git a/src-tauri/src/commands/download.rs b/src-tauri/src/commands/download.rs
+index 3a41764..31ce1a1 100644
+--- a/src-tauri/src/commands/download.rs
++++ b/src-tauri/src/commands/download.rs
+@@ -62,15 +62,4 @@ static CURRENT_DOWNLOAD_SESSION: AtomicU64 = AtomicU64::new(0);
+-/// 根据版本号获取 GitHub Release URL
+-///
+-/// 使用 GitHub API 获取指定版本的 Release 信息，支持使用 GitHub PAT 和代理
+-/// 解析 GitHub API 返回的 JSON 数据，找到与 target_version 匹配的 release，并返回 URL
+-#[tauri::command]
+-pub async fn get_github_release_by_version(
+-    owner: String,
+-    repo: String,
+-    target_version: String,
+-    github_pat: Option<String>,
+-    proxy_url: Option<String>,
+-) -> Result<Option<GitHubRelease>, String> {
+-    let url = format!("https://api.github.com/repos/{}/{}/releases", owner, repo);
+-
+-    // 构造请求头
++fn build_github_client(
++    proxy_url: Option<&String>,
++    target_url: &str,
++) -> Result<reqwest::Client, String> {
+@@ -82,2 +71 @@ pub async fn get_github_release_by_version(
+-    // 添加代理配置（如果提供）
+-    if let Some(ref proxy) = proxy_url {
++    if let Some(proxy) = proxy_url {
+@@ -86 +74 @@ pub async fn get_github_release_by_version(
+-            info!("[检查更新] 目标: {}", url);
++            info!("[检查更新] 目标: {}", target_url);
+@@ -98 +86 @@ pub async fn get_github_release_by_version(
+-    let client = client_builder
++    client_builder
+@@ -100 +88,2 @@ pub async fn get_github_release_by_version(
+-        .map_err(|e| format!("创建 HTTP 客户端失败: {}", e))?;
++        .map_err(|e| format!("创建 HTTP 客户端失败: {}", e))
++}
+@@ -101,0 +91,6 @@ pub async fn get_github_release_by_version(
++async fn fetch_github_release<T: serde::de::DeserializeOwned>(
++    url: &str,
++    github_pat: Option<String>,
++    proxy_url: Option<String>,
++) -> Result<T, String> {
++    let client = build_github_client(proxy_url.as_ref(), url)?;
+@@ -103 +98 @@ pub async fn get_github_release_by_version(
+-        .get(&url)
++        .get(url)
+@@ -107 +101,0 @@ pub async fn get_github_release_by_version(
+-    // 添加 PAT 认证（如果提供）
+@@ -123 +117 @@ pub async fn get_github_release_by_version(
+-    let releases: Vec<GitHubRelease> = response
++    response
+@@ -126 +120,17 @@ pub async fn get_github_release_by_version(
+-        .map_err(|e| format!("解析 JSON 失败: {}", e))?;
++        .map_err(|e| format!("解析 JSON 失败: {}", e))
++}
++
++/// 根据版本号获取 GitHub Release URL
++///
++/// 使用 GitHub API 获取指定版本的 Release 信息，支持使用 GitHub PAT 和代理
++/// 解析 GitHub API 返回的 JSON 数据，找到与 target_version 匹配的 release，并返回 URL
++#[tauri::command]
++pub async fn get_github_release_by_version(
++    owner: String,
++    repo: String,
++    target_version: String,
++    github_pat: Option<String>,
++    proxy_url: Option<String>,
++) -> Result<Option<GitHubRelease>, String> {
++    let url = format!("https://api.github.com/repos/{}/{}/releases", owner, repo);
++    let releases: Vec<GitHubRelease> = fetch_github_release(&url, github_pat, proxy_url).await?;
+@@ -146,0 +157,22 @@ pub async fn get_github_release_by_version(
++/// 获取 GitHub 最新的稳定 Release
++///
++/// 用于没有配置 MirrorChyan RID、仅通过 GitHub Releases 更新的项目。
++#[tauri::command]
++pub async fn get_github_latest_release(
++    owner: String,
++    repo: String,
++    github_pat: Option<String>,
++    proxy_url: Option<String>,
++) -> Result<GitHubRelease, String> {
++    let url = format!(
++        "https://api.github.com/repos/{}/{}/releases/latest",
++        owner, repo
++    );
++    let release: GitHubRelease = fetch_github_release(&url, github_pat, proxy_url).await?;
++    info!(
++        "获取到 GitHub 最新 Release: {} (tag: {})",
++        release.name, release.tag_name
++    );
++    Ok(release)
++}
++
+diff --git a/src-tauri/src/lib.rs b/src-tauri/src/lib.rs
+index f5db780..3277ffc 100644
+--- a/src-tauri/src/lib.rs
++++ b/src-tauri/src/lib.rs
+@@ -282,0 +283 @@ pub fn run() {
++            commands::download::get_github_latest_release,
+diff --git a/src/App.tsx b/src/App.tsx
+index 9846635..c1170dc 100644
+--- a/src/App.tsx
++++ b/src/App.tsx
+@@ -1039 +1039,4 @@ function App() {
+-      if (result.interface.mirrorchyan_rid && result.interface.version) {
++      if (
++        (result.interface.mirrorchyan_rid || result.interface.github) &&
++        result.interface.version
++      ) {
+@@ -1048 +1051 @@ function App() {
+-              resourceId: result.interface.mirrorchyan_rid,
++              resourceId: result.interface.mirrorchyan_rid || '',
+diff --git a/src/components/settings/UpdateSection.tsx b/src/components/settings/UpdateSection.tsx
+index 493ff1a..f168dd8 100644
+--- a/src/components/settings/UpdateSection.tsx
++++ b/src/components/settings/UpdateSection.tsx
+@@ -78,0 +79,2 @@ export function UpdateSection() {
++  const isGitHubOnly = !projectInterface?.mirrorchyan_rid && !!projectInterface?.github;
++
+@@ -81,2 +83,6 @@ export function UpdateSection() {
+-    return mirrorChyanSettings.cdk && mirrorChyanSettings.cdk.trim() !== '';
+-  }, [mirrorChyanSettings.cdk]);
++    return (
++      !!projectInterface?.mirrorchyan_rid &&
++      !!mirrorChyanSettings.cdk &&
++      mirrorChyanSettings.cdk.trim() !== ''
++    );
++  }, [mirrorChyanSettings.cdk, projectInterface?.mirrorchyan_rid]);
+@@ -306,2 +312,5 @@ export function UpdateSection() {
+-    if (!projectInterface?.mirrorchyan_rid || !projectInterface?.version) {
+-      addDebugLog('未配置 mirrorchyan_rid 或 version，无法检查更新');
++    if (
++      (!projectInterface?.mirrorchyan_rid && !projectInterface?.github) ||
++      !projectInterface?.version
++    ) {
++      addDebugLog('未配置更新来源或 version，无法检查更新');
+@@ -318 +327,5 @@ export function UpdateSection() {
+-    addDebugLog(`开始检查更新... (频道: ${mirrorChyanSettings.channel})`);
++    addDebugLog(
++      isGitHubOnly
++        ? '开始从 GitHub Releases 检查更新...'
++        : `开始检查更新... (频道: ${mirrorChyanSettings.channel})`,
++    );
+@@ -322 +335 @@ export function UpdateSection() {
+-        resourceId: projectInterface.mirrorchyan_rid,
++        resourceId: projectInterface.mirrorchyan_rid || '',
+@@ -327,0 +341 @@ export function UpdateSection() {
++        githubPat: mirrorChyanSettings.githubPat || undefined,
+@@ -360 +374 @@ export function UpdateSection() {
+-  if (!projectInterface?.mirrorchyan_rid) {
++  if (!projectInterface?.mirrorchyan_rid && !projectInterface?.github) {
+@@ -380,72 +394,78 @@ export function UpdateSection() {
+-            {/* 更新频道 */}
+-            <div>
+-              <div className="flex items-center gap-3 mb-3">
+-                <Download className="w-5 h-5 text-accent" />
+-                <span className="font-medium text-text-primary">{t('mirrorChyan.channel')}</span>
+-              </div>
+-              <div className="flex gap-2">
+-                <button
+-                  onClick={() => setMirrorChyanChannel('stable')}
+-                  className={clsx(
+-                    'flex-1 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors',
+-                    mirrorChyanSettings.channel === 'stable'
+-                      ? 'bg-accent text-white'
+-                      : 'bg-bg-tertiary text-text-secondary hover:bg-bg-hover',
+-                  )}
+-                >
+-                  {t('mirrorChyan.channelStable')}
+-                </button>
+-                <button
+-                  onClick={() => setMirrorChyanChannel('beta')}
+-                  className={clsx(
+-                    'flex-1 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors',
+-                    mirrorChyanSettings.channel === 'beta'
+-                      ? 'bg-accent text-white'
+-                      : 'bg-bg-tertiary text-text-secondary hover:bg-bg-hover',
+-                  )}
+-                >
+-                  {t('mirrorChyan.channelBeta')}
+-                </button>
+-              </div>
+-            </div>
+-
+-            {/* CDK 输入 */}
+-            <div className="pt-4 border-t border-border">
+-              <div className="flex items-center gap-3 mb-3">
+-                <Key className="w-5 h-5 text-accent" />
+-                <span className="font-medium text-text-primary">{t('mirrorChyan.cdk')}</span>
+-                <button
+-                  onClick={() => openMirrorChyanWebsite('mxu_settings')}
+-                  className="ml-auto text-xs text-accent hover:underline flex items-center gap-1"
+-                >
+-                  {t('mirrorChyan.getCdk')}
+-                  <ExternalLink className="w-3 h-3" />
+-                </button>
+-              </div>
+-              <div className="relative">
+-                <input
+-                  type={showCdk ? 'text' : 'password'}
+-                  value={mirrorChyanSettings.cdk}
+-                  onChange={(e) => handleCdkChange(e.target.value)}
+-                  placeholder={t('mirrorChyan.cdkPlaceholder')}
+-                  className="w-full px-3 py-2.5 pr-10 rounded-lg bg-bg-tertiary border border-border text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-accent/50"
+-                />
+-                <button
+-                  onClick={() => setShowCdk(!showCdk)}
+-                  className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-text-muted hover:text-text-secondary transition-colors"
+-                >
+-                  {showCdk ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+-                </button>
+-              </div>
+-              <div className="mt-3 text-xs text-text-muted leading-relaxed">
+-                <p>
+-                  <button
+-                    onClick={() => openMirrorChyanWebsite('mxu_settings_hint')}
+-                    className="text-accent hover:underline"
+-                  >
+-                    {t('mirrorChyan.serviceName')}
+-                  </button>
+-                  {t('mirrorChyan.cdkHintAfterLink', { projectName })}
+-                </p>
+-              </div>
+-            </div>
++            {!isGitHubOnly && (
++              <>
++                {/* 更新频道 */}
++                <div>
++                  <div className="flex items-center gap-3 mb-3">
++                    <Download className="w-5 h-5 text-accent" />
++                    <span className="font-medium text-text-primary">
++                      {t('mirrorChyan.channel')}
++                    </span>
++                  </div>
++                  <div className="flex gap-2">
++                    <button
++                      onClick={() => setMirrorChyanChannel('stable')}
++                      className={clsx(
++                        'flex-1 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors',
++                        mirrorChyanSettings.channel === 'stable'
++                          ? 'bg-accent text-white'
++                          : 'bg-bg-tertiary text-text-secondary hover:bg-bg-hover',
++                      )}
++                    >
++                      {t('mirrorChyan.channelStable')}
++                    </button>
++                    <button
++                      onClick={() => setMirrorChyanChannel('beta')}
++                      className={clsx(
++                        'flex-1 px-4 py-2.5 rounded-lg text-sm font-medium transition-colors',
++                        mirrorChyanSettings.channel === 'beta'
++                          ? 'bg-accent text-white'
++                          : 'bg-bg-tertiary text-text-secondary hover:bg-bg-hover',
++                      )}
++                    >
++                      {t('mirrorChyan.channelBeta')}
++                    </button>
++                  </div>
++                </div>
++
++                {/* CDK 输入 */}
++                <div className="pt-4 border-t border-border">
++                  <div className="flex items-center gap-3 mb-3">
++                    <Key className="w-5 h-5 text-accent" />
++                    <span className="font-medium text-text-primary">{t('mirrorChyan.cdk')}</span>
++                    <button
++                      onClick={() => openMirrorChyanWebsite('mxu_settings')}
++                      className="ml-auto text-xs text-accent hover:underline flex items-center gap-1"
++                    >
++                      {t('mirrorChyan.getCdk')}
++                      <ExternalLink className="w-3 h-3" />
++                    </button>
++                  </div>
++                  <div className="relative">
++                    <input
++                      type={showCdk ? 'text' : 'password'}
++                      value={mirrorChyanSettings.cdk}
++                      onChange={(e) => handleCdkChange(e.target.value)}
++                      placeholder={t('mirrorChyan.cdkPlaceholder')}
++                      className="w-full px-3 py-2.5 pr-10 rounded-lg bg-bg-tertiary border border-border text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-accent/50"
++                    />
++                    <button
++                      onClick={() => setShowCdk(!showCdk)}
++                      className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-text-muted hover:text-text-secondary transition-colors"
++                    >
++                      {showCdk ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
++                    </button>
++                  </div>
++                  <div className="mt-3 text-xs text-text-muted leading-relaxed">
++                    <p>
++                      <button
++                        onClick={() => openMirrorChyanWebsite('mxu_settings_hint')}
++                        className="text-accent hover:underline"
++                      >
++                        {t('mirrorChyan.serviceName')}
++                      </button>
++                      {t('mirrorChyan.cdkHintAfterLink', { projectName })}
++                    </p>
++                  </div>
++                </div>
++              </>
++            )}
+diff --git a/src/services/updateService.ts b/src/services/updateService.ts
+index 473da55..5feaff2 100644
+--- a/src/services/updateService.ts
++++ b/src/services/updateService.ts
+@@ -513,0 +514,23 @@ async function getGitHubReleaseByVersion(
++/**
++ * 获取 GitHub 最新的稳定 Release
++ * GitHub 的 releases/latest 接口会自动排除草稿和预发布版本。
++ */
++async function getGitHubLatestRelease(
++  owner: string,
++  repo: string,
++  githubPat?: string,
++  proxyUrl?: string,
++): Promise<GitHubRelease | null> {
++  try {
++    return await invoke<GitHubRelease>('get_github_latest_release', {
++      owner,
++      repo,
++      githubPat,
++      proxyUrl,
++    });
++  } catch (error) {
++    log.error('获取 GitHub 最新 Release 失败:', error);
++    return null;
++  }
++}
++
+@@ -862,0 +886,45 @@ export interface CheckAndDownloadOptions extends CheckUpdateOptions {
++async function checkGitHubUpdate(options: CheckAndDownloadOptions): Promise<UpdateInfo | null> {
++  const { githubUrl, githubPat, proxyUrl, currentVersion } = options;
++  if (!githubUrl) {
++    log.warn('未配置 mirrorchyan_rid 或 github，跳过更新检查');
++    return null;
++  }
++
++  const parsed = parseGitHubUrl(githubUrl);
++  if (!parsed) {
++    log.warn('无法解析 GitHub URL:', githubUrl);
++    return null;
++  }
++
++  const release = await getGitHubLatestRelease(parsed.owner, parsed.repo, githubPat, proxyUrl);
++  if (!release) return null;
++
++  const hasUpdate = compareVersions(release.tag_name, currentVersion) > 0;
++  const updateInfo: UpdateInfo = {
++    hasUpdate,
++    versionName: release.tag_name,
++    releaseNote: release.body || '',
++    channel: 'stable',
++  };
++
++  if (!hasUpdate) {
++    log.info(`当前已是最新版本: ${currentVersion}`);
++    return updateInfo;
++  }
++
++  const asset = await matchGitHubAsset(release.assets);
++  if (!asset) {
++    log.warn('GitHub 最新 Release 中未找到匹配当前系统和架构的文件');
++    return updateInfo;
++  }
++
++  log.info(`GitHub-only 更新可用: ${release.tag_name} (${asset.name})`);
++  return {
++    ...updateInfo,
++    downloadUrl: asset.browser_download_url,
++    fileSize: asset.size,
++    filename: asset.name,
++    downloadSource: 'github',
++  };
++}
++
+@@ -865 +933 @@ export interface CheckAndDownloadOptions extends CheckUpdateOptions {
+- * 始终使用 Mirror酱 检查更新，根据是否有 CDK 决定下载来源
++ * 有 MirrorChyan RID 时保留原有检查流程；否则直接检查 GitHub Releases。
+@@ -878 +946,5 @@ export async function checkAndPrepareDownload(
+-  // 始终使用 Mirror酱 检查更新
++  if (!checkOptions.resourceId) {
++    return checkGitHubUpdate(options);
++  }
++
++  // 有 RID 时使用 Mirror酱 检查更新

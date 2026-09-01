@@ -32,7 +32,7 @@ jobs:
             runtime_os: linux
             runtime_arch: x64
             ext: tar.gz
-          - os: ubuntu-latest
+          - os: ubuntu-24.04-arm
             artifact_os: linux
             arch: aarch64
             runtime_os: linux
@@ -64,6 +64,11 @@ jobs:
         with:
           node-version: 24
           cache: pnpm
+      - uses: dtolnay/rust-toolchain@stable
+        if: github.event_name != 'workflow_dispatch'
+      - name: Install MXU Linux build dependencies
+        if: github.event_name != 'workflow_dispatch' && matrix.runtime_os == 'linux'
+        run: sudo apt-get update && sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
       - run: pnpm install --frozen-lockfile
       - run: pnpm audit --audit-level high
       - run: pnpm check
@@ -76,6 +81,10 @@ jobs:
         env:
           CREATE_MAA_PROJECT_RUNTIME_PLATFORM: ${{ matrix.runtime_os }}-${{ matrix.runtime_arch }}
           GITHUB_TOKEN: ${{ github.token }}
+      - run: pnpm build:mxu
+        if: github.event_name != 'workflow_dispatch'
+        env:
+          CREATE_MAA_PROJECT_RUNTIME_PLATFORM: ${{ matrix.runtime_os }}-${{ matrix.runtime_arch }}
       - run: node tools/build-release.mjs
         if: github.event_name != 'workflow_dispatch'
         env:

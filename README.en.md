@@ -15,6 +15,8 @@ Install dependencies and run the complete validation suite:
 
 ```bash
 pnpm install
+pnpm sync:runtime
+pnpm build:mxu
 pnpm check
 ```
 
@@ -29,6 +31,8 @@ The regression suite currently includes the default nighttime scenery and retain
 
 ## Release
 
-Pushing a tag such as `v1.0.0` triggers validation and an MXU release build.
+This project uses a patched MXU build pinned to `v2.4.5`. When no MirrorChyan RID is configured, it checks, downloads, and installs updates directly from GitHub Releases. See [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md) for the patch and reproducible build instructions.
+
+Pushing a tag such as `v1.0.0` triggers validation, builds the custom MXU, and creates release packages for every supported platform. Keep the generated `*-MXU` assets attached to the GitHub Release so later versions can select the correct operating system and architecture automatically.
 
 Chinese documentation: [README.md](./README.md)
