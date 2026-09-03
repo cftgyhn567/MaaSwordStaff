@@ -688,7 +688,7 @@
         "next": [
             "Phantom.Injured",
             "Phantom.Loop.Enter",
-            "Phantom.Exit",
+            "Phantom.Claim.Open",
             "Phantom.Battle.Close"
         ],
         "on_error": [
@@ -722,7 +722,7 @@
         "timeout": 30000,
         "next": [
             "Phantom.Loop.Enter",
-            "Phantom.Exit"
+            "Phantom.Claim.Open"
         ],
         "on_error": [
             "Phantom.Done"
@@ -841,6 +841,144 @@
         ],
         "on_error": [
             "Phantom.Open.Failed"
+        ]
+    },
+    "Phantom.Claim.Open": {
+        "max_hit": 1,
+        "recognition": "OCR",
+        "roi": [
+            560,
+            1210,
+            160,
+            70
+        ],
+        "expected": "探索",
+        "threshold": 0.5,
+        "action": "Click",
+        "target": [
+            320,
+            370,
+            80,
+            80
+        ],
+        "post_delay": 2500,
+        "timeout": 12000,
+        "next": [
+            "Phantom.Claim.Window"
+        ],
+        "on_error": [
+            "Phantom.Exit"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【雙影幻境】戰鬥都打完了，再點一次入口叫出介面領取獎勵…",
+                "display": "log"
+            }
+        }
+    },
+    "Phantom.Claim.Window": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            760,
+            720,
+            340
+        ],
+        "expected": "今日|[組组][隊队]|配[對对]",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "next": [
+            "Phantom.Claim.Button",
+            "Phantom.Claim.None"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【雙影幻境】入口介面已開啟，檢查有沒有可領取的獎勵…",
+                "display": "log"
+            }
+        }
+    },
+    "Phantom.Claim.Button": {
+        "max_hit": 4,
+        "recognition": "TemplateMatch",
+        "roi": [
+            180,
+            860,
+            520,
+            120
+        ],
+        "template": "common/red-dot.png",
+        "threshold": 0.7,
+        "action": "Click",
+        "target": true,
+        "target_offset": [
+            -25,
+            24,
+            0,
+            0
+        ],
+        "post_delay": 2500,
+        "next": [
+            "Phantom.Claim.Overlay",
+            "Phantom.Claim.Button",
+            "Phantom.Claim.Close"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【雙影幻境】進度條上有已達成未領取的寶箱（紅點），點下去領獎…",
+                "display": "log"
+            }
+        }
+    },
+    "Phantom.Claim.Overlay": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            0,
+            720,
+            1280
+        ],
+        "expected": "獲得獎勵|[點点][擊击]空白|[點点][擊击]任意",
+        "threshold": 0.5,
+        "action": "Click",
+        "target": [
+            360,
+            200,
+            40,
+            40
+        ],
+        "post_delay": 1500,
+        "next": [
+            "Phantom.Claim.Button",
+            "Phantom.Claim.Close"
+        ]
+    },
+    "Phantom.Claim.None": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Phantom.Claim.Close"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【雙影幻境】介面裡沒有可領取的獎勵，直接關閉。",
+                "display": "log"
+            }
+        }
+    },
+    "Phantom.Claim.Close": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            360,
+            60,
+            40,
+            40
+        ],
+        "post_delay": 1500,
+        "next": [
+            "Phantom.Exit",
+            "Phantom.Done"
         ]
     }
 }

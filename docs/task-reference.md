@@ -35,11 +35,11 @@
 | Map   | `ExploreFate`                 | 探尋／探索命運     | `Objectives.Pilgrimage.Daily.ExploreFate3.Start` | `objective_catalog.json` | **骨架**：只導航到世界主頁並記錄日誌          |
 | Map   | `ConsumeStamina`              | 消耗體力           | `Objectives.ConsumeStamina.Start`                | `objective_catalog.json` | **骨架**：`DoNothing` ＋ 日誌                 |
 | Other | `Commissions`                 | 委託任務           | `Objectives.Commissions.Start`                   | `commissions.json`       | 流程完整、未完整回歸                          |
-| Other | `ClaimAllRewards`             | 領取所有獎勵       | `Rewards.All.Start`                              | `reward_claims.json`     | **部分串接**：目前只執行家園床／推車          |
+| Other | `ClaimAllRewards`             | 領取所有獎勵       | `Rewards.All.Start`                              | `reward_claims.json`     | 已串接完整領獎鏈；僅驗證到好友頁              |
 
 `tasks/startup.json` 的 `StartupProbe`（entry `Startup.Start`）**沒有被 `interface.json` import**，因此不是公開任務，preset 也不會靠它啟動遊戲。要啟用必須先加入 `interface.json#import` 並實機驗證。
 
-`reward_claims.json` 雖然已有好友、餽贈、日／周／委託、巡禮、基金、饋禮、月卡與精彩活動等內部節點，但 `Rewards.All.Start` 目前只進入 `HomeRewards.Start`，且 `HomeRewards.Done` 沒有接回 `Rewards.FunctionList.Start`。在修正與實機驗證前，不能把 `ClaimAllRewards` 的完整介面說明當成已實作。
+`reward_claims.json` 的好友、餽贈、日／周／委託、巡禮、基金、饋禮、月卡與精彩活動節點，2026-09-03 起已由 `HomeRewards.Done → Rewards.FunctionList.Start` 串起來，`ClaimAllRewards` 會整條跑完。實機只驗證到「家園 → 功能列表 → 好友」的導航，後段尚未端到端實跑，宣稱完整成功前要補證據。
 
 ## 消耗資源對照
 
@@ -68,7 +68,7 @@
 | `BondAdventureScenicDispatch`   | 否（每日 4 次免費）                                                                    | —                                                    |
 | `ExploreFate`、`ConsumeStamina` | 否（骨架）                                                                             | —                                                    |
 | `Commissions`                   | 否（額外次數預設關閉）                                                                 | 開啟額外次數會扣資源，但缺樣本，仍在免費上限停止     |
-| `ClaimAllRewards`               | 否（目前只領家園床／推車）                                                             | 其他領獎子流程尚未接到公開 root                      |
+| `ClaimAllRewards`               | 是（家園床／推車 → 好友 → 餽贈 → 任務 → 商城 → 活動）                                  | 後段子流程尚未端到端實跑                             |
 
 ## 選項明細
 
@@ -113,21 +113,20 @@
 
 ### 筆記與地圖（`tasks/gameplay_objectives.json`）
 
-| 任務             | 選項                                            | 型別                                       | 預設           |
-| ---------------- | ----------------------------------------------- | ------------------------------------------ | -------------- |
-| `DailyDungeon`   | `DailyDungeonTarget`                            | select `Slot1`～`Slot3`                    | `Slot3`        |
-|                  | `DailyDungeonBattleCount`                       | select `Count0`～`Count6`                  | `Count4`       |
-|                  | `DailyDungeonPurchaseCount`                     | select `Count0`～`Count2`                  | `Count0`       |
-| `ArenaChallenge` | `ArenaTicketPurchaseCount`                      | select `Count0`～`Count8`                  | `Count0`       |
-|                  | `ArenaBattleCount`                              | select `All`/`Count0`/`1`/`2`/`3`/`5`/`10` | `All`          |
-|                  | `ArenaShopItem1`～`ArenaShopItem9`              | select `Never`/`Once`/`ToLimit`            | 全部 `Never`   |
-| `BeastTrial`     | `BeastTrialRunCount`                            | select `Count0`～`Count3`                  | `Count1`       |
-|                  | `BeastTrialParty`                               | select `FillPartners`/`KeepCurrent`        | `FillPartners` |
-| `PhantomRealm`   | `PhantomRunCount`                               | select `Count0`～`Count3`                  | `Count1`       |
-|                  | `PhantomParty`                                  | select `FillPartners`/`KeepCurrent`        | `FillPartners` |
-| `MaterialRealm`  | `Material{Iron,Gold,Monster,Sand}PurchaseCount` | select `Buy0`～`Buy20`                     | 全部 `Buy0`    |
-|                  | `Material{…}QuickMining`                        | switch                                     | 全部 `Yes`     |
-|                  | `Material{…}MiningCount`                        | input 0～999                               | 全部 `0`       |
+| 任務             | 選項                                            | 型別                                        | 預設           |
+| ---------------- | ----------------------------------------------- | ------------------------------------------- | -------------- |
+| `DailyDungeon`   | `DailyDungeonTarget`                            | select 25 個副本（`WorldTree`～`IceSpire`） | `IceSpire`     |
+|                  | `DailyDungeonBattleCount`                       | select `Count0`～`Count6`／`CountMax`       | `Count4`       |
+| `ArenaChallenge` | `ArenaTicketPurchaseCount`                      | select `Count0`～`Count8`                   | `Count0`       |
+|                  | `ArenaBattleCount`                              | select `All`/`Count0`/`1`/`2`/`3`/`5`/`10`  | `All`          |
+|                  | `ArenaShopItem1`～`ArenaShopItem9`              | select `Never`/`Once`/`ToLimit`             | 全部 `Never`   |
+| `BeastTrial`     | `BeastTrialRunCount`                            | select `Count0`～`Count3`                   | `Count1`       |
+|                  | `BeastTrialParty`                               | select `FillPartners`/`KeepCurrent`         | `FillPartners` |
+| `PhantomRealm`   | `PhantomRunCount`                               | select `Count0`～`Count3`                   | `Count1`       |
+|                  | `PhantomParty`                                  | select `FillPartners`/`KeepCurrent`         | `FillPartners` |
+| `MaterialRealm`  | `Material{Iron,Gold,Monster,Sand}PurchaseCount` | select `Buy0`～`Buy20`                      | 全部 `Buy0`    |
+|                  | `Material{…}QuickMining`                        | switch                                      | 全部 `Yes`     |
+|                  | `Material{…}MiningCount`                        | input 0～999                                | 全部 `0`       |
 
 `MapExploreClaim`、`ExploreFate`、`ConsumeStamina`、`BondAdventureScenicDispatch` 沒有選項。
 
@@ -157,7 +156,7 @@
 
 即使把 `CommissionUseExtraAttempts` 設為 `Yes`，目前仍缺少「今日剩餘 `0/4` 之後的額外次數確認畫面」樣本，Pipeline 應在免費上限安全停止，不可扣資源。
 
-注意：`ClaimAllRewards` 目前不會走到內部委託節點，所以這兩個選項對公開 root 的現行床／推車流程沒有實際影響。
+注意：`ClaimAllRewards` 串接後會走到內部委託節點，這兩個選項因此會實際生效。
 
 ## Preset
 
@@ -169,7 +168,7 @@ Preset 定義在 `tasks/preset/*.json`。**Preset 只是「一次加入哪些任
 | `ClaimOnly`  | 只領獎勵 | 只有 `ClaimAllRewards`（目前與 `QuickDaily` 內容相同，只有說明文字不同） |
 | `DailyFull`  | 完整日常 | 全部 23 個任務                                                           |
 
-`QuickDaily` 與 `ClaimOnly` 目前都只會執行 `ClaimAllRewards` 的家園床／推車段落，不會自動啟動遊戲，也不會進入尚未串接的其他領獎子流程。
+`QuickDaily` 與 `ClaimOnly` 都只會執行 `ClaimAllRewards`（現在含完整領獎鏈），不會自動啟動遊戲。
 
 `DailyFull` 的執行順序為 家園 → 公會 → 筆記 → 地圖 → 其他，`ClaimAllRewards` 排最後：
 

@@ -166,6 +166,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -193,6 +194,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -214,6 +216,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -235,6 +238,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -256,6 +260,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -277,6 +282,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -1019,6 +1025,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -1046,6 +1053,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -1067,6 +1075,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -1088,6 +1097,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -1109,6 +1119,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -1130,6 +1141,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -1508,6 +1520,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -1535,6 +1548,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -1556,6 +1570,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -1577,6 +1592,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -1598,6 +1614,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -1619,6 +1636,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -1640,6 +1658,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -7802,6 +7821,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -7829,6 +7849,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -7850,6 +7871,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -7871,6 +7893,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -7892,6 +7915,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -7913,6 +7937,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -7934,6 +7959,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -8592,6 +8618,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -8619,6 +8646,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -8640,6 +8668,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -8661,6 +8690,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -8682,6 +8712,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -8703,6 +8734,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -8724,6 +8756,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -8751,6 +8784,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -9228,6 +9262,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -9255,6 +9290,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -9276,6 +9312,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -9297,6 +9334,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -9318,6 +9356,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -9339,6 +9378,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -9360,6 +9400,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -9387,6 +9428,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -9754,6 +9796,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -9781,6 +9824,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -9802,6 +9846,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -9823,6 +9868,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -9844,6 +9890,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -9865,6 +9912,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 900,
         "next": [
@@ -9895,7 +9943,7 @@
             800
         ],
         "template": "home/npc-gift-bubble.png",
-        "threshold": 0.75,
+        "threshold": 0.6,
         "action": "Click",
         "target": true,
         "target_offset": [
@@ -9906,7 +9954,8 @@
         ],
         "post_delay": 2800,
         "next": [
-            "HomeGifts.Letter1",
+            "HomeGifts.Card1",
+            "HomeGifts.Find1.Lower",
             "HomeGifts.Recover1"
         ],
         "focus": {
@@ -9919,14 +9968,15 @@
     "HomeGifts.Letter1": {
         "recognition": "OCR",
         "roi": [
-            200,
-            845,
-            320,
-            90
+            160,
+            800,
+            400,
+            160
         ],
         "expected": "領取",
-        "threshold": 0.3,
+        "threshold": 0.5,
         "action": "Click",
+        "target": true,
         "post_delay": 3000,
         "next": [
             "HomeGifts.Dismiss1"
@@ -9947,9 +9997,10 @@
             40,
             40
         ],
-        "post_delay": 2000,
+        "post_delay": 3000,
         "next": [
             "HomeGifts.Find1",
+            "HomeGifts.Recheck1",
             "HomeGifts.Move1"
         ]
     },
@@ -10008,6 +10059,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 1200,
         "next": [
@@ -10038,7 +10090,7 @@
             800
         ],
         "template": "home/npc-gift-bubble.png",
-        "threshold": 0.75,
+        "threshold": 0.6,
         "action": "Click",
         "target": true,
         "target_offset": [
@@ -10049,7 +10101,8 @@
         ],
         "post_delay": 2800,
         "next": [
-            "HomeGifts.Letter2",
+            "HomeGifts.Card2",
+            "HomeGifts.Find2.Lower",
             "HomeGifts.Recover2"
         ],
         "focus": {
@@ -10062,14 +10115,15 @@
     "HomeGifts.Letter2": {
         "recognition": "OCR",
         "roi": [
-            200,
-            845,
-            320,
-            90
+            160,
+            800,
+            400,
+            160
         ],
         "expected": "領取",
-        "threshold": 0.3,
+        "threshold": 0.5,
         "action": "Click",
+        "target": true,
         "post_delay": 3000,
         "next": [
             "HomeGifts.Dismiss2"
@@ -10090,9 +10144,10 @@
             40,
             40
         ],
-        "post_delay": 2000,
+        "post_delay": 3000,
         "next": [
             "HomeGifts.Find2",
+            "HomeGifts.Recheck2",
             "HomeGifts.Move2"
         ]
     },
@@ -10151,6 +10206,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 1200,
         "next": [
@@ -10181,7 +10237,7 @@
             800
         ],
         "template": "home/npc-gift-bubble.png",
-        "threshold": 0.75,
+        "threshold": 0.6,
         "action": "Click",
         "target": true,
         "target_offset": [
@@ -10192,7 +10248,8 @@
         ],
         "post_delay": 2800,
         "next": [
-            "HomeGifts.Letter3",
+            "HomeGifts.Card3",
+            "HomeGifts.Find3.Lower",
             "HomeGifts.Recover3"
         ],
         "focus": {
@@ -10205,14 +10262,15 @@
     "HomeGifts.Letter3": {
         "recognition": "OCR",
         "roi": [
-            200,
-            845,
-            320,
-            90
+            160,
+            800,
+            400,
+            160
         ],
         "expected": "領取",
-        "threshold": 0.3,
+        "threshold": 0.5,
         "action": "Click",
+        "target": true,
         "post_delay": 3000,
         "next": [
             "HomeGifts.Dismiss3"
@@ -10233,9 +10291,10 @@
             40,
             40
         ],
-        "post_delay": 2000,
+        "post_delay": 3000,
         "next": [
             "HomeGifts.Find3",
+            "HomeGifts.Recheck3",
             "HomeGifts.Move3"
         ]
     },
@@ -10294,6 +10353,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 1200,
         "next": [
@@ -10324,7 +10384,7 @@
             800
         ],
         "template": "home/npc-gift-bubble.png",
-        "threshold": 0.75,
+        "threshold": 0.6,
         "action": "Click",
         "target": true,
         "target_offset": [
@@ -10335,7 +10395,8 @@
         ],
         "post_delay": 2800,
         "next": [
-            "HomeGifts.Letter4",
+            "HomeGifts.Card4",
+            "HomeGifts.Find4.Lower",
             "HomeGifts.Recover4"
         ],
         "focus": {
@@ -10348,14 +10409,15 @@
     "HomeGifts.Letter4": {
         "recognition": "OCR",
         "roi": [
-            200,
-            845,
-            320,
-            90
+            160,
+            800,
+            400,
+            160
         ],
         "expected": "領取",
-        "threshold": 0.3,
+        "threshold": 0.5,
         "action": "Click",
+        "target": true,
         "post_delay": 3000,
         "next": [
             "HomeGifts.Dismiss4"
@@ -10376,9 +10438,10 @@
             40,
             40
         ],
-        "post_delay": 2000,
+        "post_delay": 3000,
         "next": [
             "HomeGifts.Find4",
+            "HomeGifts.Recheck4",
             "HomeGifts.Move4"
         ]
     },
@@ -10437,6 +10500,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 400,
         "post_delay": 1200,
         "next": [
@@ -10467,7 +10531,7 @@
             800
         ],
         "template": "home/npc-gift-bubble.png",
-        "threshold": 0.75,
+        "threshold": 0.6,
         "action": "Click",
         "target": true,
         "target_offset": [
@@ -10478,7 +10542,8 @@
         ],
         "post_delay": 2800,
         "next": [
-            "HomeGifts.Letter5",
+            "HomeGifts.Card5",
+            "HomeGifts.Find5.Lower",
             "HomeGifts.Recover5"
         ],
         "focus": {
@@ -10491,14 +10556,15 @@
     "HomeGifts.Letter5": {
         "recognition": "OCR",
         "roi": [
-            200,
-            845,
-            320,
-            90
+            160,
+            800,
+            400,
+            160
         ],
         "expected": "領取",
-        "threshold": 0.3,
+        "threshold": 0.5,
         "action": "Click",
+        "target": true,
         "post_delay": 3000,
         "next": [
             "HomeGifts.Dismiss5"
@@ -10519,9 +10585,10 @@
             40,
             40
         ],
-        "post_delay": 2000,
+        "post_delay": 3000,
         "next": [
             "HomeGifts.Find5",
+            "HomeGifts.Recheck5",
             "HomeGifts.Done"
         ]
     },
@@ -10571,6 +10638,351 @@
         "focus": {
             "Node.Recognition.Succeeded": {
                 "content": "【家園禮物】已掃過整張家園地圖，禮物領取流程結束。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.Find1.Lower": {
+        "max_hit": 6,
+        "recognition": "TemplateMatch",
+        "roi": [
+            0,
+            240,
+            720,
+            800
+        ],
+        "template": "home/npc-gift-bubble.png",
+        "threshold": 0.6,
+        "action": "Click",
+        "target": true,
+        "target_offset": [
+            0,
+            120,
+            0,
+            0
+        ],
+        "post_delay": 2800,
+        "next": [
+            "HomeGifts.Card1",
+            "HomeGifts.Recover1"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】第一次沒跳出感謝卡，改點泡泡再下面一點的位置…",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.Card1": {
+        "recognition": "OCR",
+        "roi": [
+            80,
+            300,
+            580,
+            300
+        ],
+        "expected": "親愛的|敬上|感[謝谢]",
+        "threshold": 0.5,
+        "action": "DoNothing",
+        "next": [
+            "HomeGifts.Letter1",
+            "HomeGifts.Dismiss1"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】感謝卡已跳出，準備按「領取」。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.Find2.Lower": {
+        "max_hit": 6,
+        "recognition": "TemplateMatch",
+        "roi": [
+            0,
+            240,
+            720,
+            800
+        ],
+        "template": "home/npc-gift-bubble.png",
+        "threshold": 0.6,
+        "action": "Click",
+        "target": true,
+        "target_offset": [
+            0,
+            120,
+            0,
+            0
+        ],
+        "post_delay": 2800,
+        "next": [
+            "HomeGifts.Card2",
+            "HomeGifts.Recover2"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】第一次沒跳出感謝卡，改點泡泡再下面一點的位置…",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.Card2": {
+        "recognition": "OCR",
+        "roi": [
+            80,
+            300,
+            580,
+            300
+        ],
+        "expected": "親愛的|敬上|感[謝谢]",
+        "threshold": 0.5,
+        "action": "DoNothing",
+        "next": [
+            "HomeGifts.Letter2",
+            "HomeGifts.Dismiss2"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】感謝卡已跳出，準備按「領取」。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.Find3.Lower": {
+        "max_hit": 6,
+        "recognition": "TemplateMatch",
+        "roi": [
+            0,
+            240,
+            720,
+            800
+        ],
+        "template": "home/npc-gift-bubble.png",
+        "threshold": 0.6,
+        "action": "Click",
+        "target": true,
+        "target_offset": [
+            0,
+            120,
+            0,
+            0
+        ],
+        "post_delay": 2800,
+        "next": [
+            "HomeGifts.Card3",
+            "HomeGifts.Recover3"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】第一次沒跳出感謝卡，改點泡泡再下面一點的位置…",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.Card3": {
+        "recognition": "OCR",
+        "roi": [
+            80,
+            300,
+            580,
+            300
+        ],
+        "expected": "親愛的|敬上|感[謝谢]",
+        "threshold": 0.5,
+        "action": "DoNothing",
+        "next": [
+            "HomeGifts.Letter3",
+            "HomeGifts.Dismiss3"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】感謝卡已跳出，準備按「領取」。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.Find4.Lower": {
+        "max_hit": 6,
+        "recognition": "TemplateMatch",
+        "roi": [
+            0,
+            240,
+            720,
+            800
+        ],
+        "template": "home/npc-gift-bubble.png",
+        "threshold": 0.6,
+        "action": "Click",
+        "target": true,
+        "target_offset": [
+            0,
+            120,
+            0,
+            0
+        ],
+        "post_delay": 2800,
+        "next": [
+            "HomeGifts.Card4",
+            "HomeGifts.Recover4"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】第一次沒跳出感謝卡，改點泡泡再下面一點的位置…",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.Card4": {
+        "recognition": "OCR",
+        "roi": [
+            80,
+            300,
+            580,
+            300
+        ],
+        "expected": "親愛的|敬上|感[謝谢]",
+        "threshold": 0.5,
+        "action": "DoNothing",
+        "next": [
+            "HomeGifts.Letter4",
+            "HomeGifts.Dismiss4"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】感謝卡已跳出，準備按「領取」。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.Find5.Lower": {
+        "max_hit": 6,
+        "recognition": "TemplateMatch",
+        "roi": [
+            0,
+            240,
+            720,
+            800
+        ],
+        "template": "home/npc-gift-bubble.png",
+        "threshold": 0.6,
+        "action": "Click",
+        "target": true,
+        "target_offset": [
+            0,
+            120,
+            0,
+            0
+        ],
+        "post_delay": 2800,
+        "next": [
+            "HomeGifts.Card5",
+            "HomeGifts.Recover5"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】第一次沒跳出感謝卡，改點泡泡再下面一點的位置…",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.Card5": {
+        "recognition": "OCR",
+        "roi": [
+            80,
+            300,
+            580,
+            300
+        ],
+        "expected": "親愛的|敬上|感[謝谢]",
+        "threshold": 0.5,
+        "action": "DoNothing",
+        "next": [
+            "HomeGifts.Letter5",
+            "HomeGifts.Dismiss5"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】感謝卡已跳出，準備按「領取」。",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.Recheck1": {
+        "max_hit": 1,
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "post_delay": 1500,
+        "next": [
+            "HomeGifts.Find1",
+            "HomeGifts.Move1"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】等畫面回到家園再確認一次同一個位置還有沒有禮物泡泡…",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.Recheck2": {
+        "max_hit": 1,
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "post_delay": 1500,
+        "next": [
+            "HomeGifts.Find2",
+            "HomeGifts.Move2"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】等畫面回到家園再確認一次同一個位置還有沒有禮物泡泡…",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.Recheck3": {
+        "max_hit": 1,
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "post_delay": 1500,
+        "next": [
+            "HomeGifts.Find3",
+            "HomeGifts.Move3"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】等畫面回到家園再確認一次同一個位置還有沒有禮物泡泡…",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.Recheck4": {
+        "max_hit": 1,
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "post_delay": 1500,
+        "next": [
+            "HomeGifts.Find4",
+            "HomeGifts.Move4"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】等畫面回到家園再確認一次同一個位置還有沒有禮物泡泡…",
+                "display": "log"
+            }
+        }
+    },
+    "HomeGifts.Recheck5": {
+        "max_hit": 1,
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "post_delay": 1500,
+        "next": [
+            "HomeGifts.Find5",
+            "HomeGifts.Done"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【家園禮物】等畫面回到家園再確認一次同一個位置還有沒有禮物泡泡…",
                 "display": "log"
             }
         }

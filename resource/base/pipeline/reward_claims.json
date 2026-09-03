@@ -2,7 +2,9 @@
     "Rewards.All.Start": {
         "recognition": "DirectHit",
         "action": "DoNothing",
-        "next": ["HomeRewards.Start"]
+        "next": [
+            "HomeRewards.Start"
+        ]
     },
     "Rewards.FunctionList.Start": {
         "recognition": "DirectHit",
@@ -30,7 +32,9 @@
             40
         ],
         "post_delay": 600,
-        "next": ["Rewards.FunctionList.Screen"]
+        "next": [
+            "Rewards.FunctionList.Screen"
+        ]
     },
     "Rewards.FunctionList.Screen": {
         "recognition": "OCR",
@@ -43,7 +47,9 @@
         "expected": "商城",
         "threshold": 0.2,
         "action": "DoNothing",
-        "next": ["Rewards.Friends.Open"]
+        "next": [
+            "Rewards.Friends.Open"
+        ]
     },
     "Rewards.Friends.Open": {
         "recognition": "DirectHit",
@@ -55,7 +61,9 @@
             120
         ],
         "post_delay": 600,
-        "next": ["Rewards.Friends.Screen"]
+        "next": [
+            "Rewards.Friends.Screen"
+        ]
     },
     "Rewards.Friends.Screen": {
         "recognition": "OCR",
@@ -109,7 +117,9 @@
         "action": "ClickKey",
         "key": 4,
         "post_delay": 600,
-        "next": ["Rewards.Friends.Back"]
+        "next": [
+            "Rewards.Friends.Back"
+        ]
     },
     "Rewards.Friends.Back": {
         "max_hit": 15,
@@ -146,7 +156,9 @@
             40
         ],
         "post_delay": 600,
-        "next": ["Rewards.FunctionList.ForGift"]
+        "next": [
+            "Rewards.FunctionList.ForGift"
+        ]
     },
     "Rewards.FunctionList.ForGift": {
         "recognition": "OCR",
@@ -166,7 +178,9 @@
             120
         ],
         "post_delay": 600,
-        "next": ["Rewards.Gifts.Screen"]
+        "next": [
+            "Rewards.Gifts.Screen"
+        ]
     },
     "Rewards.Gifts.Screen": {
         "recognition": "TemplateMatch",
@@ -213,7 +227,9 @@
         "threshold": 0.2,
         "action": "ClickKey",
         "key": 4,
-        "next": ["Rewards.Gifts.Back"]
+        "next": [
+            "Rewards.Gifts.Back"
+        ]
     },
     "Rewards.Gifts.Back": {
         "max_hit": 15,
@@ -250,7 +266,9 @@
             40
         ],
         "post_delay": 600,
-        "next": ["Rewards.FunctionList.ForTasks"]
+        "next": [
+            "Rewards.FunctionList.ForTasks"
+        ]
     },
     "Rewards.FunctionList.ForTasks": {
         "recognition": "OCR",
@@ -270,7 +288,9 @@
             125
         ],
         "post_delay": 600,
-        "next": ["Rewards.Daily.Screen"]
+        "next": [
+            "Rewards.Daily.Screen"
+        ]
     },
     "Rewards.Daily.Screen": {
         "recognition": "OCR",
@@ -283,7 +303,9 @@
         "expected": "日常任務",
         "threshold": 0.2,
         "action": "DoNothing",
-        "next": ["Rewards.Daily.Scan"]
+        "next": [
+            "Rewards.Daily.Scan"
+        ]
     },
     "Rewards.Daily.Scan": {
         "recognition": "DirectHit",
@@ -291,6 +313,7 @@
         "next": [
             "Rewards.Daily.ClaimTop",
             "Rewards.Daily.Claim",
+            "Rewards.Daily.Scroll",
             "Rewards.Weekly.Open"
         ]
     },
@@ -341,7 +364,9 @@
         "threshold": 0.2,
         "action": "ClickKey",
         "key": 4,
-        "next": ["Rewards.Daily.Scan"]
+        "next": [
+            "Rewards.Daily.Scan"
+        ]
     },
     "Rewards.Daily.Scroll": {
         "max_hit": 5,
@@ -360,7 +385,9 @@
             1
         ],
         "duration": 500,
-        "next": ["Rewards.Daily.Scan"]
+        "next": [
+            "Rewards.Daily.Scan"
+        ]
     },
     "Rewards.Weekly.Open": {
         "recognition": "DirectHit",
@@ -372,7 +399,9 @@
             100
         ],
         "post_delay": 450,
-        "next": ["Rewards.Weekly.Screen"]
+        "next": [
+            "Rewards.Weekly.Screen"
+        ]
     },
     "Rewards.Weekly.Screen": {
         "recognition": "OCR",
@@ -385,7 +414,9 @@
         "expected": "周常任務|週常任務",
         "threshold": 0.2,
         "action": "DoNothing",
-        "next": ["Rewards.Weekly.Scan"]
+        "next": [
+            "Rewards.Weekly.Scan"
+        ]
     },
     "Rewards.Weekly.Scan": {
         "recognition": "DirectHit",
@@ -393,6 +424,7 @@
         "next": [
             "Rewards.Weekly.ClaimTop",
             "Rewards.Weekly.Claim",
+            "Rewards.Weekly.Scroll",
             "Rewards.Commissions.Open"
         ]
     },
@@ -443,7 +475,9 @@
         "threshold": 0.2,
         "action": "ClickKey",
         "key": 4,
-        "next": ["Rewards.Weekly.Scan"]
+        "next": [
+            "Rewards.Weekly.Scan"
+        ]
     },
     "Rewards.Weekly.Scroll": {
         "max_hit": 5,
@@ -462,7 +496,9 @@
             1
         ],
         "duration": 500,
-        "next": ["Rewards.Weekly.Scan"]
+        "next": [
+            "Rewards.Weekly.Scan"
+        ]
     },
     "Rewards.Commissions.Open": {
         "recognition": "DirectHit",
@@ -474,7 +510,9 @@
             100
         ],
         "post_delay": 450,
-        "next": ["Rewards.Commissions.Screen"]
+        "next": [
+            "Rewards.Commissions.Screen"
+        ]
     },
     "Rewards.Commissions.Screen": {
         "recognition": "OCR",
@@ -487,7 +525,9 @@
         "expected": "委託任務",
         "threshold": 0.2,
         "action": "DoNothing",
-        "next": ["Rewards.Commissions.Count.Route"]
+        "next": [
+            "Rewards.Commissions.Count.Route"
+        ]
     },
     "Rewards.Commissions.Count.Route": {
         "recognition": "DirectHit",
@@ -512,7 +552,9 @@
         "expected": "今日可提交次數.*0/4",
         "threshold": 0.2,
         "action": "DoNothing",
-        "next": ["Rewards.Commissions.Extra.Route"],
+        "next": [
+            "Rewards.Commissions.Extra.Route"
+        ],
         "focus": {
             "Node.Recognition.Succeeded": {
                 "content": "委託次數辨識：今日可提交 0/4，免費剩餘 0 次。",
@@ -531,7 +573,9 @@
         "expected": "今日可提交次數.*1/4",
         "threshold": 0.2,
         "action": "DoNothing",
-        "next": ["Rewards.Commissions.Scan"],
+        "next": [
+            "Rewards.Commissions.Scan"
+        ],
         "focus": {
             "Node.Recognition.Succeeded": {
                 "content": "委託次數辨識：今日可提交 1/4，免費剩餘 1 次。",
@@ -550,7 +594,9 @@
         "expected": "今日可提交次數.*2/4",
         "threshold": 0.2,
         "action": "DoNothing",
-        "next": ["Rewards.Commissions.Scan"],
+        "next": [
+            "Rewards.Commissions.Scan"
+        ],
         "focus": {
             "Node.Recognition.Succeeded": {
                 "content": "委託次數辨識：今日可提交 2/4，免費剩餘 2 次。",
@@ -569,7 +615,9 @@
         "expected": "今日可提交次數.*3/4",
         "threshold": 0.2,
         "action": "DoNothing",
-        "next": ["Rewards.Commissions.Scan"],
+        "next": [
+            "Rewards.Commissions.Scan"
+        ],
         "focus": {
             "Node.Recognition.Succeeded": {
                 "content": "委託次數辨識：今日可提交 3/4，免費剩餘 3 次。",
@@ -588,7 +636,9 @@
         "expected": "今日可提交次數.*4/4",
         "threshold": 0.2,
         "action": "DoNothing",
-        "next": ["Rewards.Commissions.Scan"],
+        "next": [
+            "Rewards.Commissions.Scan"
+        ],
         "focus": {
             "Node.Recognition.Succeeded": {
                 "content": "委託次數辨識：今日可提交 4/4，免費剩餘 4 次。",
@@ -599,12 +649,16 @@
     "Rewards.Commissions.Extra.Route": {
         "recognition": "DirectHit",
         "action": "DoNothing",
-        "next": ["Rewards.Tasks.Back"]
+        "next": [
+            "Rewards.Tasks.Back"
+        ]
     },
     "Rewards.Commissions.Extra.NeedsSample": {
         "recognition": "DirectHit",
         "action": "DoNothing",
-        "next": ["Rewards.Tasks.Back"],
+        "next": [
+            "Rewards.Tasks.Back"
+        ],
         "focus": {
             "Node.Action.Starting": {
                 "content": "已允許使用委託額外次數，但尚缺 0/4 後的額外次數確認畫面；為避免誤扣資源，本次先停在免費上限。",
@@ -654,7 +708,9 @@
         "threshold": 0.2,
         "action": "ClickKey",
         "key": 4,
-        "next": ["Rewards.Commissions.Count.Route"]
+        "next": [
+            "Rewards.Commissions.Count.Route"
+        ]
     },
     "Rewards.Commissions.Scroll": {
         "max_hit": 5,
@@ -673,7 +729,9 @@
             1
         ],
         "duration": 500,
-        "next": ["Rewards.Commissions.Scan"]
+        "next": [
+            "Rewards.Commissions.Scan"
+        ]
     },
     "Rewards.Tasks.Back": {
         "max_hit": 15,
@@ -710,7 +768,9 @@
             40
         ],
         "post_delay": 600,
-        "next": ["Rewards.FunctionList.ForShop"]
+        "next": [
+            "Rewards.FunctionList.ForShop"
+        ]
     },
     "Rewards.FunctionList.ForShop": {
         "recognition": "OCR",
@@ -730,7 +790,9 @@
             125
         ],
         "post_delay": 650,
-        "next": ["Rewards.Shop.List"]
+        "next": [
+            "Rewards.Shop.List"
+        ]
     },
     "Rewards.Shop.List": {
         "recognition": "OCR",
@@ -743,7 +805,9 @@
         "expected": "超值精選",
         "threshold": 0.2,
         "action": "DoNothing",
-        "next": ["Rewards.Shop.ResetTop"]
+        "next": [
+            "Rewards.Shop.ResetTop"
+        ]
     },
     "Rewards.Shop.ResetTop": {
         "recognition": "DirectHit",
@@ -763,7 +827,9 @@
         "duration": 500,
         "repeat": 3,
         "repeat_delay": 150,
-        "next": ["Rewards.Pilgrimage.Find"]
+        "next": [
+            "Rewards.Pilgrimage.Find"
+        ]
     },
     "Rewards.Pilgrimage.Find": {
         "recognition": "DirectHit",
@@ -785,7 +851,9 @@
         "threshold": 0.2,
         "action": "Click",
         "post_delay": 550,
-        "next": ["Rewards.Pilgrimage.Screen"]
+        "next": [
+            "Rewards.Pilgrimage.Screen"
+        ]
     },
     "Rewards.Pilgrimage.Scroll": {
         "max_hit": 3,
@@ -804,7 +872,9 @@
             1
         ],
         "duration": 500,
-        "next": ["Rewards.Pilgrimage.Find"]
+        "next": [
+            "Rewards.Pilgrimage.Find"
+        ]
     },
     "Rewards.Pilgrimage.Screen": {
         "recognition": "OCR",
@@ -824,13 +894,16 @@
             100
         ],
         "post_delay": 450,
-        "next": ["Rewards.Pilgrimage.Daily.Scan"]
+        "next": [
+            "Rewards.Pilgrimage.Daily.Scan"
+        ]
     },
     "Rewards.Pilgrimage.Daily.Scan": {
         "recognition": "DirectHit",
         "action": "DoNothing",
         "next": [
             "Rewards.Pilgrimage.Daily.Claim",
+            "Rewards.Pilgrimage.Daily.Scroll",
             "Rewards.Pilgrimage.Weekly.Open"
         ]
     },
@@ -845,7 +918,9 @@
         "expected": "領取",
         "threshold": 0.2,
         "action": "Click",
-        "next": ["Rewards.Pilgrimage.Daily.Scan"]
+        "next": [
+            "Rewards.Pilgrimage.Daily.Scan"
+        ]
     },
     "Rewards.Pilgrimage.Daily.Scroll": {
         "max_hit": 4,
@@ -864,7 +939,9 @@
             1
         ],
         "duration": 500,
-        "next": ["Rewards.Pilgrimage.Daily.Scan"]
+        "next": [
+            "Rewards.Pilgrimage.Daily.Scan"
+        ]
     },
     "Rewards.Pilgrimage.Weekly.Open": {
         "recognition": "DirectHit",
@@ -875,13 +952,16 @@
             210,
             80
         ],
-        "next": ["Rewards.Pilgrimage.Weekly.Scan"]
+        "next": [
+            "Rewards.Pilgrimage.Weekly.Scan"
+        ]
     },
     "Rewards.Pilgrimage.Weekly.Scan": {
         "recognition": "DirectHit",
         "action": "DoNothing",
         "next": [
             "Rewards.Pilgrimage.Weekly.Claim",
+            "Rewards.Pilgrimage.Weekly.Scroll",
             "Rewards.Pilgrimage.Period.Open"
         ]
     },
@@ -896,7 +976,9 @@
         "expected": "領取",
         "threshold": 0.2,
         "action": "Click",
-        "next": ["Rewards.Pilgrimage.Weekly.Scan"]
+        "next": [
+            "Rewards.Pilgrimage.Weekly.Scan"
+        ]
     },
     "Rewards.Pilgrimage.Weekly.Scroll": {
         "max_hit": 4,
@@ -915,7 +997,9 @@
             1
         ],
         "duration": 500,
-        "next": ["Rewards.Pilgrimage.Weekly.Scan"]
+        "next": [
+            "Rewards.Pilgrimage.Weekly.Scan"
+        ]
     },
     "Rewards.Pilgrimage.Period.Open": {
         "recognition": "DirectHit",
@@ -926,13 +1010,16 @@
             210,
             80
         ],
-        "next": ["Rewards.Pilgrimage.Period.Scan"]
+        "next": [
+            "Rewards.Pilgrimage.Period.Scan"
+        ]
     },
     "Rewards.Pilgrimage.Period.Scan": {
         "recognition": "DirectHit",
         "action": "DoNothing",
         "next": [
             "Rewards.Pilgrimage.Period.Claim",
+            "Rewards.Pilgrimage.Period.Scroll",
             "Rewards.Pilgrimage.Pass.Open"
         ]
     },
@@ -947,7 +1034,9 @@
         "expected": "領取",
         "threshold": 0.2,
         "action": "Click",
-        "next": ["Rewards.Pilgrimage.Period.Scan"]
+        "next": [
+            "Rewards.Pilgrimage.Period.Scan"
+        ]
     },
     "Rewards.Pilgrimage.Period.Scroll": {
         "max_hit": 4,
@@ -966,7 +1055,9 @@
             1
         ],
         "duration": 500,
-        "next": ["Rewards.Pilgrimage.Period.Scan"]
+        "next": [
+            "Rewards.Pilgrimage.Period.Scan"
+        ]
     },
     "Rewards.Pilgrimage.Pass.Open": {
         "recognition": "DirectHit",
@@ -978,7 +1069,9 @@
             100
         ],
         "post_delay": 450,
-        "next": ["Rewards.Pilgrimage.Pass.Scan"]
+        "next": [
+            "Rewards.Pilgrimage.Pass.Scan"
+        ]
     },
     "Rewards.Pilgrimage.Pass.Scan": {
         "recognition": "DirectHit",
@@ -1000,7 +1093,9 @@
         "template": "common/red-dot.png",
         "threshold": 0.78,
         "action": "Click",
-        "next": ["Rewards.Pilgrimage.Pass.Scan"]
+        "next": [
+            "Rewards.Pilgrimage.Pass.Scan"
+        ]
     },
     "Rewards.Pilgrimage.Back": {
         "max_hit": 15,
@@ -1029,7 +1124,9 @@
         "expected": "超值精選",
         "threshold": 0.2,
         "action": "DoNothing",
-        "next": ["Rewards.Funds.Find"]
+        "next": [
+            "Rewards.Funds.Find"
+        ]
     },
     "Rewards.Funds.Find": {
         "recognition": "DirectHit",
@@ -1051,7 +1148,9 @@
         "threshold": 0.2,
         "action": "Click",
         "post_delay": 550,
-        "next": ["Rewards.Funds.Scan"]
+        "next": [
+            "Rewards.Funds.Scan"
+        ]
     },
     "Rewards.Funds.FindScroll": {
         "max_hit": 4,
@@ -1070,7 +1169,9 @@
             1
         ],
         "duration": 500,
-        "next": ["Rewards.Funds.Find"]
+        "next": [
+            "Rewards.Funds.Find"
+        ]
     },
     "Rewards.Funds.Scan": {
         "recognition": "DirectHit",
@@ -1093,7 +1194,9 @@
         "template": "common/red-dot.png",
         "threshold": 0.78,
         "action": "Click",
-        "next": ["Rewards.Funds.Scan"]
+        "next": [
+            "Rewards.Funds.Scan"
+        ]
     },
     "Rewards.Funds.Scroll": {
         "max_hit": 8,
@@ -1112,7 +1215,9 @@
             1
         ],
         "duration": 500,
-        "next": ["Rewards.Funds.Scan"]
+        "next": [
+            "Rewards.Funds.Scan"
+        ]
     },
     "Rewards.Funds.Back": {
         "max_hit": 15,
@@ -1141,7 +1246,9 @@
         "expected": "超值精選",
         "threshold": 0.2,
         "action": "DoNothing",
-        "next": ["Rewards.DailyOffer.Find"]
+        "next": [
+            "Rewards.DailyOffer.Find"
+        ]
     },
     "Rewards.DailyOffer.Find": {
         "recognition": "DirectHit",
@@ -1163,7 +1270,9 @@
         "threshold": 0.2,
         "action": "Click",
         "post_delay": 550,
-        "next": ["Rewards.DailyOffer.Screen"]
+        "next": [
+            "Rewards.DailyOffer.Screen"
+        ]
     },
     "Rewards.DailyOffer.FindScroll": {
         "max_hit": 4,
@@ -1182,7 +1291,9 @@
             1
         ],
         "duration": 500,
-        "next": ["Rewards.DailyOffer.Find"]
+        "next": [
+            "Rewards.DailyOffer.Find"
+        ]
     },
     "Rewards.DailyOffer.Screen": {
         "recognition": "OCR",
@@ -1245,7 +1356,9 @@
         "threshold": 0.2,
         "action": "ClickKey",
         "key": 4,
-        "next": ["Rewards.DailyOffer.Back"]
+        "next": [
+            "Rewards.DailyOffer.Back"
+        ]
     },
     "Rewards.DailyOffer.Back": {
         "max_hit": 15,
@@ -1274,7 +1387,9 @@
         "expected": "超值精選",
         "threshold": 0.2,
         "action": "DoNothing",
-        "next": ["Rewards.WeeklySelection.Find"]
+        "next": [
+            "Rewards.WeeklySelection.Find"
+        ]
     },
     "Rewards.WeeklySelection.Find": {
         "recognition": "DirectHit",
@@ -1296,7 +1411,9 @@
         "threshold": 0.2,
         "action": "Click",
         "post_delay": 550,
-        "next": ["Rewards.WeeklySelection.Screen"]
+        "next": [
+            "Rewards.WeeklySelection.Screen"
+        ]
     },
     "Rewards.WeeklySelection.FindScroll": {
         "max_hit": 4,
@@ -1315,7 +1432,9 @@
             1
         ],
         "duration": 500,
-        "next": ["Rewards.WeeklySelection.Find"]
+        "next": [
+            "Rewards.WeeklySelection.Find"
+        ]
     },
     "Rewards.WeeklySelection.Screen": {
         "recognition": "OCR",
@@ -1378,7 +1497,9 @@
         "threshold": 0.2,
         "action": "ClickKey",
         "key": 4,
-        "next": ["Rewards.WeeklySelection.Back"]
+        "next": [
+            "Rewards.WeeklySelection.Back"
+        ]
     },
     "Rewards.WeeklySelection.Back": {
         "max_hit": 15,
@@ -1407,7 +1528,9 @@
         "expected": "超值精選",
         "threshold": 0.2,
         "action": "DoNothing",
-        "next": ["Rewards.Monthly.Open"]
+        "next": [
+            "Rewards.Monthly.Open"
+        ]
     },
     "Rewards.Monthly.Open": {
         "recognition": "OCR",
@@ -1427,7 +1550,9 @@
             100
         ],
         "post_delay": 450,
-        "next": ["Rewards.Monthly.Screen"]
+        "next": [
+            "Rewards.Monthly.Screen"
+        ]
     },
     "Rewards.Monthly.Screen": {
         "recognition": "OCR",
@@ -1474,7 +1599,9 @@
         "threshold": 0.2,
         "action": "ClickKey",
         "key": 4,
-        "next": ["Rewards.Monthly.Screen"]
+        "next": [
+            "Rewards.Monthly.Screen"
+        ]
     },
     "Rewards.Monthly.Back": {
         "max_hit": 15,
@@ -1535,7 +1662,9 @@
             160
         ],
         "post_delay": 550,
-        "next": ["Rewards.Featured.List"]
+        "next": [
+            "Rewards.Featured.List"
+        ]
     },
     "Rewards.Featured.List": {
         "recognition": "OCR",
@@ -1567,7 +1696,9 @@
         "threshold": 0.82,
         "action": "Click",
         "post_delay": 550,
-        "next": ["Rewards.Featured.Event.Scan"]
+        "next": [
+            "Rewards.Featured.Event.Scan"
+        ]
     },
     "Rewards.Featured.Event.Scan": {
         "recognition": "DirectHit",
@@ -1601,7 +1732,9 @@
             70
         ],
         "post_delay": 600,
-        "next": ["Rewards.Featured.Event.Scan"]
+        "next": [
+            "Rewards.Featured.Event.Scan"
+        ]
     },
     "Rewards.Featured.Event.AllClaim": {
         "max_hit": 10,
@@ -1649,7 +1782,9 @@
         "template": "common/red-dot-event.png",
         "threshold": 0.82,
         "action": "Click",
-        "next": ["Rewards.Featured.Event.Scan"]
+        "next": [
+            "Rewards.Featured.Event.Scan"
+        ]
     },
     "Rewards.Featured.Event.Overlay": {
         "recognition": "OCR",
@@ -1663,7 +1798,9 @@
         "threshold": 0.2,
         "action": "ClickKey",
         "key": 4,
-        "next": ["Rewards.Featured.Event.Scan"]
+        "next": [
+            "Rewards.Featured.Event.Scan"
+        ]
     },
     "Rewards.Featured.Event.Scroll": {
         "max_hit": 4,
@@ -1682,7 +1819,9 @@
             1
         ],
         "duration": 500,
-        "next": ["Rewards.Featured.Event.Scan"]
+        "next": [
+            "Rewards.Featured.Event.Scan"
+        ]
     },
     "Rewards.Featured.Season.Pass.Open": {
         "recognition": "OCR",
@@ -1702,7 +1841,9 @@
             70
         ],
         "post_delay": 600,
-        "next": ["Rewards.Featured.Season.Pass.Scan"]
+        "next": [
+            "Rewards.Featured.Season.Pass.Scan"
+        ]
     },
     "Rewards.Featured.Season.Pass.Scan": {
         "recognition": "DirectHit",
@@ -1732,7 +1873,9 @@
             80
         ],
         "post_delay": 500,
-        "next": ["Rewards.Featured.Season.Pass.Scan"]
+        "next": [
+            "Rewards.Featured.Season.Pass.Scan"
+        ]
     },
     "Rewards.Featured.Season.Pass.RedDot": {
         "max_hit": 20,
@@ -1747,7 +1890,9 @@
         "threshold": 0.78,
         "action": "Click",
         "post_delay": 400,
-        "next": ["Rewards.Featured.Season.Pass.Scan"]
+        "next": [
+            "Rewards.Featured.Season.Pass.Scan"
+        ]
     },
     "Rewards.Featured.Season.Pass.Back": {
         "recognition": "OCR",
@@ -1767,7 +1912,9 @@
             10
         ],
         "post_delay": 1000,
-        "next": ["Rewards.Featured.Event.Scan"]
+        "next": [
+            "Rewards.Featured.Event.Scan"
+        ]
     },
     "Rewards.Featured.Event.Back": {
         "max_hit": 15,
@@ -1810,7 +1957,12 @@
             1
         ],
         "duration": 500,
-        "next": ["Rewards.Featured.List"]
+        "next": [
+            "Rewards.Featured.List"
+        ]
     },
-    "Rewards.All.Done": {"recognition": "DirectHit", "action": "DoNothing"}
+    "Rewards.All.Done": {
+        "recognition": "DirectHit",
+        "action": "DoNothing"
+    }
 }

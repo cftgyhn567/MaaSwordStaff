@@ -214,68 +214,8 @@
         "recognition": "DirectHit",
         "action": "DoNothing",
         "next": [
-            "Dungeon.Select.Slot3"
+            "Dungeon.Select.Top"
         ]
-    },
-    "Dungeon.Select.Slot1": {
-        "recognition": "DirectHit",
-        "action": "Click",
-        "target": [
-            300,
-            300,
-            120,
-            60
-        ],
-        "post_delay": 2600,
-        "next": [
-            "Dungeon.Detail"
-        ],
-        "focus": {
-            "Node.Recognition.Succeeded": {
-                "content": "【日常副本】選擇清單第 1 個副本。",
-                "display": "log"
-            }
-        }
-    },
-    "Dungeon.Select.Slot2": {
-        "recognition": "DirectHit",
-        "action": "Click",
-        "target": [
-            300,
-            640,
-            120,
-            60
-        ],
-        "post_delay": 2600,
-        "next": [
-            "Dungeon.Detail"
-        ],
-        "focus": {
-            "Node.Recognition.Succeeded": {
-                "content": "【日常副本】選擇清單第 2 個副本。",
-                "display": "log"
-            }
-        }
-    },
-    "Dungeon.Select.Slot3": {
-        "recognition": "DirectHit",
-        "action": "Click",
-        "target": [
-            300,
-            975,
-            120,
-            60
-        ],
-        "post_delay": 2600,
-        "next": [
-            "Dungeon.Detail"
-        ],
-        "focus": {
-            "Node.Recognition.Succeeded": {
-                "content": "【日常副本】選擇清單第 3 個副本。",
-                "display": "log"
-            }
-        }
     },
     "Dungeon.Detail": {
         "recognition": "OCR",
@@ -337,7 +277,7 @@
         "recognition": "DirectHit",
         "action": "DoNothing",
         "next": [
-            "Dungeon.Goto"
+            "Dungeon.Purchase.Open"
         ]
     },
     "Dungeon.Purchase.Open": {
@@ -361,6 +301,7 @@
         "post_delay": 1200,
         "timeout": 8000,
         "next": [
+            "Dungeon.Purchase.AtLimit",
             "Dungeon.Purchase.Dialog"
         ],
         "on_error": [
@@ -394,30 +335,30 @@
         "custom_action": "BuyLimitedCount",
         "custom_action_param": {
             "label": "日常副本領獎次數",
-            "total": 0,
+            "total": 99,
             "limit_roi": [
-                330,
-                750,
-                300,
-                70
+                400,
+                660,
+                240,
+                60
             ],
             "plus_target": [
-                580,
-                625,
-                60,
-                60
+                575,
+                620,
+                45,
+                45
             ],
             "buy_roi": [
-                370,
-                780,
-                260,
-                110
+                400,
+                700,
+                240,
+                80
             ],
             "cancel_target": [
-                228,
-                743,
-                120,
-                60
+                194,
+                722,
+                66,
+                39
             ]
         },
         "post_delay": 1500,
@@ -1160,5 +1101,146 @@
         "on_error": [
             "Dungeon.Open.Failed"
         ]
+    },
+    "Dungeon.Select.Top": {
+        "max_hit": 15,
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            360,
+            320,
+            10,
+            10
+        ],
+        "end": [
+            360,
+            1040,
+            10,
+            10
+        ],
+        "end_hold": 250,
+        "duration": 300,
+        "post_delay": 260,
+        "next": [
+            "Dungeon.Select.Top",
+            "Dungeon.Select.Scan"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】把副本清單捲回最上面（世界之樹）…",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Select.Scan": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "next": [
+            "Dungeon.Select.Find",
+            "Dungeon.Select.Scroll"
+        ]
+    },
+    "Dungeon.Select.Find": {
+        "recognition": "OCR",
+        "roi": [
+            0,
+            100,
+            720,
+            1060
+        ],
+        "expected": "冰.{0,3}凌.{0,3}尖.{0,3}塔",
+        "threshold": 0.5,
+        "action": "Click",
+        "target": true,
+        "post_delay": 2600,
+        "next": [
+            "Dungeon.Detail"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】在清單裡找到設定的副本，點進詳情頁。",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Select.Scroll": {
+        "max_hit": 16,
+        "recognition": "DirectHit",
+        "action": "Swipe",
+        "begin": [
+            360,
+            1010,
+            10,
+            10
+        ],
+        "end": [
+            360,
+            305,
+            10,
+            10
+        ],
+        "end_hold": 300,
+        "duration": 500,
+        "post_delay": 500,
+        "next": [
+            "Dungeon.Select.Find",
+            "Dungeon.Select.Scroll",
+            "Dungeon.Select.NotFound"
+        ]
+    },
+    "Dungeon.Select.NotFound": {
+        "recognition": "DirectHit",
+        "action": "DoNothing",
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】整份清單都找過了仍找不到設定的副本（可能尚未解鎖或名稱已改），已安全停止，未進入任何副本。",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Purchase.AtLimit": {
+        "recognition": "OCR",
+        "roi": [
+            40,
+            280,
+            640,
+            120
+        ],
+        "expected": "已[達达]到上限|無法[進进]行[購购][買买]",
+        "threshold": 0.3,
+        "action": "DoNothing",
+        "post_delay": 800,
+        "next": [
+            "Dungeon.Goto",
+            "Dungeon.Purchase.Dismiss"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】今日領獎次數已達上限，無法再購買，直接前往副本。",
+                "display": "log"
+            }
+        }
+    },
+    "Dungeon.Result.LeaveAndExit": {
+        "recognition": "DirectHit",
+        "action": "Click",
+        "target": [
+            45,
+            1190,
+            60,
+            55
+        ],
+        "post_delay": 8000,
+        "timeout": 30000,
+        "next": [
+            "Dungeon.Exit",
+            "Dungeon.Done"
+        ],
+        "focus": {
+            "Node.Recognition.Succeeded": {
+                "content": "【日常副本】領獎次數已用完，離開結算畫面後直接收工，不再消耗體力。",
+                "display": "log"
+            }
+        }
     }
 }

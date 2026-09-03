@@ -4,7 +4,7 @@
             "name": "DailyDungeon",
             "label": "日常副本",
             "entry": "Objectives.Daily.Dungeon1.Start",
-            "description": "筆記 →「日常副本」→ 選定副本 → 前往副本地圖 → 點人物上方的入口 → 用夥伴組隊 → 進入副本 → 開始戰鬥 → 結算頁領取獎勵，依設定次數重複。角色重傷時會用料理一鍵治療後繼續。",
+            "description": "從筆記的日常副本清單挑一個副本（世界之樹～冰凌尖塔共 25 個），設定挑戰次數或打到領獎次數上限；每日領獎次數一律自動用晨星買到今日上限。",
             "group": [
                 "Note"
             ],
@@ -13,8 +13,7 @@
             ],
             "option": [
                 "DailyDungeonTarget",
-                "DailyDungeonBattleCount",
-                "DailyDungeonPurchaseCount"
+                "DailyDungeonBattleCount"
             ]
         },
         {
@@ -4273,57 +4272,315 @@
         "DailyDungeonTarget": {
             "type": "select",
             "label": "日常副本：要打哪一個副本",
-            "description": "副本清單固定 3 個，依清單由上到下排序。進入詳情頁後會用標題文字確認，和設定不符就安全停止，不會誤打別的副本。",
+            "description": "清單由上到下共 25 個副本（世界之樹 → 冰凌尖塔）。流程會先把清單捲到最頂，再用副本名稱逐頁往下找；進入詳情頁後會再用標題文字確認一次，找不到或名稱不符就安全停止，不會誤打別的副本。",
             "cases": [
                 {
-                    "name": "Slot1",
-                    "label": "第 1 個（泰坦熱氣球）",
+                    "name": "WorldTree",
+                    "label": "01. 世界之樹",
                     "pipeline_override": {
-                        "Dungeon.Select.Route": {
-                            "next": [
-                                "Dungeon.Select.Slot1"
-                            ]
+                        "Dungeon.Select.Find": {
+                            "expected": "世.{0,3}界.{0,3}之.{0,3}樹"
                         },
                         "Dungeon.Detail.Title": {
-                            "expected": "泰坦熱氣球"
+                            "expected": "世.{0,3}界.{0,3}之.{0,3}樹"
                         }
                     }
                 },
                 {
-                    "name": "Slot2",
-                    "label": "第 2 個（星空之城）",
+                    "name": "MachineGod",
+                    "label": "02. 機神山",
                     "pipeline_override": {
-                        "Dungeon.Select.Route": {
-                            "next": [
-                                "Dungeon.Select.Slot2"
-                            ]
+                        "Dungeon.Select.Find": {
+                            "expected": "機.{0,3}神.{0,3}山"
                         },
                         "Dungeon.Detail.Title": {
-                            "expected": "星空之城"
+                            "expected": "機.{0,3}神.{0,3}山"
                         }
                     }
                 },
                 {
-                    "name": "Slot3",
-                    "label": "第 3 個（冰凌尖塔）",
+                    "name": "SeaPalace",
+                    "label": "03. 海之宮遺跡",
                     "pipeline_override": {
-                        "Dungeon.Select.Route": {
-                            "next": [
-                                "Dungeon.Select.Slot3"
-                            ]
+                        "Dungeon.Select.Find": {
+                            "expected": "海.{0,3}之.{0,3}宮"
                         },
                         "Dungeon.Detail.Title": {
-                            "expected": "冰凌尖塔"
+                            "expected": "海.{0,3}之.{0,3}宮"
+                        }
+                    }
+                },
+                {
+                    "name": "SpringShrine",
+                    "label": "04. 源水大社",
+                    "pipeline_override": {
+                        "Dungeon.Select.Find": {
+                            "expected": "源.{0,3}水.{0,3}大"
+                        },
+                        "Dungeon.Detail.Title": {
+                            "expected": "源.{0,3}水.{0,3}大"
+                        }
+                    }
+                },
+                {
+                    "name": "YellowSpring",
+                    "label": "05. 黃泉閣",
+                    "pipeline_override": {
+                        "Dungeon.Select.Find": {
+                            "expected": "[黃黄].{0,3}泉.{0,3}[閣阁]"
+                        },
+                        "Dungeon.Detail.Title": {
+                            "expected": "[黃黄].{0,3}泉.{0,3}[閣阁]"
+                        }
+                    }
+                },
+                {
+                    "name": "SealedGorge",
+                    "label": "06. 封魔峽",
+                    "pipeline_override": {
+                        "Dungeon.Select.Find": {
+                            "expected": "封.{0,3}魔.{0,3}[峽峡]"
+                        },
+                        "Dungeon.Detail.Title": {
+                            "expected": "封.{0,3}魔.{0,3}[峽峡]"
+                        }
+                    }
+                },
+                {
+                    "name": "GeneralTomb",
+                    "label": "07. 將軍陵",
+                    "pipeline_override": {
+                        "Dungeon.Select.Find": {
+                            "expected": "[將将].{0,3}[軍军].{0,3}陵"
+                        },
+                        "Dungeon.Detail.Title": {
+                            "expected": "[將将].{0,3}[軍军].{0,3}陵"
+                        }
+                    }
+                },
+                {
+                    "name": "GreenCloud",
+                    "label": "08. 青雲觀",
+                    "pipeline_override": {
+                        "Dungeon.Select.Find": {
+                            "expected": "青.{0,3}[雲云].{0,3}[觀观]"
+                        },
+                        "Dungeon.Detail.Title": {
+                            "expected": "青.{0,3}[雲云].{0,3}[觀观]"
+                        }
+                    }
+                },
+                {
+                    "name": "AncientSword",
+                    "label": "09. 古劍城",
+                    "pipeline_override": {
+                        "Dungeon.Select.Find": {
+                            "expected": "古.{0,3}[劍剑].{0,3}城"
+                        },
+                        "Dungeon.Detail.Title": {
+                            "expected": "古.{0,3}[劍剑].{0,3}城"
+                        }
+                    }
+                },
+                {
+                    "name": "CloudBoat",
+                    "label": "10. 仙海雲舟",
+                    "pipeline_override": {
+                        "Dungeon.Select.Find": {
+                            "expected": "仙.{0,3}海.{0,3}[雲云]"
+                        },
+                        "Dungeon.Detail.Title": {
+                            "expected": "仙.{0,3}海.{0,3}[雲云]"
+                        }
+                    }
+                },
+                {
+                    "name": "CrystalSpiral",
+                    "label": "11. 結晶螺旋樹",
+                    "pipeline_override": {
+                        "Dungeon.Select.Find": {
+                            "expected": "[結结].{0,3}晶.{0,3}螺"
+                        },
+                        "Dungeon.Detail.Title": {
+                            "expected": "[結结].{0,3}晶.{0,3}螺"
+                        }
+                    }
+                },
+                {
+                    "name": "EternalGarden",
+                    "label": "12. 永恆花庭",
+                    "pipeline_override": {
+                        "Dungeon.Select.Find": {
+                            "expected": "永.{0,3}[恆恒].{0,3}花"
+                        },
+                        "Dungeon.Detail.Title": {
+                            "expected": "永.{0,3}[恆恒].{0,3}花"
+                        }
+                    }
+                },
+                {
+                    "name": "WarAbyssFort",
+                    "label": "13. 戰淵堡壘",
+                    "pipeline_override": {
+                        "Dungeon.Select.Find": {
+                            "expected": "[戰战].{0,3}[淵渊]"
+                        },
+                        "Dungeon.Detail.Title": {
+                            "expected": "[戰战].{0,3}[淵渊]"
+                        }
+                    }
+                },
+                {
+                    "name": "PurifyCourt",
+                    "label": "14. 淨化之庭",
+                    "pipeline_override": {
+                        "Dungeon.Select.Find": {
+                            "expected": "[淨净].{0,3}化.{0,3}之"
+                        },
+                        "Dungeon.Detail.Title": {
+                            "expected": "[淨净].{0,3}化.{0,3}之"
+                        }
+                    }
+                },
+                {
+                    "name": "OrderTemple",
+                    "label": "15. 秩序神殿",
+                    "pipeline_override": {
+                        "Dungeon.Select.Find": {
+                            "expected": "秩.{0,3}序.{0,3}神"
+                        },
+                        "Dungeon.Detail.Title": {
+                            "expected": "秩.{0,3}序.{0,3}神"
+                        }
+                    }
+                },
+                {
+                    "name": "SunSpire",
+                    "label": "16. 烈陽尖塔",
+                    "pipeline_override": {
+                        "Dungeon.Select.Find": {
+                            "expected": "烈.{0,3}[陽阳].{0,3}尖"
+                        },
+                        "Dungeon.Detail.Title": {
+                            "expected": "烈.{0,3}[陽阳].{0,3}尖"
+                        }
+                    }
+                },
+                {
+                    "name": "TyrantNest",
+                    "label": "17. 君臨之巢",
+                    "pipeline_override": {
+                        "Dungeon.Select.Find": {
+                            "expected": "君.{0,3}[臨临].{0,3}巢"
+                        },
+                        "Dungeon.Detail.Title": {
+                            "expected": "君.{0,3}[臨临].{0,3}巢"
+                        }
+                    }
+                },
+                {
+                    "name": "ClockTower",
+                    "label": "18. 奇巧鐘樓",
+                    "pipeline_override": {
+                        "Dungeon.Select.Find": {
+                            "expected": "巧.{0,3}[鐘钟].{0,3}[樓楼]"
+                        },
+                        "Dungeon.Detail.Title": {
+                            "expected": "巧.{0,3}[鐘钟].{0,3}[樓楼]"
+                        }
+                    }
+                },
+                {
+                    "name": "PiratePark",
+                    "label": "19. 樂園海盜船",
+                    "pipeline_override": {
+                        "Dungeon.Select.Find": {
+                            "expected": "[樂乐].{0,3}[園园].{0,3}海"
+                        },
+                        "Dungeon.Detail.Title": {
+                            "expected": "[樂乐].{0,3}[園园].{0,3}海"
+                        }
+                    }
+                },
+                {
+                    "name": "SeaKingSub",
+                    "label": "20. 海皇潛艇",
+                    "pipeline_override": {
+                        "Dungeon.Select.Find": {
+                            "expected": "海.{0,3}皇.{0,3}[潛潜]"
+                        },
+                        "Dungeon.Detail.Title": {
+                            "expected": "海.{0,3}皇.{0,3}[潛潜]"
+                        }
+                    }
+                },
+                {
+                    "name": "ClockworkFort",
+                    "label": "21. 發條要塞",
+                    "pipeline_override": {
+                        "Dungeon.Select.Find": {
+                            "expected": "[發发].{0,3}[條条].{0,3}要"
+                        },
+                        "Dungeon.Detail.Title": {
+                            "expected": "[發发].{0,3}[條条].{0,3}要"
+                        }
+                    }
+                },
+                {
+                    "name": "SkyObservatory",
+                    "label": "22. 天象觀測站",
+                    "pipeline_override": {
+                        "Dungeon.Select.Find": {
+                            "expected": "天.{0,3}象.{0,3}[觀观]"
+                        },
+                        "Dungeon.Detail.Title": {
+                            "expected": "天.{0,3}象.{0,3}[觀观]"
+                        }
+                    }
+                },
+                {
+                    "name": "TitanBalloon",
+                    "label": "23. 泰坦熱氣球",
+                    "pipeline_override": {
+                        "Dungeon.Select.Find": {
+                            "expected": "[熱热].{0,3}[氣气].{0,3}球"
+                        },
+                        "Dungeon.Detail.Title": {
+                            "expected": "[熱热].{0,3}[氣气].{0,3}球"
+                        }
+                    }
+                },
+                {
+                    "name": "StarCity",
+                    "label": "24. 星空之城",
+                    "pipeline_override": {
+                        "Dungeon.Select.Find": {
+                            "expected": "星.{0,3}空.{0,3}之.{0,3}城"
+                        },
+                        "Dungeon.Detail.Title": {
+                            "expected": "星.{0,3}空.{0,3}之.{0,3}城"
+                        }
+                    }
+                },
+                {
+                    "name": "IceSpire",
+                    "label": "25. 冰凌尖塔",
+                    "pipeline_override": {
+                        "Dungeon.Select.Find": {
+                            "expected": "冰.{0,3}凌.{0,3}尖.{0,3}塔"
+                        },
+                        "Dungeon.Detail.Title": {
+                            "expected": "冰.{0,3}凌.{0,3}尖.{0,3}塔"
                         }
                     }
                 }
             ],
-            "default_case": "Slot3"
+            "default_case": "IceSpire"
         },
         "DailyDungeonBattleCount": {
             "type": "select",
             "label": "日常副本：挑戰次數",
-            "description": "每次挑戰都會消耗體力並在結算頁點「領取獎勵」；領獎次數用完後仍可挑戰，只是不再有獎勵。上限 6 次，預設 4 次。",
+            "description": "每次挑戰都會消耗體力並在結算頁點「領取獎勵」。固定次數上限 6 次；選「打到上限」則會一直打到結算頁顯示「領獎次數已用盡」為止，不會再多打沒有獎勵的場次。預設 4 次。",
             "cases": [
                 {
                     "name": "Count0",
@@ -4419,110 +4676,33 @@
                             "max_hit": 6
                         }
                     }
-                }
-            ],
-            "default_case": "Count4"
-        },
-        "DailyDungeonPurchaseCount": {
-            "type": "select",
-            "label": "日常副本：購買領獎次數",
-            "description": "詳情頁「每日領獎次數」旁的 ＋，每次 100 晨星，今日限購 2 次。設定值視為今日累計目標，流程會先讀「今日限購 a/2」扣掉已購買的次數。預設不購買。",
-            "cases": [
-                {
-                    "name": "Count0",
-                    "label": "不購買",
-                    "pipeline_override": {
-                        "Dungeon.Purchase.Route": {
-                            "next": [
-                                "Dungeon.Goto"
-                            ]
-                        }
-                    }
                 },
                 {
-                    "name": "Count1",
-                    "label": "買到今日累計 1 次",
+                    "name": "CountMax",
+                    "label": "打到上限（領獎次數用完就停）",
                     "pipeline_override": {
-                        "Dungeon.Purchase.Route": {
+                        "Dungeon.Map": {
                             "next": [
-                                "Dungeon.Purchase.Open"
+                                "Dungeon.Loop.Enter"
                             ]
                         },
-                        "Dungeon.Purchase.Buy": {
-                            "custom_action_param": {
-                                "label": "日常副本領獎次數",
-                                "total": 1,
-                                "limit_roi": [
-                                    400,
-                                    660,
-                                    240,
-                                    60
-                                ],
-                                "plus_target": [
-                                    575,
-                                    620,
-                                    45,
-                                    45
-                                ],
-                                "buy_roi": [
-                                    400,
-                                    700,
-                                    240,
-                                    80
-                                ],
-                                "cancel_target": [
-                                    194,
-                                    722,
-                                    66,
-                                    39
-                                ]
-                            }
-                        }
-                    }
-                },
-                {
-                    "name": "Count2",
-                    "label": "買到今日累計 2 次",
-                    "pipeline_override": {
-                        "Dungeon.Purchase.Route": {
+                        "Dungeon.Loop.Enter": {
+                            "max_hit": 20
+                        },
+                        "Dungeon.Claim.Exhausted": {
                             "next": [
-                                "Dungeon.Purchase.Open"
+                                "Dungeon.Result.LeaveAndExit"
                             ]
                         },
-                        "Dungeon.Purchase.Buy": {
-                            "custom_action_param": {
-                                "label": "日常副本領獎次數",
-                                "total": 2,
-                                "limit_roi": [
-                                    400,
-                                    660,
-                                    240,
-                                    60
-                                ],
-                                "plus_target": [
-                                    575,
-                                    620,
-                                    45,
-                                    45
-                                ],
-                                "buy_roi": [
-                                    400,
-                                    700,
-                                    240,
-                                    80
-                                ],
-                                "cancel_target": [
-                                    194,
-                                    722,
-                                    66,
-                                    39
-                                ]
-                            }
+                        "Dungeon.Claim.NoCount": {
+                            "next": [
+                                "Dungeon.Result.LeaveAndExit"
+                            ]
                         }
                     }
                 }
             ],
-            "default_case": "Count0"
+            "default_case": "Count4"
         },
         "BeastTrialRunCount": {
             "type": "select",

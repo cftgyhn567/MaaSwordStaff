@@ -37,7 +37,7 @@
 
 ## 已知重要缺口
 
-- `ClaimAllRewards` 的 UI 說明比目前串接完整：`Rewards.All.Start` 只進 `HomeRewards.Start`，`HomeRewards.Done` 沒有接 `Rewards.FunctionList.Start`，所以目前只跑床／推車。
+- `ClaimAllRewards` 已於 2026-09-03 串接完整（`HomeRewards.Done → Rewards.FunctionList.Start`），但床／推車之後的好友、餽贈、任務、商城與活動段落還沒有端到端實機證據。
 - `QuickDaily` 與 `ClaimOnly` 都只有 `ClaimAllRewards`，目前行為相同，也不會啟動遊戲。
 - `ExploreFate`、`ConsumeStamina` 仍是安全骨架；免費條件、消耗方式與停止規則未完成。
 - `Commissions` 有 Pipeline，但額外次數與目前帳號狀態需重新做端到端驗證。

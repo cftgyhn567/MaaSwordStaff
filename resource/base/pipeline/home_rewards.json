@@ -120,6 +120,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 200,
         "post_delay": 150,
         "next": [
@@ -141,6 +142,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 200,
         "post_delay": 150,
         "next": [
@@ -162,6 +164,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 200,
         "post_delay": 150,
         "next": [
@@ -183,6 +186,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 200,
         "post_delay": 300,
         "next": [
@@ -253,6 +257,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 200,
         "post_delay": 150,
         "next": [
@@ -274,6 +279,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 200,
         "post_delay": 150,
         "next": [
@@ -295,6 +301,7 @@
             10,
             10
         ],
+        "end_hold": 400,
         "duration": 200,
         "post_delay": 400,
         "next": [
@@ -353,9 +360,12 @@
     "HomeRewards.Done": {
         "recognition": "DirectHit",
         "action": "DoNothing",
+        "next": [
+            "Rewards.FunctionList.Start"
+        ],
         "focus": {
             "Node.Recognition.Succeeded": {
-                "content": "【家園收益】床鋪與推車放置收益領取完成！",
+                "content": "【家園收益】床鋪與推車放置收益領取完成，接著處理好友、餽贈、任務、商城與活動的獎勵。",
                 "display": "log"
             }
         }
