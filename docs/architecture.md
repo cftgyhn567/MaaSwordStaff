@@ -32,16 +32,16 @@ flowchart TD
 
 ## 各層責任
 
-| 層         | 位置                                               | 責任                                                    | 不負責                                  |
-| ---------- | -------------------------------------------------- | ------------------------------------------------------- | --------------------------------------- |
-| 專案介面   | `interface.json`                                   | 版本、controller、resource、Agent、群組與 imports       | 遊戲畫面判斷                            |
-| 任務介面   | `tasks/*.json`                                     | 名稱、說明、entry、選項與 `pipeline_override`           | 真正點擊與辨識                          |
-| Preset     | `tasks/preset/*.json`                              | 一鍵加入哪些任務、順序與預設覆寫                        | 串成單一 Pipeline；每個 task 仍獨立提交 |
-| Pipeline   | `resource/base/pipeline/*.json`                    | recognition、action、`next`、`on_error`、重試與停止條件 | 複雜算術與跨次執行的任意狀態保存        |
-| 辨識資源   | `resource/base/image/`、`resource/base/model/ocr/` | TemplateMatch 圖片與 OCR 模型                           | UI 任務定義                             |
-| Agent      | `agent/main.py`                                    | 計數、限購、組隊與狀態彙整等 Custom Action              | 取代整套 Pipeline 導航                  |
-| Controller | MaaFramework ADB controller                        | 連線、截圖、輸入、啟動 App、座標縮放                    | 判斷任務是否在遊戲內成功                |
-| 離線回歸   | `maatools.config.mts`、`tests/screenshots/`        | 用固定截圖檢查應命中的辨識節點                          | 證明 ADB、點擊或完整實機流程            |
+| 層         | 位置                                               | 責任                                                    | 不負責                                   |
+| ---------- | -------------------------------------------------- | ------------------------------------------------------- | ---------------------------------------- |
+| 專案介面   | `interface.json`                                   | 版本、controller、resource、Agent、群組與 imports       | 遊戲畫面判斷                             |
+| 任務介面   | `tasks/*.json`                                     | 名稱、說明、entry、選項與 `pipeline_override`           | 真正點擊與辨識                           |
+| Preset     | `tasks/preset/*.json`                              | 一鍵加入哪些任務、順序與預設覆寫                        | 串成單一 Pipeline；每個 task 仍獨立提交  |
+| Pipeline   | `resource/base/pipeline/*.json`                    | recognition、action、`next`、`on_error`、重試與停止條件 | 複雜算術與跨次執行的任意狀態保存         |
+| 辨識資源   | `resource/base/image/`、`resource/base/model/ocr/` | TemplateMatch 圖片與 OCR 模型                           | UI 任務定義                              |
+| Agent      | `agent/main.py`                                    | 計數、限購、組隊與狀態彙整等 Custom Action              | 取代整套 Pipeline 導航                   |
+| Controller | MaaFramework ADB controller                        | 連線、截圖、輸入、啟動 App、座標縮放                    | 判斷任務是否在遊戲內成功                 |
+| 離線回歸   | `maatools.config.mts`、`tests/screenshots/`        | 描述哪張截圖應命中哪些節點；目前未接線且已過期          | 任何自動保障——沒有 script 或 CI 會執行它 |
 
 ## 任務到 Pipeline 的資料流
 

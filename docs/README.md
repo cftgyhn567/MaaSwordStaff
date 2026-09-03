@@ -24,7 +24,7 @@
 - 遊戲套件：`com.m88.idleXX`（台灣版）。
 - 公開任務：23 個；preset：3 個。
 - Python Agent：`maafw==5.12.3`，提供 5 個 Custom Action。
-- 自動化測試：`maatools.config.mts` 以 `tests/screenshots/` 的已遮蔽截圖做離線辨識回歸。
+- 離線辨識案例：`maatools.config.mts` 搭配 `tests/screenshots/` 的已遮蔽截圖，**但目前沒有任何 script 或 CI 會執行它**，內容也已落後於 Pipeline。詳見 [開發與驗證](./development.md#離線辨識案例的目前狀態)。
 
 ## 事實來源優先順序
 

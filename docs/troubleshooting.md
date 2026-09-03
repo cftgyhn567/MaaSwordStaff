@@ -47,7 +47,7 @@ pnpm audit:pipeline
 - 同時測正樣本、相似負樣本、已領取／售完／禁用等狀態。
 - 文字可能被 OCR 拆框；必要時改用穩定圖示模板或縮小 ROI。
 - 不要只降低 threshold 讓案例通過；這通常會增加跨頁誤命中。
-- 將已遮蔽截圖加入 `tests/screenshots/` 與 `maatools.config.mts` 後跑 `pnpm check:maa`。
+- 已遮蔽截圖可加入 `tests/screenshots/` 與 `maatools.config.mts`，但目前**沒有任何 script 或 CI 會執行這些案例**（`pnpm check:maa` 只做靜態診斷），所以它不會替你擋下辨識退化。現況與重新啟用順序見 [開發與驗證](./development.md#離線辨識案例的目前狀態)。新截圖被 `.gitignore` 第 15 行擋住時，需要 `git add -f`。
 
 ## Custom Action 沒啟動或沒有日誌
 
@@ -65,7 +65,7 @@ pnpm check:py
 
 - `format:check`：執行 `pnpm exec prettier <affected-files> --write`，再檢查差異。
 - `check:schema`：查看錯誤中的檔案與 JSON path；空檔、重複 task／preset、未知 option 參照都會失敗。
-- `check:maa`：分辨是 Pipeline 結構錯誤、資源遺失，還是固定截圖命中改變。
+- `check:maa`：`maa-tools check` 的靜態診斷，通常是 Pipeline 結構錯誤或資源遺失；它不會執行截圖案例。
 - Python 不在 `pnpm check` 內：Agent 變更要另外跑 `pnpm check:py`。
 
 不要刪除不理解的檔案、放寬 schema 或移除測試案例來換取綠燈。

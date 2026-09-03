@@ -48,7 +48,23 @@ pnpm release:dry-run
 | 發布與版本               | `pnpm check`、`pnpm check:py`、`pnpm release:dry-run`      |
 | JavaScript／MJS 工具     | 上述相關檢查，加 `node --check <file>`                     |
 
-`pnpm check:maa` 使用固定截圖做辨識回歸；它不能證明 controller、截圖、點擊、等待或完整遊戲流程可用。
+`pnpm check:maa` 執行的是 `maa-tools check`，只做靜態診斷；它**不會**跑 `maatools.config.mts` 的截圖案例，也不能證明 controller、截圖、點擊、等待或完整遊戲流程可用。
+
+### 離線辨識案例的目前狀態
+
+`maatools.config.mts` 的 `test.cases` 描述「哪張截圖應該命中哪些節點」，素材放在 `tests/screenshots/`。這套案例目前是**未接線且已過期**的，接手時不要把它當成可信的回歸網：
+
+1. **沒有任何入口會執行它。** `maa-tools` 的截圖案例由 `test` 子命令執行，但 `package.json` 沒有對應 script，`.github/workflows/check.yml` 也只跑 `pnpm check`（format ＋ schema ＋ `maa-tools check`）。
+2. **內容已落後 Pipeline。** 案例引用 105 個節點名稱，其中 **33 個在 `resource/base/pipeline/` 已不存在**，多半是家園、公會與素材秘境流程重寫後改名留下的（例如 `Home.IdleBedReady`、`Guild.Donation.Screen`、`MaterialRealm.Iron.Purchase.Confirm`）。
+3. **`.gitignore` 與實際追蹤狀態不一致。** 第 15 行有 `tests/screenshots/`，但其中 38 張截圖早於該規則就已加入版本庫，因此仍被追蹤；之後新增的截圖會被預設忽略，`git add` 需要 `-f` 才進得去。
+
+要重新啟用時的最小順序：先用上面的比對找出失效節點並改名或刪除案例，再決定 `.gitignore` 要排除還是保留 `tests/screenshots/`，最後才把 `maa-tools test` 接進 script 與 CI。在那之前，Pipeline 改動的實際保障只有 `pnpm check:schema`、`pnpm audit:pipeline` 與實機驗證。
+
+可用下列指令重新統計失效節點：
+
+```powershell
+node -e "const fs=require('fs'),p=require('path');const d='resource/base/pipeline';const all=new Set();for(const f of fs.readdirSync(d))for(const k of Object.keys(JSON.parse(fs.readFileSync(p.join(d,f),'utf8'))))all.add(k);const r=[...new Set([...fs.readFileSync('maatools.config.mts','utf8').matchAll(/'([A-Z][A-Za-z0-9_.]+\.[A-Za-z0-9_.]+)'/g)].map(m=>m[1]))];console.log(r.filter(x=>!all.has(x)).join('\n'))"
+```
 
 ## Pipeline 撰寫規則
 
