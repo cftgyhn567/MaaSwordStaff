@@ -181,6 +181,7 @@ function updateMxuVersion(root) {
             "overrides:",
             '  rollup: "4.63.1"',
             '  postcss: "8.5.26"',
+            '  browserslist: "4.28.8"',
             '  "nanoid@<4": "3.3.18"',
             '  "picomatch@<3": "2.3.2"',
             '  "picomatch@>=4 <5": "4.0.7"',
