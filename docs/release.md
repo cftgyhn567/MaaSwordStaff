@@ -26,7 +26,7 @@
 4. 依目前 OS／架構選擇名稱相符的 `*-MXU` 資產，下載、安裝並重啟。
 5. 在 runtime 放入 `mxu-github-only.json`；正式打包會驗證該 marker 的上游 commit。
 
-修補版版本為 `2.4.5-github-only.1`。來源、patch、AGPL-3.0 與打包授權檔說明見 [THIRD_PARTY_NOTICES](../THIRD_PARTY_NOTICES.md)。
+修補版版本為 `2.4.5-github-only.2`。來源、patch、AGPL-3.0 與打包授權檔說明見 [THIRD_PARTY_NOTICES](../THIRD_PARTY_NOTICES.md)。
 
 ## 發布前檢查
 
@@ -54,7 +54,7 @@ pnpm build:mxu
 node .\tools\build-release.mjs
 ```
 
-預期至少產生 `dist/package-mxu/` 與平台 MXU executable。`build:mxu` 會 clone 上游、安裝前端相依、執行高風險 audit、編譯 Tauri/Rust，時間與磁碟需求都明顯高於一般檢查。
+預期至少產生 `dist/package-mxu/` 與平台 MXU executable。`build:mxu` 會 clone 上游、安裝前端相依、執行 Moderate 以上風險 audit、編譯 Tauri/Rust，時間與磁碟需求都明顯高於一般檢查。
 
 如果本機缺少 Visual C++ linker、Rust target 或 Tauri 系統相依，可讓 GitHub Actions 做正式跨平台建置；不能把只有 `release:dry-run` 的結果稱為成功建置。
 

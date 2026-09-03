@@ -18,8 +18,8 @@
 
 ## 目前基準
 
-- 專案版本：`v1.0.5`，由 `interface.json` 宣告。
-- 介面：客製 MXU `v2.4.5-github-only.1`；沒有 MirrorChyan RID 時直接使用 GitHub Releases 更新。
+- 專案版本：`v1.0.6`，由 `interface.json` 宣告。
+- 介面：客製 MXU `v2.4.5-github-only.2`；沒有 MirrorChyan RID 時直接使用 GitHub Releases 更新。
 - 控制器：Android ADB，基準短邊 720；已知實機基準為 BlueStacks 5、直式 720×1280、DPI 160。
 - 遊戲套件：`com.m88.idleXX`（台灣版）。
 - 公開任務：23 個；preset：3 個。

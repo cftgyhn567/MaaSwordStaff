@@ -40,7 +40,7 @@
         "displayName": "Maa杖劍傳說助手",
         "initialTemplate": "pipeline",
         "slug": "maa-sword-staff",
-        "version": "1.0.5"
+        "version": "1.0.6"
     },
     "resources": [
         {

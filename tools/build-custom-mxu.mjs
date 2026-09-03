@@ -16,7 +16,7 @@ import {delimiter, join, resolve} from "node:path";
 const MXU_REPOSITORY = "https://github.com/MistEO/MXU.git";
 const MXU_TAG = "v2.4.5";
 const MXU_COMMIT = "115fcb39d75718f8bd53e76511322660b8af00ec";
-const MXU_CUSTOM_VERSION = "2.4.5-github-only.1";
+const MXU_CUSTOM_VERSION = "2.4.5-github-only.2";
 const MXU_PATCH = resolve("patches/mxu/github-only-v2.4.5.patch");
 
 const runtimePlatform = detectRuntimePlatform();
@@ -100,7 +100,7 @@ try {
         [
             "audit",
             "--audit-level",
-            "high",
+            "moderate",
         ],
         sourceRoot,
     );
@@ -168,6 +168,7 @@ function updateMxuVersion(root) {
         const json = JSON.parse(readFileSync(path, "utf8"));
         json.version = MXU_CUSTOM_VERSION;
         if (path.endsWith("package.json")) {
+            json.dependencies.dompurify = "3.4.14";
             json.devDependencies.vite = "7.3.6";
         }
         writeJson(path, json);
@@ -179,9 +180,11 @@ function updateMxuVersion(root) {
             "packages:",
             '  - "."',
             "overrides:",
+            '  "@babel/core": "7.29.7"',
             '  rollup: "4.63.1"',
             '  postcss: "8.5.26"',
             '  browserslist: "4.28.8"',
+            '  yaml: "2.9.0"',
             '  "nanoid@<4": "3.3.18"',
             '  "picomatch@<3": "2.3.2"',
             '  "picomatch@>=4 <5": "4.0.7"',
