@@ -2,8 +2,8 @@
     "preset": [
         {
             "name": "QuickDaily",
-            "label": "快速日常",
-            "description": "領取所有免費掛機與收益獎勵。",
+            "label": "$text.329",
+            "description": "$text.330",
             "task": [
                 {
                     "name": "ClaimAllRewards"

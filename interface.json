@@ -1,14 +1,14 @@
 {
     "interface_version": 2,
     "name": "maa-sword-staff",
-    "label": "Maa杖劍傳說助手",
-    "version": "v1.0.6",
+    "label": "$text.000",
+    "version": "v1.1.0",
     "github": "https://github.com/cftgyhn567/MaaSwordStaff",
-    "description": "透過 Android 模擬器與 ADB 執行《杖劍傳說：坎斯汀之約》日常流程。",
+    "description": "$text.001",
     "controller": [
         {
             "name": "Android",
-            "label": "Android 模擬器",
+            "label": "$text.002",
             "type": "Adb",
             "display_short_side": 720
         }
@@ -25,7 +25,7 @@
     "resource": [
         {
             "name": "base",
-            "label": "台服",
+            "label": "$text.003",
             "path": [
                 "./resource/base"
             ]
@@ -34,32 +34,32 @@
     "group": [
         {
             "name": "Home",
-            "label": "家園",
-            "description": "家園地圖設施互動、購物、祈願與煉金。",
+            "label": "$text.004",
+            "description": "$text.005",
             "default_expand": true
         },
         {
             "name": "Guild",
-            "label": "公會",
-            "description": "公會大廳、捐贈、討伐與放置領獎。",
+            "label": "$text.006",
+            "description": "$text.007",
             "default_expand": true
         },
         {
             "name": "Note",
-            "label": "筆記",
-            "description": "透過筆記入口執行的副本、競技與委派。",
+            "label": "$text.008",
+            "description": "$text.009",
             "default_expand": true
         },
         {
             "name": "Map",
-            "label": "地圖",
-            "description": "地圖探索與體力消耗。",
+            "label": "$text.010",
+            "description": "$text.011",
             "default_expand": true
         },
         {
             "name": "Other",
-            "label": "其他",
-            "description": "委託與一鍵領取所有獎勵。",
+            "label": "$text.012",
+            "description": "$text.013",
             "default_expand": true
         }
     ],
@@ -71,5 +71,12 @@
         "./tasks/preset/QuickDaily.json",
         "./tasks/preset/DailyFull.json",
         "./tasks/preset/ClaimOnly.json"
-    ]
+    ],
+    "languages": {
+        "zh_tw": "./i18n/zh_tw.json",
+        "zh_cn": "./i18n/zh_cn.json",
+        "en_us": "./i18n/en_us.json",
+        "ja_jp": "./i18n/ja_jp.json",
+        "ko_kr": "./i18n/ko_kr.json"
+    }
 }

@@ -2,9 +2,9 @@
     "task": [
         {
             "name": "DailyDungeon",
-            "label": "日常副本",
+            "label": "$text.014",
             "entry": "Objectives.Daily.Dungeon1.Start",
-            "description": "從筆記的日常副本清單挑一個副本（世界之樹～冰凌尖塔共 25 個），設定挑戰次數或打到領獎次數上限；每日領獎次數一律自動用晨星買到今日上限。",
+            "description": "$text.015",
             "group": [
                 "Note"
             ],
@@ -18,9 +18,9 @@
         },
         {
             "name": "ArenaChallenge",
-            "label": "競技場挑戰",
+            "label": "$text.016",
             "entry": "Objectives.Daily.Arena1.Start",
-            "description": "筆記 →「競技」→「競技場」。三件事：右上角購買競技場券、挑戰四位對手中最右邊那位、切換到競技商店逐格購買。三者都可個別設定，預設只挑戰、不購買。",
+            "description": "$text.017",
             "group": [
                 "Note"
             ],
@@ -43,9 +43,9 @@
         },
         {
             "name": "BeastTrial",
-            "label": "聖獸試煉",
+            "label": "$text.018",
             "entry": "Objectives.Daily.BeastTrialReward1.Start",
-            "description": "筆記 →「每日活動」→「聖獸試煉」→ 前往地圖 → 點人物上方的聖獸 → 用夥伴組隊 → 進入試煉 → 開始戰鬥 → 等到「戰鬥結束」→ 離開地圖。",
+            "description": "$text.019",
             "group": [
                 "Note"
             ],
@@ -59,9 +59,9 @@
         },
         {
             "name": "PhantomRealm",
-            "label": "雙影幻境",
+            "label": "$text.020",
             "entry": "Objectives.Daily.PhantomRealmWave3.Start",
-            "description": "筆記 →「每日活動」→「雙影幻境」→ 前往地圖 → 點人物上方的幻境入口 → 用夥伴組隊 → 進入幻境 → 開始戰鬥 → 等到「戰鬥結束」→ 離開地圖。",
+            "description": "$text.021",
             "group": [
                 "Note"
             ],
@@ -75,9 +75,9 @@
         },
         {
             "name": "MaterialRealm",
-            "label": "素材秘境",
+            "label": "$text.022",
             "entry": "Objectives.MaterialRealm.Start",
-            "description": "筆記 → 素材秘境；分別處理鐵石礦洞、黃金礦洞、怪物洞窟與砂石礦洞。四類均可獨立設定本次購買數量、快速開採及採集次數；購買會先辨識今日已購買次數，預設為 0。",
+            "description": "$text.023",
             "group": [
                 "Note"
             ],
@@ -101,9 +101,9 @@
         },
         {
             "name": "MapExploreClaim",
-            "label": "地圖探索領取",
+            "label": "$text.024",
             "entry": "Objectives.MapExplore.Claim.Start",
-            "description": "筆記的「地圖探索」右上角有紅點時代表裡面有東西可領。目前處理每天可領 1 次的命運果實；已領過會顯示倒數，流程不會重複點。",
+            "description": "$text.025",
             "group": [
                 "Note"
             ],
@@ -113,9 +113,9 @@
         },
         {
             "name": "ExploreFate",
-            "label": "探尋/探索命運",
+            "label": "$text.026",
             "entry": "Objectives.Pilgrimage.Daily.ExploreFate3.Start",
-            "description": "「探尋命運」與「探索命運」是同一個遊戲功能，共用一個 Maa 任務。",
+            "description": "$text.027",
             "group": [
                 "Map"
             ],
@@ -125,9 +125,9 @@
         },
         {
             "name": "ConsumeStamina",
-            "label": "消耗體力",
+            "label": "$text.028",
             "entry": "Objectives.ConsumeStamina.Start",
-            "description": "由日常副本、素材秘境等已啟用流程自然消耗體力，不為湊進度使用付費道具。",
+            "description": "$text.029",
             "group": [
                 "Map"
             ],
@@ -137,9 +137,9 @@
         },
         {
             "name": "Commissions",
-            "label": "委託任務",
+            "label": "$text.030",
             "entry": "Objectives.Commissions.Start",
-            "description": "進入任務 → 委託，辨識今日剩餘次數（4/4 逐次降至 0/4）並寫入執行日誌；只提交已完成的委託，且依設定限制本次最多提交次數。",
+            "description": "$text.031",
             "group": [
                 "Other"
             ],
@@ -153,9 +153,9 @@
         },
         {
             "name": "BondAdventureScenicDispatch",
-            "label": "羈絆冒險／奇景委派",
+            "label": "$text.032",
             "entry": "Objectives.BondAdventureScenicDispatch.Start",
-            "description": "「羈絆冒險」與「奇景委派」是同一個遊戲功能，從筆記的羈絆冒險入口進入。",
+            "description": "$text.033",
             "group": [
                 "Note"
             ],
@@ -165,9 +165,9 @@
         },
         {
             "name": "GoddessStatuePrayer",
-            "label": "女神像祈願",
+            "label": "$text.034",
             "entry": "Objectives.GoddessStatue.Prayer.Start",
-            "description": "至家園女神像選擇祈願池（高階／普通／友情）後執行祈願。次數可自由輸入，流程會自動選用 100／10／1 抽按鈕，並以畫面上的「今日已祈願」計數驗證實際結果。",
+            "description": "$text.035",
             "group": [
                 "Home"
             ],
@@ -182,9 +182,9 @@
         },
         {
             "name": "TimeGachaMachine",
-            "label": "時光扭蛋機",
+            "label": "$text.036",
             "entry": "Objectives.GachaMachine.Start",
-            "description": "至家園時光扭蛋機，可指定要切換到哪一個國度系列，再依設定次數扭蛋。次數可自由輸入，流程會自動選用 100／10／1 抽按鈕，並以畫面上的「今日已扭蛋／今日已開啟」計數驗證實際結果。",
+            "description": "$text.037",
             "group": [
                 "Home"
             ],
@@ -199,9 +199,9 @@
         },
         {
             "name": "SakuraBeastBonding",
-            "label": "幻獸結緣",
+            "label": "$text.038",
             "entry": "Objectives.SakuraTree.BeastBonding.Start",
-            "description": "至家園大櫻花樹執行幻獸結緣。次數可自由輸入，流程會自動選用 100／10／1 抽按鈕湊齊次數，不會超抽；每次抽取都以畫面上的「今日已結緣」計數驗證實際結果。",
+            "description": "$text.039",
             "group": [
                 "Home"
             ],
@@ -215,9 +215,9 @@
         },
         {
             "name": "HomeNpcGifts",
-            "label": "家園禮物領取",
+            "label": "$text.040",
             "entry": "Objectives.HomeGifts.Start",
-            "description": "由最右側往左掃過整張家園地圖，找出 NPC 頭上的紫色禮物泡泡並點擊「領取」。每日可領取次數由遊戲限制，領完後按鈕消失即自動結束。",
+            "description": "$text.041",
             "group": [
                 "Home"
             ],
@@ -227,9 +227,9 @@
         },
         {
             "name": "AlchemyFurnace",
-            "label": "煉金爐",
+            "label": "$text.042",
             "entry": "Objectives.AlchemyFurnace.Start",
-            "description": "進入煉金爐：先在「分解」分頁依設定處理「排除高戰力」，勾選四個裝備品級並重複分解，直到「已選物品」為 0；接著在「寶石」分頁執行「一鍵合成」。",
+            "description": "$text.043",
             "group": [
                 "Home"
             ],
@@ -243,9 +243,9 @@
         },
         {
             "name": "BagUseItems",
-            "label": "背包道具一鍵使用",
+            "label": "$text.044",
             "entry": "Objectives.Bag.UseItems.Start",
-            "description": "進入家園寶箱（道具）頁，重複執行「一鍵使用」並確認，直到畫面上不再出現「一鍵使用」按鈕為止。需自行選擇的寶箱不會被使用。",
+            "description": "$text.045",
             "group": [
                 "Home"
             ],
@@ -260,12 +260,12 @@
     "option": {
         "MaterialIronPurchaseCount": {
             "type": "select",
-            "label": "鐵石礦洞：購買次數",
-            "description": "鐵石礦洞右上角的 ＋（每次 60 晨星、可購買 鐵礦錘），今日限購 20 次。設定值視為今日累計目標，流程會先讀「今日限購 a/20」扣掉今日已購買的次數，只補差額。預設不購買。",
+            "label": "$text.046",
+            "description": "$text.047",
             "cases": [
                 {
                     "name": "Buy0",
-                    "label": "0（不購買）",
+                    "label": "$text.048",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": false
@@ -274,7 +274,7 @@
                 },
                 {
                     "name": "Buy1",
-                    "label": "買到今日累計 1 次",
+                    "label": "$text.049",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
@@ -313,7 +313,7 @@
                 },
                 {
                     "name": "Buy2",
-                    "label": "買到今日累計 2 次",
+                    "label": "$text.050",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
@@ -352,7 +352,7 @@
                 },
                 {
                     "name": "Buy3",
-                    "label": "買到今日累計 3 次",
+                    "label": "$text.051",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
@@ -391,7 +391,7 @@
                 },
                 {
                     "name": "Buy4",
-                    "label": "買到今日累計 4 次",
+                    "label": "$text.052",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
@@ -430,7 +430,7 @@
                 },
                 {
                     "name": "Buy5",
-                    "label": "買到今日累計 5 次",
+                    "label": "$text.053",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
@@ -469,7 +469,7 @@
                 },
                 {
                     "name": "Buy6",
-                    "label": "買到今日累計 6 次",
+                    "label": "$text.054",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
@@ -508,7 +508,7 @@
                 },
                 {
                     "name": "Buy7",
-                    "label": "買到今日累計 7 次",
+                    "label": "$text.055",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
@@ -547,7 +547,7 @@
                 },
                 {
                     "name": "Buy8",
-                    "label": "買到今日累計 8 次",
+                    "label": "$text.056",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
@@ -586,7 +586,7 @@
                 },
                 {
                     "name": "Buy9",
-                    "label": "買到今日累計 9 次",
+                    "label": "$text.057",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
@@ -625,7 +625,7 @@
                 },
                 {
                     "name": "Buy10",
-                    "label": "買到今日累計 10 次",
+                    "label": "$text.058",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
@@ -664,7 +664,7 @@
                 },
                 {
                     "name": "Buy11",
-                    "label": "買到今日累計 11 次",
+                    "label": "$text.059",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
@@ -703,7 +703,7 @@
                 },
                 {
                     "name": "Buy12",
-                    "label": "買到今日累計 12 次",
+                    "label": "$text.060",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
@@ -742,7 +742,7 @@
                 },
                 {
                     "name": "Buy13",
-                    "label": "買到今日累計 13 次",
+                    "label": "$text.061",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
@@ -781,7 +781,7 @@
                 },
                 {
                     "name": "Buy14",
-                    "label": "買到今日累計 14 次",
+                    "label": "$text.062",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
@@ -820,7 +820,7 @@
                 },
                 {
                     "name": "Buy15",
-                    "label": "買到今日累計 15 次",
+                    "label": "$text.063",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
@@ -859,7 +859,7 @@
                 },
                 {
                     "name": "Buy16",
-                    "label": "買到今日累計 16 次",
+                    "label": "$text.064",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
@@ -898,7 +898,7 @@
                 },
                 {
                     "name": "Buy17",
-                    "label": "買到今日累計 17 次",
+                    "label": "$text.065",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
@@ -937,7 +937,7 @@
                 },
                 {
                     "name": "Buy18",
-                    "label": "買到今日累計 18 次",
+                    "label": "$text.066",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
@@ -976,7 +976,7 @@
                 },
                 {
                     "name": "Buy19",
-                    "label": "買到今日累計 19 次",
+                    "label": "$text.067",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
@@ -1015,7 +1015,7 @@
                 },
                 {
                     "name": "Buy20",
-                    "label": "買到今日累計 20 次",
+                    "label": "$text.068",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Purchase.Open": {
                             "enabled": true
@@ -1057,12 +1057,12 @@
         },
         "MaterialIronQuickMining": {
             "type": "switch",
-            "label": "鐵石礦洞：快速開採",
-            "description": "是否將鐵石礦洞的快速開採切換為開啟。",
+            "label": "$text.069",
+            "description": "$text.070",
             "cases": [
                 {
                     "name": "Yes",
-                    "label": "開啟",
+                    "label": "$text.071",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Quick.Route": {
                             "next": [
@@ -1074,7 +1074,7 @@
                 },
                 {
                     "name": "No",
-                    "label": "關閉",
+                    "label": "$text.072",
                     "pipeline_override": {
                         "MaterialRealm.Iron.Quick.Route": {
                             "next": [
@@ -1089,12 +1089,12 @@
         },
         "MaterialIronMiningCount": {
             "type": "input",
-            "label": "鐵石礦洞：採集次數",
-            "description": "鐵石礦洞要執行的採集次數，範圍 0～999。",
+            "label": "$text.073",
+            "description": "$text.074",
             "inputs": [
                 {
                     "name": "Count",
-                    "label": "次數",
+                    "label": "$text.075",
                     "default": "0",
                     "pipeline_type": "int",
                     "verify": "^(?:0|[1-9][0-9]{0,2})$",
@@ -1109,12 +1109,12 @@
         },
         "MaterialGoldPurchaseCount": {
             "type": "select",
-            "label": "黃金礦洞：購買次數",
-            "description": "黃金礦洞右上角的 ＋（每次 60 晨星、可購買 金礦錘），今日限購 20 次。設定值視為今日累計目標，流程會先讀「今日限購 a/20」扣掉今日已購買的次數，只補差額。預設不購買。",
+            "label": "$text.076",
+            "description": "$text.077",
             "cases": [
                 {
                     "name": "Buy0",
-                    "label": "0（不購買）",
+                    "label": "$text.048",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": false
@@ -1123,7 +1123,7 @@
                 },
                 {
                     "name": "Buy1",
-                    "label": "買到今日累計 1 次",
+                    "label": "$text.049",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
@@ -1162,7 +1162,7 @@
                 },
                 {
                     "name": "Buy2",
-                    "label": "買到今日累計 2 次",
+                    "label": "$text.050",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
@@ -1201,7 +1201,7 @@
                 },
                 {
                     "name": "Buy3",
-                    "label": "買到今日累計 3 次",
+                    "label": "$text.051",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
@@ -1240,7 +1240,7 @@
                 },
                 {
                     "name": "Buy4",
-                    "label": "買到今日累計 4 次",
+                    "label": "$text.052",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
@@ -1279,7 +1279,7 @@
                 },
                 {
                     "name": "Buy5",
-                    "label": "買到今日累計 5 次",
+                    "label": "$text.053",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
@@ -1318,7 +1318,7 @@
                 },
                 {
                     "name": "Buy6",
-                    "label": "買到今日累計 6 次",
+                    "label": "$text.054",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
@@ -1357,7 +1357,7 @@
                 },
                 {
                     "name": "Buy7",
-                    "label": "買到今日累計 7 次",
+                    "label": "$text.055",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
@@ -1396,7 +1396,7 @@
                 },
                 {
                     "name": "Buy8",
-                    "label": "買到今日累計 8 次",
+                    "label": "$text.056",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
@@ -1435,7 +1435,7 @@
                 },
                 {
                     "name": "Buy9",
-                    "label": "買到今日累計 9 次",
+                    "label": "$text.057",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
@@ -1474,7 +1474,7 @@
                 },
                 {
                     "name": "Buy10",
-                    "label": "買到今日累計 10 次",
+                    "label": "$text.058",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
@@ -1513,7 +1513,7 @@
                 },
                 {
                     "name": "Buy11",
-                    "label": "買到今日累計 11 次",
+                    "label": "$text.059",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
@@ -1552,7 +1552,7 @@
                 },
                 {
                     "name": "Buy12",
-                    "label": "買到今日累計 12 次",
+                    "label": "$text.060",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
@@ -1591,7 +1591,7 @@
                 },
                 {
                     "name": "Buy13",
-                    "label": "買到今日累計 13 次",
+                    "label": "$text.061",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
@@ -1630,7 +1630,7 @@
                 },
                 {
                     "name": "Buy14",
-                    "label": "買到今日累計 14 次",
+                    "label": "$text.062",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
@@ -1669,7 +1669,7 @@
                 },
                 {
                     "name": "Buy15",
-                    "label": "買到今日累計 15 次",
+                    "label": "$text.063",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
@@ -1708,7 +1708,7 @@
                 },
                 {
                     "name": "Buy16",
-                    "label": "買到今日累計 16 次",
+                    "label": "$text.064",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
@@ -1747,7 +1747,7 @@
                 },
                 {
                     "name": "Buy17",
-                    "label": "買到今日累計 17 次",
+                    "label": "$text.065",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
@@ -1786,7 +1786,7 @@
                 },
                 {
                     "name": "Buy18",
-                    "label": "買到今日累計 18 次",
+                    "label": "$text.066",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
@@ -1825,7 +1825,7 @@
                 },
                 {
                     "name": "Buy19",
-                    "label": "買到今日累計 19 次",
+                    "label": "$text.067",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
@@ -1864,7 +1864,7 @@
                 },
                 {
                     "name": "Buy20",
-                    "label": "買到今日累計 20 次",
+                    "label": "$text.068",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Purchase.Open": {
                             "enabled": true
@@ -1906,12 +1906,12 @@
         },
         "MaterialGoldQuickMining": {
             "type": "switch",
-            "label": "黃金礦洞：快速開採",
-            "description": "是否將黃金礦洞的快速開採切換為開啟。",
+            "label": "$text.078",
+            "description": "$text.079",
             "cases": [
                 {
                     "name": "Yes",
-                    "label": "開啟",
+                    "label": "$text.071",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Quick.Route": {
                             "next": [
@@ -1923,7 +1923,7 @@
                 },
                 {
                     "name": "No",
-                    "label": "關閉",
+                    "label": "$text.072",
                     "pipeline_override": {
                         "MaterialRealm.Gold.Quick.Route": {
                             "next": [
@@ -1938,12 +1938,12 @@
         },
         "MaterialGoldMiningCount": {
             "type": "input",
-            "label": "黃金礦洞：採集次數",
-            "description": "黃金礦洞要執行的採集次數，範圍 0～999。",
+            "label": "$text.080",
+            "description": "$text.081",
             "inputs": [
                 {
                     "name": "Count",
-                    "label": "次數",
+                    "label": "$text.075",
                     "default": "0",
                     "pipeline_type": "int",
                     "verify": "^(?:0|[1-9][0-9]{0,2})$",
@@ -1958,12 +1958,12 @@
         },
         "MaterialMonsterPurchaseCount": {
             "type": "select",
-            "label": "怪物洞窟：購買次數",
-            "description": "怪物洞窟右上角的 ＋（每次 60 晨星、可購買 討伐令），今日限購 20 次。設定值視為今日累計目標，流程會先讀「今日限購 a/20」扣掉今日已購買的次數，只補差額。預設不購買。",
+            "label": "$text.082",
+            "description": "$text.083",
             "cases": [
                 {
                     "name": "Buy0",
-                    "label": "0（不購買）",
+                    "label": "$text.048",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": false
@@ -1972,7 +1972,7 @@
                 },
                 {
                     "name": "Buy1",
-                    "label": "買到今日累計 1 次",
+                    "label": "$text.049",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
@@ -2011,7 +2011,7 @@
                 },
                 {
                     "name": "Buy2",
-                    "label": "買到今日累計 2 次",
+                    "label": "$text.050",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
@@ -2050,7 +2050,7 @@
                 },
                 {
                     "name": "Buy3",
-                    "label": "買到今日累計 3 次",
+                    "label": "$text.051",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
@@ -2089,7 +2089,7 @@
                 },
                 {
                     "name": "Buy4",
-                    "label": "買到今日累計 4 次",
+                    "label": "$text.052",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
@@ -2128,7 +2128,7 @@
                 },
                 {
                     "name": "Buy5",
-                    "label": "買到今日累計 5 次",
+                    "label": "$text.053",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
@@ -2167,7 +2167,7 @@
                 },
                 {
                     "name": "Buy6",
-                    "label": "買到今日累計 6 次",
+                    "label": "$text.054",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
@@ -2206,7 +2206,7 @@
                 },
                 {
                     "name": "Buy7",
-                    "label": "買到今日累計 7 次",
+                    "label": "$text.055",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
@@ -2245,7 +2245,7 @@
                 },
                 {
                     "name": "Buy8",
-                    "label": "買到今日累計 8 次",
+                    "label": "$text.056",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
@@ -2284,7 +2284,7 @@
                 },
                 {
                     "name": "Buy9",
-                    "label": "買到今日累計 9 次",
+                    "label": "$text.057",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
@@ -2323,7 +2323,7 @@
                 },
                 {
                     "name": "Buy10",
-                    "label": "買到今日累計 10 次",
+                    "label": "$text.058",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
@@ -2362,7 +2362,7 @@
                 },
                 {
                     "name": "Buy11",
-                    "label": "買到今日累計 11 次",
+                    "label": "$text.059",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
@@ -2401,7 +2401,7 @@
                 },
                 {
                     "name": "Buy12",
-                    "label": "買到今日累計 12 次",
+                    "label": "$text.060",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
@@ -2440,7 +2440,7 @@
                 },
                 {
                     "name": "Buy13",
-                    "label": "買到今日累計 13 次",
+                    "label": "$text.061",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
@@ -2479,7 +2479,7 @@
                 },
                 {
                     "name": "Buy14",
-                    "label": "買到今日累計 14 次",
+                    "label": "$text.062",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
@@ -2518,7 +2518,7 @@
                 },
                 {
                     "name": "Buy15",
-                    "label": "買到今日累計 15 次",
+                    "label": "$text.063",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
@@ -2557,7 +2557,7 @@
                 },
                 {
                     "name": "Buy16",
-                    "label": "買到今日累計 16 次",
+                    "label": "$text.064",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
@@ -2596,7 +2596,7 @@
                 },
                 {
                     "name": "Buy17",
-                    "label": "買到今日累計 17 次",
+                    "label": "$text.065",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
@@ -2635,7 +2635,7 @@
                 },
                 {
                     "name": "Buy18",
-                    "label": "買到今日累計 18 次",
+                    "label": "$text.066",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
@@ -2674,7 +2674,7 @@
                 },
                 {
                     "name": "Buy19",
-                    "label": "買到今日累計 19 次",
+                    "label": "$text.067",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
@@ -2713,7 +2713,7 @@
                 },
                 {
                     "name": "Buy20",
-                    "label": "買到今日累計 20 次",
+                    "label": "$text.068",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Purchase.Open": {
                             "enabled": true
@@ -2755,12 +2755,12 @@
         },
         "MaterialMonsterQuickMining": {
             "type": "switch",
-            "label": "怪物洞窟：快速開採",
-            "description": "是否將怪物洞窟的快速開採切換為開啟。",
+            "label": "$text.084",
+            "description": "$text.085",
             "cases": [
                 {
                     "name": "Yes",
-                    "label": "開啟",
+                    "label": "$text.071",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Quick.Route": {
                             "next": [
@@ -2772,7 +2772,7 @@
                 },
                 {
                     "name": "No",
-                    "label": "關閉",
+                    "label": "$text.072",
                     "pipeline_override": {
                         "MaterialRealm.Monster.Quick.Route": {
                             "next": [
@@ -2787,12 +2787,12 @@
         },
         "MaterialMonsterMiningCount": {
             "type": "input",
-            "label": "怪物洞窟：採集次數",
-            "description": "怪物洞窟要執行的採集次數，範圍 0～999。",
+            "label": "$text.086",
+            "description": "$text.087",
             "inputs": [
                 {
                     "name": "Count",
-                    "label": "次數",
+                    "label": "$text.075",
                     "default": "0",
                     "pipeline_type": "int",
                     "verify": "^(?:0|[1-9][0-9]{0,2})$",
@@ -2807,12 +2807,12 @@
         },
         "MaterialSandPurchaseCount": {
             "type": "select",
-            "label": "砂石礦洞：購買次數",
-            "description": "砂石礦洞右上角的 ＋（每次 60 晨星、可購買 砂礦鏟），今日限購 20 次。設定值視為今日累計目標，流程會先讀「今日限購 a/20」扣掉今日已購買的次數，只補差額。預設不購買。",
+            "label": "$text.088",
+            "description": "$text.089",
             "cases": [
                 {
                     "name": "Buy0",
-                    "label": "0（不購買）",
+                    "label": "$text.048",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": false
@@ -2821,7 +2821,7 @@
                 },
                 {
                     "name": "Buy1",
-                    "label": "買到今日累計 1 次",
+                    "label": "$text.049",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
@@ -2860,7 +2860,7 @@
                 },
                 {
                     "name": "Buy2",
-                    "label": "買到今日累計 2 次",
+                    "label": "$text.050",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
@@ -2899,7 +2899,7 @@
                 },
                 {
                     "name": "Buy3",
-                    "label": "買到今日累計 3 次",
+                    "label": "$text.051",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
@@ -2938,7 +2938,7 @@
                 },
                 {
                     "name": "Buy4",
-                    "label": "買到今日累計 4 次",
+                    "label": "$text.052",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
@@ -2977,7 +2977,7 @@
                 },
                 {
                     "name": "Buy5",
-                    "label": "買到今日累計 5 次",
+                    "label": "$text.053",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
@@ -3016,7 +3016,7 @@
                 },
                 {
                     "name": "Buy6",
-                    "label": "買到今日累計 6 次",
+                    "label": "$text.054",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
@@ -3055,7 +3055,7 @@
                 },
                 {
                     "name": "Buy7",
-                    "label": "買到今日累計 7 次",
+                    "label": "$text.055",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
@@ -3094,7 +3094,7 @@
                 },
                 {
                     "name": "Buy8",
-                    "label": "買到今日累計 8 次",
+                    "label": "$text.056",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
@@ -3133,7 +3133,7 @@
                 },
                 {
                     "name": "Buy9",
-                    "label": "買到今日累計 9 次",
+                    "label": "$text.057",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
@@ -3172,7 +3172,7 @@
                 },
                 {
                     "name": "Buy10",
-                    "label": "買到今日累計 10 次",
+                    "label": "$text.058",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
@@ -3211,7 +3211,7 @@
                 },
                 {
                     "name": "Buy11",
-                    "label": "買到今日累計 11 次",
+                    "label": "$text.059",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
@@ -3250,7 +3250,7 @@
                 },
                 {
                     "name": "Buy12",
-                    "label": "買到今日累計 12 次",
+                    "label": "$text.060",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
@@ -3289,7 +3289,7 @@
                 },
                 {
                     "name": "Buy13",
-                    "label": "買到今日累計 13 次",
+                    "label": "$text.061",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
@@ -3328,7 +3328,7 @@
                 },
                 {
                     "name": "Buy14",
-                    "label": "買到今日累計 14 次",
+                    "label": "$text.062",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
@@ -3367,7 +3367,7 @@
                 },
                 {
                     "name": "Buy15",
-                    "label": "買到今日累計 15 次",
+                    "label": "$text.063",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
@@ -3406,7 +3406,7 @@
                 },
                 {
                     "name": "Buy16",
-                    "label": "買到今日累計 16 次",
+                    "label": "$text.064",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
@@ -3445,7 +3445,7 @@
                 },
                 {
                     "name": "Buy17",
-                    "label": "買到今日累計 17 次",
+                    "label": "$text.065",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
@@ -3484,7 +3484,7 @@
                 },
                 {
                     "name": "Buy18",
-                    "label": "買到今日累計 18 次",
+                    "label": "$text.066",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
@@ -3523,7 +3523,7 @@
                 },
                 {
                     "name": "Buy19",
-                    "label": "買到今日累計 19 次",
+                    "label": "$text.067",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
@@ -3562,7 +3562,7 @@
                 },
                 {
                     "name": "Buy20",
-                    "label": "買到今日累計 20 次",
+                    "label": "$text.068",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Purchase.Open": {
                             "enabled": true
@@ -3604,12 +3604,12 @@
         },
         "MaterialSandQuickMining": {
             "type": "switch",
-            "label": "砂石礦洞：快速開採",
-            "description": "是否將砂石礦洞的快速開採切換為開啟。",
+            "label": "$text.090",
+            "description": "$text.091",
             "cases": [
                 {
                     "name": "Yes",
-                    "label": "開啟",
+                    "label": "$text.071",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Quick.Route": {
                             "next": [
@@ -3621,7 +3621,7 @@
                 },
                 {
                     "name": "No",
-                    "label": "關閉",
+                    "label": "$text.072",
                     "pipeline_override": {
                         "MaterialRealm.Sand.Quick.Route": {
                             "next": [
@@ -3636,12 +3636,12 @@
         },
         "MaterialSandMiningCount": {
             "type": "input",
-            "label": "砂石礦洞：採集次數",
-            "description": "砂石礦洞要執行的採集次數，範圍 0～999。",
+            "label": "$text.092",
+            "description": "$text.093",
             "inputs": [
                 {
                     "name": "Count",
-                    "label": "次數",
+                    "label": "$text.075",
                     "default": "0",
                     "pipeline_type": "int",
                     "verify": "^(?:0|[1-9][0-9]{0,2})$",
@@ -3656,12 +3656,12 @@
         },
         "CommissionSubmitCount": {
             "type": "input",
-            "label": "委託：本次最多提交次數",
-            "description": "本次執行最多點擊幾次「提交」，範圍 0～99；未勾選額外次數時，辨識到今日剩餘 0/4 就停止。",
+            "label": "$text.094",
+            "description": "$text.095",
             "inputs": [
                 {
                     "name": "Count",
-                    "label": "次數",
+                    "label": "$text.075",
                     "default": "4",
                     "pipeline_type": "int",
                     "verify": "^(?:0|[1-9][0-9]?)$",
@@ -3679,12 +3679,12 @@
         },
         "CommissionUseExtraAttempts": {
             "type": "switch",
-            "label": "委託：使用額外次數",
-            "description": "關閉時只使用每日 4 次免費額度；開啟後才允許處理剩餘 0/4 之後的額外次數。額外次數確認畫面尚待建立辨識樣本。",
+            "label": "$text.096",
+            "description": "$text.097",
             "cases": [
                 {
                     "name": "No",
-                    "label": "不使用",
+                    "label": "$text.098",
                     "pipeline_override": {
                         "Rewards.Commissions.Extra.Route": {
                             "next": [
@@ -3700,7 +3700,7 @@
                 },
                 {
                     "name": "Yes",
-                    "label": "允許使用",
+                    "label": "$text.099",
                     "pipeline_override": {
                         "Rewards.Commissions.Extra.Route": {
                             "next": [
@@ -3719,12 +3719,12 @@
         },
         "AlchemyExcludeHighPower": {
             "type": "select",
-            "label": "煉金爐：分解時排除高戰力裝備",
-            "description": "進入分解頁後，會先辨識「排除高戰力」目前的勾選狀態，再依此設定調整。勾選可避免分解掉戰力較高的裝備。",
+            "label": "$text.100",
+            "description": "$text.101",
             "cases": [
                 {
                     "name": "Enabled",
-                    "label": "勾選（建議）",
+                    "label": "$text.102",
                     "pipeline_override": {
                         "Alchemy.Exclude.Route": {
                             "next": [
@@ -3736,7 +3736,7 @@
                 },
                 {
                     "name": "Disabled",
-                    "label": "不勾選（連高戰力裝備一起分解）",
+                    "label": "$text.103",
                     "pipeline_override": {
                         "Alchemy.Exclude.Route": {
                             "next": [
@@ -3751,12 +3751,12 @@
         },
         "GoddessStatuePrayerCount": {
             "type": "input",
-            "label": "女神像：祈願次數",
-            "description": "輸入 0～9999。流程會依剩餘次數自動選擇「祈願 100 次／10 次／1 次」；友情祈願沒有 100 次按鈕時會自動退到 10 次或 1 次。",
+            "label": "$text.104",
+            "description": "$text.105",
             "inputs": [
                 {
                     "name": "Count",
-                    "label": "次數",
+                    "label": "$text.075",
                     "default": "2",
                     "pipeline_type": "int",
                     "verify": "^(?:0|[1-9][0-9]{0,3})$",
@@ -3782,12 +3782,12 @@
         },
         "TimeGachaCount": {
             "type": "input",
-            "label": "時光扭蛋機：扭蛋次數",
-            "description": "輸入 0～9999。流程會依剩餘次數自動選擇「扭蛋 100 次／10 次／1 次」；代幣不足導致按鈕消失時會自動退到較小的按鈕。",
+            "label": "$text.106",
+            "description": "$text.107",
             "inputs": [
                 {
                     "name": "Count",
-                    "label": "次數",
+                    "label": "$text.075",
                     "default": "2",
                     "pipeline_type": "int",
                     "verify": "^(?:0|[1-9][0-9]{0,3})$",
@@ -3813,12 +3813,12 @@
         },
         "SakuraBeastBondCount": {
             "type": "input",
-            "label": "幻獸結緣：結緣次數",
-            "description": "輸入 0～9999。流程會依剩餘次數自動選擇「結緣 100 次／10 次／1 次」，剩餘不足時退到較小的按鈕，避免超抽。",
+            "label": "$text.108",
+            "description": "$text.109",
             "inputs": [
                 {
                     "name": "Count",
-                    "label": "次數",
+                    "label": "$text.075",
                     "default": "10",
                     "pipeline_type": "int",
                     "verify": "^(?:0|[1-9][0-9]{0,3})$",
@@ -3844,12 +3844,12 @@
         },
         "AlchemyDecomposeRounds": {
             "type": "select",
-            "label": "煉金爐：分解重複輪數上限",
-            "description": "裝備有單次分解數量上限，需要重複「勾選品級 → 分解」。此設定為安全上限，流程仍會在「已選物品」為 0 時提前結束。",
+            "label": "$text.110",
+            "description": "$text.111",
             "cases": [
                 {
                     "name": "Rounds1",
-                    "label": "1 輪",
+                    "label": "$text.112",
                     "pipeline_override": {
                         "Alchemy.Loop.SelectNormal": {
                             "max_hit": 1
@@ -3858,7 +3858,7 @@
                 },
                 {
                     "name": "Rounds2",
-                    "label": "2 輪",
+                    "label": "$text.113",
                     "pipeline_override": {
                         "Alchemy.Loop.SelectNormal": {
                             "max_hit": 2
@@ -3867,7 +3867,7 @@
                 },
                 {
                     "name": "Rounds4",
-                    "label": "4 輪",
+                    "label": "$text.114",
                     "pipeline_override": {
                         "Alchemy.Loop.SelectNormal": {
                             "max_hit": 4
@@ -3876,7 +3876,7 @@
                 },
                 {
                     "name": "Rounds6",
-                    "label": "6 輪",
+                    "label": "$text.115",
                     "pipeline_override": {
                         "Alchemy.Loop.SelectNormal": {
                             "max_hit": 6
@@ -3885,7 +3885,7 @@
                 },
                 {
                     "name": "Rounds8",
-                    "label": "8 輪",
+                    "label": "$text.116",
                     "pipeline_override": {
                         "Alchemy.Loop.SelectNormal": {
                             "max_hit": 8
@@ -3894,7 +3894,7 @@
                 },
                 {
                     "name": "Rounds12",
-                    "label": "12 輪",
+                    "label": "$text.117",
                     "pipeline_override": {
                         "Alchemy.Loop.SelectNormal": {
                             "max_hit": 12
@@ -3906,12 +3906,12 @@
         },
         "BagUseAllRounds": {
             "type": "select",
-            "label": "背包：一鍵使用重複輪數上限",
-            "description": "「一鍵使用」單次上限 100 個，需要時會重複執行。流程會在按鈕消失時提前結束。",
+            "label": "$text.118",
+            "description": "$text.119",
             "cases": [
                 {
                     "name": "Rounds1",
-                    "label": "1 輪",
+                    "label": "$text.112",
                     "pipeline_override": {
                         "Bag.Loop.UseAll": {
                             "max_hit": 1
@@ -3920,7 +3920,7 @@
                 },
                 {
                     "name": "Rounds2",
-                    "label": "2 輪",
+                    "label": "$text.113",
                     "pipeline_override": {
                         "Bag.Loop.UseAll": {
                             "max_hit": 2
@@ -3929,7 +3929,7 @@
                 },
                 {
                     "name": "Rounds4",
-                    "label": "4 輪",
+                    "label": "$text.114",
                     "pipeline_override": {
                         "Bag.Loop.UseAll": {
                             "max_hit": 4
@@ -3938,7 +3938,7 @@
                 },
                 {
                     "name": "Rounds6",
-                    "label": "6 輪",
+                    "label": "$text.115",
                     "pipeline_override": {
                         "Bag.Loop.UseAll": {
                             "max_hit": 6
@@ -3947,7 +3947,7 @@
                 },
                 {
                     "name": "Rounds10",
-                    "label": "10 輪",
+                    "label": "$text.120",
                     "pipeline_override": {
                         "Bag.Loop.UseAll": {
                             "max_hit": 10
@@ -3959,12 +3959,12 @@
         },
         "SakuraBeastBondDeduct": {
             "type": "switch",
-            "label": "幻獸結緣：扣除已結緣次數",
-            "description": "勾選時，上面的次數視為「今日累計目標」，流程會先讀畫面上的「今日已結緣」計數，只補足差額；取消勾選則不論今天已結緣過幾次，都固定再執行設定的次數。",
+            "label": "$text.121",
+            "description": "$text.122",
             "cases": [
                 {
                     "name": "Yes",
-                    "label": "扣除（次數視為今日累計目標）",
+                    "label": "$text.123",
                     "pipeline_override": {
                         "SakuraTree.Pull.Route": {
                             "next": [
@@ -3975,7 +3975,7 @@
                 },
                 {
                     "name": "No",
-                    "label": "不扣除（每次都執行設定次數）",
+                    "label": "$text.124",
                     "pipeline_override": {
                         "SakuraTree.Pull.Route": {
                             "next": [
@@ -3989,33 +3989,33 @@
         },
         "GoddessStatuePool": {
             "type": "select",
-            "label": "女神像：祈願池",
-            "description": "祈願池以橫向清單排列且可左右捲動，流程會自動捲動尋找指定的池；找不到時安全結束，不會誤抽其他池。",
+            "label": "$text.125",
+            "description": "$text.126",
             "cases": [
                 {
                     "name": "Friendship",
-                    "label": "友情祈願",
+                    "label": "$text.127",
                     "pipeline_override": {
                         "GoddessStatue.Pool.Select": {
-                            "expected": "友情祈願"
+                            "expected": "$text.127"
                         }
                     }
                 },
                 {
                     "name": "Normal",
-                    "label": "普通祈願",
+                    "label": "$text.128",
                     "pipeline_override": {
                         "GoddessStatue.Pool.Select": {
-                            "expected": "普通祈願"
+                            "expected": "$text.128"
                         }
                     }
                 },
                 {
                     "name": "Advanced",
-                    "label": "高階祈願",
+                    "label": "$text.129",
                     "pipeline_override": {
                         "GoddessStatue.Pool.Select": {
-                            "expected": "高階祈願"
+                            "expected": "$text.129"
                         }
                     }
                 }
@@ -4024,12 +4024,12 @@
         },
         "GoddessStatuePrayerDeduct": {
             "type": "switch",
-            "label": "女神像：扣除已祈願次數",
-            "description": "勾選時，上面的次數視為「今日累計目標」，流程會先讀畫面上的「今日已祈願」計數，只補足差額；取消勾選則不論今天已祈願過幾次，都固定再執行設定的次數。",
+            "label": "$text.130",
+            "description": "$text.131",
             "cases": [
                 {
                     "name": "Yes",
-                    "label": "扣除（次數視為今日累計目標）",
+                    "label": "$text.123",
                     "pipeline_override": {
                         "GoddessStatue.Pull.Route": {
                             "next": [
@@ -4040,7 +4040,7 @@
                 },
                 {
                     "name": "No",
-                    "label": "不扣除（每次都執行設定次數）",
+                    "label": "$text.124",
                     "pipeline_override": {
                         "GoddessStatue.Pull.Route": {
                             "next": [
@@ -4054,12 +4054,12 @@
         },
         "TimeGachaRealm": {
             "type": "select",
-            "label": "時光扭蛋機：國度系列",
-            "description": "對應扭蛋機畫面右上角的「切換扭蛋機」。選擇後流程會開啟該視窗、捲到最上方再往下尋找指定系列，找不到時維持原本選擇。",
+            "label": "$text.132",
+            "description": "$text.133",
             "cases": [
                 {
                     "name": "Keep",
-                    "label": "不切換（維持遊戲中目前選擇）",
+                    "label": "$text.134",
                     "pipeline_override": {
                         "GachaMachine.Realm.Route": {
                             "next": [
@@ -4070,7 +4070,7 @@
                 },
                 {
                     "name": "SenLuoYiZhen",
-                    "label": "森之國・森羅遺珍",
+                    "label": "$text.135",
                     "pipeline_override": {
                         "GachaMachine.Realm.Route": {
                             "next": [
@@ -4084,7 +4084,7 @@
                 },
                 {
                     "name": "JiShenMiCang",
-                    "label": "山之國・機神祕藏",
+                    "label": "$text.136",
                     "pipeline_override": {
                         "GachaMachine.Realm.Route": {
                             "next": [
@@ -4098,7 +4098,7 @@
                 },
                 {
                     "name": "FuShiQiTan",
-                    "label": "澤之國・浮世奇譚",
+                    "label": "$text.137",
                     "pipeline_override": {
                         "GachaMachine.Realm.Route": {
                             "next": [
@@ -4112,7 +4112,7 @@
                 },
                 {
                     "name": "QianKunZaoHua",
-                    "label": "龍之國・乾坤造化",
+                    "label": "$text.138",
                     "pipeline_override": {
                         "GachaMachine.Realm.Route": {
                             "next": [
@@ -4126,7 +4126,7 @@
                 },
                 {
                     "name": "DaoYanTianJi",
-                    "label": "龍之國・道衍天機",
+                    "label": "$text.139",
                     "pipeline_override": {
                         "GachaMachine.Realm.Route": {
                             "next": [
@@ -4140,7 +4140,7 @@
                 },
                 {
                     "name": "ShuGuangMiShi",
-                    "label": "羽之國・曙光祕誓",
+                    "label": "$text.140",
                     "pipeline_override": {
                         "GachaMachine.Realm.Route": {
                             "next": [
@@ -4154,7 +4154,7 @@
                 },
                 {
                     "name": "TianQiongShengYue",
-                    "label": "羽之國・天穹聖約",
+                    "label": "$text.141",
                     "pipeline_override": {
                         "GachaMachine.Realm.Route": {
                             "next": [
@@ -4168,7 +4168,7 @@
                 },
                 {
                     "name": "CangHuiGuLv",
-                    "label": "羽之國・蒼輝古律",
+                    "label": "$text.142",
                     "pipeline_override": {
                         "GachaMachine.Realm.Route": {
                             "next": [
@@ -4182,7 +4182,7 @@
                 },
                 {
                     "name": "XieXueShengYan",
-                    "label": "哈帕迪・諧謔盛宴",
+                    "label": "$text.143",
                     "pipeline_override": {
                         "GachaMachine.Realm.Route": {
                             "next": [
@@ -4196,7 +4196,7 @@
                 },
                 {
                     "name": "HuangDanXiJu",
-                    "label": "哈帕迪・荒誕喜劇",
+                    "label": "$text.144",
                     "pipeline_override": {
                         "GachaMachine.Realm.Route": {
                             "next": [
@@ -4210,7 +4210,7 @@
                 },
                 {
                     "name": "QiJingHuanXiang",
-                    "label": "哈帕迪・奇境幻想",
+                    "label": "$text.145",
                     "pipeline_override": {
                         "GachaMachine.Realm.Route": {
                             "next": [
@@ -4224,7 +4224,7 @@
                 },
                 {
                     "name": "ShuangYanGongWu",
-                    "label": "伊格尼斯・霜焰共舞",
+                    "label": "$text.146",
                     "pipeline_override": {
                         "GachaMachine.Realm.Route": {
                             "next": [
@@ -4241,12 +4241,12 @@
         },
         "TimeGachaDeduct": {
             "type": "switch",
-            "label": "時光扭蛋機：扣除已扭蛋次數",
-            "description": "勾選時，上面的次數視為「今日累計目標」，流程會先讀畫面上的「今日已扭蛋」計數，只補足差額；取消勾選則不論今天已扭蛋過幾次，都固定再執行設定的次數。",
+            "label": "$text.147",
+            "description": "$text.148",
             "cases": [
                 {
                     "name": "Yes",
-                    "label": "扣除（次數視為今日累計目標）",
+                    "label": "$text.123",
                     "pipeline_override": {
                         "GachaMachine.Pull.Route": {
                             "next": [
@@ -4257,7 +4257,7 @@
                 },
                 {
                     "name": "No",
-                    "label": "不扣除（每次都執行設定次數）",
+                    "label": "$text.124",
                     "pipeline_override": {
                         "GachaMachine.Pull.Route": {
                             "next": [
@@ -4271,12 +4271,12 @@
         },
         "DailyDungeonTarget": {
             "type": "select",
-            "label": "日常副本：要打哪一個副本",
-            "description": "清單由上到下共 25 個副本（世界之樹 → 冰凌尖塔）。流程會先把清單捲到最頂，再用副本名稱逐頁往下找；進入詳情頁後會再用標題文字確認一次，找不到或名稱不符就安全停止，不會誤打別的副本。",
+            "label": "$text.149",
+            "description": "$text.150",
             "cases": [
                 {
                     "name": "WorldTree",
-                    "label": "01. 世界之樹",
+                    "label": "$text.151",
                     "pipeline_override": {
                         "Dungeon.Select.Find": {
                             "expected": "世.{0,3}界.{0,3}之.{0,3}樹"
@@ -4288,7 +4288,7 @@
                 },
                 {
                     "name": "MachineGod",
-                    "label": "02. 機神山",
+                    "label": "$text.152",
                     "pipeline_override": {
                         "Dungeon.Select.Find": {
                             "expected": "機.{0,3}神.{0,3}山"
@@ -4300,7 +4300,7 @@
                 },
                 {
                     "name": "SeaPalace",
-                    "label": "03. 海之宮遺跡",
+                    "label": "$text.153",
                     "pipeline_override": {
                         "Dungeon.Select.Find": {
                             "expected": "海.{0,3}之.{0,3}宮"
@@ -4312,7 +4312,7 @@
                 },
                 {
                     "name": "SpringShrine",
-                    "label": "04. 源水大社",
+                    "label": "$text.154",
                     "pipeline_override": {
                         "Dungeon.Select.Find": {
                             "expected": "源.{0,3}水.{0,3}大"
@@ -4324,7 +4324,7 @@
                 },
                 {
                     "name": "YellowSpring",
-                    "label": "05. 黃泉閣",
+                    "label": "$text.155",
                     "pipeline_override": {
                         "Dungeon.Select.Find": {
                             "expected": "[黃黄].{0,3}泉.{0,3}[閣阁]"
@@ -4336,7 +4336,7 @@
                 },
                 {
                     "name": "SealedGorge",
-                    "label": "06. 封魔峽",
+                    "label": "$text.156",
                     "pipeline_override": {
                         "Dungeon.Select.Find": {
                             "expected": "封.{0,3}魔.{0,3}[峽峡]"
@@ -4348,7 +4348,7 @@
                 },
                 {
                     "name": "GeneralTomb",
-                    "label": "07. 將軍陵",
+                    "label": "$text.157",
                     "pipeline_override": {
                         "Dungeon.Select.Find": {
                             "expected": "[將将].{0,3}[軍军].{0,3}陵"
@@ -4360,7 +4360,7 @@
                 },
                 {
                     "name": "GreenCloud",
-                    "label": "08. 青雲觀",
+                    "label": "$text.158",
                     "pipeline_override": {
                         "Dungeon.Select.Find": {
                             "expected": "青.{0,3}[雲云].{0,3}[觀观]"
@@ -4372,7 +4372,7 @@
                 },
                 {
                     "name": "AncientSword",
-                    "label": "09. 古劍城",
+                    "label": "$text.159",
                     "pipeline_override": {
                         "Dungeon.Select.Find": {
                             "expected": "古.{0,3}[劍剑].{0,3}城"
@@ -4384,7 +4384,7 @@
                 },
                 {
                     "name": "CloudBoat",
-                    "label": "10. 仙海雲舟",
+                    "label": "$text.160",
                     "pipeline_override": {
                         "Dungeon.Select.Find": {
                             "expected": "仙.{0,3}海.{0,3}[雲云]"
@@ -4396,7 +4396,7 @@
                 },
                 {
                     "name": "CrystalSpiral",
-                    "label": "11. 結晶螺旋樹",
+                    "label": "$text.161",
                     "pipeline_override": {
                         "Dungeon.Select.Find": {
                             "expected": "[結结].{0,3}晶.{0,3}螺"
@@ -4408,7 +4408,7 @@
                 },
                 {
                     "name": "EternalGarden",
-                    "label": "12. 永恆花庭",
+                    "label": "$text.162",
                     "pipeline_override": {
                         "Dungeon.Select.Find": {
                             "expected": "永.{0,3}[恆恒].{0,3}花"
@@ -4420,7 +4420,7 @@
                 },
                 {
                     "name": "WarAbyssFort",
-                    "label": "13. 戰淵堡壘",
+                    "label": "$text.163",
                     "pipeline_override": {
                         "Dungeon.Select.Find": {
                             "expected": "[戰战].{0,3}[淵渊]"
@@ -4432,7 +4432,7 @@
                 },
                 {
                     "name": "PurifyCourt",
-                    "label": "14. 淨化之庭",
+                    "label": "$text.164",
                     "pipeline_override": {
                         "Dungeon.Select.Find": {
                             "expected": "[淨净].{0,3}化.{0,3}之"
@@ -4444,7 +4444,7 @@
                 },
                 {
                     "name": "OrderTemple",
-                    "label": "15. 秩序神殿",
+                    "label": "$text.165",
                     "pipeline_override": {
                         "Dungeon.Select.Find": {
                             "expected": "秩.{0,3}序.{0,3}神"
@@ -4456,7 +4456,7 @@
                 },
                 {
                     "name": "SunSpire",
-                    "label": "16. 烈陽尖塔",
+                    "label": "$text.166",
                     "pipeline_override": {
                         "Dungeon.Select.Find": {
                             "expected": "烈.{0,3}[陽阳].{0,3}尖"
@@ -4468,7 +4468,7 @@
                 },
                 {
                     "name": "TyrantNest",
-                    "label": "17. 君臨之巢",
+                    "label": "$text.167",
                     "pipeline_override": {
                         "Dungeon.Select.Find": {
                             "expected": "君.{0,3}[臨临].{0,3}巢"
@@ -4480,7 +4480,7 @@
                 },
                 {
                     "name": "ClockTower",
-                    "label": "18. 奇巧鐘樓",
+                    "label": "$text.168",
                     "pipeline_override": {
                         "Dungeon.Select.Find": {
                             "expected": "巧.{0,3}[鐘钟].{0,3}[樓楼]"
@@ -4492,7 +4492,7 @@
                 },
                 {
                     "name": "PiratePark",
-                    "label": "19. 樂園海盜船",
+                    "label": "$text.169",
                     "pipeline_override": {
                         "Dungeon.Select.Find": {
                             "expected": "[樂乐].{0,3}[園园].{0,3}海"
@@ -4504,7 +4504,7 @@
                 },
                 {
                     "name": "SeaKingSub",
-                    "label": "20. 海皇潛艇",
+                    "label": "$text.170",
                     "pipeline_override": {
                         "Dungeon.Select.Find": {
                             "expected": "海.{0,3}皇.{0,3}[潛潜]"
@@ -4516,7 +4516,7 @@
                 },
                 {
                     "name": "ClockworkFort",
-                    "label": "21. 發條要塞",
+                    "label": "$text.171",
                     "pipeline_override": {
                         "Dungeon.Select.Find": {
                             "expected": "[發发].{0,3}[條条].{0,3}要"
@@ -4528,7 +4528,7 @@
                 },
                 {
                     "name": "SkyObservatory",
-                    "label": "22. 天象觀測站",
+                    "label": "$text.172",
                     "pipeline_override": {
                         "Dungeon.Select.Find": {
                             "expected": "天.{0,3}象.{0,3}[觀观]"
@@ -4540,7 +4540,7 @@
                 },
                 {
                     "name": "TitanBalloon",
-                    "label": "23. 泰坦熱氣球",
+                    "label": "$text.173",
                     "pipeline_override": {
                         "Dungeon.Select.Find": {
                             "expected": "[熱热].{0,3}[氣气].{0,3}球"
@@ -4552,7 +4552,7 @@
                 },
                 {
                     "name": "StarCity",
-                    "label": "24. 星空之城",
+                    "label": "$text.174",
                     "pipeline_override": {
                         "Dungeon.Select.Find": {
                             "expected": "星.{0,3}空.{0,3}之.{0,3}城"
@@ -4564,7 +4564,7 @@
                 },
                 {
                     "name": "IceSpire",
-                    "label": "25. 冰凌尖塔",
+                    "label": "$text.175",
                     "pipeline_override": {
                         "Dungeon.Select.Find": {
                             "expected": "冰.{0,3}凌.{0,3}尖.{0,3}塔"
@@ -4579,12 +4579,12 @@
         },
         "DailyDungeonBattleCount": {
             "type": "select",
-            "label": "日常副本：挑戰次數",
-            "description": "每次挑戰都會消耗體力並在結算頁點「領取獎勵」。固定次數上限 6 次；選「打到上限」則會一直打到結算頁顯示「領獎次數已用盡」為止，不會再多打沒有獎勵的場次。預設 4 次。",
+            "label": "$text.176",
+            "description": "$text.177",
             "cases": [
                 {
                     "name": "Count0",
-                    "label": "0 次（不執行）",
+                    "label": "$text.178",
                     "pipeline_override": {
                         "Dungeon.Map": {
                             "next": [
@@ -4595,7 +4595,7 @@
                 },
                 {
                     "name": "Count1",
-                    "label": "1 次",
+                    "label": "$text.179",
                     "pipeline_override": {
                         "Dungeon.Map": {
                             "next": [
@@ -4609,7 +4609,7 @@
                 },
                 {
                     "name": "Count2",
-                    "label": "2 次",
+                    "label": "$text.180",
                     "pipeline_override": {
                         "Dungeon.Map": {
                             "next": [
@@ -4623,7 +4623,7 @@
                 },
                 {
                     "name": "Count3",
-                    "label": "3 次",
+                    "label": "$text.181",
                     "pipeline_override": {
                         "Dungeon.Map": {
                             "next": [
@@ -4637,7 +4637,7 @@
                 },
                 {
                     "name": "Count4",
-                    "label": "4 次",
+                    "label": "$text.182",
                     "pipeline_override": {
                         "Dungeon.Map": {
                             "next": [
@@ -4651,7 +4651,7 @@
                 },
                 {
                     "name": "Count5",
-                    "label": "5 次",
+                    "label": "$text.183",
                     "pipeline_override": {
                         "Dungeon.Map": {
                             "next": [
@@ -4665,7 +4665,7 @@
                 },
                 {
                     "name": "Count6",
-                    "label": "6 次",
+                    "label": "$text.184",
                     "pipeline_override": {
                         "Dungeon.Map": {
                             "next": [
@@ -4679,7 +4679,7 @@
                 },
                 {
                     "name": "CountMax",
-                    "label": "打到上限（領獎次數用完就停）",
+                    "label": "$text.185",
                     "pipeline_override": {
                         "Dungeon.Map": {
                             "next": [
@@ -4706,12 +4706,12 @@
         },
         "BeastTrialRunCount": {
             "type": "select",
-            "label": "聖獸試煉：挑戰次數",
-            "description": "聖獸每隔一段時間輪換，人物會自動傳送到聖獸下方。一場為 10 回合的傷害戰，實測約 1～2 分鐘，獎勵依當日最高傷害發放，通常 1 次即可。",
+            "label": "$text.186",
+            "description": "$text.187",
             "cases": [
                 {
                     "name": "Count0",
-                    "label": "0 次（不執行）",
+                    "label": "$text.178",
                     "pipeline_override": {
                         "BeastTrial.Map": {
                             "next": [
@@ -4722,7 +4722,7 @@
                 },
                 {
                     "name": "Count1",
-                    "label": "1 次",
+                    "label": "$text.179",
                     "pipeline_override": {
                         "BeastTrial.Map": {
                             "next": [
@@ -4736,7 +4736,7 @@
                 },
                 {
                     "name": "Count2",
-                    "label": "2 次",
+                    "label": "$text.180",
                     "pipeline_override": {
                         "BeastTrial.Map": {
                             "next": [
@@ -4750,7 +4750,7 @@
                 },
                 {
                     "name": "Count3",
-                    "label": "3 次",
+                    "label": "$text.181",
                     "pipeline_override": {
                         "BeastTrial.Map": {
                             "next": [
@@ -4767,12 +4767,12 @@
         },
         "BeastTrialParty": {
             "type": "select",
-            "label": "聖獸試煉：組隊",
-            "description": "隊伍上限 6 人。只邀請「夥伴」分頁的 AI 夥伴，不會邀請或配對其他玩家。",
+            "label": "$text.188",
+            "description": "$text.189",
             "cases": [
                 {
                     "name": "FillPartners",
-                    "label": "用夥伴補滿隊伍",
+                    "label": "$text.190",
                     "pipeline_override": {
                         "BeastTrial.Party.Route": {
                             "next": [
@@ -4783,7 +4783,7 @@
                 },
                 {
                     "name": "KeepCurrent",
-                    "label": "不組隊（沿用目前隊伍）",
+                    "label": "$text.191",
                     "pipeline_override": {
                         "BeastTrial.Party.Route": {
                             "next": [
@@ -4798,12 +4798,12 @@
         },
         "PhantomRunCount": {
             "type": "select",
-            "label": "雙影幻境：挑戰次數",
-            "description": "固定在龍之國·幻天鼎，隊伍上限 2 人且會要求特定職業（夥伴清單會自動只列出可用的）。目標是擊破第 3 波，戰敗會使角色重傷，流程會用料理一鍵治療。",
+            "label": "$text.192",
+            "description": "$text.193",
             "cases": [
                 {
                     "name": "Count0",
-                    "label": "0 次（不執行）",
+                    "label": "$text.178",
                     "pipeline_override": {
                         "Phantom.Map": {
                             "next": [
@@ -4814,7 +4814,7 @@
                 },
                 {
                     "name": "Count1",
-                    "label": "1 次",
+                    "label": "$text.179",
                     "pipeline_override": {
                         "Phantom.Map": {
                             "next": [
@@ -4828,7 +4828,7 @@
                 },
                 {
                     "name": "Count2",
-                    "label": "2 次",
+                    "label": "$text.180",
                     "pipeline_override": {
                         "Phantom.Map": {
                             "next": [
@@ -4842,7 +4842,7 @@
                 },
                 {
                     "name": "Count3",
-                    "label": "3 次",
+                    "label": "$text.181",
                     "pipeline_override": {
                         "Phantom.Map": {
                             "next": [
@@ -4859,12 +4859,12 @@
         },
         "PhantomParty": {
             "type": "select",
-            "label": "雙影幻境：組隊",
-            "description": "隊伍上限 2 人，需要 1 位符合當日職業需求的隊友。只邀請「夥伴」分頁的 AI 夥伴，不會邀請或配對其他玩家。",
+            "label": "$text.194",
+            "description": "$text.195",
             "cases": [
                 {
                     "name": "FillPartners",
-                    "label": "用夥伴補滿隊伍",
+                    "label": "$text.190",
                     "pipeline_override": {
                         "Phantom.Party.Route": {
                             "next": [
@@ -4875,7 +4875,7 @@
                 },
                 {
                     "name": "KeepCurrent",
-                    "label": "不組隊（沿用目前隊伍）",
+                    "label": "$text.191",
                     "pipeline_override": {
                         "Phantom.Party.Route": {
                             "next": [
@@ -4890,12 +4890,12 @@
         },
         "ArenaTicketPurchaseCount": {
             "type": "select",
-            "label": "競技場：購買競技場券",
-            "description": "右上角「挑戰次數」旁的 ＋，每張 10 晨星、今日限購 8 張。設定值視為今日累計目標，流程會先讀「今日限購 a/8」扣掉已購買的張數。預設不購買。",
+            "label": "$text.196",
+            "description": "$text.197",
             "cases": [
                 {
                     "name": "Count0",
-                    "label": "不購買",
+                    "label": "$text.198",
                     "pipeline_override": {
                         "Arena.Purchase.Route": {
                             "next": [
@@ -4906,7 +4906,7 @@
                 },
                 {
                     "name": "Count1",
-                    "label": "買到今日累計 1 張",
+                    "label": "$text.199",
                     "pipeline_override": {
                         "Arena.Purchase.Route": {
                             "next": [
@@ -4947,7 +4947,7 @@
                 },
                 {
                     "name": "Count2",
-                    "label": "買到今日累計 2 張",
+                    "label": "$text.200",
                     "pipeline_override": {
                         "Arena.Purchase.Route": {
                             "next": [
@@ -4988,7 +4988,7 @@
                 },
                 {
                     "name": "Count3",
-                    "label": "買到今日累計 3 張",
+                    "label": "$text.201",
                     "pipeline_override": {
                         "Arena.Purchase.Route": {
                             "next": [
@@ -5029,7 +5029,7 @@
                 },
                 {
                     "name": "Count4",
-                    "label": "買到今日累計 4 張",
+                    "label": "$text.202",
                     "pipeline_override": {
                         "Arena.Purchase.Route": {
                             "next": [
@@ -5070,7 +5070,7 @@
                 },
                 {
                     "name": "Count5",
-                    "label": "買到今日累計 5 張",
+                    "label": "$text.203",
                     "pipeline_override": {
                         "Arena.Purchase.Route": {
                             "next": [
@@ -5111,7 +5111,7 @@
                 },
                 {
                     "name": "Count6",
-                    "label": "買到今日累計 6 張",
+                    "label": "$text.204",
                     "pipeline_override": {
                         "Arena.Purchase.Route": {
                             "next": [
@@ -5152,7 +5152,7 @@
                 },
                 {
                     "name": "Count7",
-                    "label": "買到今日累計 7 張",
+                    "label": "$text.205",
                     "pipeline_override": {
                         "Arena.Purchase.Route": {
                             "next": [
@@ -5193,7 +5193,7 @@
                 },
                 {
                     "name": "Count8",
-                    "label": "買到今日累計 8 張",
+                    "label": "$text.206",
                     "pipeline_override": {
                         "Arena.Purchase.Route": {
                             "next": [
@@ -5237,12 +5237,12 @@
         },
         "ArenaBattleCount": {
             "type": "select",
-            "label": "競技場：挑戰次數",
-            "description": "固定挑戰「選擇對手」四位中最右邊那位（排名最低、戰力最弱）。每場消耗 1 張競技場券，戰鬥為自動結算。預設用完目前剩餘的券。",
+            "label": "$text.207",
+            "description": "$text.208",
             "cases": [
                 {
                     "name": "All",
-                    "label": "用完剩餘次數（預設）",
+                    "label": "$text.209",
                     "pipeline_override": {
                         "Arena.Battle.Route": {
                             "next": [
@@ -5257,7 +5257,7 @@
                 },
                 {
                     "name": "Count0",
-                    "label": "0 次（不挑戰）",
+                    "label": "$text.210",
                     "pipeline_override": {
                         "Arena.Battle.Route": {
                             "next": [
@@ -5268,7 +5268,7 @@
                 },
                 {
                     "name": "Count1",
-                    "label": "1 次",
+                    "label": "$text.179",
                     "pipeline_override": {
                         "Arena.Battle.Route": {
                             "next": [
@@ -5283,7 +5283,7 @@
                 },
                 {
                     "name": "Count2",
-                    "label": "2 次",
+                    "label": "$text.180",
                     "pipeline_override": {
                         "Arena.Battle.Route": {
                             "next": [
@@ -5298,7 +5298,7 @@
                 },
                 {
                     "name": "Count3",
-                    "label": "3 次",
+                    "label": "$text.181",
                     "pipeline_override": {
                         "Arena.Battle.Route": {
                             "next": [
@@ -5313,7 +5313,7 @@
                 },
                 {
                     "name": "Count5",
-                    "label": "5 次",
+                    "label": "$text.183",
                     "pipeline_override": {
                         "Arena.Battle.Route": {
                             "next": [
@@ -5328,7 +5328,7 @@
                 },
                 {
                     "name": "Count10",
-                    "label": "10 次",
+                    "label": "$text.211",
                     "pipeline_override": {
                         "Arena.Battle.Route": {
                             "next": [
@@ -5346,12 +5346,12 @@
         },
         "ArenaShopItem1": {
             "type": "select",
-            "label": "競技商店：第 1 項",
-            "description": "競技商店為 3×3 共 9 格，由左至右、由上至下編號，使用決鬥幣。點下價格鍵會直接成交、沒有確認視窗；已售完或限購用盡會自動略過。預設不購買。",
+            "label": "$text.212",
+            "description": "$text.213",
             "cases": [
                 {
                     "name": "Never",
-                    "label": "不購買",
+                    "label": "$text.198",
                     "pipeline_override": {
                         "Arena.Shop.Slot1.Buy": {
                             "enabled": false
@@ -5360,7 +5360,7 @@
                 },
                 {
                     "name": "Once",
-                    "label": "購買 1 次",
+                    "label": "$text.214",
                     "pipeline_override": {
                         "Arena.Shop.Route": {
                             "next": [
@@ -5375,7 +5375,7 @@
                 },
                 {
                     "name": "ToLimit",
-                    "label": "買到限購上限",
+                    "label": "$text.215",
                     "pipeline_override": {
                         "Arena.Shop.Route": {
                             "next": [
@@ -5393,12 +5393,12 @@
         },
         "ArenaShopItem2": {
             "type": "select",
-            "label": "競技商店：第 2 項",
-            "description": "競技商店為 3×3 共 9 格，由左至右、由上至下編號，使用決鬥幣。點下價格鍵會直接成交、沒有確認視窗；已售完或限購用盡會自動略過。預設不購買。",
+            "label": "$text.216",
+            "description": "$text.213",
             "cases": [
                 {
                     "name": "Never",
-                    "label": "不購買",
+                    "label": "$text.198",
                     "pipeline_override": {
                         "Arena.Shop.Slot2.Buy": {
                             "enabled": false
@@ -5407,7 +5407,7 @@
                 },
                 {
                     "name": "Once",
-                    "label": "購買 1 次",
+                    "label": "$text.214",
                     "pipeline_override": {
                         "Arena.Shop.Route": {
                             "next": [
@@ -5422,7 +5422,7 @@
                 },
                 {
                     "name": "ToLimit",
-                    "label": "買到限購上限",
+                    "label": "$text.215",
                     "pipeline_override": {
                         "Arena.Shop.Route": {
                             "next": [
@@ -5440,12 +5440,12 @@
         },
         "ArenaShopItem3": {
             "type": "select",
-            "label": "競技商店：第 3 項",
-            "description": "競技商店為 3×3 共 9 格，由左至右、由上至下編號，使用決鬥幣。點下價格鍵會直接成交、沒有確認視窗；已售完或限購用盡會自動略過。預設不購買。",
+            "label": "$text.217",
+            "description": "$text.213",
             "cases": [
                 {
                     "name": "Never",
-                    "label": "不購買",
+                    "label": "$text.198",
                     "pipeline_override": {
                         "Arena.Shop.Slot3.Buy": {
                             "enabled": false
@@ -5454,7 +5454,7 @@
                 },
                 {
                     "name": "Once",
-                    "label": "購買 1 次",
+                    "label": "$text.214",
                     "pipeline_override": {
                         "Arena.Shop.Route": {
                             "next": [
@@ -5469,7 +5469,7 @@
                 },
                 {
                     "name": "ToLimit",
-                    "label": "買到限購上限",
+                    "label": "$text.215",
                     "pipeline_override": {
                         "Arena.Shop.Route": {
                             "next": [
@@ -5487,12 +5487,12 @@
         },
         "ArenaShopItem4": {
             "type": "select",
-            "label": "競技商店：第 4 項",
-            "description": "競技商店為 3×3 共 9 格，由左至右、由上至下編號，使用決鬥幣。點下價格鍵會直接成交、沒有確認視窗；已售完或限購用盡會自動略過。預設不購買。",
+            "label": "$text.218",
+            "description": "$text.213",
             "cases": [
                 {
                     "name": "Never",
-                    "label": "不購買",
+                    "label": "$text.198",
                     "pipeline_override": {
                         "Arena.Shop.Slot4.Buy": {
                             "enabled": false
@@ -5501,7 +5501,7 @@
                 },
                 {
                     "name": "Once",
-                    "label": "購買 1 次",
+                    "label": "$text.214",
                     "pipeline_override": {
                         "Arena.Shop.Route": {
                             "next": [
@@ -5516,7 +5516,7 @@
                 },
                 {
                     "name": "ToLimit",
-                    "label": "買到限購上限",
+                    "label": "$text.215",
                     "pipeline_override": {
                         "Arena.Shop.Route": {
                             "next": [
@@ -5534,12 +5534,12 @@
         },
         "ArenaShopItem5": {
             "type": "select",
-            "label": "競技商店：第 5 項",
-            "description": "競技商店為 3×3 共 9 格，由左至右、由上至下編號，使用決鬥幣。點下價格鍵會直接成交、沒有確認視窗；已售完或限購用盡會自動略過。預設不購買。",
+            "label": "$text.219",
+            "description": "$text.213",
             "cases": [
                 {
                     "name": "Never",
-                    "label": "不購買",
+                    "label": "$text.198",
                     "pipeline_override": {
                         "Arena.Shop.Slot5.Buy": {
                             "enabled": false
@@ -5548,7 +5548,7 @@
                 },
                 {
                     "name": "Once",
-                    "label": "購買 1 次",
+                    "label": "$text.214",
                     "pipeline_override": {
                         "Arena.Shop.Route": {
                             "next": [
@@ -5563,7 +5563,7 @@
                 },
                 {
                     "name": "ToLimit",
-                    "label": "買到限購上限",
+                    "label": "$text.215",
                     "pipeline_override": {
                         "Arena.Shop.Route": {
                             "next": [
@@ -5581,12 +5581,12 @@
         },
         "ArenaShopItem6": {
             "type": "select",
-            "label": "競技商店：第 6 項",
-            "description": "競技商店為 3×3 共 9 格，由左至右、由上至下編號，使用決鬥幣。點下價格鍵會直接成交、沒有確認視窗；已售完或限購用盡會自動略過。預設不購買。",
+            "label": "$text.220",
+            "description": "$text.213",
             "cases": [
                 {
                     "name": "Never",
-                    "label": "不購買",
+                    "label": "$text.198",
                     "pipeline_override": {
                         "Arena.Shop.Slot6.Buy": {
                             "enabled": false
@@ -5595,7 +5595,7 @@
                 },
                 {
                     "name": "Once",
-                    "label": "購買 1 次",
+                    "label": "$text.214",
                     "pipeline_override": {
                         "Arena.Shop.Route": {
                             "next": [
@@ -5610,7 +5610,7 @@
                 },
                 {
                     "name": "ToLimit",
-                    "label": "買到限購上限",
+                    "label": "$text.215",
                     "pipeline_override": {
                         "Arena.Shop.Route": {
                             "next": [
@@ -5628,12 +5628,12 @@
         },
         "ArenaShopItem7": {
             "type": "select",
-            "label": "競技商店：第 7 項",
-            "description": "競技商店為 3×3 共 9 格，由左至右、由上至下編號，使用決鬥幣。點下價格鍵會直接成交、沒有確認視窗；已售完或限購用盡會自動略過。預設不購買。",
+            "label": "$text.221",
+            "description": "$text.213",
             "cases": [
                 {
                     "name": "Never",
-                    "label": "不購買",
+                    "label": "$text.198",
                     "pipeline_override": {
                         "Arena.Shop.Slot7.Buy": {
                             "enabled": false
@@ -5642,7 +5642,7 @@
                 },
                 {
                     "name": "Once",
-                    "label": "購買 1 次",
+                    "label": "$text.214",
                     "pipeline_override": {
                         "Arena.Shop.Route": {
                             "next": [
@@ -5657,7 +5657,7 @@
                 },
                 {
                     "name": "ToLimit",
-                    "label": "買到限購上限",
+                    "label": "$text.215",
                     "pipeline_override": {
                         "Arena.Shop.Route": {
                             "next": [
@@ -5675,12 +5675,12 @@
         },
         "ArenaShopItem8": {
             "type": "select",
-            "label": "競技商店：第 8 項",
-            "description": "競技商店為 3×3 共 9 格，由左至右、由上至下編號，使用決鬥幣。點下價格鍵會直接成交、沒有確認視窗；已售完或限購用盡會自動略過。預設不購買。",
+            "label": "$text.222",
+            "description": "$text.213",
             "cases": [
                 {
                     "name": "Never",
-                    "label": "不購買",
+                    "label": "$text.198",
                     "pipeline_override": {
                         "Arena.Shop.Slot8.Buy": {
                             "enabled": false
@@ -5689,7 +5689,7 @@
                 },
                 {
                     "name": "Once",
-                    "label": "購買 1 次",
+                    "label": "$text.214",
                     "pipeline_override": {
                         "Arena.Shop.Route": {
                             "next": [
@@ -5704,7 +5704,7 @@
                 },
                 {
                     "name": "ToLimit",
-                    "label": "買到限購上限",
+                    "label": "$text.215",
                     "pipeline_override": {
                         "Arena.Shop.Route": {
                             "next": [
@@ -5722,12 +5722,12 @@
         },
         "ArenaShopItem9": {
             "type": "select",
-            "label": "競技商店：第 9 項",
-            "description": "競技商店為 3×3 共 9 格，由左至右、由上至下編號，使用決鬥幣。點下價格鍵會直接成交、沒有確認視窗；已售完或限購用盡會自動略過。預設不購買。",
+            "label": "$text.223",
+            "description": "$text.213",
             "cases": [
                 {
                     "name": "Never",
-                    "label": "不購買",
+                    "label": "$text.198",
                     "pipeline_override": {
                         "Arena.Shop.Slot9.Buy": {
                             "enabled": false
@@ -5736,7 +5736,7 @@
                 },
                 {
                     "name": "Once",
-                    "label": "購買 1 次",
+                    "label": "$text.214",
                     "pipeline_override": {
                         "Arena.Shop.Route": {
                             "next": [
@@ -5751,7 +5751,7 @@
                 },
                 {
                     "name": "ToLimit",
-                    "label": "買到限購上限",
+                    "label": "$text.215",
                     "pipeline_override": {
                         "Arena.Shop.Route": {
                             "next": [

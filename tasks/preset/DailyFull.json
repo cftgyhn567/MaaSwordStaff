@@ -2,8 +2,8 @@
     "preset": [
         {
             "name": "DailyFull",
-            "label": "完整日常",
-            "description": "包含家園、公會、筆記、地圖與其他項目。執行順序依序為：家園 → 公會 → 筆記 → 地圖 → 其他，一鍵領取所有獎勵安排在最末項執行。",
+            "label": "$text.327",
+            "description": "$text.328",
             "task": [
                 {
                     "name": "SakuraBeastBonding"

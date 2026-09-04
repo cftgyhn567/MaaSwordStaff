@@ -120,6 +120,7 @@ for (const path of [
     ...(typeof interfaceJson.icon === "string" ? [interfaceJson.icon] : []),
     ...strings(interfaceJson.resource),
     ...strings(interfaceJson.import),
+    ...(isRecord(interfaceJson.languages) ? Object.values(interfaceJson.languages) : []),
 ]) {
     if (path.includes("\\")) {
         throw new Error(`release paths must use forward slashes: ${path}`);
@@ -270,6 +271,9 @@ function releasePackagePaths(interfaceJson, runtimePlatform, guiKey) {
         "tasks",
         "resource",
     ];
+    if (isRecord(interfaceJson.languages)) {
+        paths.push("i18n");
+    }
     if (guiKey === "mfaa") {
         paths.push("runtimes", "libs/MaaAgentBinary", "plugins");
     }
