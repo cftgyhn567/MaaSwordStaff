@@ -17,6 +17,7 @@
     "private": true,
     "scripts": {
         "audit:pipeline": "node tools/audit-pipeline.mjs",
+        "audit:mxu": "node tools/build-custom-mxu.mjs --audit-only",
         "build:mxu": "node tools/build-custom-mxu.mjs",
         "check": "pnpm format:check && pnpm check:schema && pnpm check:i18n && pnpm check:maa",
         "check:i18n": "node tools/validate-i18n.mjs",

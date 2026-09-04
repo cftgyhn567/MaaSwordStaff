@@ -62,13 +62,14 @@ node .\tools\build-release.mjs
 
 推送 `v*` tag 後，`.github/workflows/release.yml` 會：
 
-1. 安裝 Node 24、pnpm、Python 3.13、uv 與 Rust。
-2. 執行 `pnpm audit --audit-level high`、`pnpm check`、`pnpm check:py`。
-3. 同步指定平台 Maa runtime。
-4. 原生編譯客製 MXU。
-5. 組裝發行目錄，檢查 entrypoint、Agent 與內嵌 Python。
-6. 建立平台 archive，保留 Unix executable metadata。
-7. 建立 GitHub Release；帶 `-` 的版本標為 prerelease。
+1. 先以單一工作執行專案相依與客製 MXU 相依安全稽核，通過後才啟動跨平台建置。
+2. 安裝 Node 24、pnpm、Python 3.13、uv 與 Rust。
+3. 執行 `pnpm check` 與 `pnpm check:py`。
+4. 同步指定平台 Maa runtime。
+5. 原生編譯已通過相依稽核的客製 MXU。
+6. 組裝發行目錄，檢查 entrypoint、Agent 與內嵌 Python。
+7. 建立平台 archive，保留 Unix executable metadata。
+8. 建立 GitHub Release；帶 `-` 的版本標為 prerelease。
 
 資產名稱格式：
 

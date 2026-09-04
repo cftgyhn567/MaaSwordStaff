@@ -7,7 +7,26 @@ on:
   workflow_dispatch:
 
 jobs:
+  audit:
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: pnpm
+      - uses: dtolnay/rust-toolchain@stable
+        if: github.event_name != 'workflow_dispatch'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm audit --audit-level high
+      - run: pnpm audit:mxu
+        if: github.event_name != 'workflow_dispatch'
+
   package:
+    needs: audit
     permissions:
       contents: read
     strategy:
@@ -70,7 +89,6 @@ jobs:
         if: github.event_name != 'workflow_dispatch' && matrix.runtime_os == 'linux'
         run: sudo apt-get update && sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
       - run: pnpm install --frozen-lockfile
-      - run: pnpm audit --audit-level high
       - run: pnpm check
       - run: pnpm check:py
         if: hashFiles('pyproject.toml') != ''
@@ -85,6 +103,7 @@ jobs:
         if: github.event_name != 'workflow_dispatch'
         env:
           CREATE_MAA_PROJECT_RUNTIME_PLATFORM: ${{ matrix.runtime_os }}-${{ matrix.runtime_arch }}
+          SKIP_MXU_AUDIT: "1"
       - run: node tools/build-release.mjs
         if: github.event_name != 'workflow_dispatch'
         env:

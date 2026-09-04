@@ -18,6 +18,8 @@ const MXU_TAG = "v2.4.5";
 const MXU_COMMIT = "115fcb39d75718f8bd53e76511322660b8af00ec";
 const MXU_CUSTOM_VERSION = "2.4.5-github-only.2";
 const MXU_PATCH = resolve("patches/mxu/github-only-v2.4.5.patch");
+const auditOnly = process.argv.includes("--audit-only");
+const skipAudit = process.env.SKIP_MXU_AUDIT === "1";
 
 const runtimePlatform = detectRuntimePlatform();
 const targetTriple = targetTripleFor(runtimePlatform);
@@ -95,63 +97,70 @@ try {
         ],
         sourceRoot,
     );
-    run(
-        "pnpm",
-        [
-            "audit",
-            "--audit-level",
-            "moderate",
-        ],
-        sourceRoot,
-    );
-    run(
-        "pnpm",
-        [
-            "tauri",
-            "build",
-            "--no-bundle",
-            "--target",
-            targetTriple,
-        ],
-        sourceRoot,
-        {
-            CARGO_TARGET_DIR: cargoTargetRoot,
-        },
-    );
-
-    const executableName = runtimePlatform.startsWith("win-") ? "mxu.exe" : "mxu";
-    let builtExecutable = join(cargoTargetRoot, targetTriple, "release", executableName);
-    if (!existsSync(builtExecutable)) {
-        builtExecutable = join(cargoTargetRoot, "release", executableName);
+    if (!skipAudit) {
+        run(
+            "pnpm",
+            [
+                "audit",
+                "--audit-level",
+                "moderate",
+            ],
+            sourceRoot,
+        );
     }
-    if (!existsSync(builtExecutable)) {
-        throw new Error(`Custom MXU executable was not produced. Looked for: ${builtExecutable}`);
+    if (auditOnly) {
+        succeeded = true;
+        console.log(`GitHub-only MXU dependency audit completed for ${MXU_TAG}`);
+    } else {
+        run(
+            "pnpm",
+            [
+                "tauri",
+                "build",
+                "--no-bundle",
+                "--target",
+                targetTriple,
+            ],
+            sourceRoot,
+            {
+                CARGO_TARGET_DIR: cargoTargetRoot,
+            },
+        );
+
+        const executableName = runtimePlatform.startsWith("win-") ? "mxu.exe" : "mxu";
+        let builtExecutable = join(cargoTargetRoot, targetTriple, "release", executableName);
+        if (!existsSync(builtExecutable)) {
+            builtExecutable = join(cargoTargetRoot, "release", executableName);
+        }
+        if (!existsSync(builtExecutable)) {
+            throw new Error(`Custom MXU executable was not produced. Looked for: ${builtExecutable}`);
+        }
+
+        const stagedRuntime = join(workRoot, `runtime-${runtimePlatform}`);
+        mkdirSync(stagedRuntime, {recursive: true});
+        copyFileSync(builtExecutable, join(stagedRuntime, executableName));
+        if (!runtimePlatform.startsWith("win-")) {
+            chmodSync(join(stagedRuntime, executableName), 0o755);
+        }
+
+        const pdb = join(cargoTargetRoot, "release", "mxu.pdb");
+        if (existsSync(pdb)) copyFileSync(pdb, join(stagedRuntime, "mxu.pdb"));
+        copyFileSync(join(sourceRoot, "LICENSE"), join(stagedRuntime, "LICENSE-MXU-AGPL-3.0.txt"));
+        copyFileSync(join(sourceRoot, "README.md"), join(stagedRuntime, "README-MXU.md"));
+        writeJson(join(stagedRuntime, "mxu-github-only.json"), {
+            custom_version: MXU_CUSTOM_VERSION,
+            upstream_repository: MXU_REPOSITORY.replace(/\.git$/, ""),
+            upstream_tag: MXU_TAG,
+            upstream_commit: MXU_COMMIT,
+            patch: "patches/mxu/github-only-v2.4.5.patch",
+        });
+
+        rmSync(runtimeRoot, {recursive: true, force: true});
+        mkdirSync(runtimeRoot, {recursive: true});
+        cpSync(stagedRuntime, runtimeRoot, {recursive: true, force: true});
+        succeeded = true;
+        console.log(`GitHub-only MXU runtime installed at ${runtimeRoot}`);
     }
-
-    const stagedRuntime = join(workRoot, `runtime-${runtimePlatform}`);
-    mkdirSync(stagedRuntime, {recursive: true});
-    copyFileSync(builtExecutable, join(stagedRuntime, executableName));
-    if (!runtimePlatform.startsWith("win-")) {
-        chmodSync(join(stagedRuntime, executableName), 0o755);
-    }
-
-    const pdb = join(cargoTargetRoot, "release", "mxu.pdb");
-    if (existsSync(pdb)) copyFileSync(pdb, join(stagedRuntime, "mxu.pdb"));
-    copyFileSync(join(sourceRoot, "LICENSE"), join(stagedRuntime, "LICENSE-MXU-AGPL-3.0.txt"));
-    copyFileSync(join(sourceRoot, "README.md"), join(stagedRuntime, "README-MXU.md"));
-    writeJson(join(stagedRuntime, "mxu-github-only.json"), {
-        custom_version: MXU_CUSTOM_VERSION,
-        upstream_repository: MXU_REPOSITORY.replace(/\.git$/, ""),
-        upstream_tag: MXU_TAG,
-        upstream_commit: MXU_COMMIT,
-        patch: "patches/mxu/github-only-v2.4.5.patch",
-    });
-
-    rmSync(runtimeRoot, {recursive: true, force: true});
-    mkdirSync(runtimeRoot, {recursive: true});
-    cpSync(stagedRuntime, runtimeRoot, {recursive: true, force: true});
-    succeeded = true;
-    console.log(`GitHub-only MXU runtime installed at ${runtimeRoot}`);
 } finally {
     if (succeeded || process.env.KEEP_MXU_BUILD_DIR !== "1") {
         rmSync(workRoot, {recursive: true, force: true});
