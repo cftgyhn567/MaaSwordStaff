@@ -3997,7 +3997,7 @@
                     "label": "$text.127",
                     "pipeline_override": {
                         "GoddessStatue.Pool.Select": {
-                            "expected": "$text.127"
+                            "expected": "友情祈願"
                         }
                     }
                 },
@@ -4006,7 +4006,7 @@
                     "label": "$text.128",
                     "pipeline_override": {
                         "GoddessStatue.Pool.Select": {
-                            "expected": "$text.128"
+                            "expected": "普通祈願"
                         }
                     }
                 },
@@ -4015,7 +4015,7 @@
                     "label": "$text.129",
                     "pipeline_override": {
                         "GoddessStatue.Pool.Select": {
-                            "expected": "$text.129"
+                            "expected": "高階祈願"
                         }
                     }
                 }

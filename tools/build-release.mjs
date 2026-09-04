@@ -80,7 +80,7 @@ const GUI_TYPES = {
         flatLayout: false,
         modifyInterface(iface, slug, ver, platform) {
             const modified = {...iface};
-            modified.title = `${iface.label ?? slug} ${ver} | MXU`;
+            modified.title = iface.label?.startsWith("$") ? "$release.title" : `${iface.label ?? slug} ${ver} | MXU`;
             if (Array.isArray(modified.agent) && modified.agent[0]) {
                 modified.agent = modified.agent.map((agent) =>
                     isRecord(agent)
@@ -147,6 +147,7 @@ for (const guiKey of enabledGuis) {
         version,
         runtimePlatform,
     );
+    const releaseTranslations = prepareReleaseTranslations(guiInterface);
 
     if (!dryRun) {
         const guiPath = guiRuntimePath(gui.runtimeDir, runtimePlatform);
@@ -169,6 +170,12 @@ for (const guiKey of enabledGuis) {
             }
         }
         prepareReleasePackage(guiKey, gui, packagePaths, guiInterface, runtimePlatform);
+        for (const [
+            path,
+            translations,
+        ] of releaseTranslations) {
+            writeJson(join(`dist/package-${guiKey}`, path), translations);
+        }
         smokeReleasePackage(gui, `dist/package-${guiKey}`, packagePaths, runtimePlatform);
     }
 
@@ -241,6 +248,23 @@ console.log(
 
 function readJson(path) {
     return JSON.parse(readFileSync(path, "utf8"));
+}
+
+function prepareReleaseTranslations(iface) {
+    return Object.values(iface.languages ?? {}).map((path) => {
+        const translations = readJson(path);
+        if (iface.title === "$release.title") {
+            const label = translations[iface.label.slice(1)];
+            if (typeof label !== "string" || !label.trim()) {
+                throw new Error(`release title translation is missing in ${path}`);
+            }
+            translations["release.title"] = `${label} ${iface.version} | MXU`;
+        }
+        return [
+            path,
+            translations,
+        ];
+    });
 }
 
 function writeJson(path, value) {
