@@ -492,6 +492,7 @@ function smokeReleasePackage(gui, root, packagePaths, runtimePlatform) {
         ...(typeof packagedInterface.icon === "string" ? [packagedInterface.icon] : []),
         ...interfaceResourcePaths(packagedInterface.resource),
         ...strings(packagedInterface.import),
+        ...(isRecord(packagedInterface.languages) ? Object.values(packagedInterface.languages) : []),
     ]) {
         if (path.includes("\\")) {
             throw new Error(`release package smoke failed: package path uses backslashes: ${path}`);

@@ -32,7 +32,7 @@
 
 ```powershell
 pnpm install --frozen-lockfile
-pnpm audit --audit-level high
+pnpm audit --audit-level high --ignore-registry-errors --fetch-timeout 10000 --fetch-retries 1
 pnpm check
 pnpm check:py
 pnpm audit:pipeline

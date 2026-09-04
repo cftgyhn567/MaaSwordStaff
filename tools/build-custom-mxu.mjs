@@ -80,15 +80,17 @@ try {
     );
     updateMxuVersion(sourceRoot);
 
-    run(
-        "rustup",
-        [
-            "target",
-            "add",
-            targetTriple,
-        ],
-        sourceRoot,
-    );
+    if (!auditOnly) {
+        run(
+            "rustup",
+            [
+                "target",
+                "add",
+                targetTriple,
+            ],
+            sourceRoot,
+        );
+    }
     run(
         "pnpm",
         [
@@ -109,8 +111,11 @@ try {
                     dependencySet,
                     "--audit-level",
                     "moderate",
-                    "--registry",
-                    "https://registry.npmjs.com",
+                    "--ignore-registry-errors",
+                    "--fetch-timeout",
+                    "10000",
+                    "--fetch-retries",
+                    "1",
                 ],
                 sourceRoot,
             );

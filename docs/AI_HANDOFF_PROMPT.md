@@ -18,7 +18,7 @@
 
 ## 目前程式基準
 
-- `interface.json` 是唯一入口，版本目前為 `v1.0.6`。
+- `interface.json` 是唯一入口，版本目前為 `v1.1.1`。
 - 公開任務 23 個，分成 Home 7、Guild 5、Note 7、Map 2、Other 2；preset 3 個。
 - `tasks/startup.json` 存在但沒有被 `interface.json` import，因此不是公開任務，preset 也不會靠它自動啟動遊戲。
 - Pipeline 位於 `resource/base/pipeline/`；圖片與 OCR 模型位於 `resource/base/image/`、`resource/base/model/ocr/`。

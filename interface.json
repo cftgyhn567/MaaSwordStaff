@@ -2,7 +2,7 @@
     "interface_version": 2,
     "name": "maa-sword-staff",
     "label": "$text.000",
-    "version": "v1.1.0",
+    "version": "v1.1.1",
     "github": "https://github.com/cftgyhn567/MaaSwordStaff",
     "description": "$text.001",
     "controller": [
