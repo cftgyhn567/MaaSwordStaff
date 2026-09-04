@@ -98,15 +98,23 @@ try {
         sourceRoot,
     );
     if (!skipAudit) {
-        run(
-            "pnpm",
-            [
-                "audit",
-                "--audit-level",
-                "moderate",
-            ],
-            sourceRoot,
-        );
+        for (const dependencySet of [
+            "--prod",
+            "--dev",
+        ]) {
+            run(
+                "pnpm",
+                [
+                    "audit",
+                    dependencySet,
+                    "--audit-level",
+                    "moderate",
+                    "--registry",
+                    "https://registry.npmjs.com",
+                ],
+                sourceRoot,
+            );
+        }
     }
     if (auditOnly) {
         succeeded = true;
@@ -177,6 +185,7 @@ function updateMxuVersion(root) {
         const json = JSON.parse(readFileSync(path, "utf8"));
         json.version = MXU_CUSTOM_VERSION;
         if (path.endsWith("package.json")) {
+            json.packageManager = "pnpm@11.5.1";
             json.dependencies.dompurify = "3.4.14";
             json.devDependencies.vite = "7.3.6";
         }
@@ -197,6 +206,8 @@ function updateMxuVersion(root) {
             '  "nanoid@<4": "3.3.18"',
             '  "picomatch@<3": "2.3.2"',
             '  "picomatch@>=4 <5": "4.0.7"',
+            "allowBuilds:",
+            "  esbuild: true",
             "",
         ].join("\n"),
         "utf8",

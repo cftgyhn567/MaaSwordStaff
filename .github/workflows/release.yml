@@ -21,7 +21,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         if: github.event_name != 'workflow_dispatch'
       - run: pnpm install --frozen-lockfile
-      - run: pnpm audit --audit-level high
+      - run: pnpm audit --audit-level high --registry https://registry.npmjs.com
       - run: pnpm audit:mxu
         if: github.event_name != 'workflow_dispatch'
 
